@@ -1,0 +1,13 @@
+{
+    "db_type": "SQLite",
+    "mysql_host": "localhost",
+    "mysql_port": 3306,
+    "mysql_user": "root",
+    "mysql_password": "",
+    "mysql_database": "voice_to_sql",
+    "ai_provider": "Offline Rules",
+    "gemini_api_key": "",
+    "openai_api_key": "",
+    "recording_duration": 5,
+    "tts_enabled": true
+}

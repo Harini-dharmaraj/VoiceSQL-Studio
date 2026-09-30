@@ -1,0 +1,51 @@
+customer_id,customer_name,email,city,state,country,customer_segment
+1,James Lee,james.lee13@example.com,Houston,TX,United States,Corporate
+2,Mary Davis,mary.davis27@example.com,San Diego,CA,United States,Corporate
+3,John Perez,john.perez85@example.com,Chicago,IL,United States,Consumer
+4,Patricia Smith,patricia.smith37@example.com,Chicago,IL,United States,Consumer
+5,Robert Martin,robert.martin81@example.com,New York,NY,United States,Consumer
+6,Jennifer Lee,jennifer.lee38@example.com,Seattle,WA,United States,Consumer
+7,Michael Rodriguez,michael.rodriguez30@example.com,New York,NY,United States,Corporate
+8,Linda Hernandez,linda.hernandez29@example.com,Dallas,TX,United States,Consumer
+9,William Harris,william.harris23@example.com,Austin,TX,United States,Consumer
+10,Elizabeth Brown,elizabeth.brown54@example.com,Jacksonville,FL,United States,Corporate
+11,David Sanchez,david.sanchez68@example.com,Los Angeles,CA,United States,Consumer
+12,Barbara Robinson,barbara.robinson20@example.com,San Francisco,CA,United States,Corporate
+13,Richard Clark,richard.clark83@example.com,Jacksonville,FL,United States,Consumer
+14,Susan Williams,susan.williams94@example.com,Los Angeles,CA,United States,Consumer
+15,Joseph Martinez,joseph.martinez39@example.com,Chicago,IL,United States,Home Office
+16,Jessica Gonzalez,jessica.gonzalez68@example.com,Dallas,TX,United States,Corporate
+17,Thomas Lopez,thomas.lopez57@example.com,Philadelphia,PA,United States,Consumer
+18,Sarah Perez,sarah.perez99@example.com,Dallas,TX,United States,Home Office
+19,Charles Lee,charles.lee87@example.com,Chicago,IL,United States,Corporate
+20,Karen Moore,karen.moore30@example.com,San Diego,CA,United States,Consumer
+21,Christopher Rodriguez,christopher.rodriguez97@example.com,San Diego,CA,United States,Consumer
+22,Nancy Harris,nancy.harris39@example.com,Los Angeles,CA,United States,Corporate
+23,Daniel Sanchez,daniel.sanchez61@example.com,Austin,TX,United States,Consumer
+24,Lisa Miller,lisa.miller37@example.com,Austin,TX,United States,Corporate
+25,Matthew Gonzalez,matthew.gonzalez28@example.com,Denver,CO,United States,Consumer
+26,Margaret Davis,margaret.davis84@example.com,Dallas,TX,United States,Consumer
+27,Anthony Jackson,anthony.jackson56@example.com,San Francisco,CA,United States,Consumer
+28,Betty Jones,betty.jones21@example.com,Boston,MA,United States,Corporate
+29,Donald Ramirez,donald.ramirez29@example.com,Houston,TX,United States,Corporate
+30,Sandra Sanchez,sandra.sanchez86@example.com,Seattle,WA,United States,Consumer
+31,Mark Gonzalez,mark.gonzalez77@example.com,Denver,CO,United States,Consumer
+32,Ashley Moore,ashley.moore97@example.com,New York,NY,United States,Corporate
+33,Paul Perez,paul.perez92@example.com,Dallas,TX,United States,Consumer
+34,Dorothy Martinez,dorothy.martinez30@example.com,Seattle,WA,United States,Consumer
+35,Steven Walker,steven.walker74@example.com,Dallas,TX,United States,Corporate
+36,Kimberly Taylor,kimberly.taylor90@example.com,Houston,TX,United States,Consumer
+37,Andrew Lee,andrew.lee29@example.com,San Antonio,TX,United States,Consumer
+38,Emily Garcia,emily.garcia86@example.com,New York,NY,United States,Consumer
+39,Kenneth Smith,kenneth.smith56@example.com,Houston,TX,United States,Home Office
+40,Donna Clark,donna.clark40@example.com,San Jose,CA,United States,Consumer
+41,Joshua Lewis,joshua.lewis20@example.com,Chicago,IL,United States,Corporate
+42,Michelle Clark,michelle.clark78@example.com,Chicago,IL,United States,Corporate
+43,Kevin Jones,kevin.jones80@example.com,Boston,MA,United States,Consumer
+44,Carol Taylor,carol.taylor37@example.com,Seattle,WA,United States,Home Office
+45,Brian Harris,brian.harris49@example.com,San Antonio,TX,United States,Consumer
+46,Amanda Perez,amanda.perez66@example.com,Jacksonville,FL,United States,Home Office
+47,George Anderson,george.anderson41@example.com,Houston,TX,United States,Consumer
+48,Melissa Hernandez,melissa.hernandez85@example.com,New York,NY,United States,Corporate
+49,Edward Jackson,edward.jackson10@example.com,San Diego,CA,United States,Consumer
+50,Deborah Lee,deborah.lee39@example.com,Los Angeles,CA,United States,Consumer

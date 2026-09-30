@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ========================================================
+   GLOBAL THEME & TYPOGRAPHY
+   ======================================================== */
+:root {
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --primary-glow: rgba(37, 99, 235, 0.25);
+    --bg-main: #F8FAFC;
+    --card-bg: #FFFFFF;
+    --border-color: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-muted: #64748B;
+    --accent-emerald: #10B981;
+    --accent-purple: #8B5CF6;
+}
+
+.stApp {
+    background-color: var(--bg-main) !important;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    color: var(--text-primary) !important;
+}
+
+/* Page container */
+.main .block-container {
+    padding-top: 1.8rem !important;
+    padding-bottom: 3.5rem !important;
+    max-width: 1260px !important;
+}
+
+/* Headers */
+h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+    letter-spacing: -0.035em !important;
+}
+
+h2, h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 700 !important;
+    color: #1E293B !important;
+    letter-spacing: -0.025em !important;
+}
+
+h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 600 !important;
+    color: #334155 !important;
+    letter-spacing: -0.01em !important;
+}
+
+p, label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+hr {
+    margin: 1.25rem 0 !important;
+    border-color: #E2E8F0 !important;
+}
+
+/* ========================================================
+   SIDEBAR NAVIGATION & COLLAPSE BUTTON FIX
+   ======================================================== */
+section[data-testid="stSidebar"] {
+    background-color: #0B1120 !important;
+    border-right: 1px solid #1E293B !important;
+}
+
+/* Fix Streamlit ligature text leak ('keyboard_double_arrow_left') */
+[data-testid="stSidebarCollapseButton"] span {
+    font-size: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+[data-testid="stSidebarCollapseButton"] span::after {
+    content: "◀" !important;
+    font-size: 15px !important;
+    color: #94A3B8 !important;
+    display: inline-block !important;
+}
+
+[data-testid="stSidebarCollapseButton"] {
+    background: transparent !important;
+    border: none !important;
+}
+
+[data-testid="stSidebarCollapseButton"]:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+}
+
+[data-testid="stSidebarHeader"] {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.2rem !important;
+}
+
+[data-testid="stSidebarExpandButton"] span {
+    font-size: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+[data-testid="stSidebarExpandButton"] span::after {
+    content: "▶" !important;
+    font-size: 15px !important;
+    color: #2563EB !important;
+    display: inline-block !important;
+}
+
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] label {
+    color: #F1F5F9 !important;
+}
+
+section[data-testid="stSidebar"] code,
+section[data-testid="stSidebar"] pre {
+    background-color: transparent !important;
+    border: none !important;
+    color: inherit !important;
+}
+
+section[data-testid="stSidebar"] .stRadio label {
+    padding: 8px 14px !important;
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    font-size: 13.5px !important;
+    letter-spacing: -0.01em !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+}
+
+section[data-testid="stSidebar"] .stRadio label:hover {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    transform: translateX(3px) !important;
+}
+
+/* ========================================================
+   MODERN BUTTONS
+   ======================================================== */
+.stButton > button {
+    border-radius: 10px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    padding: 0.55rem 1.1rem !important;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    border: 1px solid #CBD5E1 !important;
+    background-color: #FFFFFF !important;
+    color: #1E293B !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+}
+
+.stButton > button:hover {
+    border-color: #94A3B8 !important;
+    background-color: #F8FAFC !important;
+    transform: translateY(-1.5px) !important;
+    box-shadow: 0 4px 8px -2px rgba(15, 23, 42, 0.08) !important;
+}
+
+.stButton > button:active {
+    transform: translateY(0px) !important;
+}
+
+/* Primary Action Buttons */
+.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+    color: #FFFFFF !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28) !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background: linear-gradient(135deg, #1D4ED8 0%, #1E40AF 100%) !important;
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.38) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Quick prompt chips */
+button[data-testid="baseButton-secondary"] {
+    border-radius: 9999px !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
+
+/* ========================================================
+   INPUTS & TEXTAREAS
+   ======================================================== */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea {
+    background-color: #FFFFFF !important;
+    border: 1.5px solid #CBD5E1 !important;
+    border-radius: 12px !important;
+    color: #0F172A !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 14.5px !important;
+    line-height: 1.5 !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03) !important;
+    transition: all 0.15s ease-in-out !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+    border-color: #2563EB !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+}
+
+/* ========================================================
+   CODE BLOCKS & MONOSPACE
+   ======================================================== */
+code, pre {
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace !important;
+    border-radius: 10px !important;
+    font-size: 13.5px !important;
+}
+
+/* ========================================================
+   DATAFRAME & TABLE STYLING
+   ======================================================== */
+div[data-testid="stDataFrame"] {
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    background-color: #FFFFFF !important;
+    box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* ========================================================
+   METRIC CARD STYLING
+   ======================================================== */
+div[data-testid="stMetric"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    box-shadow: 0 2px 4px rgba(15, 23, 42, 0.03) !important;
+}
+
+div[data-testid="stMetricLabel"] {
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    color: #64748B !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.04em !important;
+}
+
+div[data-testid="stMetricValue"] {
+    font-weight: 800 !important;
+    color: #0F172A !important;
+}
+
+/* ========================================================
+   TABS STYLING
+   ======================================================== */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 8px !important;
+    border-bottom: 2px solid #E2E8F0 !important;
+    padding-bottom: 4px !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    padding: 8px 16px !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    border-radius: 8px !important;
+    color: #64748B !important;
+    background-color: transparent !important;
+    border: none !important;
+    transition: all 0.15s ease-in-out !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: #2563EB !important;
+    background-color: #EFF6FF !important;
+}
+
+.stTabs [aria-selected="true"] {
+    color: #2563EB !important;
+    font-weight: 700 !important;
+    background-color: #EFF6FF !important;
+}
+
+/* ========================================================
+   AUDIO PLAYER STYLING
+   ======================================================== */
+audio {
+    border-radius: 24px !important;
+    width: 100% !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ========================================================
+   CUSTOM GLASS/CARD UTILITY CLASSES
+   ======================================================== */
+.studio-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.05);
+}
+
+.studio-card-dark {
+    background: #0F172A;
+    border: 1px solid #1E293B;
+    border-radius: 14px;
+    padding: 20px;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.voice-response-card {
+    background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+    border: 1.5px solid #86EFAC;
+    border-radius: 14px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.12);
+}
+
+.voice-pulse {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #10B981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse-green 1.8s infinite;
+}
+
+@keyframes pulse-green {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+    }
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}

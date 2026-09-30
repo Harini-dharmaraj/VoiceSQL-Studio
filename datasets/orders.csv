@@ -1,0 +1,121 @@
+order_id,customer_id,order_date,shipping_mode,payment_method,order_status,order_total
+1,3,2026-06-19,Standard Delivery,PayPal,Delivered,1038.15
+2,31,2026-07-28,Standard Delivery,Credit Card,Processing,41.65
+3,4,2026-02-20,Standard Delivery,Apple Pay,Delivered,399.0
+4,12,2026-05-23,Standard Delivery,Credit Card,Delivered,6533.3
+5,11,2026-07-28,Standard Delivery,PayPal,Delivered,8227.2
+6,36,2026-09-07,Standard Delivery,Apple Pay,Delivered,6662.55
+7,12,2026-02-05,Standard Delivery,PayPal,Delivered,32.3
+8,3,2026-02-11,Standard Delivery,Apple Pay,Delivered,229.0
+9,9,2026-06-03,Standard Delivery,Credit Card,Delivered,2348.15
+10,5,2026-05-06,Standard Delivery,PayPal,Delivered,1789.2
+11,7,2026-03-10,Standard Delivery,Credit Card,Processing,907.65
+12,17,2026-09-16,Standard Delivery,Credit Card,Delivered,391.2
+13,11,2026-08-15,Standard Delivery,Wire Transfer,Shipped,2562.15
+14,10,2026-01-19,Express Air,PayPal,Delivered,466.65
+15,3,2026-07-03,Standard Delivery,PayPal,Processing,254.15
+16,40,2026-03-21,Same Day Priority,PayPal,Delivered,1522.4
+17,45,2026-02-25,Standard Delivery,Credit Card,Delivered,144.0
+18,15,2026-04-25,Standard Delivery,PayPal,Delivered,19.8
+19,23,2026-09-18,Standard Delivery,Apple Pay,Delivered,343.2
+20,17,2026-01-20,Standard Delivery,Wire Transfer,Delivered,805.6
+21,17,2026-01-23,Express Air,Credit Card,Shipped,3038.25
+22,40,2026-06-10,Express Air,Credit Card,Processing,1033.15
+23,44,2026-03-31,Express Air,Apple Pay,Delivered,1520.55
+24,30,2026-08-15,Standard Delivery,PayPal,Shipped,206.15
+25,40,2026-06-21,Standard Delivery,PayPal,Processing,149.0
+26,16,2026-09-01,Express Air,Credit Card,Delivered,170.1
+27,25,2026-09-11,Standard Delivery,PayPal,Processing,655.8
+28,45,2026-08-26,Standard Delivery,PayPal,Delivered,1119.2
+29,29,2026-09-16,Standard Delivery,Wire Transfer,Delivered,2225.0
+30,34,2026-09-06,Express Air,Apple Pay,Delivered,549.0
+31,35,2026-02-11,Standard Delivery,PayPal,Delivered,628.0
+32,14,2026-08-04,Standard Delivery,Credit Card,Shipped,2997.0
+33,25,2026-08-03,Standard Delivery,PayPal,Delivered,49.0
+34,43,2026-07-27,Express Air,Wire Transfer,Delivered,1788.05
+35,30,2026-06-17,Standard Delivery,Wire Transfer,Delivered,94.55
+36,23,2026-04-25,Express Air,Credit Card,Delivered,3444.0
+37,17,2026-07-08,Standard Delivery,Credit Card,Delivered,5861.15
+38,7,2026-06-04,Express Air,Credit Card,Shipped,798.0
+39,27,2026-09-08,Standard Delivery,Apple Pay,Processing,5040.1
+40,31,2026-08-27,Standard Delivery,Apple Pay,Delivered,981.2
+41,32,2026-06-16,Standard Delivery,PayPal,Delivered,1867.2
+42,13,2026-02-13,Standard Delivery,Wire Transfer,Delivered,453.1
+43,19,2026-04-24,Standard Delivery,PayPal,Delivered,5324.0
+44,23,2026-08-21,Standard Delivery,Apple Pay,Delivered,359.1
+45,49,2026-04-05,Standard Delivery,Wire Transfer,Delivered,937.2
+46,24,2026-04-02,Standard Delivery,PayPal,Delivered,1139.05
+47,9,2026-09-09,Standard Delivery,Credit Card,Shipped,1100.0
+48,4,2026-05-10,Same Day Priority,Wire Transfer,Delivered,3771.55
+49,16,2026-03-02,Standard Delivery,Wire Transfer,Shipped,1305.0
+50,38,2026-08-08,Standard Delivery,Credit Card,Shipped,2776.6
+51,19,2026-01-17,Standard Delivery,Apple Pay,Processing,3325.35
+52,35,2026-04-26,Express Air,Apple Pay,Delivered,2755.0
+53,37,2026-05-28,Standard Delivery,Wire Transfer,Processing,253.65
+54,32,2026-08-13,Standard Delivery,Credit Card,Delivered,643.65
+55,38,2026-01-11,Same Day Priority,Apple Pay,Shipped,284.05
+56,29,2026-05-23,Standard Delivery,Wire Transfer,Processing,2098.0
+57,43,2026-07-25,Express Air,Credit Card,Delivered,343.2
+58,26,2026-01-01,Express Air,Wire Transfer,Delivered,314.1
+59,41,2026-08-15,Express Air,PayPal,Delivered,456.3
+60,39,2026-05-03,Express Air,Apple Pay,Shipped,39.2
+61,8,2026-08-25,Same Day Priority,PayPal,Delivered,2468.1
+62,39,2026-09-18,Express Air,PayPal,Delivered,298.0
+63,33,2026-05-17,Express Air,Apple Pay,Processing,616.55
+64,10,2026-08-17,Standard Delivery,Apple Pay,Delivered,783.55
+65,37,2026-07-16,Standard Delivery,Wire Transfer,Delivered,1980.0
+66,25,2026-03-19,Standard Delivery,Credit Card,Delivered,1862.35
+67,30,2026-01-08,Express Air,Wire Transfer,Processing,2471.35
+68,46,2026-09-07,Express Air,Credit Card,Shipped,189.0
+69,15,2026-02-16,Standard Delivery,Credit Card,Processing,3249.0
+70,4,2026-05-31,Standard Delivery,Wire Transfer,Delivered,44.1
+71,11,2026-03-31,Standard Delivery,Wire Transfer,Shipped,1118.0
+72,43,2026-01-05,Express Air,Wire Transfer,Delivered,2304.05
+73,28,2026-05-09,Standard Delivery,Apple Pay,Delivered,3115.1
+74,44,2026-01-26,Same Day Priority,Wire Transfer,Delivered,777.0
+75,49,2026-03-12,Express Air,Credit Card,Delivered,3146.0
+76,27,2026-03-31,Standard Delivery,Apple Pay,Shipped,479.85
+77,19,2026-06-23,Express Air,Wire Transfer,Delivered,448.2
+78,26,2026-07-07,Standard Delivery,Wire Transfer,Delivered,1899.05
+79,44,2026-05-15,Standard Delivery,Apple Pay,Delivered,1884.05
+80,42,2026-02-02,Express Air,Wire Transfer,Processing,49.0
+81,3,2026-06-05,Same Day Priority,Credit Card,Delivered,699.0
+82,43,2026-08-03,Standard Delivery,PayPal,Delivered,1085.8
+83,14,2026-08-16,Standard Delivery,PayPal,Delivered,135.15
+84,42,2026-07-03,Standard Delivery,Apple Pay,Delivered,3422.95
+85,5,2026-04-17,Standard Delivery,PayPal,Delivered,285.0
+86,35,2026-05-09,Express Air,Credit Card,Processing,4486.1
+87,34,2026-02-28,Express Air,Wire Transfer,Delivered,2278.55
+88,43,2026-06-04,Standard Delivery,Credit Card,Delivered,295.5
+89,38,2026-06-16,Standard Delivery,Apple Pay,Delivered,1797.15
+90,36,2026-04-21,Standard Delivery,PayPal,Delivered,1125.0
+91,21,2026-08-07,Standard Delivery,Apple Pay,Delivered,1994.4
+92,36,2026-06-18,Express Air,Wire Transfer,Delivered,966.9
+93,10,2026-09-04,Standard Delivery,Credit Card,Delivered,2566.15
+94,44,2026-01-14,Express Air,Apple Pay,Delivered,389.3
+95,23,2026-01-04,Standard Delivery,PayPal,Shipped,3052.45
+96,25,2026-08-03,Standard Delivery,PayPal,Delivered,1518.1
+97,6,2026-01-27,Standard Delivery,Credit Card,Processing,1250.0
+98,29,2026-08-01,Standard Delivery,Credit Card,Delivered,521.55
+99,34,2026-06-07,Standard Delivery,Wire Transfer,Shipped,399.0
+100,9,2026-05-11,Standard Delivery,Credit Card,Delivered,1424.05
+101,43,2026-07-01,Standard Delivery,Credit Card,Delivered,18.0
+102,28,2026-07-27,Express Air,Wire Transfer,Delivered,2997.0
+103,40,2026-08-24,Express Air,Apple Pay,Delivered,1899.05
+104,34,2026-02-10,Standard Delivery,Apple Pay,Processing,1598.0
+105,41,2026-02-28,Standard Delivery,PayPal,Delivered,48.0
+106,7,2026-03-16,Standard Delivery,PayPal,Shipped,299.0
+107,50,2026-09-10,Standard Delivery,Wire Transfer,Processing,973.25
+108,18,2026-01-29,Standard Delivery,Credit Card,Delivered,2566.3
+109,40,2026-09-17,Standard Delivery,Credit Card,Delivered,1177.15
+110,22,2026-02-13,Standard Delivery,PayPal,Delivered,5937.5
+111,40,2026-03-23,Standard Delivery,Apple Pay,Delivered,799.0
+112,41,2026-06-21,Standard Delivery,Credit Card,Shipped,2137.05
+113,22,2026-02-11,Standard Delivery,PayPal,Delivered,189.0
+114,39,2026-02-13,Standard Delivery,Wire Transfer,Processing,3271.3
+115,34,2026-02-17,Express Air,Wire Transfer,Shipped,79.2
+116,22,2026-09-06,Standard Delivery,PayPal,Delivered,41.8
+117,35,2026-01-20,Express Air,PayPal,Shipped,1377.5
+118,40,2026-03-26,Express Air,Credit Card,Delivered,389.0
+119,19,2026-08-18,Standard Delivery,PayPal,Delivered,1350.75
+120,11,2026-04-13,Express Air,PayPal,Delivered,2090.0
