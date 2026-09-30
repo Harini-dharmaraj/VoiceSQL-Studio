@@ -205,12 +205,25 @@ SQL:"""
     except Exception as e:
         return f"SELECT 'OpenAI Exception: {str(e)}' AS error;"
 
+def generate_sql_local(question, schema_context):
+    """Generate SQL using local Transformers model with safe fallback."""
+    try:
+        generator = get_local_generator()
+        prompt = f"Convert natural language to SQL.\nDatabase Schema:\n{schema_context}\n\nQuestion: {question}\nSQL:"
+        result = generator(prompt, max_new_tokens=100)
+        raw_output = result[0]["generated_text"]
+        if "SQL:" in raw_output:
+            raw_output = raw_output.split("SQL:")[-1]
+        return clean_sql_string(raw_output)
+    except Exception:
+        return generate_sql_mock(question)
+
 def generate_sql(question):
     """Main SQL generation router based on configuration settings."""
     config = load_config()
     schema_context = get_db_schema_context()
     
-    provider = config.get("ai_provider", "Mock")
+    provider = str(config.get("ai_provider", "Mock")).strip()
     
     if provider in ["Google Gemini", "Gemini"]:
         api_key = config.get("gemini_api_key", "").strip()
@@ -218,15 +231,15 @@ def generate_sql(question):
             return "SELECT 'Error: Gemini API Key not configured in Settings. Please enter your key in Settings.' AS error;"
         return generate_sql_gemini(question, schema_context, api_key)
         
-    elif provider == "OpenAI":
+    elif provider in ["OpenAI", "ChatGPT"]:
         api_key = config.get("openai_api_key", "").strip()
         if not api_key:
             return "SELECT 'Error: OpenAI API Key not configured in Settings. Please enter your key in Settings.' AS error;"
         return generate_sql_openai(question, schema_context, api_key)
         
-    elif provider == "Mock":
-        return generate_sql_mock(question)
+    elif provider in ["Local (Flan-T5)", "Local"]:
+        return generate_sql_local(question, schema_context)
         
     else:
-        # Local Flan-T5
-        return generate_sql_local(question, schema_context)
+        # Default: "Offline Rules", "Offline Rules (Fast)", "Mock"
+        return generate_sql_mock(question)
