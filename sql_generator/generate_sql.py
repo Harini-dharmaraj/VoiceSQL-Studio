@@ -80,6 +80,34 @@ def generate_sql_mock(question):
         return "SELECT p.product_name, p.category, SUM(oi.profit_amount) AS total_profit FROM products p JOIN order_items oi ON p.product_id = oi.product_id GROUP BY p.product_id, p.product_name, p.category ORDER BY total_profit DESC LIMIT 5;"
 
     # ==========================================
+    # HEALTHCARE & CLINIC QUERIES
+    # ==========================================
+    elif "expensive treatment" in q or ("highest" in q and "treatment" in q) or ("highest" in q and "cost" in q):
+        return "SELECT patient_name, diagnosis, treatment_cost, doctor_name FROM patients ORDER BY treatment_cost DESC LIMIT 5;"
+    elif "patient" in q and ("all" in q or "show" in q or "list" in q):
+        return "SELECT patient_id, patient_name, age, gender, diagnosis, treatment_cost, insurance_status FROM patients LIMIT 25;"
+    elif "doctor" in q and ("all" in q or "show" in q or "list" in q):
+        return "SELECT doctor_id, doctor_name, specialization, experience_years, consultation_fee FROM doctors ORDER BY experience_years DESC;"
+    elif "doctor" in q and ("fee" in q or "expensive" in q):
+        return "SELECT doctor_name, specialization, consultation_fee FROM doctors ORDER BY consultation_fee DESC LIMIT 5;"
+    elif "icu" in q or "hospital room" in q or "room" in q:
+        return "SELECT room_number, room_type, daily_rate, status FROM hospital_rooms WHERE status = 'Available';"
+
+    # ==========================================
+    # EDUCATION & ACADEMIC QUERIES
+    # ==========================================
+    elif "highest gpa" in q or ("top" in q and "student" in q):
+        return "SELECT student_name, major, gpa, scholarship_awarded FROM students ORDER BY gpa DESC LIMIT 5;"
+    elif "student" in q and ("all" in q or "show" in q or "list" in q):
+        return "SELECT student_id, student_name, major, gpa, graduation_year, scholarship_awarded FROM students LIMIT 25;"
+    elif "scholarship" in q:
+        return "SELECT student_name, major, gpa FROM students WHERE scholarship_awarded = 'Yes' ORDER BY gpa DESC;"
+    elif "course" in q or "class" in q:
+        return "SELECT course_code, course_name, department, credits, instructor_name FROM courses;"
+    elif "review" in q or "rating" in q:
+        return "SELECT review_id, product_id, rating, sentiment, verified_purchase FROM product_reviews ORDER BY rating DESC LIMIT 20;"
+
+    # ==========================================
     # LEGACY EMPLOYEE & PROJECT QUERIES
     # ==========================================
     if "highest" in q and "salary" in q:

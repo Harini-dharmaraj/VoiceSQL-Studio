@@ -1,0 +1,41 @@
+student_id,student_name,major,gpa,graduation_year,scholarship_awarded
+1,Zoe O'Connor,Biomedical Sciences,3.92,2026,Yes
+2,Leah Patel,Computer Science,3.16,2028,No
+3,Riley Patel,Electrical Engineering,2.94,2027,No
+4,Bella Muller,Data Science,2.82,2026,No
+5,Riley Santos,Computer Science,3.06,2028,No
+6,Jackson Kowalski,Biomedical Sciences,3.66,2026,Yes
+7,Bella Muller,Electrical Engineering,3.48,2028,No
+8,Hannah Kim,Biomedical Sciences,3.81,2027,Yes
+9,Claire Chen,Data Science,3.88,2027,Yes
+10,Nora Kowalski,Data Science,3.72,2028,Yes
+11,Skylar Kowalski,Finance & Economics,3.59,2026,No
+12,Claire Dubois,Data Science,2.67,2027,No
+13,Julian Kim,Electrical Engineering,3.84,2027,Yes
+14,Ethan Santos,Finance & Economics,3.13,2026,No
+15,Christian Dubois,Finance & Economics,2.7,2026,No
+16,Nora Dubois,Biomedical Sciences,3.09,2026,No
+17,Chloe Sharma,Finance & Economics,3.16,2026,No
+18,Mason Kim,Data Science,3.79,2026,Yes
+19,Eli Patel,Biomedical Sciences,3.34,2027,No
+20,Claire Muller,Computer Science,3.84,2026,Yes
+21,Nora Muller,Computer Science,3.91,2028,Yes
+22,Riley Dubois,Biomedical Sciences,3.03,2028,No
+23,Logan Patel,Finance & Economics,3.56,2028,No
+24,Claire Kim,Finance & Economics,4.0,2026,Yes
+25,Zoe Dubois,Data Science,2.97,2027,No
+26,Claire Patel,Computer Science,3.97,2027,Yes
+27,Ethan O'Connor,Biomedical Sciences,3.02,2027,No
+28,Aiden Kim,Data Science,3.6,2028,Yes
+29,Aiden O'Connor,Biomedical Sciences,3.19,2027,No
+30,Logan Sharma,Finance & Economics,3.76,2027,Yes
+31,Caleb Dubois,Finance & Economics,2.74,2026,No
+32,Mason O'Connor,Biomedical Sciences,3.28,2028,No
+33,Ethan Santos,Data Science,2.86,2026,No
+34,Stella Patel,Computer Science,2.77,2026,No
+35,Bella Kowalski,Biomedical Sciences,3.03,2028,No
+36,Caleb Novak,Computer Science,3.85,2027,Yes
+37,Logan Patel,Computer Science,3.66,2028,Yes
+38,Samuel Muller,Electrical Engineering,2.71,2028,No
+39,Christian Patel,Electrical Engineering,3.95,2028,Yes
+40,Samuel Chen,Finance & Economics,2.69,2026,No

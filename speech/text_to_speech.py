@@ -82,6 +82,33 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
                 except Exception:
                     pass
 
+        elif "patient_name" in df.columns:
+            details.append(f"{row['patient_name']}")
+            if "diagnosis" in df.columns:
+                details.append(f"diagnosed with {row['diagnosis']}")
+            if "treatment_cost" in df.columns:
+                try:
+                    details.append(f"treatment cost ${float(row['treatment_cost']):,.0f}")
+                except Exception:
+                    pass
+
+        elif "doctor_name" in df.columns:
+            details.append(f"{row['doctor_name']}")
+            if "specialization" in df.columns:
+                details.append(f"specializing in {row['specialization']}")
+            if "consultation_fee" in df.columns:
+                try:
+                    details.append(f"consultation fee ${float(row['consultation_fee']):,.0f}")
+                except Exception:
+                    pass
+
+        elif "student_name" in df.columns:
+            details.append(f"{row['student_name']}")
+            if "major" in df.columns:
+                details.append(f"majoring in {row['major']}")
+            if "gpa" in df.columns:
+                details.append(f"with GPA {row['gpa']}")
+
         elif "first_name" in df.columns and "last_name" in df.columns:
             details.append(f"{row['first_name']} {row['last_name']}")
             if "job_title" in df.columns:
@@ -111,7 +138,13 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     # 3. Small list (2 to 5 items)
     if 2 <= row_count <= 5:
         names = []
-        if "customer_name" in df.columns:
+        if "patient_name" in df.columns:
+            names = [str(r) for r in df["patient_name"].tolist()]
+        elif "doctor_name" in df.columns:
+            names = [str(r) for r in df["doctor_name"].tolist()]
+        elif "student_name" in df.columns:
+            names = [str(r) for r in df["student_name"].tolist()]
+        elif "customer_name" in df.columns:
             names = [str(r) for r in df["customer_name"].tolist()]
         elif "product_name" in df.columns:
             names = [str(r) for r in df["product_name"].tolist()]

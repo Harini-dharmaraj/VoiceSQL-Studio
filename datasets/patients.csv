@@ -1,0 +1,41 @@
+patient_id,patient_name,age,gender,blood_type,diagnosis,doctor_name,admission_date,discharge_date,treatment_cost,insurance_status
+1,Liam Johnson,42,Female,AB-,Acute Bronchitis,Dr. Allison Cameron,2026-03-05,2026-03-15,1448.11,Covered (Private)
+2,Olivia Smith,45,Female,AB-,Coronary Artery Disease,Dr. John Watson,2026-02-28,2026-03-03,21422.2,Covered (Private)
+3,Noah Williams,64,Male,AB-,Fractured Femur,Dr. Cristina Yang,2026-06-22,2026-06-29,10501.91,Covered (Private)
+4,Emma Brown,77,Female,AB+,Coronary Artery Disease,Dr. Robert Chase,2026-07-03,2026-07-09,22255.1,Medicare
+5,Oliver Jones,68,Female,AB+,Migraine Chronic,Dr. Meredith Grey,2026-04-23,2026-05-05,1023.13,Medicare
+6,Charlotte Garcia,77,Male,A+,Fractured Femur,Dr. Gregory House,2026-04-14,2026-04-26,11457.91,Covered (Private)
+7,Elijah Miller,37,Male,B-,Type 2 Diabetes Complications,Dr. John Watson,2026-01-26,2026-01-29,5234.7,Covered (Private)
+8,Amelia Davis,64,Female,B+,Hypertension Crisis,Dr. Allison Cameron,2026-03-30,2026-04-02,4381.19,Medicare
+9,James Rodriguez,18,Male,A+,Acute Bronchitis,Dr. Robert Chase,2026-04-08,2026-04-17,1800.42,Medicaid
+10,Ava Martinez,33,Female,B+,Knee Replacement,Dr. Derek Shepherd,2026-09-03,2026-09-07,19915.17,Medicare
+11,William Hernandez,75,Male,A+,Type 2 Diabetes Complications,Dr. John Watson,2026-04-06,2026-04-13,4491.54,Covered (Private)
+12,Sophia Lopez,62,Female,O+,Appendicitis,Dr. John Watson,2026-07-02,2026-07-08,7961.87,Covered (Private)
+13,Benjamin Gonzalez,50,Female,AB+,Migraine Chronic,Dr. Meredith Grey,2026-05-24,2026-05-30,1154.69,Covered (Private)
+14,Isabella Wilson,40,Male,O+,Knee Replacement,Dr. Lisa Cuddy,2026-08-17,2026-08-27,17782.88,Covered (Private)
+15,Lucas Anderson,61,Male,O-,Hypertension Crisis,Dr. Cristina Yang,2026-05-31,2026-06-10,3836.59,Medicare
+16,Mia Thomas,35,Female,A-,Knee Replacement,Dr. Shaun Murphy,2026-08-26,2026-09-02,14383.59,Covered (Private)
+17,Henry Taylor,46,Male,AB+,Type 2 Diabetes Complications,Dr. Meredith Grey,2026-02-16,2026-02-22,3609.95,Covered (Private)
+18,Evelyn Moore,43,Female,AB+,Type 2 Diabetes Complications,Dr. James Wilson,2026-05-29,2026-06-07,4705.52,Covered (Private)
+19,Alexander Jackson,50,Male,B-,Appendicitis,Dr. James Wilson,2026-03-27,2026-03-28,7028.24,Covered (Private)
+20,Harper Martin,61,Female,AB-,Knee Replacement,Dr. Gregory House,2026-03-19,2026-03-28,20300.49,Medicare
+21,Sebastian Lee,77,Male,O+,Migraine Chronic,Dr. James Wilson,2026-06-29,2026-07-04,1478.12,Uninsured
+22,Camila Perez,80,Male,O+,Asthma Exacerbation,Dr. John Watson,2026-06-13,2026-06-24,1857.34,Covered (Private)
+23,Jack Thompson,75,Female,A+,Type 2 Diabetes Complications,Dr. James Wilson,2026-07-11,2026-07-18,3580.74,Covered (Private)
+24,Gianna White,63,Male,A+,Appendicitis,Dr. Cristina Yang,2026-06-25,2026-06-28,7906.99,Covered (Private)
+25,Owen Harris,42,Female,B+,Acute Bronchitis,Dr. Cristina Yang,2026-08-27,2026-09-05,1751.66,Medicaid
+26,Abigail Sanchez,47,Male,O+,Fractured Femur,Dr. Allison Cameron,2026-08-29,2026-09-01,12508.88,Medicare
+27,Daniel Clark,34,Male,A+,Acute Bronchitis,Dr. James Wilson,2026-06-15,2026-06-25,1871.02,Medicare
+28,Emily Ramirez,29,Female,B-,Type 2 Diabetes Complications,Dr. Gregory House,2026-02-08,2026-02-13,3673.85,Medicare
+29,Matthew Lewis,30,Female,O-,Appendicitis,Dr. Derek Shepherd,2026-07-14,2026-07-21,6510.43,Medicare
+30,Elizabeth Robinson,60,Male,AB+,Pneumonia,Dr. Lisa Cuddy,2026-08-27,2026-08-31,5394.9,Covered (Private)
+31,David Walker,37,Male,AB-,Hypertension Crisis,Dr. James Wilson,2026-09-03,2026-09-07,4497.09,Medicaid
+32,Avery Young,42,Female,O+,Appendicitis,Dr. John Watson,2026-05-24,2026-05-29,7845.22,Covered (Private)
+33,Joseph Allen,34,Female,A-,Hypertension Crisis,Dr. Robert Chase,2026-09-06,2026-09-11,3401.63,Uninsured
+34,Sofia King,56,Male,B+,Knee Replacement,Dr. Gregory House,2026-04-15,2026-04-23,14320.04,Medicaid
+35,Carter Wright,67,Male,A-,Acute Bronchitis,Dr. Cristina Yang,2026-01-10,2026-01-17,1866.69,Covered (Private)
+36,Ella Scott,31,Male,B-,Asthma Exacerbation,Dr. James Wilson,2026-03-20,2026-03-26,2396.78,Medicaid
+37,Luke Torres,54,Female,B+,Type 2 Diabetes Complications,Dr. Allison Cameron,2026-06-28,2026-07-06,3958.41,Covered (Private)
+38,Madison Nguyen,23,Male,A+,Asthma Exacerbation,Dr. Gregory House,2026-07-21,2026-08-02,2168.79,Covered (Private)
+39,Anthony Hill,65,Female,B+,Fractured Femur,Dr. James Wilson,2026-03-13,2026-03-16,13765.24,Uninsured
+40,Scarlett Flores,67,Male,AB-,Coronary Artery Disease,Dr. Allison Cameron,2026-01-25,2026-02-05,21751.98,Covered (Private)

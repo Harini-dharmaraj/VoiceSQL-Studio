@@ -1,0 +1,11 @@
+doctor_id,doctor_name,specialization,experience_years,consultation_fee
+1,Dr. Gregory House,Diagnostic Medicine,22,350.0
+2,Dr. Meredith Grey,General Surgery,15,280.0
+3,Dr. Derek Shepherd,Neurosurgery,18,450.0
+4,Dr. Cristina Yang,Cardiothoracic Surgery,14,400.0
+5,Dr. John Watson,Internal Medicine,12,200.0
+6,Dr. Shaun Murphy,Pediatric Surgery,8,260.0
+7,Dr. Lisa Cuddy,Endocrinology,20,310.0
+8,Dr. James Wilson,Oncology,19,380.0
+9,Dr. Allison Cameron,Immunology,10,220.0
+10,Dr. Robert Chase,Intensive Care,13,270.0

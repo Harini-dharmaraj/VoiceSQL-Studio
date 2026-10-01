@@ -1,0 +1,31 @@
+room_number,room_type,daily_rate,status
+101,ICU,2200.0,Occupied
+102,General Ward,250.0,Occupied
+103,ICU,2200.0,Cleaning
+104,Semi-Private,500.0,Occupied
+105,Private Suite,950.0,Occupied
+106,General Ward,250.0,Occupied
+107,Private Suite,950.0,Occupied
+108,Semi-Private,500.0,Available
+109,Semi-Private,500.0,Occupied
+110,Semi-Private,500.0,Occupied
+111,General Ward,250.0,Occupied
+112,ICU,2200.0,Occupied
+113,Semi-Private,500.0,Cleaning
+114,ICU,2200.0,Available
+115,Semi-Private,500.0,Occupied
+116,Semi-Private,500.0,Occupied
+117,ICU,2200.0,Cleaning
+118,ICU,2200.0,Occupied
+119,Semi-Private,500.0,Available
+120,General Ward,250.0,Available
+121,Semi-Private,500.0,Occupied
+122,General Ward,250.0,Available
+123,General Ward,250.0,Occupied
+124,Private Suite,950.0,Occupied
+125,Semi-Private,500.0,Cleaning
+126,Semi-Private,500.0,Occupied
+127,Private Suite,950.0,Occupied
+128,Private Suite,950.0,Available
+129,ICU,2200.0,Available
+130,Semi-Private,500.0,Available

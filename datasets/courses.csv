@@ -1,0 +1,8 @@
+course_code,course_name,department,credits,instructor_name
+CS-101,Introduction to Artificial Intelligence,Computer Science,4,Prof. Andrew Ng
+CS-205,Database Systems & SQL Optimization,Computer Science,3,Prof. Michael Stonebraker
+DS-301,Machine Learning & Deep Neural Nets,Data Science,4,Prof. Yann LeCun
+EE-210,Digital Circuit Design & Microprocessors,Electrical Engineering,4,Prof. Lynn Conway
+FIN-401,Quantitative Portfolio Analytics,Finance & Economics,3,Prof. Eugene Fama
+BIO-220,Molecular Genetics & Genomics,Biomedical Sciences,4,Prof. Jennifer Doudna
+CS-450,Cloud Computing & Distributed Architecture,Computer Science,3,Prof. Leslie Lamport
