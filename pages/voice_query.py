@@ -238,18 +238,16 @@ def show_voice_query_page():
         </div>
         """, unsafe_allow_html=True)
 
-        col_audio1, col_audio2 = st.columns([4, 1])
-        with col_audio1:
-            if audio_path and os.path.exists(audio_path):
-                st.audio(audio_path, format="audio/wav")
-        with col_audio2:
-            if st.button("🔊 Replay Voice", key="replay_voice_btn", use_container_width=True):
-                st.markdown(get_browser_tts_html(summary_text), unsafe_allow_html=True)
+        # Audio Player & Browser Trigger
+        if audio_path and os.path.exists(audio_path):
+            st.audio(audio_path, autoplay=True)
 
-        # Trigger automatic browser voice on first execution
-        if st.session_state.get("trigger_browser_tts", False):
+        col_audio1, col_audio2 = st.columns([2, 3])
+        with col_audio1:
+            if st.button("🔊 Replay Voice Answer", key="replay_voice_btn", use_container_width=True):
+                st.markdown(get_browser_tts_html(summary_text), unsafe_allow_html=True)
+        with col_audio2:
             st.markdown(get_browser_tts_html(summary_text), unsafe_allow_html=True)
-            st.session_state.trigger_browser_tts = False
 
     # ==========================================
     # RESULTS & TABS DATA HUB
@@ -363,7 +361,7 @@ def _run_pipeline(question, tts_enabled=True):
         if tts_enabled:
             summary = summarize_query_for_voice(question, df_or_msg, success)
             st.session_state.voice_summary = summary
-            audio_file = generate_voice_response(summary, output_file="audio/ai_response.wav")
+            audio_file = generate_voice_response(summary, output_file="audio/ai_response.mp3")
             st.session_state.voice_audio_path = audio_file
         else:
             st.session_state.voice_summary = None

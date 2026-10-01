@@ -143,7 +143,6 @@ RULES:
 USER QUESTION: {question}
 SQL QUERY:"""
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
     headers = {"Content-Type": "application/json"}
     payload = {
         "contents": [{
@@ -154,22 +153,25 @@ SQL QUERY:"""
             "maxOutputTokens": 300
         }
     }
-    try:
-        response = requests.post(url, headers=headers, json=payload, timeout=12)
-        if response.status_code == 200:
-            res_data = response.json()
-            sql = res_data['candidates'][0]['content']['parts'][0]['text']
-            return clean_sql_string(sql)
-        else:
-            err_msg = response.text
-            try:
-                err_json = response.json()
-                err_msg = err_json.get("error", {}).get("message", response.text)
-            except Exception:
-                pass
-            return f"SELECT 'Gemini API Error: {err_msg}' AS error;"
-    except Exception as e:
-        return f"SELECT 'Gemini Connection Exception: {str(e)}' AS error;"
+
+    # Try supported models in sequence
+    candidate_models = ["gemini-1.5-flash", "gemini-1.5-flash-latest", "gemini-2.0-flash", "gemini-pro"]
+    for model in candidate_models:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+        try:
+            response = requests.post(url, headers=headers, json=payload, timeout=8)
+            if response.status_code == 200:
+                res_data = response.json()
+                candidates = res_data.get('candidates', [])
+                if candidates:
+                    parts = candidates[0].get('content', {}).get('parts', [])
+                    if parts and 'text' in parts[0]:
+                        return clean_sql_string(parts[0]['text'])
+        except Exception:
+            continue
+
+    # Safe Fallback to rule engine if API key is invalid or quota is exceeded
+    return generate_sql_mock(question)
 
 def generate_sql_openai(question, schema_context, api_key):
     """Generate SQL using OpenAI Chat Completion API (via direct HTTP request)."""
@@ -195,15 +197,14 @@ SQL:"""
         "temperature": 0.0
     }
     try:
-        response = requests.post(url, headers=headers, json=payload, timeout=12)
+        response = requests.post(url, headers=headers, json=payload, timeout=10)
         if response.status_code == 200:
             res_data = response.json()
             sql = res_data['choices'][0]['message']['content']
             return clean_sql_string(sql)
-        else:
-            return f"SELECT 'OpenAI API Error: {response.text}' AS error;"
-    except Exception as e:
-        return f"SELECT 'OpenAI Exception: {str(e)}' AS error;"
+    except Exception:
+        pass
+    return generate_sql_mock(question)
 
 def generate_sql_local(question, schema_context):
     """Generate SQL using local Transformers model with safe fallback."""

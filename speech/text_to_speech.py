@@ -1,6 +1,7 @@
 import os
 import re
 import subprocess
+import requests
 import pandas as pd
 
 def summarize_query_for_voice(natural_query, df_or_msg, success):
@@ -17,6 +18,11 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     df = df_or_msg
     row_count = len(df)
 
+    # Check if table only contains an error column
+    if "error" in [c.lower() for c in df.columns]:
+        first_err = str(df.iloc[0, 0])
+        return f"Query returned an error notice: {first_err[:60]}."
+
     if row_count == 0:
         return "The query executed successfully, but returned zero matching records."
 
@@ -24,7 +30,7 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     if "total_revenue" in df.columns and "total_profit" in df.columns and row_count == 1:
         rev = float(df.iloc[0]["total_revenue"] or 0)
         prof = float(df.iloc[0]["total_profit"] or 0)
-        return f"Total revenue is ${rev:,.0f} generating a total profit of ${prof:,.0f}."
+        return f"Total revenue is ${rev:,.0f} with a total net profit of ${prof:,.0f}."
 
     # 1. Single column aggregation (e.g. COUNT(*), AVG, SUM, MAX, MIN)
     if len(df.columns) == 1 and row_count == 1:
@@ -56,7 +62,6 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
         row = df.iloc[0]
         details = []
 
-        # Product
         if "product_name" in df.columns:
             details.append(f"{row['product_name']}")
             if "category" in df.columns:
@@ -67,7 +72,6 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
                 except Exception:
                     pass
 
-        # Customer
         elif "customer_name" in df.columns:
             details.append(f"{row['customer_name']}")
             if "city" in df.columns:
@@ -78,7 +82,6 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
                 except Exception:
                     pass
 
-        # Employee (legacy)
         elif "first_name" in df.columns and "last_name" in df.columns:
             details.append(f"{row['first_name']} {row['last_name']}")
             if "job_title" in df.columns:
@@ -89,7 +92,6 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
                 except Exception:
                     pass
 
-        # Order
         elif "order_id" in df.columns:
             details.append(f"Order #{row['order_id']}")
             if "order_status" in df.columns:
@@ -109,10 +111,10 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     # 3. Small list (2 to 5 items)
     if 2 <= row_count <= 5:
         names = []
-        if "product_name" in df.columns:
-            names = [str(r) for r in df["product_name"].tolist()]
-        elif "customer_name" in df.columns:
+        if "customer_name" in df.columns:
             names = [str(r) for r in df["customer_name"].tolist()]
+        elif "product_name" in df.columns:
+            names = [str(r) for r in df["product_name"].tolist()]
         elif "first_name" in df.columns and "last_name" in df.columns:
             names = [f"{r['first_name']} {r['last_name']}" for _, r in df.iterrows()]
         elif "category" in df.columns:
@@ -140,45 +142,51 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     return f"Retrieved {row_count} {item_type} from the database. You can review the details in the table below."
 
 
-def generate_voice_response(text, output_file="audio/ai_response.wav"):
+def generate_voice_response(text, output_file="audio/ai_response.mp3"):
     """
-    Synthesize text into speech audio WAV file using Windows native SpeechSynthesizer.
-    Returns the audio file path if successful, or None.
+    Universal Speech Synthesizer:
+    1. Primary: Direct HTTP Google TTS (cross-platform, Linux Cloud + Windows, zero pip packages).
+    2. Fallback: Windows SAPI PowerShell synthesizer (offline fallback).
+    Returns path to audio file if created, or None.
     """
     try:
         os.makedirs(os.path.dirname(output_file) or ".", exist_ok=True)
         abs_path = os.path.abspath(output_file)
-        if os.path.exists(abs_path):
-            try:
-                os.remove(abs_path)
-            except Exception:
-                pass
-
+        
         # Clean speech text
         clean_text = re.sub(r'[\$\*\_`#]', '', text)
         clean_text = clean_text.replace('"', ' ').replace("'", " ").strip()
+        if not clean_text:
+            return None
 
-        worker_path = os.path.abspath("speech/tts_worker.ps1")
-        if not os.path.exists(worker_path):
-            with open(worker_path, "w", encoding="utf-8") as f:
-                f.write("""param([string]$text, [string]$outFile)
-Add-Type -AssemblyName System.Speech
-$s = New-Object System.Speech.Synthesis.SpeechSynthesizer
-$s.Rate = 1
-$s.SetOutputToWaveFile($outFile)
-$s.Speak($text)
-$s.Dispose()
-""")
+        # Strategy 1: Google Translate TTS (works on Linux Streamlit Cloud and Windows)
+        try:
+            url = f"https://translate.google.com/translate_tts?ie=UTF-8&q={requests.utils.quote(clean_text[:250])}&tl=en&client=tw-ob"
+            headers = {"User-Agent": "Mozilla/5.0"}
+            res = requests.get(url, headers=headers, timeout=4)
+            if res.status_code == 200 and len(res.content) > 100:
+                with open(abs_path, "wb") as f:
+                    f.write(res.content)
+                return output_file
+        except Exception:
+            pass
 
-        subprocess.run(
-            ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", worker_path, clean_text, abs_path],
-            capture_output=True,
-            text=True,
-            timeout=10
-        )
+        # Strategy 2: Windows native PowerShell SpeechSynthesizer (offline Windows fallback)
+        try:
+            wav_path = abs_path.replace(".mp3", ".wav")
+            worker_path = os.path.abspath("speech/tts_worker.ps1")
+            if os.path.exists(worker_path):
+                subprocess.run(
+                    ["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", worker_path, clean_text[:200], wav_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=5
+                )
+                if os.path.exists(wav_path) and os.path.getsize(wav_path) > 100:
+                    return wav_path
+        except Exception:
+            pass
 
-        if os.path.exists(abs_path) and os.path.getsize(abs_path) > 100:
-            return output_file
     except Exception as e:
         print(f"TTS generation error: {e}")
     return None
@@ -186,19 +194,44 @@ $s.Dispose()
 
 def get_browser_tts_html(text):
     """
-    HTML/JS snippet using the Web Speech API to speak directly in the user's browser.
+    HTML/JS snippet using the Web Speech API with an instant interactive trigger button.
     """
     clean = re.sub(r'[\$\*\_`#"\']', ' ', text).strip()
     return f"""
+    <div style="margin-top: 10px; display: inline-block;">
+        <button id="tts_btn" onclick="
+            if ('speechSynthesis' in window) {{
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance('{clean}');
+                u.rate = 1.0;
+                window.speechSynthesis.speak(u);
+            }}
+        " style="
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+        ">
+            🔊 Speak Aloud in Browser
+        </button>
+    </div>
     <script>
+    // Automatic trigger on load
     if ('speechSynthesis' in window) {{
         window.speechSynthesis.cancel();
         setTimeout(function() {{
-            const u = new SpeechSynthesisUtterance("{clean}");
+            const u = new SpeechSynthesisUtterance('{clean}');
             u.rate = 1.0;
-            u.pitch = 1.0;
             window.speechSynthesis.speak(u);
-        }}, 200);
+        }}, 300);
     }}
     </script>
     """
