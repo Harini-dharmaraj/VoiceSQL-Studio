@@ -1,0 +1,9 @@
+dept_id,dept_name,head_of_department,total_beds,annual_operating_budget
+1,Cardiology,Dr. Cristina Yang,45,8500000.0
+2,Neurology & Neurosurgery,Dr. Derek Shepherd,35,9200000.0
+3,Oncology,Dr. James Wilson,50,11000000.0
+4,Pediatrics,Dr. Shaun Murphy,40,6000000.0
+5,Orthopedics,Dr. Callie Torres,38,7200000.0
+6,General Surgery,Dr. Meredith Grey,42,7800000.0
+7,Internal Medicine,Dr. John Watson,55,5500000.0
+8,Emergency & Trauma,Dr. Robert Chase,30,9800000.0

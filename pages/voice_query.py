@@ -113,12 +113,12 @@ def show_voice_query_page():
     """, unsafe_allow_html=True)
 
     chips = [
-        ("🛍️ Top Products", "Show the most expensive products"),
-        ("💰 Total Revenue", "Show total revenue and total sales"),
-        ("👥 Top Customers", "Show top 5 customers by total spending"),
-        ("💻 Tech Products", "Show products in Technology category"),
-        ("📦 Delivered Orders", "Show delivered orders"),
-        ("💳 Payment Modes", "Show breakdown by payment method"),
+        ("🏥 ICU Admissions", "Show patients admitted to ICU"),
+        ("💰 Treatment Costs", "Show highest treatment cost admissions"),
+        ("🩺 Doctors List", "Show all doctors and their consultation fees"),
+        ("📋 Denied Claims", "Show denied or pending insurance claims"),
+        ("❤️ Cardiology", "Show patients diagnosed with heart or coronary condition"),
+        ("🏢 Departments", "Show hospital departments by bed capacity"),
     ]
 
     chip_cols = st.columns(len(chips))

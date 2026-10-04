@@ -163,7 +163,17 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
 
     # 4. Larger result sets (> 5 rows)
     item_type = "records"
-    if "product_name" in df.columns:
+    if "admission_id" in df.columns or "diagnosis" in df.columns:
+        item_type = "patient admissions"
+    elif "bill_id" in df.columns or "claim_status" in df.columns:
+        item_type = "medical billing claims"
+    elif "patient_name" in df.columns and "age" in df.columns:
+        item_type = "patient profiles"
+    elif "doctor_name" in df.columns or "license_number" in df.columns:
+        item_type = "physicians"
+    elif "dept_name" in df.columns or "head_of_department" in df.columns:
+        item_type = "hospital departments"
+    elif "product_name" in df.columns:
         item_type = "products"
     elif "customer_name" in df.columns:
         item_type = "customers"

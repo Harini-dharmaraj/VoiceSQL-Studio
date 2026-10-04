@@ -1,0 +1,551 @@
+bill_id,admission_id,patient_id,total_billed_amount,insurance_paid_amount,patient_copay_amount,claim_status,payment_method
+1,1,5,45258.39,39932.48,5325.91,Approved & Settled,Credit Card
+2,2,24,19051.61,14436.7,4614.91,Approved & Settled,HSA Account
+3,3,180,34334.29,30214.18,4120.11,Approved & Settled,Government Program Direct
+4,4,114,33496.3,28609.35,4886.95,Approved & Settled,Insurance Direct
+5,5,99,8899.88,6852.66,2047.22,Denied / Appeal,Insurance Direct
+6,6,18,13008.55,11447.52,1561.03,Approved & Settled,Government Program Direct
+7,7,39,23805.66,19109.53,4696.13,Approved & Settled,Insurance Direct
+8,8,64,19918.62,17266.37,2652.25,Approved & Settled,HSA Account
+9,9,225,7135.06,6200.84,934.22,Approved & Settled,Credit Card
+10,10,29,38205.19,34309.5,3895.69,Pending Review,Insurance Direct
+11,11,100,13388.68,11221.11,2167.57,Approved & Settled,Insurance Direct
+12,12,11,21993.12,19353.95,2639.17,Approved & Settled,Government Program Direct
+13,13,103,7407.82,5918.94,1488.88,Approved & Settled,HSA Account
+14,14,175,20138.96,15279.14,4859.82,Approved & Settled,Credit Card
+15,15,30,14913.74,13124.09,1789.65,Approved & Settled,Government Program Direct
+16,16,128,8728.35,7680.95,1047.4,Approved & Settled,Government Program Direct
+17,17,31,31373.1,25864.68,5508.42,Approved & Settled,Insurance Direct
+18,18,128,17199.41,15135.48,2063.93,Approved & Settled,Government Program Direct
+19,19,30,37625.88,33110.77,4515.11,Approved & Settled,Government Program Direct
+20,20,246,21705.45,19100.8,2604.65,Approved & Settled,Government Program Direct
+21,21,20,17603.76,15722.13,1881.63,Approved & Settled,Credit Card
+22,22,222,6311.94,5010.03,1301.91,Approved & Settled,HSA Account
+23,23,160,37426.47,32935.29,4491.18,Approved & Settled,Government Program Direct
+24,24,63,24828.78,0.0,24828.78,Direct Patient Billing,Cash / Debit
+25,25,225,27521.37,24699.53,2821.84,Approved & Settled,Insurance Direct
+26,26,249,26337.63,21385.06,4952.57,Approved & Settled,Credit Card
+27,27,250,8105.72,7133.03,972.69,Pending Review,Government Program Direct
+28,28,61,6970.24,5996.52,973.72,Approved & Settled,Credit Card
+29,29,60,8183.27,6636.44,1546.83,Approved & Settled,Insurance Direct
+30,30,116,7182.27,5714.45,1467.82,Approved & Settled,HSA Account
+31,31,11,29480.85,25943.15,3537.7,Approved & Settled,Government Program Direct
+32,32,45,27928.66,22882.13,5046.53,Approved & Settled,Insurance Direct
+33,33,32,31908.92,28419.24,3489.68,Approved & Settled,HSA Account
+34,34,67,9040.01,6904.73,2135.28,Approved & Settled,Credit Card
+35,35,32,17461.14,14885.31,2575.83,Approved & Settled,Insurance Direct
+36,36,233,18421.44,15520.92,2900.52,Approved & Settled,Credit Card
+37,37,106,27722.48,24395.78,3326.7,Approved & Settled,Government Program Direct
+38,38,206,25781.9,21210.82,4571.08,Pending Review,HSA Account
+39,39,83,17323.22,0.0,17323.22,Direct Patient Billing,Payment Plan Installments
+40,40,136,7291.14,6416.2,874.94,Approved & Settled,Government Program Direct
+41,41,235,22473.04,17448.41,5024.63,Approved & Settled,HSA Account
+42,42,179,7994.62,6671.24,1323.38,Approved & Settled,Credit Card
+43,43,139,6528.33,5221.1,1307.23,Approved & Settled,Insurance Direct
+44,44,88,24942.83,20901.88,4040.95,Pending Review,Insurance Direct
+45,45,217,11460.5,10085.24,1375.26,Approved & Settled,Government Program Direct
+46,46,41,22676.49,20033.32,2643.17,Approved & Settled,Credit Card
+47,47,58,40922.81,36515.62,4407.19,Approved & Settled,HSA Account
+48,48,9,18160.4,16171.89,1988.51,Approved & Settled,HSA Account
+49,49,20,34792.16,30721.41,4070.75,Approved & Settled,Credit Card
+50,50,54,28362.91,22914.13,5448.78,Approved & Settled,Insurance Direct
+51,51,227,22784.53,19679.83,3104.7,Approved & Settled,Credit Card
+52,52,19,17735.89,13754.46,3981.43,Approved & Settled,HSA Account
+53,53,20,28837.96,22342.2,6495.76,Approved & Settled,Insurance Direct
+54,54,14,40938.01,36387.18,4550.83,Approved & Settled,HSA Account
+55,55,73,6295.88,5125.73,1170.15,Approved & Settled,HSA Account
+56,56,161,9827.57,0.0,9827.57,Direct Patient Billing,Credit Card
+57,57,122,40816.57,31744.36,9072.21,Approved & Settled,Credit Card
+58,58,48,18452.27,15400.95,3051.32,Approved & Settled,HSA Account
+59,59,171,40931.8,35861.15,5070.65,Approved & Settled,Credit Card
+60,60,248,22206.37,19661.89,2544.48,Approved & Settled,HSA Account
+61,61,147,11129.76,8669.07,2460.69,Approved & Settled,Insurance Direct
+62,62,175,20633.0,18293.64,2339.36,Pending Review,Insurance Direct
+63,63,23,20154.68,16999.64,3155.04,Approved & Settled,Credit Card
+64,64,29,25383.67,19419.28,5964.39,Approved & Settled,Insurance Direct
+65,65,202,5654.33,4474.34,1179.99,Approved & Settled,HSA Account
+66,66,175,30826.52,23347.81,7478.71,Approved & Settled,Credit Card
+67,67,230,8308.56,6353.83,1954.73,Approved & Settled,Insurance Direct
+68,68,77,14671.43,11975.66,2695.77,Pending Review,Credit Card
+69,69,190,9467.57,8209.12,1258.45,Approved & Settled,HSA Account
+70,70,8,16461.26,13473.0,2988.26,Pending Review,HSA Account
+71,71,51,17789.05,14646.05,3143.0,Approved & Settled,Credit Card
+72,72,151,27352.02,23340.23,4011.79,Approved & Settled,Credit Card
+73,73,13,17879.4,15728.41,2150.99,Pending Review,HSA Account
+74,74,3,8938.78,7519.76,1419.02,Pending Review,HSA Account
+75,75,248,27408.88,22697.18,4711.7,Approved & Settled,HSA Account
+76,76,27,28372.1,21739.15,6632.95,Approved & Settled,Credit Card
+77,77,164,4049.03,3182.72,866.31,Approved & Settled,HSA Account
+78,78,104,36011.42,28605.34,7406.08,Pending Review,Credit Card
+79,79,100,22849.7,19440.07,3409.63,Approved & Settled,Insurance Direct
+80,80,216,33414.13,29404.43,4009.7,Approved & Settled,Government Program Direct
+81,81,196,19356.77,17033.96,2322.81,Approved & Settled,Government Program Direct
+82,82,67,17070.07,14296.8,2773.27,Pending Review,Insurance Direct
+83,83,121,25033.78,22501.67,2532.11,Approved & Settled,HSA Account
+84,84,229,14628.58,11701.32,2927.26,Denied / Appeal,Credit Card
+85,85,163,20287.96,17539.66,2748.3,Approved & Settled,HSA Account
+86,86,112,15505.7,12870.78,2634.92,Approved & Settled,Insurance Direct
+87,87,229,3838.73,2953.29,885.44,Approved & Settled,HSA Account
+88,88,79,17571.06,14549.6,3021.46,Approved & Settled,Credit Card
+89,89,228,40467.01,35279.19,5187.82,Approved & Settled,Insurance Direct
+90,90,187,21136.77,18107.16,3029.61,Approved & Settled,Credit Card
+91,91,225,19077.24,14364.42,4712.82,Approved & Settled,Credit Card
+92,92,114,16900.77,14414.01,2486.76,Approved & Settled,Credit Card
+93,93,170,42940.2,37787.38,5152.82,Approved & Settled,Government Program Direct
+94,94,30,44311.03,38993.71,5317.32,Pending Review,Government Program Direct
+95,95,92,28979.84,22754.27,6225.57,Approved & Settled,Insurance Direct
+96,96,233,35112.59,30145.44,4967.15,Pending Review,HSA Account
+97,97,60,15689.11,13653.28,2035.83,Approved & Settled,HSA Account
+98,98,30,36273.43,31920.62,4352.81,Approved & Settled,Government Program Direct
+99,99,113,9149.91,7489.03,1660.88,Approved & Settled,HSA Account
+100,100,218,8670.11,7447.29,1222.82,Denied / Appeal,Insurance Direct
+101,101,27,23008.33,20233.21,2775.12,Approved & Settled,HSA Account
+102,102,250,20581.0,18111.28,2469.72,Approved & Settled,Government Program Direct
+103,103,81,29597.57,25424.25,4173.32,Approved & Settled,HSA Account
+104,104,174,20916.81,15858.81,5058.0,Approved & Settled,Insurance Direct
+105,105,130,9098.89,7516.04,1582.85,Approved & Settled,Credit Card
+106,106,104,29237.24,24113.95,5123.29,Approved & Settled,Credit Card
+107,107,191,19837.98,0.0,19837.98,Direct Patient Billing,Cash / Debit
+108,108,164,6300.87,4776.95,1523.92,Approved & Settled,Credit Card
+109,109,85,23303.02,18670.46,4632.56,Approved & Settled,Credit Card
+110,110,141,12162.11,10620.88,1541.23,Approved & Settled,Credit Card
+111,111,28,17489.93,14004.01,3485.92,Approved & Settled,Insurance Direct
+112,112,238,18723.6,15458.76,3264.84,Pending Review,Insurance Direct
+113,113,136,21530.53,18946.87,2583.66,Approved & Settled,Government Program Direct
+114,114,209,22567.28,19909.05,2658.23,Approved & Settled,HSA Account
+115,115,235,25965.98,21821.26,4144.72,Approved & Settled,HSA Account
+116,116,77,26662.61,20835.68,5826.93,Approved & Settled,HSA Account
+117,117,89,34107.51,26171.06,7936.45,Approved & Settled,Credit Card
+118,118,150,14376.71,12609.74,1766.97,Approved & Settled,HSA Account
+119,119,28,34619.82,29513.69,5106.13,Approved & Settled,Insurance Direct
+120,120,177,6477.95,5700.6,777.35,Approved & Settled,Government Program Direct
+121,121,173,26946.27,0.0,26946.27,Direct Patient Billing,Cash / Debit
+122,122,171,21489.55,19230.46,2259.09,Approved & Settled,HSA Account
+123,123,65,28730.68,24730.44,4000.24,Approved & Settled,HSA Account
+124,124,247,25339.58,19665.27,5674.31,Approved & Settled,Credit Card
+125,125,11,22033.75,19389.7,2644.05,Approved & Settled,Government Program Direct
+126,126,11,24682.38,21720.49,2961.89,Approved & Settled,Government Program Direct
+127,127,126,13366.34,11037.54,2328.8,Approved & Settled,HSA Account
+128,128,104,7846.34,6230.28,1616.06,Pending Review,HSA Account
+129,129,136,10108.61,8895.58,1213.03,Pending Review,Government Program Direct
+130,130,175,4076.93,3230.66,846.27,Pending Review,Credit Card
+131,131,132,13839.42,12178.69,1660.73,Approved & Settled,Government Program Direct
+132,132,245,27541.11,24229.09,3312.02,Approved & Settled,Insurance Direct
+133,133,53,27105.55,20483.2,6622.35,Approved & Settled,Insurance Direct
+134,134,204,18754.05,15334.6,3419.45,Approved & Settled,Credit Card
+135,135,5,16004.89,14040.09,1964.8,Approved & Settled,HSA Account
+136,136,28,6448.35,5218.44,1229.91,Approved & Settled,Credit Card
+137,137,41,26469.47,21035.51,5433.96,Approved & Settled,HSA Account
+138,138,166,6758.92,5649.83,1109.09,Approved & Settled,HSA Account
+139,139,243,8632.25,7137.86,1494.39,Approved & Settled,Insurance Direct
+140,140,158,21343.51,18733.37,2610.14,Pending Review,HSA Account
+141,141,119,20717.28,18231.21,2486.07,Approved & Settled,Government Program Direct
+142,142,172,16545.02,13614.55,2930.47,Approved & Settled,HSA Account
+143,143,79,27506.29,23871.31,3634.98,Approved & Settled,HSA Account
+144,144,112,19175.25,15662.42,3512.83,Approved & Settled,Credit Card
+145,145,142,40749.6,32171.21,8578.39,Approved & Settled,Insurance Direct
+146,146,187,8472.4,6869.17,1603.23,Approved & Settled,Insurance Direct
+147,147,142,20650.31,16389.12,4261.19,Approved & Settled,HSA Account
+148,148,24,21148.4,18975.99,2172.41,Approved & Settled,HSA Account
+149,149,36,17921.01,15965.4,1955.61,Approved & Settled,Credit Card
+150,150,60,8312.64,7221.35,1091.29,Approved & Settled,Credit Card
+151,151,226,22409.46,0.0,22409.46,Direct Patient Billing,Payment Plan Installments
+152,152,149,26617.62,23298.94,3318.68,Approved & Settled,Credit Card
+153,153,250,28416.5,25006.52,3409.98,Approved & Settled,Government Program Direct
+154,154,113,15927.69,12321.72,3605.97,Approved & Settled,Insurance Direct
+155,155,170,34305.17,30188.55,4116.62,Approved & Settled,Government Program Direct
+156,156,106,26878.68,23653.24,3225.44,Approved & Settled,Government Program Direct
+157,157,229,17547.29,14838.75,2708.54,Approved & Settled,HSA Account
+158,158,170,7300.73,6424.64,876.09,Approved & Settled,Government Program Direct
+159,159,213,20027.09,17079.88,2947.21,Pending Review,HSA Account
+160,160,152,7525.06,6622.05,903.01,Approved & Settled,Government Program Direct
+161,161,130,31024.72,26916.43,4108.29,Approved & Settled,Insurance Direct
+162,162,24,11040.69,9404.28,1636.41,Approved & Settled,Credit Card
+163,163,95,22223.59,19556.76,2666.83,Approved & Settled,Government Program Direct
+164,164,215,26796.11,23580.58,3215.53,Approved & Settled,Government Program Direct
+165,165,73,8345.58,6268.19,2077.39,Approved & Settled,HSA Account
+166,166,206,4131.81,3260.81,871.0,Approved & Settled,HSA Account
+167,167,94,8518.99,0.0,8518.99,Direct Patient Billing,Cash / Debit
+168,168,143,9452.09,7284.82,2167.27,Approved & Settled,Insurance Direct
+169,169,192,31761.45,26444.15,5317.3,Approved & Settled,HSA Account
+170,170,14,15901.29,14134.33,1766.96,Approved & Settled,Insurance Direct
+171,171,68,34964.25,27725.61,7238.64,Pending Review,Insurance Direct
+172,172,243,20123.76,16656.9,3466.86,Approved & Settled,HSA Account
+173,173,131,10929.4,9831.24,1098.16,Approved & Settled,Credit Card
+174,174,172,19690.28,17482.54,2207.74,Approved & Settled,HSA Account
+175,175,213,28740.2,24033.59,4706.61,Approved & Settled,Credit Card
+176,176,130,43963.78,39281.92,4681.86,Approved & Settled,HSA Account
+177,177,65,28787.87,23580.38,5207.49,Approved & Settled,Insurance Direct
+178,178,124,36879.85,31538.78,5341.07,Approved & Settled,Credit Card
+179,179,245,8604.3,6551.35,2052.95,Pending Review,Credit Card
+180,180,81,8277.6,7338.0,939.6,Approved & Settled,Insurance Direct
+181,181,61,36201.7,27802.25,8399.45,Approved & Settled,HSA Account
+182,182,127,10425.13,9174.11,1251.02,Approved & Settled,Government Program Direct
+183,183,81,10488.5,8068.14,2420.36,Approved & Settled,Credit Card
+184,184,123,27558.94,24251.87,3307.07,Approved & Settled,Government Program Direct
+185,185,31,27613.84,23248.55,4365.29,Approved & Settled,HSA Account
+186,186,68,30203.85,24573.59,5630.26,Approved & Settled,Credit Card
+187,187,94,16309.27,0.0,16309.27,Direct Patient Billing,Payment Plan Installments
+188,188,206,38018.21,29366.49,8651.72,Approved & Settled,Insurance Direct
+189,189,108,9018.87,7925.56,1093.31,Approved & Settled,Insurance Direct
+190,190,177,18506.14,16285.4,2220.74,Approved & Settled,Government Program Direct
+191,191,86,17086.09,15037.56,2048.53,Pending Review,Insurance Direct
+192,192,148,15418.46,13355.65,2062.81,Approved & Settled,Insurance Direct
+193,193,98,8970.88,7577.62,1393.26,Approved & Settled,Insurance Direct
+194,194,21,18939.29,16666.58,2272.71,Approved & Settled,Government Program Direct
+195,195,102,18791.07,14611.62,4179.45,Approved & Settled,HSA Account
+196,196,61,32415.99,24812.86,7603.13,Approved & Settled,Credit Card
+197,197,141,18234.01,15466.54,2767.47,Approved & Settled,Credit Card
+198,198,59,36802.26,27759.42,9042.84,Approved & Settled,Credit Card
+199,199,222,10333.8,8024.77,2309.03,Approved & Settled,HSA Account
+200,200,192,20482.71,16841.86,3640.85,Approved & Settled,Insurance Direct
+201,201,114,7262.33,5821.36,1440.97,Approved & Settled,Insurance Direct
+202,202,177,9142.36,8045.28,1097.08,Approved & Settled,Government Program Direct
+203,203,2,27261.07,23989.74,3271.33,Approved & Settled,Government Program Direct
+204,204,97,36056.55,31963.88,4092.67,Approved & Settled,HSA Account
+205,205,70,6483.4,5302.87,1180.53,Approved & Settled,Credit Card
+206,206,49,3646.1,2790.51,855.59,Approved & Settled,HSA Account
+207,207,113,32941.1,29636.93,3304.17,Approved & Settled,Insurance Direct
+208,208,85,8375.81,6510.02,1865.79,Approved & Settled,Credit Card
+209,209,210,17134.11,15406.65,1727.46,Approved & Settled,HSA Account
+210,210,198,45584.38,35272.82,10311.56,Approved & Settled,HSA Account
+211,211,240,26720.22,23941.08,2779.14,Approved & Settled,Credit Card
+212,212,84,32846.99,24679.24,8167.75,Approved & Settled,HSA Account
+213,213,122,27728.11,24829.07,2899.04,Approved & Settled,Insurance Direct
+214,214,16,7815.21,6232.72,1582.49,Approved & Settled,HSA Account
+215,215,194,8788.03,7230.75,1557.28,Approved & Settled,Credit Card
+216,216,139,27598.39,22637.83,4960.56,Approved & Settled,HSA Account
+217,217,235,25087.33,21735.35,3351.98,Approved & Settled,HSA Account
+218,218,48,26227.68,23475.73,2751.95,Approved & Settled,Insurance Direct
+219,219,135,31801.85,26347.2,5454.65,Approved & Settled,Insurance Direct
+220,220,46,20788.3,18293.7,2494.6,Approved & Settled,Government Program Direct
+221,221,169,8894.52,7827.18,1067.34,Approved & Settled,Government Program Direct
+222,222,228,8875.72,7842.27,1033.45,Approved & Settled,HSA Account
+223,223,15,10745.75,9456.26,1289.49,Approved & Settled,Government Program Direct
+224,224,186,34095.88,30417.8,3678.08,Approved & Settled,HSA Account
+225,225,107,36393.62,29487.33,6906.29,Approved & Settled,Insurance Direct
+226,226,137,10849.03,9547.15,1301.88,Approved & Settled,Government Program Direct
+227,227,106,19694.46,17331.12,2363.34,Approved & Settled,Government Program Direct
+228,228,66,6742.08,5344.26,1397.82,Approved & Settled,Insurance Direct
+229,229,228,7451.6,6507.86,943.74,Pending Review,HSA Account
+230,230,143,13692.21,11023.08,2669.13,Approved & Settled,Insurance Direct
+231,231,66,7153.12,5550.36,1602.76,Approved & Settled,HSA Account
+232,232,180,16800.7,14784.62,2016.08,Approved & Settled,Government Program Direct
+233,233,200,22013.28,18978.79,3034.49,Approved & Settled,Insurance Direct
+234,234,163,18451.77,14252.83,4198.94,Approved & Settled,Insurance Direct
+235,235,40,22111.45,17074.5,5036.95,Approved & Settled,Credit Card
+236,236,147,22034.38,16956.7,5077.68,Approved & Settled,HSA Account
+237,237,51,8993.38,7104.22,1889.16,Approved & Settled,HSA Account
+238,238,237,14666.15,11705.21,2960.94,Approved & Settled,Insurance Direct
+239,239,198,5669.04,4947.52,721.52,Approved & Settled,Credit Card
+240,240,40,9333.12,8216.07,1117.05,Approved & Settled,Insurance Direct
+241,241,88,26543.45,21990.98,4552.47,Approved & Settled,Credit Card
+242,242,160,20563.07,18095.5,2467.57,Approved & Settled,Government Program Direct
+243,243,73,29360.87,26041.05,3319.82,Approved & Settled,Insurance Direct
+244,244,5,6988.02,6188.46,799.56,Approved & Settled,HSA Account
+245,245,137,7637.49,6720.99,916.5,Approved & Settled,Government Program Direct
+246,246,86,9316.03,7860.72,1455.31,Approved & Settled,HSA Account
+247,247,71,23111.37,18115.56,4995.81,Approved & Settled,Credit Card
+248,248,169,24659.63,21700.47,2959.16,Approved & Settled,Government Program Direct
+249,249,59,22543.81,17607.02,4936.79,Approved & Settled,HSA Account
+250,250,176,31443.99,25611.43,5832.56,Pending Review,Insurance Direct
+251,251,168,16945.38,13078.93,3866.45,Approved & Settled,Credit Card
+252,252,226,24908.55,0.0,24908.55,Direct Patient Billing,Cash / Debit
+253,253,71,24610.35,20718.33,3892.02,Approved & Settled,Insurance Direct
+254,254,176,30231.2,25415.57,4815.63,Approved & Settled,Credit Card
+255,255,48,15834.08,12516.5,3317.58,Approved & Settled,HSA Account
+256,256,172,27471.08,23146.0,4325.08,Approved & Settled,Credit Card
+257,257,228,32323.04,28795.65,3527.39,Approved & Settled,HSA Account
+258,258,135,20311.23,17907.74,2403.49,Approved & Settled,HSA Account
+259,259,102,22713.74,19671.27,3042.47,Approved & Settled,Insurance Direct
+260,260,109,7226.51,5909.51,1317.0,Approved & Settled,Insurance Direct
+261,261,47,16356.62,14393.83,1962.79,Approved & Settled,Government Program Direct
+262,262,117,9008.03,7726.69,1281.34,Approved & Settled,Insurance Direct
+263,263,181,19021.96,15346.95,3675.01,Approved & Settled,Insurance Direct
+264,264,234,4285.85,3771.55,514.3,Approved & Settled,Government Program Direct
+265,265,80,18089.84,15919.06,2170.78,Approved & Settled,Government Program Direct
+266,266,128,10013.61,8811.98,1201.63,Approved & Settled,Government Program Direct
+267,267,105,17038.97,14888.45,2150.52,Approved & Settled,Insurance Direct
+268,268,15,18661.82,16422.4,2239.42,Approved & Settled,Government Program Direct
+269,269,85,8746.02,7340.06,1405.96,Approved & Settled,Insurance Direct
+270,270,248,16083.49,12976.82,3106.67,Approved & Settled,Credit Card
+271,271,216,24777.66,21804.34,2973.32,Approved & Settled,Government Program Direct
+272,272,54,9516.44,7262.48,2253.96,Approved & Settled,HSA Account
+273,273,240,27863.91,21440.08,6423.83,Approved & Settled,HSA Account
+274,274,187,16760.9,13301.0,3459.9,Approved & Settled,Insurance Direct
+275,275,7,15907.65,13267.97,2639.68,Approved & Settled,Insurance Direct
+276,276,164,28040.51,22392.83,5647.68,Approved & Settled,HSA Account
+277,277,86,4433.93,3938.85,495.08,Approved & Settled,Credit Card
+278,278,205,22595.94,19884.43,2711.51,Approved & Settled,Government Program Direct
+279,279,119,19025.79,16742.7,2283.09,Approved & Settled,Government Program Direct
+280,280,85,8989.21,7586.68,1402.53,Approved & Settled,HSA Account
+281,281,156,19725.1,15597.12,4127.98,Approved & Settled,Insurance Direct
+282,282,96,16112.03,12174.4,3937.63,Approved & Settled,Insurance Direct
+283,283,114,13045.38,10808.67,2236.71,Approved & Settled,Insurance Direct
+284,284,197,42878.32,37732.92,5145.4,Approved & Settled,Government Program Direct
+285,285,2,5784.56,5090.41,694.15,Approved & Settled,Government Program Direct
+286,286,191,5996.33,0.0,5996.33,Direct Patient Billing,Credit Card
+287,287,50,6122.9,4606.19,1516.71,Approved & Settled,HSA Account
+288,288,27,29710.38,23545.18,6165.2,Approved & Settled,Insurance Direct
+289,289,80,8311.68,7314.28,997.4,Approved & Settled,Government Program Direct
+290,290,110,20432.58,17467.91,2964.67,Approved & Settled,Credit Card
+291,291,86,29661.77,22679.08,6982.69,Approved & Settled,HSA Account
+292,292,182,18748.66,16498.82,2249.84,Approved & Settled,Government Program Direct
+293,293,94,18480.04,0.0,18480.04,Direct Patient Billing,Credit Card
+294,294,122,43538.17,36601.06,6937.11,Approved & Settled,Insurance Direct
+295,295,104,29946.72,23531.72,6415.0,Approved & Settled,Insurance Direct
+296,296,250,10019.82,8817.44,1202.38,Approved & Settled,Government Program Direct
+297,297,112,16353.26,14317.48,2035.78,Approved & Settled,HSA Account
+298,298,119,3913.45,3443.84,469.61,Approved & Settled,Government Program Direct
+299,299,176,10536.92,9330.32,1206.6,Approved & Settled,Insurance Direct
+300,300,194,24411.11,19024.8,5386.31,Approved & Settled,Credit Card
+301,301,77,15887.32,13131.88,2755.44,Approved & Settled,Credit Card
+302,302,16,7510.69,6603.3,907.39,Approved & Settled,Insurance Direct
+303,303,111,30579.89,25113.14,5466.75,Approved & Settled,Credit Card
+304,304,216,6957.3,6122.42,834.88,Approved & Settled,Government Program Direct
+305,305,166,26901.45,23428.24,3473.21,Approved & Settled,HSA Account
+306,306,155,21924.31,19293.39,2630.92,Approved & Settled,Government Program Direct
+307,307,48,25126.51,21017.14,4109.37,Approved & Settled,Insurance Direct
+308,308,146,8515.71,7319.49,1196.22,Approved & Settled,Credit Card
+309,309,120,13884.31,10575.85,3308.46,Approved & Settled,HSA Account
+310,310,80,9303.09,8186.72,1116.37,Approved & Settled,Government Program Direct
+311,311,147,4542.2,3917.26,624.94,Approved & Settled,HSA Account
+312,312,67,23364.8,20358.55,3006.25,Approved & Settled,Credit Card
+313,313,125,7706.94,6077.26,1629.68,Approved & Settled,HSA Account
+314,314,45,14262.21,12195.85,2066.36,Approved & Settled,HSA Account
+315,315,221,21904.97,17785.57,4119.4,Approved & Settled,HSA Account
+316,316,113,15779.01,12460.04,3318.97,Approved & Settled,Insurance Direct
+317,317,43,16140.27,13813.51,2326.76,Approved & Settled,Insurance Direct
+318,318,136,23459.48,20644.34,2815.14,Pending Review,Government Program Direct
+319,319,175,22553.74,18048.52,4505.22,Approved & Settled,Insurance Direct
+320,320,66,19521.66,16365.18,3156.48,Approved & Settled,Credit Card
+321,321,174,25609.75,19606.47,6003.28,Approved & Settled,Insurance Direct
+322,322,186,5692.85,4776.99,915.86,Approved & Settled,Insurance Direct
+323,323,244,10185.47,8963.21,1222.26,Approved & Settled,Government Program Direct
+324,324,206,18670.73,14215.09,4455.64,Approved & Settled,Credit Card
+325,325,197,21135.44,18599.19,2536.25,Approved & Settled,Government Program Direct
+326,326,245,17548.7,14195.06,3353.64,Approved & Settled,Insurance Direct
+327,327,37,21867.73,19243.6,2624.13,Approved & Settled,Government Program Direct
+328,328,187,20109.31,17895.96,2213.35,Approved & Settled,Credit Card
+329,329,39,28587.31,25059.85,3527.46,Approved & Settled,Insurance Direct
+330,330,139,33209.23,27732.58,5476.65,Pending Review,Credit Card
+331,331,86,39884.36,31947.75,7936.61,Approved & Settled,Credit Card
+332,332,166,25373.59,21678.75,3694.84,Approved & Settled,HSA Account
+333,333,177,6720.06,5913.65,806.41,Pending Review,Government Program Direct
+334,334,62,9751.07,8724.7,1026.37,Approved & Settled,Insurance Direct
+335,335,10,4231.46,3723.68,507.78,Approved & Settled,Government Program Direct
+336,336,174,21883.22,16877.18,5006.04,Approved & Settled,Credit Card
+337,337,233,8885.3,7721.81,1163.49,Approved & Settled,Insurance Direct
+338,338,214,15810.7,13318.05,2492.65,Approved & Settled,Insurance Direct
+339,339,110,4593.07,3591.71,1001.36,Approved & Settled,Insurance Direct
+340,340,86,8757.95,7295.47,1462.48,Approved & Settled,HSA Account
+341,341,11,23756.17,20905.43,2850.74,Approved & Settled,Government Program Direct
+342,342,46,8208.13,7223.15,984.98,Approved & Settled,Government Program Direct
+343,343,37,18761.88,16510.45,2251.43,Approved & Settled,Government Program Direct
+344,344,157,7498.99,6734.02,764.97,Denied / Appeal,HSA Account
+345,345,93,27717.99,24391.83,3326.16,Approved & Settled,Government Program Direct
+346,346,248,8439.06,6790.31,1648.75,Approved & Settled,Credit Card
+347,347,86,8092.78,6694.64,1398.14,Approved & Settled,Insurance Direct
+348,348,185,15866.66,13962.66,1904.0,Approved & Settled,Government Program Direct
+349,349,84,33097.58,27228.09,5869.49,Approved & Settled,Insurance Direct
+350,350,56,10060.05,8852.84,1207.21,Approved & Settled,Government Program Direct
+351,351,250,21340.02,18779.22,2560.8,Approved & Settled,Government Program Direct
+352,352,44,4195.81,3531.74,664.07,Approved & Settled,HSA Account
+353,353,219,36786.85,29130.61,7656.24,Approved & Settled,HSA Account
+354,354,224,37699.0,33625.17,4073.83,Pending Review,Insurance Direct
+355,355,107,22254.9,19016.77,3238.13,Approved & Settled,Credit Card
+356,356,62,7351.25,5839.6,1511.65,Approved & Settled,Insurance Direct
+357,357,5,9619.05,8327.94,1291.11,Approved & Settled,Credit Card
+358,358,48,6827.41,6035.53,791.88,Approved & Settled,Insurance Direct
+359,359,76,19444.04,17110.76,2333.28,Approved & Settled,Government Program Direct
+360,360,189,21083.96,16969.12,4114.84,Approved & Settled,HSA Account
+361,361,181,9364.11,7837.93,1526.18,Pending Review,Insurance Direct
+362,362,193,32613.13,24726.26,7886.87,Approved & Settled,Credit Card
+363,363,125,12635.1,10992.35,1642.75,Pending Review,Insurance Direct
+364,364,49,19064.94,14518.75,4546.19,Approved & Settled,Insurance Direct
+365,365,179,27230.94,22634.77,4596.17,Approved & Settled,Credit Card
+366,366,108,18274.86,15994.93,2279.93,Approved & Settled,Credit Card
+367,367,106,16956.45,14921.68,2034.77,Approved & Settled,Government Program Direct
+368,368,78,14102.27,11363.4,2738.87,Approved & Settled,Insurance Direct
+369,369,38,7091.64,6240.64,851.0,Approved & Settled,Government Program Direct
+370,370,182,27536.31,24231.95,3304.36,Approved & Settled,Government Program Direct
+371,371,67,7543.06,6268.13,1274.93,Approved & Settled,Credit Card
+372,372,32,34111.64,26382.21,7729.43,Denied / Appeal,HSA Account
+373,373,250,13958.94,12283.87,1675.07,Approved & Settled,Government Program Direct
+374,374,38,17226.81,15159.59,2067.22,Approved & Settled,Government Program Direct
+375,375,142,34869.21,29506.22,5362.99,Approved & Settled,Insurance Direct
+376,376,201,20323.22,18161.71,2161.51,Denied / Appeal,Credit Card
+377,377,50,8715.55,7652.87,1062.68,Approved & Settled,Credit Card
+378,378,4,6693.09,5236.37,1456.72,Approved & Settled,HSA Account
+379,379,107,14925.65,12508.84,2416.81,Approved & Settled,Insurance Direct
+380,380,78,9386.27,7049.02,2337.25,Approved & Settled,Credit Card
+381,381,107,16676.15,13734.27,2941.88,Approved & Settled,Credit Card
+382,382,214,13174.54,9885.74,3288.8,Approved & Settled,HSA Account
+383,383,214,19265.89,15156.72,4109.17,Approved & Settled,Credit Card
+384,384,127,7663.75,6744.1,919.65,Approved & Settled,Government Program Direct
+385,385,250,25264.89,22233.1,3031.79,Approved & Settled,Government Program Direct
+386,386,225,28441.72,25222.56,3219.16,Approved & Settled,Credit Card
+387,387,75,10965.06,9649.25,1315.81,Approved & Settled,Government Program Direct
+388,388,81,31642.67,26485.14,5157.53,Approved & Settled,Insurance Direct
+389,389,36,11151.78,9205.88,1945.9,Approved & Settled,HSA Account
+390,390,158,31955.83,28393.12,3562.71,Approved & Settled,Credit Card
+391,391,177,7067.79,6219.66,848.13,Approved & Settled,Government Program Direct
+392,392,191,36955.15,0.0,36955.15,Direct Patient Billing,Credit Card
+393,393,54,25702.81,19441.03,6261.78,Approved & Settled,HSA Account
+394,394,132,13357.39,11754.5,1602.89,Approved & Settled,Government Program Direct
+395,395,194,35303.88,30957.24,4346.64,Pending Review,HSA Account
+396,396,90,7232.64,0.0,7232.64,Direct Patient Billing,Cash / Debit
+397,397,18,40731.46,35843.68,4887.78,Pending Review,Government Program Direct
+398,398,26,29449.95,25915.96,3533.99,Approved & Settled,Government Program Direct
+399,399,214,6952.72,5329.59,1623.13,Approved & Settled,Credit Card
+400,400,181,6142.69,5160.22,982.47,Approved & Settled,Credit Card
+401,401,58,27762.71,24732.75,3029.96,Approved & Settled,Insurance Direct
+402,402,173,8530.26,0.0,8530.26,Direct Patient Billing,Credit Card
+403,403,102,17646.34,14809.59,2836.75,Denied / Appeal,Insurance Direct
+404,404,60,22889.33,19763.69,3125.64,Approved & Settled,Credit Card
+405,405,92,9720.62,7627.02,2093.6,Pending Review,Insurance Direct
+406,406,26,19630.9,17275.19,2355.71,Approved & Settled,Government Program Direct
+407,407,40,5980.63,5079.43,901.2,Approved & Settled,Credit Card
+408,408,139,4532.57,3660.25,872.32,Approved & Settled,Credit Card
+409,409,114,15049.91,12259.69,2790.22,Approved & Settled,Credit Card
+410,410,125,39912.99,33300.94,6612.05,Approved & Settled,Insurance Direct
+411,411,101,18246.49,16056.91,2189.58,Approved & Settled,Government Program Direct
+412,412,12,25759.4,22668.27,3091.13,Approved & Settled,Government Program Direct
+413,413,98,37053.0,29524.38,7528.62,Approved & Settled,HSA Account
+414,414,17,5654.16,4798.49,855.67,Approved & Settled,HSA Account
+415,415,231,21522.82,17990.51,3532.31,Approved & Settled,Insurance Direct
+416,416,177,37861.18,33317.84,4543.34,Approved & Settled,Government Program Direct
+417,417,77,7928.85,6288.4,1640.45,Approved & Settled,HSA Account
+418,418,103,31745.33,24129.32,7616.01,Approved & Settled,Credit Card
+419,419,110,29364.88,23403.9,5960.98,Approved & Settled,Credit Card
+420,420,160,10418.46,9168.24,1250.22,Approved & Settled,Government Program Direct
+421,421,221,18549.49,16162.91,2386.58,Approved & Settled,Credit Card
+422,422,240,14165.34,12210.03,1955.31,Approved & Settled,Credit Card
+423,423,106,3731.84,3284.02,447.82,Approved & Settled,Government Program Direct
+424,424,104,36688.47,30070.75,6617.72,Approved & Settled,Credit Card
+425,425,109,19105.32,14833.33,4271.99,Approved & Settled,HSA Account
+426,426,125,28367.57,21546.23,6821.34,Pending Review,Credit Card
+427,427,172,38591.15,34343.82,4247.33,Approved & Settled,HSA Account
+428,428,244,10799.98,9503.98,1296.0,Approved & Settled,Government Program Direct
+429,429,85,13862.72,12413.91,1448.81,Approved & Settled,Credit Card
+430,430,221,13574.14,11291.81,2282.33,Approved & Settled,Insurance Direct
+431,431,247,21652.06,16352.1,5299.96,Approved & Settled,Insurance Direct
+432,432,177,41028.3,36104.9,4923.4,Approved & Settled,Government Program Direct
+433,433,208,34875.57,31272.89,3602.68,Approved & Settled,Insurance Direct
+434,434,240,32773.57,26139.47,6634.1,Approved & Settled,HSA Account
+435,435,105,22972.4,18375.81,4596.59,Approved & Settled,Insurance Direct
+436,436,212,19040.35,16755.51,2284.84,Approved & Settled,Government Program Direct
+437,437,84,14908.08,12077.02,2831.06,Approved & Settled,Credit Card
+438,438,148,8935.95,7572.12,1363.83,Approved & Settled,HSA Account
+439,439,176,24455.89,21274.9,3180.99,Approved & Settled,Credit Card
+440,440,95,18186.42,16004.05,2182.37,Approved & Settled,Government Program Direct
+441,441,6,24679.95,20097.76,4582.19,Approved & Settled,Insurance Direct
+442,442,246,7690.46,6767.6,922.86,Approved & Settled,Government Program Direct
+443,443,117,33496.29,28872.68,4623.61,Approved & Settled,Credit Card
+444,444,220,27294.06,24018.77,3275.29,Approved & Settled,Government Program Direct
+445,445,38,31552.79,27766.46,3786.33,Approved & Settled,Government Program Direct
+446,446,121,23011.17,18719.44,4291.73,Approved & Settled,Insurance Direct
+447,447,25,28813.99,25790.87,3023.12,Approved & Settled,HSA Account
+448,448,208,23285.91,19809.07,3476.84,Approved & Settled,HSA Account
+449,449,11,13465.97,11850.05,1615.92,Approved & Settled,Government Program Direct
+450,450,111,23844.32,21364.65,2479.67,Approved & Settled,Credit Card
+451,451,238,21828.41,16911.51,4916.9,Approved & Settled,Credit Card
+452,452,196,21568.62,18980.39,2588.23,Approved & Settled,Government Program Direct
+453,453,42,33451.6,27902.92,5548.68,Approved & Settled,Insurance Direct
+454,454,217,21550.72,18964.63,2586.09,Approved & Settled,Government Program Direct
+455,455,131,21740.49,17108.1,4632.39,Approved & Settled,Insurance Direct
+456,456,228,3899.31,3269.77,629.54,Pending Review,Credit Card
+457,457,40,31069.14,23328.91,7740.23,Pending Review,HSA Account
+458,458,160,18249.8,16059.82,2189.98,Approved & Settled,Government Program Direct
+459,459,221,17848.63,14069.62,3779.01,Approved & Settled,Credit Card
+460,460,23,31552.17,28181.29,3370.88,Approved & Settled,Credit Card
+461,461,126,20243.13,16534.92,3708.21,Approved & Settled,Credit Card
+462,462,145,9758.3,7954.15,1804.15,Approved & Settled,Insurance Direct
+463,463,132,4185.54,3683.28,502.26,Approved & Settled,Government Program Direct
+464,464,75,14971.35,13174.79,1796.56,Approved & Settled,Government Program Direct
+465,465,232,6598.61,5454.4,1144.21,Approved & Settled,Credit Card
+466,466,170,15385.98,13539.66,1846.32,Approved & Settled,Government Program Direct
+467,467,170,15724.91,13837.92,1886.99,Approved & Settled,Government Program Direct
+468,468,117,40589.06,35373.4,5215.66,Approved & Settled,Insurance Direct
+469,469,192,8047.89,6827.59,1220.3,Approved & Settled,Credit Card
+470,470,223,34524.73,29382.98,5141.75,Approved & Settled,Credit Card
+471,471,206,5953.43,4489.02,1464.41,Approved & Settled,Insurance Direct
+472,472,167,30274.42,24072.33,6202.09,Approved & Settled,Credit Card
+473,473,109,25829.01,21113.34,4715.67,Approved & Settled,Credit Card
+474,474,146,19743.32,17708.24,2035.08,Approved & Settled,HSA Account
+475,475,149,9942.85,8675.17,1267.68,Approved & Settled,HSA Account
+476,476,16,11335.68,9604.1,1731.58,Approved & Settled,Insurance Direct
+477,477,127,8989.28,7910.57,1078.71,Approved & Settled,Government Program Direct
+478,478,57,15223.69,13396.85,1826.84,Approved & Settled,Government Program Direct
+479,479,186,31787.84,27867.75,3920.09,Approved & Settled,Credit Card
+480,480,177,8248.5,7258.68,989.82,Approved & Settled,Government Program Direct
+481,481,242,9331.14,8211.4,1119.74,Approved & Settled,Government Program Direct
+482,482,212,12622.63,11107.91,1514.72,Approved & Settled,Government Program Direct
+483,483,58,10918.76,9586.79,1331.97,Approved & Settled,HSA Account
+484,484,172,43390.09,38886.15,4503.94,Approved & Settled,HSA Account
+485,485,201,36109.52,28664.4,7445.12,Approved & Settled,HSA Account
+486,486,128,35695.48,31412.02,4283.46,Approved & Settled,Government Program Direct
+487,487,249,20687.63,17735.09,2952.54,Approved & Settled,HSA Account
+488,488,171,30650.07,26673.69,3976.38,Approved & Settled,Credit Card
+489,489,230,14571.8,11668.3,2903.5,Approved & Settled,Insurance Direct
+490,490,112,18207.45,15224.77,2982.68,Denied / Appeal,HSA Account
+491,491,205,38680.55,34038.88,4641.67,Approved & Settled,Government Program Direct
+492,492,3,21549.26,18180.12,3369.14,Approved & Settled,Credit Card
+493,493,179,8377.03,7212.69,1164.34,Approved & Settled,HSA Account
+494,494,73,30155.53,23340.5,6815.03,Approved & Settled,HSA Account
+495,495,152,16729.12,14721.63,2007.49,Approved & Settled,Government Program Direct
+496,496,161,10809.08,0.0,10809.08,Direct Patient Billing,Payment Plan Installments
+497,497,147,33806.37,28538.04,5268.33,Approved & Settled,HSA Account
+498,498,60,8016.31,6180.54,1835.77,Approved & Settled,HSA Account
+499,499,64,42853.55,37465.39,5388.16,Approved & Settled,Insurance Direct
+500,500,109,24039.04,20150.39,3888.65,Approved & Settled,Credit Card
+501,501,224,22048.34,19260.81,2787.53,Approved & Settled,Insurance Direct
+502,502,125,29406.44,25118.12,4288.32,Approved & Settled,Insurance Direct
+503,503,192,15336.56,11855.09,3481.47,Approved & Settled,Credit Card
+504,504,78,6749.81,5111.62,1638.19,Approved & Settled,Credit Card
+505,505,56,18200.77,16016.68,2184.09,Approved & Settled,Government Program Direct
+506,506,231,3581.5,2760.54,820.96,Approved & Settled,Credit Card
+507,507,171,16177.86,14318.0,1859.86,Approved & Settled,Insurance Direct
+508,508,246,32401.89,28513.66,3888.23,Approved & Settled,Government Program Direct
+509,509,162,29518.14,25493.11,4025.03,Pending Review,HSA Account
+510,510,49,11113.24,8793.29,2319.95,Approved & Settled,HSA Account
+511,511,215,17049.56,15003.61,2045.95,Approved & Settled,Government Program Direct
+512,512,112,16502.59,12660.73,3841.86,Approved & Settled,Insurance Direct
+513,513,74,20674.18,18193.28,2480.9,Pending Review,Government Program Direct
+514,514,47,29414.94,25885.15,3529.79,Approved & Settled,Government Program Direct
+515,515,97,40333.76,35993.99,4339.77,Approved & Settled,Credit Card
+516,516,119,23395.13,20587.71,2807.42,Approved & Settled,Government Program Direct
+517,517,69,25025.14,21945.59,3079.55,Approved & Settled,Insurance Direct
+518,518,96,28983.18,24150.9,4832.28,Approved & Settled,Credit Card
+519,519,247,9712.73,8507.61,1205.12,Approved & Settled,Credit Card
+520,520,216,16368.44,14404.23,1964.21,Approved & Settled,Government Program Direct
+521,521,18,7322.51,6443.81,878.7,Approved & Settled,Government Program Direct
+522,522,130,3970.51,3124.35,846.16,Denied / Appeal,Credit Card
+523,523,54,14241.64,10701.69,3539.95,Approved & Settled,HSA Account
+524,524,230,32465.14,27520.37,4944.77,Approved & Settled,HSA Account
+525,525,114,39729.91,34635.76,5094.15,Denied / Appeal,Insurance Direct
+526,526,119,8455.94,7441.23,1014.71,Approved & Settled,Government Program Direct
+527,527,182,8980.92,7903.21,1077.71,Pending Review,Government Program Direct
+528,528,10,17522.01,15419.37,2102.64,Approved & Settled,Government Program Direct
+529,529,102,42373.65,35612.76,6760.89,Approved & Settled,HSA Account
+530,530,33,9218.98,8112.7,1106.28,Approved & Settled,Government Program Direct
+531,531,71,23776.52,19355.68,4420.84,Approved & Settled,HSA Account
+532,532,14,4247.09,3482.56,764.53,Approved & Settled,Insurance Direct
+533,533,227,31723.83,27980.89,3742.94,Approved & Settled,HSA Account
+534,534,58,27647.18,20996.0,6651.18,Approved & Settled,Insurance Direct
+535,535,123,22082.43,19432.54,2649.89,Pending Review,Government Program Direct
+536,536,214,22046.2,18583.51,3462.69,Approved & Settled,HSA Account
+537,537,115,16267.21,14110.13,2157.08,Approved & Settled,Credit Card
+538,538,15,5683.57,5001.54,682.03,Approved & Settled,Government Program Direct
+539,539,103,39844.78,32442.25,7402.53,Approved & Settled,Insurance Direct
+540,540,87,16074.47,12085.48,3988.99,Approved & Settled,HSA Account
+541,541,203,25330.68,22291.0,3039.68,Approved & Settled,Government Program Direct
+542,542,12,21284.08,18729.99,2554.09,Approved & Settled,Government Program Direct
+543,543,150,25575.79,21704.93,3870.86,Approved & Settled,Insurance Direct
+544,544,130,26519.46,20690.2,5829.26,Approved & Settled,Insurance Direct
+545,545,171,9162.12,7323.22,1838.9,Approved & Settled,Insurance Direct
+546,546,127,34639.11,30482.42,4156.69,Approved & Settled,Government Program Direct
+547,547,189,3855.19,3212.16,643.03,Approved & Settled,Credit Card
+548,548,50,17043.69,13342.51,3701.18,Approved & Settled,Insurance Direct
+549,549,87,27985.5,21565.25,6420.25,Approved & Settled,Insurance Direct
+550,550,87,29343.36,26150.05,3193.31,Denied / Appeal,HSA Account

@@ -29,7 +29,7 @@ def show_database_page():
         db_error = str(e)
 
     # Status & Management Header
-    col1, col2, col3 = st.columns([3, 2, 2])
+    col1, col2, col3, col4 = st.columns([2.5, 1.8, 2.5, 2.2])
     with col1:
         st.markdown(f"**Target Database:** `{db_name}`")
     with col2:
@@ -38,9 +38,19 @@ def show_database_page():
         else:
             st.markdown("🔴 **Status:** Offline / Disconnected")
     with col3:
-        if st.button("🔥 Re-seed Default Sample Data", use_container_width=True):
+        if st.button("🏥 Seed 550+ Healthcare Data", use_container_width=True, type="primary"):
+            from database.seed_healthcare_500 import generate_and_seed_healthcare_500
+            with st.spinner("Seeding 550+ Hospital EHR records..."):
+                ok, seed_msg = generate_and_seed_healthcare_500()
+            if ok:
+                st.success("✅ " + seed_msg)
+                st.rerun()
+            else:
+                st.error(f"❌ {seed_msg}")
+    with col4:
+        if st.button("📦 Seed Classic Tables", use_container_width=True):
             from database.db_connection import init_database
-            with st.spinner("Restoring sample tables (employees, departments, projects)..."):
+            with st.spinner("Restoring sample tables..."):
                 ok, seed_msg = init_database()
             if ok:
                 st.success("✅ Sample database restored!")

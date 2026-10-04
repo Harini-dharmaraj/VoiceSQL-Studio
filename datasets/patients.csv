@@ -1,41 +1,251 @@
-patient_id,patient_name,age,gender,blood_type,diagnosis,doctor_name,admission_date,discharge_date,treatment_cost,insurance_status
-1,Liam Johnson,42,Female,AB-,Acute Bronchitis,Dr. Allison Cameron,2026-03-05,2026-03-15,1448.11,Covered (Private)
-2,Olivia Smith,45,Female,AB-,Coronary Artery Disease,Dr. John Watson,2026-02-28,2026-03-03,21422.2,Covered (Private)
-3,Noah Williams,64,Male,AB-,Fractured Femur,Dr. Cristina Yang,2026-06-22,2026-06-29,10501.91,Covered (Private)
-4,Emma Brown,77,Female,AB+,Coronary Artery Disease,Dr. Robert Chase,2026-07-03,2026-07-09,22255.1,Medicare
-5,Oliver Jones,68,Female,AB+,Migraine Chronic,Dr. Meredith Grey,2026-04-23,2026-05-05,1023.13,Medicare
-6,Charlotte Garcia,77,Male,A+,Fractured Femur,Dr. Gregory House,2026-04-14,2026-04-26,11457.91,Covered (Private)
-7,Elijah Miller,37,Male,B-,Type 2 Diabetes Complications,Dr. John Watson,2026-01-26,2026-01-29,5234.7,Covered (Private)
-8,Amelia Davis,64,Female,B+,Hypertension Crisis,Dr. Allison Cameron,2026-03-30,2026-04-02,4381.19,Medicare
-9,James Rodriguez,18,Male,A+,Acute Bronchitis,Dr. Robert Chase,2026-04-08,2026-04-17,1800.42,Medicaid
-10,Ava Martinez,33,Female,B+,Knee Replacement,Dr. Derek Shepherd,2026-09-03,2026-09-07,19915.17,Medicare
-11,William Hernandez,75,Male,A+,Type 2 Diabetes Complications,Dr. John Watson,2026-04-06,2026-04-13,4491.54,Covered (Private)
-12,Sophia Lopez,62,Female,O+,Appendicitis,Dr. John Watson,2026-07-02,2026-07-08,7961.87,Covered (Private)
-13,Benjamin Gonzalez,50,Female,AB+,Migraine Chronic,Dr. Meredith Grey,2026-05-24,2026-05-30,1154.69,Covered (Private)
-14,Isabella Wilson,40,Male,O+,Knee Replacement,Dr. Lisa Cuddy,2026-08-17,2026-08-27,17782.88,Covered (Private)
-15,Lucas Anderson,61,Male,O-,Hypertension Crisis,Dr. Cristina Yang,2026-05-31,2026-06-10,3836.59,Medicare
-16,Mia Thomas,35,Female,A-,Knee Replacement,Dr. Shaun Murphy,2026-08-26,2026-09-02,14383.59,Covered (Private)
-17,Henry Taylor,46,Male,AB+,Type 2 Diabetes Complications,Dr. Meredith Grey,2026-02-16,2026-02-22,3609.95,Covered (Private)
-18,Evelyn Moore,43,Female,AB+,Type 2 Diabetes Complications,Dr. James Wilson,2026-05-29,2026-06-07,4705.52,Covered (Private)
-19,Alexander Jackson,50,Male,B-,Appendicitis,Dr. James Wilson,2026-03-27,2026-03-28,7028.24,Covered (Private)
-20,Harper Martin,61,Female,AB-,Knee Replacement,Dr. Gregory House,2026-03-19,2026-03-28,20300.49,Medicare
-21,Sebastian Lee,77,Male,O+,Migraine Chronic,Dr. James Wilson,2026-06-29,2026-07-04,1478.12,Uninsured
-22,Camila Perez,80,Male,O+,Asthma Exacerbation,Dr. John Watson,2026-06-13,2026-06-24,1857.34,Covered (Private)
-23,Jack Thompson,75,Female,A+,Type 2 Diabetes Complications,Dr. James Wilson,2026-07-11,2026-07-18,3580.74,Covered (Private)
-24,Gianna White,63,Male,A+,Appendicitis,Dr. Cristina Yang,2026-06-25,2026-06-28,7906.99,Covered (Private)
-25,Owen Harris,42,Female,B+,Acute Bronchitis,Dr. Cristina Yang,2026-08-27,2026-09-05,1751.66,Medicaid
-26,Abigail Sanchez,47,Male,O+,Fractured Femur,Dr. Allison Cameron,2026-08-29,2026-09-01,12508.88,Medicare
-27,Daniel Clark,34,Male,A+,Acute Bronchitis,Dr. James Wilson,2026-06-15,2026-06-25,1871.02,Medicare
-28,Emily Ramirez,29,Female,B-,Type 2 Diabetes Complications,Dr. Gregory House,2026-02-08,2026-02-13,3673.85,Medicare
-29,Matthew Lewis,30,Female,O-,Appendicitis,Dr. Derek Shepherd,2026-07-14,2026-07-21,6510.43,Medicare
-30,Elizabeth Robinson,60,Male,AB+,Pneumonia,Dr. Lisa Cuddy,2026-08-27,2026-08-31,5394.9,Covered (Private)
-31,David Walker,37,Male,AB-,Hypertension Crisis,Dr. James Wilson,2026-09-03,2026-09-07,4497.09,Medicaid
-32,Avery Young,42,Female,O+,Appendicitis,Dr. John Watson,2026-05-24,2026-05-29,7845.22,Covered (Private)
-33,Joseph Allen,34,Female,A-,Hypertension Crisis,Dr. Robert Chase,2026-09-06,2026-09-11,3401.63,Uninsured
-34,Sofia King,56,Male,B+,Knee Replacement,Dr. Gregory House,2026-04-15,2026-04-23,14320.04,Medicaid
-35,Carter Wright,67,Male,A-,Acute Bronchitis,Dr. Cristina Yang,2026-01-10,2026-01-17,1866.69,Covered (Private)
-36,Ella Scott,31,Male,B-,Asthma Exacerbation,Dr. James Wilson,2026-03-20,2026-03-26,2396.78,Medicaid
-37,Luke Torres,54,Female,B+,Type 2 Diabetes Complications,Dr. Allison Cameron,2026-06-28,2026-07-06,3958.41,Covered (Private)
-38,Madison Nguyen,23,Male,A+,Asthma Exacerbation,Dr. Gregory House,2026-07-21,2026-08-02,2168.79,Covered (Private)
-39,Anthony Hill,65,Female,B+,Fractured Femur,Dr. James Wilson,2026-03-13,2026-03-16,13765.24,Uninsured
-40,Scarlett Flores,67,Male,AB-,Coronary Artery Disease,Dr. Allison Cameron,2026-01-25,2026-02-05,21751.98,Covered (Private)
+patient_id,patient_name,age,gender,blood_type,city,state,emergency_contact_phone,insurance_provider
+1,Logan Davis,50,Male,O-,New York,NY,(289) 804-7912,Medicaid
+2,Emma Johnson,65,Female,AB+,Buffalo,NY,(918) 758-7873,Medicare
+3,Lucas Lewis,43,Male,O+,Syracuse,NY,(420) 981-6514,UnitedHealth
+4,Amelia Garcia,45,Female,A+,Boston,MA,(670) 749-3045,Blue Cross Blue Shield
+5,Wyatt Harris,37,Male,O-,Buffalo,NY,(877) 433-5741,Blue Cross Blue Shield
+6,Charlotte Anderson,32,Female,B-,Buffalo,NY,(473) 918-2169,Blue Cross Blue Shield
+7,Ethan Hernandez,54,Male,B+,Albany,NY,(532) 986-1916,Blue Cross Blue Shield
+8,Ava Williams,84,Female,B-,Yonkers,NY,(871) 711-7482,UnitedHealth
+9,David Robinson,25,Male,O-,Rochester,NY,(797) 608-6930,Aetna
+10,Ava Rodriguez,49,Female,A+,Philadelphia,PA,(632) 810-2040,Medicare
+11,Alexander Harris,46,Male,O-,Philadelphia,PA,(749) 968-5371,Medicare
+12,Ella Perez,66,Female,O-,Buffalo,NY,(469) 712-3927,Medicaid
+13,Michael Miller,83,Male,AB+,Syracuse,NY,(200) 813-6310,Cigna
+14,Eleanor Johnson,27,Female,A-,Buffalo,NY,(280) 287-8962,Aetna
+15,John Jones,33,Male,B+,Rochester,NY,(633) 416-9835,Medicaid
+16,Ella Gonzalez,80,Female,B-,Syracuse,NY,(453) 430-2049,UnitedHealth
+17,Jack Johnson,5,Male,AB+,Albany,NY,(538) 272-9423,Blue Cross Blue Shield
+18,Ava Moore,64,Female,AB+,Philadelphia,PA,(616) 394-2545,Medicare
+19,James Ramirez,47,Male,B-,Yonkers,NY,(262) 612-6559,Aetna
+20,Avery Miller,35,Female,AB+,Albany,NY,(455) 277-8260,UnitedHealth
+21,Aiden Scott,68,Male,O+,Buffalo,NY,(370) 616-8956,Medicaid
+22,Eleanor Wilson,30,Female,O+,Boston,MA,(665) 492-7930,Medicare
+23,Samuel Scott,52,Male,B+,Philadelphia,PA,(965) 521-1936,Aetna
+24,Emma Nguyen,5,Female,B+,Philadelphia,PA,(440) 613-2964,Blue Cross Blue Shield
+25,David Torres,59,Male,O+,Albany,NY,(467) 409-6147,Aetna
+26,Ava Taylor,38,Female,B+,Boston,MA,(274) 209-8508,Medicare
+27,Ethan Torres,24,Male,A+,Buffalo,NY,(270) 450-7054,UnitedHealth
+28,Luna Hernandez,62,Female,O-,Philadelphia,PA,(879) 306-3200,Aetna
+29,Benjamin Davis,65,Male,B+,Buffalo,NY,(849) 470-9280,Blue Cross Blue Shield
+30,Eleanor Taylor,15,Female,A+,New York,NY,(852) 468-3647,Medicare
+31,Jacob Lewis,6,Male,O+,Boston,MA,(765) 351-8041,UnitedHealth
+32,Sophia Williams,45,Female,A-,Syracuse,NY,(305) 562-7658,Blue Cross Blue Shield
+33,Ethan Martinez,17,Male,B+,Albany,NY,(540) 621-5065,Medicare
+34,Evelyn Hernandez,45,Female,B-,Buffalo,NY,(558) 512-4728,Cigna
+35,Lucas Johnson,26,Male,B-,Albany,NY,(895) 749-6425,Aetna
+36,Olivia Davis,47,Female,B+,Syracuse,NY,(521) 646-9379,UnitedHealth
+37,James Harris,59,Male,O-,Albany,NY,(903) 936-4228,Medicaid
+38,Camila Ramirez,49,Female,A-,Buffalo,NY,(534) 612-5844,Medicare
+39,Mason Rodriguez,51,Male,B-,Albany,NY,(200) 511-5700,UnitedHealth
+40,Isabella Ramirez,52,Female,AB-,Yonkers,NY,(953) 373-2389,Cigna
+41,Theodore Allen,73,Male,A+,Yonkers,NY,(247) 450-8784,Blue Cross Blue Shield
+42,Violet Jones,52,Female,B-,Philadelphia,PA,(449) 351-1090,Aetna
+43,David Miller,7,Male,AB+,Boston,MA,(324) 667-3184,Blue Cross Blue Shield
+44,Avery Robinson,79,Female,AB-,Yonkers,NY,(362) 961-8777,Aetna
+45,Mateo Taylor,62,Male,O-,Albany,NY,(279) 930-5681,UnitedHealth
+46,Ava Moore,20,Female,A-,Yonkers,NY,(923) 419-2052,Medicare
+47,Jackson Clark,19,Male,AB-,Yonkers,NY,(912) 220-7232,Medicare
+48,Eleanor Smith,59,Female,O-,Yonkers,NY,(817) 425-8999,Aetna
+49,Lucas Moore,56,Male,AB-,Boston,MA,(369) 678-3091,UnitedHealth
+50,Violet Wright,46,Female,B-,New York,NY,(672) 386-1823,Blue Cross Blue Shield
+51,Benjamin Harris,28,Male,AB+,Yonkers,NY,(631) 458-2341,Cigna
+52,Eleanor Johnson,8,Female,A-,New York,NY,(453) 404-1333,Blue Cross Blue Shield
+53,Ethan Martinez,84,Male,B+,Albany,NY,(462) 985-7043,UnitedHealth
+54,Mia Hill,66,Female,B+,Buffalo,NY,(584) 606-4249,Aetna
+55,Oliver Nguyen,55,Male,A+,Albany,NY,(779) 242-6688,Blue Cross Blue Shield
+56,Chloe Ramirez,66,Female,A+,Yonkers,NY,(308) 643-6934,Medicaid
+57,Logan Robinson,41,Male,B-,Rochester,NY,(751) 993-8921,Medicaid
+58,Elizabeth Ramirez,74,Female,A-,Syracuse,NY,(675) 783-7209,Blue Cross Blue Shield
+59,Jack Johnson,52,Male,A-,Philadelphia,PA,(810) 918-5526,UnitedHealth
+60,Chloe Smith,59,Female,A+,Albany,NY,(687) 861-9041,Blue Cross Blue Shield
+61,Mateo Johnson,53,Male,O-,Buffalo,NY,(766) 743-6632,UnitedHealth
+62,Scarlett Scott,32,Female,A-,Yonkers,NY,(397) 523-2958,Blue Cross Blue Shield
+63,Jacob Wright,61,Male,AB+,Rochester,NY,(737) 811-5636,Self-Pay / Uninsured
+64,Amelia Gonzalez,55,Female,AB+,Syracuse,NY,(246) 255-5786,Blue Cross Blue Shield
+65,Samuel Rodriguez,55,Male,A+,Philadelphia,PA,(252) 458-8827,UnitedHealth
+66,Amelia Jones,36,Female,AB-,Boston,MA,(511) 287-5066,Aetna
+67,James Scott,80,Male,AB+,Boston,MA,(802) 639-6003,UnitedHealth
+68,Mila Flores,52,Female,A+,New York,NY,(377) 765-2229,Blue Cross Blue Shield
+69,William Smith,16,Male,AB-,Boston,MA,(489) 919-8438,UnitedHealth
+70,Charlotte Anderson,63,Female,AB+,Syracuse,NY,(345) 273-1977,Cigna
+71,William Martin,32,Male,AB-,Syracuse,NY,(752) 705-8172,UnitedHealth
+72,Charlotte Hill,16,Female,B-,New York,NY,(890) 789-1339,Blue Cross Blue Shield
+73,Asher Moore,34,Male,B+,New York,NY,(850) 703-2494,Aetna
+74,Eleanor Thompson,39,Female,A-,Boston,MA,(495) 878-7561,Medicare
+75,John Scott,28,Male,AB-,New York,NY,(726) 201-9889,Medicare
+76,Elizabeth Clark,65,Female,AB+,New York,NY,(408) 473-9998,Medicare
+77,Elijah Jackson,65,Male,AB-,Philadelphia,PA,(214) 765-7684,UnitedHealth
+78,Charlotte Anderson,81,Female,AB-,Buffalo,NY,(922) 479-7807,UnitedHealth
+79,John Walker,35,Male,AB+,Philadelphia,PA,(964) 339-2143,Aetna
+80,Evelyn Clark,55,Female,O-,Yonkers,NY,(352) 657-9824,Medicare
+81,Daniel Thompson,28,Male,B-,Yonkers,NY,(994) 620-1715,UnitedHealth
+82,Harper Walker,81,Female,B-,Boston,MA,(804) 539-2644,Blue Cross Blue Shield
+83,Joseph Lewis,79,Male,AB-,Buffalo,NY,(276) 680-5342,Self-Pay / Uninsured
+84,Harper Flores,78,Female,A+,Boston,MA,(977) 699-9864,Aetna
+85,Noah Flores,55,Male,AB+,Buffalo,NY,(300) 978-2646,UnitedHealth
+86,Elizabeth Hernandez,28,Female,O+,Syracuse,NY,(450) 743-7751,UnitedHealth
+87,Sebastian Lopez,58,Male,B+,Rochester,NY,(797) 346-4804,Aetna
+88,Elizabeth Taylor,60,Female,O-,Philadelphia,PA,(652) 553-5901,Blue Cross Blue Shield
+89,Logan Ramirez,24,Male,AB-,Syracuse,NY,(567) 788-5847,UnitedHealth
+90,Aria Jackson,64,Female,B-,New York,NY,(820) 963-9138,Self-Pay / Uninsured
+91,John Jackson,38,Male,A-,Albany,NY,(985) 875-3240,Medicare
+92,Penelope Miller,32,Female,O-,New York,NY,(502) 534-7807,Blue Cross Blue Shield
+93,William Gonzalez,34,Male,A-,Rochester,NY,(693) 502-6549,Medicaid
+94,Avery Davis,53,Female,A+,Philadelphia,PA,(770) 574-2479,Self-Pay / Uninsured
+95,Aiden Sanchez,60,Male,O-,New York,NY,(798) 590-7086,Medicare
+96,Amelia Anderson,35,Female,O+,Philadelphia,PA,(675) 917-5951,Blue Cross Blue Shield
+97,Logan Clark,19,Male,B+,Buffalo,NY,(750) 338-7367,Blue Cross Blue Shield
+98,Elizabeth White,49,Female,B+,Boston,MA,(486) 233-7070,Cigna
+99,Henry Lewis,83,Male,AB+,Philadelphia,PA,(262) 607-5520,Aetna
+100,Isabella Davis,15,Female,A+,Philadelphia,PA,(328) 778-4362,UnitedHealth
+101,Oliver Scott,8,Male,AB+,Albany,NY,(348) 333-9850,Medicaid
+102,Evelyn Lopez,57,Female,O+,Buffalo,NY,(471) 253-3076,Blue Cross Blue Shield
+103,Jacob Clark,57,Male,A+,Buffalo,NY,(426) 829-1710,UnitedHealth
+104,Abigail King,81,Female,AB-,Syracuse,NY,(310) 702-8267,UnitedHealth
+105,Oliver Garcia,54,Male,B+,Yonkers,NY,(532) 590-9692,Aetna
+106,Luna Robinson,49,Female,A+,Boston,MA,(938) 420-8046,Medicare
+107,Mateo Anderson,30,Male,A-,Boston,MA,(461) 583-3500,UnitedHealth
+108,Gianna Walker,59,Female,A+,Buffalo,NY,(333) 769-1982,UnitedHealth
+109,Sebastian Scott,67,Male,A+,Yonkers,NY,(560) 306-9313,Aetna
+110,Isabella Martinez,29,Female,AB+,Philadelphia,PA,(431) 639-1430,UnitedHealth
+111,Ethan Moore,40,Male,B+,New York,NY,(346) 779-7566,Blue Cross Blue Shield
+112,Charlotte Martinez,34,Female,A+,New York,NY,(578) 519-6314,UnitedHealth
+113,Asher Torres,65,Male,O+,Buffalo,NY,(877) 634-8957,UnitedHealth
+114,Violet Lewis,42,Female,O-,Boston,MA,(894) 894-8972,Blue Cross Blue Shield
+115,Michael Martin,37,Male,AB+,New York,NY,(985) 340-5186,Cigna
+116,Luna Lee,41,Female,O+,Buffalo,NY,(435) 712-6802,Aetna
+117,Oliver Sanchez,48,Male,B-,New York,NY,(926) 855-7843,Aetna
+118,Luna Davis,80,Female,O+,Boston,MA,(290) 647-2734,Cigna
+119,Lucas Ramirez,45,Male,A+,Boston,MA,(278) 722-2868,Medicare
+120,Emily Allen,41,Female,A-,Albany,NY,(377) 816-3504,UnitedHealth
+121,Asher Jones,42,Male,AB-,Rochester,NY,(778) 858-6295,Cigna
+122,Nora Lee,33,Female,AB-,Rochester,NY,(257) 560-9312,UnitedHealth
+123,Oliver Martin,5,Male,AB-,Philadelphia,PA,(292) 829-9307,Medicaid
+124,Sofia Robinson,52,Female,AB-,New York,NY,(263) 661-2695,Aetna
+125,Aiden Perez,60,Male,B+,Buffalo,NY,(572) 581-5634,Aetna
+126,Sofia Clark,38,Female,O+,Yonkers,NY,(595) 490-5128,Aetna
+127,Jacob Hill,36,Male,A-,Rochester,NY,(878) 601-3112,Medicare
+128,Violet Garcia,56,Female,B-,Syracuse,NY,(956) 901-9624,Medicaid
+129,Oliver Ramirez,27,Male,O+,Yonkers,NY,(396) 431-3253,Medicare
+130,Sophia Jones,13,Female,A+,Syracuse,NY,(984) 832-3147,UnitedHealth
+131,Ethan Harris,65,Male,B+,Rochester,NY,(573) 892-4891,Blue Cross Blue Shield
+132,Elizabeth Flores,75,Female,AB-,Syracuse,NY,(398) 576-8218,Medicare
+133,Mateo Jackson,44,Male,B-,Boston,MA,(856) 692-7081,UnitedHealth
+134,Chloe Miller,42,Female,O-,Buffalo,NY,(647) 293-4637,Aetna
+135,John Lewis,19,Male,O+,Yonkers,NY,(283) 583-4678,UnitedHealth
+136,Olivia Lee,22,Female,A-,Buffalo,NY,(912) 342-8685,Medicaid
+137,Mateo Flores,52,Male,A+,New York,NY,(740) 633-2821,Medicare
+138,Ella Jackson,53,Female,O-,Albany,NY,(264) 313-9189,Aetna
+139,Ethan Wright,16,Male,AB+,New York,NY,(784) 626-4068,UnitedHealth
+140,Gianna Garcia,62,Female,A+,Yonkers,NY,(681) 244-7338,UnitedHealth
+141,Levi Taylor,57,Male,A-,New York,NY,(990) 795-6447,Aetna
+142,Sophia Williams,60,Female,A-,Yonkers,NY,(338) 264-8498,Blue Cross Blue Shield
+143,Noah Jackson,76,Male,O+,Albany,NY,(756) 684-5150,Aetna
+144,Emma Gonzalez,19,Female,A-,Syracuse,NY,(609) 961-8204,UnitedHealth
+145,David Harris,77,Male,B+,Yonkers,NY,(284) 944-7955,Aetna
+146,Charlotte Ramirez,48,Female,O-,Rochester,NY,(817) 934-7981,UnitedHealth
+147,William Lewis,85,Male,AB-,Yonkers,NY,(258) 276-7655,UnitedHealth
+148,Camila Allen,65,Female,O+,Rochester,NY,(268) 441-7001,Blue Cross Blue Shield
+149,Levi Harris,32,Male,B+,New York,NY,(340) 742-7012,Blue Cross Blue Shield
+150,Sofia Lee,51,Female,AB+,Syracuse,NY,(320) 468-5264,Cigna
+151,Samuel Lewis,33,Male,O-,Albany,NY,(376) 930-8292,Blue Cross Blue Shield
+152,Charlotte Lee,75,Female,A+,Yonkers,NY,(917) 853-3852,Medicare
+153,Aiden White,50,Male,A+,Albany,NY,(767) 786-7044,Blue Cross Blue Shield
+154,Elizabeth Scott,58,Female,A+,Rochester,NY,(987) 619-2208,Aetna
+155,Elijah Lee,39,Male,AB-,Buffalo,NY,(764) 855-3981,Medicaid
+156,Ella Rodriguez,34,Female,O+,Boston,MA,(926) 430-6669,UnitedHealth
+157,Michael Jackson,38,Male,O-,Buffalo,NY,(746) 295-9234,UnitedHealth
+158,Penelope Hernandez,76,Female,B+,Rochester,NY,(229) 283-1744,Aetna
+159,Logan Torres,59,Male,AB+,Syracuse,NY,(842) 758-5745,Aetna
+160,Penelope Martin,58,Female,AB+,Philadelphia,PA,(361) 650-7809,Medicare
+161,Daniel Robinson,22,Male,A-,Albany,NY,(553) 608-3142,Self-Pay / Uninsured
+162,Ella White,32,Female,A-,Buffalo,NY,(251) 497-7293,Blue Cross Blue Shield
+163,Joseph Flores,56,Male,AB+,Boston,MA,(363) 710-9433,Blue Cross Blue Shield
+164,Elizabeth Young,58,Female,AB-,Syracuse,NY,(797) 561-1797,Blue Cross Blue Shield
+165,Noah Jackson,35,Male,AB-,Philadelphia,PA,(944) 574-7606,Medicaid
+166,Camila Williams,52,Female,O+,Boston,MA,(716) 661-5582,Blue Cross Blue Shield
+167,John Flores,57,Male,B+,Buffalo,NY,(347) 403-9341,UnitedHealth
+168,Sofia Allen,56,Female,O+,New York,NY,(727) 343-6373,Blue Cross Blue Shield
+169,Wyatt Flores,37,Male,B+,Yonkers,NY,(745) 701-5911,Medicaid
+170,Eleanor Johnson,21,Female,A-,Yonkers,NY,(904) 844-1436,Medicaid
+171,Ethan Walker,19,Male,AB+,Syracuse,NY,(834) 993-7229,Aetna
+172,Sophia Thomas,18,Female,A+,New York,NY,(408) 620-9221,UnitedHealth
+173,Asher Flores,62,Male,O+,Philadelphia,PA,(689) 738-7173,Self-Pay / Uninsured
+174,Harper Lopez,54,Female,A-,Philadelphia,PA,(485) 771-5890,Cigna
+175,Lucas Martin,61,Male,AB+,Syracuse,NY,(938) 480-5715,Aetna
+176,Amelia Torres,10,Female,B-,Boston,MA,(280) 554-8247,Cigna
+177,Logan Taylor,74,Male,AB+,Philadelphia,PA,(340) 311-4920,Medicare
+178,Ava Brown,59,Female,AB+,Albany,NY,(989) 340-1084,Blue Cross Blue Shield
+179,Mason Hernandez,38,Male,AB-,Boston,MA,(987) 291-4804,Aetna
+180,Chloe Williams,19,Female,B-,Rochester,NY,(496) 238-1151,Medicare
+181,Theodore Torres,63,Male,A-,Buffalo,NY,(716) 679-5470,Cigna
+182,Isabella Davis,32,Female,B+,Yonkers,NY,(502) 781-4164,Medicare
+183,William Flores,48,Male,B-,Boston,MA,(343) 688-6301,Blue Cross Blue Shield
+184,Lily Thomas,74,Female,O-,New York,NY,(940) 786-1187,UnitedHealth
+185,Benjamin White,21,Male,O+,Albany,NY,(920) 988-6095,Medicare
+186,Aria Davis,53,Female,A-,Syracuse,NY,(820) 582-7813,UnitedHealth
+187,Samuel Scott,65,Male,AB+,Philadelphia,PA,(570) 279-2838,Aetna
+188,Emma Scott,28,Female,B+,Albany,NY,(797) 700-2489,Blue Cross Blue Shield
+189,David Allen,62,Male,O+,Philadelphia,PA,(673) 888-6049,Blue Cross Blue Shield
+190,Abigail Johnson,5,Female,O-,Boston,MA,(917) 265-9866,UnitedHealth
+191,Noah Jones,51,Male,O+,Philadelphia,PA,(861) 630-7135,Self-Pay / Uninsured
+192,Layla Harris,63,Female,B-,Philadelphia,PA,(382) 750-7439,UnitedHealth
+193,Michael Rodriguez,55,Male,O+,Albany,NY,(744) 588-4762,Aetna
+194,Ava Robinson,67,Female,B+,Yonkers,NY,(984) 216-4943,UnitedHealth
+195,Henry Jones,47,Male,O+,Buffalo,NY,(439) 752-4559,UnitedHealth
+196,Ella Brown,64,Female,O-,Rochester,NY,(528) 442-5944,Medicare
+197,David Martinez,83,Male,B-,Albany,NY,(379) 841-7999,Medicaid
+198,Chloe Young,39,Female,A-,New York,NY,(352) 507-7167,UnitedHealth
+199,William Wright,80,Male,AB+,Philadelphia,PA,(626) 770-9683,Aetna
+200,Sophia Harris,80,Female,O-,Albany,NY,(941) 395-1844,Blue Cross Blue Shield
+201,Benjamin Harris,64,Male,A+,New York,NY,(540) 510-1251,Aetna
+202,Isabella Gonzalez,40,Female,AB-,Buffalo,NY,(765) 529-5637,Cigna
+203,Alexander Robinson,62,Male,O-,Yonkers,NY,(939) 680-6246,Medicaid
+204,Lily Wilson,64,Female,A-,Yonkers,NY,(766) 798-7841,Blue Cross Blue Shield
+205,Theodore Martinez,64,Male,A-,Albany,NY,(901) 545-5216,Medicare
+206,Ella Young,41,Female,AB-,Philadelphia,PA,(388) 755-1962,Aetna
+207,Michael Williams,70,Male,O+,Buffalo,NY,(924) 354-1149,Blue Cross Blue Shield
+208,Isabella Allen,65,Female,A-,Philadelphia,PA,(744) 764-7739,Blue Cross Blue Shield
+209,Liam Johnson,34,Male,O-,Syracuse,NY,(352) 446-4144,Blue Cross Blue Shield
+210,Violet King,43,Female,A-,Syracuse,NY,(778) 449-4700,UnitedHealth
+211,Theodore Garcia,58,Male,A+,New York,NY,(919) 375-2354,Aetna
+212,Eleanor Ramirez,72,Female,A+,Yonkers,NY,(780) 686-5441,Medicare
+213,Noah Jones,66,Male,O+,Syracuse,NY,(970) 929-7525,Aetna
+214,Lily Jones,64,Female,B+,Syracuse,NY,(593) 973-3292,Aetna
+215,Aiden Garcia,31,Male,O+,Yonkers,NY,(809) 606-6347,Medicare
+216,Olivia Moore,29,Female,AB-,Philadelphia,PA,(876) 589-2404,Medicare
+217,Asher Flores,20,Male,AB+,Syracuse,NY,(849) 357-7383,Medicare
+218,Harper White,60,Female,A+,Buffalo,NY,(289) 391-8061,Blue Cross Blue Shield
+219,Mateo Scott,5,Male,A+,Boston,MA,(532) 594-1202,Aetna
+220,Luna Clark,53,Female,A+,Boston,MA,(373) 342-5405,Medicare
+221,Theodore Moore,23,Male,B+,Philadelphia,PA,(278) 569-5123,Aetna
+222,Ava Young,66,Female,AB-,Albany,NY,(835) 589-6399,UnitedHealth
+223,Mateo Perez,28,Male,B+,Boston,MA,(607) 526-5775,UnitedHealth
+224,Abigail Young,26,Female,A-,Albany,NY,(806) 758-3947,Aetna
+225,Owen Scott,75,Male,AB-,New York,NY,(618) 889-9180,Blue Cross Blue Shield
+226,Sophia Martin,15,Female,O-,Albany,NY,(690) 796-7566,Self-Pay / Uninsured
+227,Mason Allen,63,Male,O+,Boston,MA,(987) 454-6816,Blue Cross Blue Shield
+228,Mia Flores,17,Female,B-,New York,NY,(722) 964-9499,UnitedHealth
+229,Mason Nguyen,60,Male,AB-,Albany,NY,(553) 225-8909,Aetna
+230,Amelia Jackson,44,Female,A+,Boston,MA,(411) 733-8912,UnitedHealth
+231,Levi Walker,16,Male,AB-,Buffalo,NY,(927) 317-1370,Blue Cross Blue Shield
+232,Nora Perez,62,Female,B+,Buffalo,NY,(636) 673-4798,UnitedHealth
+233,Aiden Sanchez,15,Male,B+,Rochester,NY,(402) 660-8037,Aetna
+234,Sofia Smith,42,Female,AB+,Albany,NY,(391) 574-6340,Medicaid
+235,Henry Robinson,82,Male,O-,Buffalo,NY,(597) 825-7431,UnitedHealth
+236,Mila Davis,51,Female,A-,Yonkers,NY,(829) 804-2388,UnitedHealth
+237,Owen Rodriguez,27,Male,A+,Yonkers,NY,(597) 628-3258,Blue Cross Blue Shield
+238,Mila Harris,88,Female,B+,Boston,MA,(377) 768-3733,Cigna
+239,Daniel Jackson,10,Male,B+,Rochester,NY,(209) 696-3236,UnitedHealth
+240,Isabella Harris,88,Female,B-,Philadelphia,PA,(284) 778-1505,Aetna
+241,Aiden Anderson,25,Male,O+,Syracuse,NY,(960) 991-9115,UnitedHealth
+242,Chloe Allen,63,Female,A+,Buffalo,NY,(978) 936-8231,Medicare
+243,Mason Wilson,75,Male,A+,Boston,MA,(469) 556-2425,Blue Cross Blue Shield
+244,Elizabeth Davis,41,Female,AB+,Albany,NY,(847) 638-3719,Medicare
+245,Ethan Rodriguez,64,Male,AB+,Albany,NY,(372) 531-5794,Aetna
+246,Luna Torres,67,Female,A+,Syracuse,NY,(329) 918-3174,Medicaid
+247,Lucas Martinez,44,Male,AB+,Yonkers,NY,(842) 624-7146,Aetna
+248,Elizabeth Jones,88,Female,B-,Buffalo,NY,(699) 535-1040,UnitedHealth
+249,Joseph Garcia,43,Male,A-,Philadelphia,PA,(416) 706-5399,UnitedHealth
+250,Harper Jackson,76,Female,B+,Yonkers,NY,(247) 301-8529,Medicare

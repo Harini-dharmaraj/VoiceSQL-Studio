@@ -1,11 +1,17 @@
-doctor_id,doctor_name,specialization,experience_years,consultation_fee
-1,Dr. Gregory House,Diagnostic Medicine,22,350.0
-2,Dr. Meredith Grey,General Surgery,15,280.0
-3,Dr. Derek Shepherd,Neurosurgery,18,450.0
-4,Dr. Cristina Yang,Cardiothoracic Surgery,14,400.0
-5,Dr. John Watson,Internal Medicine,12,200.0
-6,Dr. Shaun Murphy,Pediatric Surgery,8,260.0
-7,Dr. Lisa Cuddy,Endocrinology,20,310.0
-8,Dr. James Wilson,Oncology,19,380.0
-9,Dr. Allison Cameron,Immunology,10,220.0
-10,Dr. Robert Chase,Intensive Care,13,270.0
+doctor_id,doctor_name,department,license_number,experience_years,consultation_fee
+1,Dr. Cristina Yang,Cardiology,LIC-NY-8491,16,420.0
+2,Dr. Preston Burke,Cardiology,LIC-NY-6120,22,480.0
+3,Dr. Derek Shepherd,Neurology & Neurosurgery,LIC-NY-9021,20,500.0
+4,Dr. Amelia Shepherd,Neurology & Neurosurgery,LIC-NY-7411,14,430.0
+5,Dr. James Wilson,Oncology,LIC-NY-5231,19,390.0
+6,Dr. Allison Cameron,Oncology,LIC-NY-3199,11,280.0
+7,Dr. Shaun Murphy,Pediatrics,LIC-NY-4211,9,290.0
+8,Dr. Arizona Robbins,Pediatrics,LIC-NY-8820,17,360.0
+9,Dr. Callie Torres,Orthopedics,LIC-NY-7120,18,390.0
+10,Dr. Atticus Lincoln,Orthopedics,LIC-NY-4890,12,330.0
+11,Dr. Meredith Grey,General Surgery,LIC-NY-9912,18,410.0
+12,Dr. Miranda Bailey,General Surgery,LIC-NY-8311,21,460.0
+13,Dr. John Watson,Internal Medicine,LIC-NY-5011,15,250.0
+14,Dr. Gregory House,Internal Medicine,LIC-NY-1001,25,550.0
+15,Dr. Robert Chase,Emergency & Trauma,LIC-NY-7721,14,380.0
+16,Dr. Owen Hunt,Emergency & Trauma,LIC-NY-6641,19,440.0

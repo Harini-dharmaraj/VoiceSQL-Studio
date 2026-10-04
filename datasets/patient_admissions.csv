@@ -1,0 +1,551 @@
+admission_id,patient_id,doctor_id,admission_date,discharge_date,admission_type,diagnosis,room_type,treatment_cost,discharge_status
+1,5,3,2025-08-14,2025-08-18,Emergency,Brain Tumor Craniotomy,ICU,45258.39,Home Health Care
+2,24,14,2025-05-09,2025-05-15,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,19051.61,Discharged to Home
+3,180,6,2025-12-02,2025-12-08,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,34334.29,Discharged to Home
+4,114,1,2025-12-23,2025-12-31,Emergency,Coronary Artery Bypass Graft (CABG),ICU,33496.3,Discharged to Home
+5,99,1,2025-02-22,2025-02-23,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8899.88,Transferred to Inpatient Rehab
+6,18,11,2025-11-09,2025-11-16,Urgent,Acute Perforated Appendicitis,General Ward,13008.55,Discharged to Home
+7,39,10,2026-03-17,2026-03-22,Emergency,Total Hip Replacement,Semi-Private,23805.66,Discharged to Home
+8,64,5,2025-05-08,2025-05-15,Urgent,Breast Cancer Resection,Private Suite,19918.62,Discharged to Home
+9,225,7,2025-09-23,2025-09-26,Emergency,Pediatric Severe Pneumonia,General Ward,7135.06,Discharged to Home
+10,29,6,2025-11-23,2025-11-28,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,38205.19,Discharged to Home
+11,100,14,2025-07-07,2025-07-11,Emergency,Severe Sepsis Protocol,ICU,13388.68,Home Health Care
+12,11,2,2025-09-17,2025-09-21,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,21993.12,Transferred to Inpatient Rehab
+13,103,1,2025-05-23,2025-05-26,Elective,Atrial Fibrillation Management,Cardiac Care Unit,7407.82,Home Health Care
+14,175,13,2025-06-08,2025-06-13,Urgent,Acute Kidney Failure Hemodialysis,Private Suite,20138.96,Transferred to Inpatient Rehab
+15,30,9,2025-06-08,2025-06-12,Emergency,Compound Femur Fracture,Semi-Private,14913.74,Discharged to Home
+16,128,8,2025-03-27,2025-03-28,Emergency,Pediatric Appendectomy,General Ward,8728.35,Transferred to Inpatient Rehab
+17,31,2,2026-02-18,2026-02-24,Emergency,Coronary Artery Bypass Graft (CABG),ICU,31373.1,Home Health Care
+18,128,13,2025-07-08,2025-07-14,Emergency,Severe Sepsis Protocol,ICU,17199.41,Transferred to Inpatient Rehab
+19,30,5,2025-01-23,2025-01-29,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,37625.88,Discharged to Home
+20,246,2,2025-04-25,2025-04-29,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,21705.45,Discharged to Home
+21,20,14,2025-03-03,2025-03-05,Emergency,Severe Sepsis Protocol,ICU,17603.76,Transferred to Inpatient Rehab
+22,222,8,2025-06-17,2025-06-20,Emergency,Pediatric Severe Pneumonia,General Ward,6311.94,Discharged to Home
+23,160,6,2025-07-08,2025-07-12,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,37426.47,Discharged to Home
+24,63,3,2025-07-29,2025-08-03,Emergency,Acute Ischemic Stroke,ICU,24828.78,Discharged to Home
+25,225,2,2025-01-01,2025-01-09,Urgent,Coronary Artery Bypass Graft (CABG),ICU,27521.37,Discharged to Home
+26,249,4,2025-02-17,2025-02-22,Emergency,Acute Ischemic Stroke,ICU,26337.63,Discharged to Home
+27,250,1,2025-09-16,2025-09-21,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8105.72,Discharged to Home
+28,61,8,2026-03-12,2026-03-18,Emergency,Pediatric Severe Pneumonia,General Ward,6970.24,Transferred to Inpatient Rehab
+29,60,1,2025-03-11,2025-03-14,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8183.27,Discharged to Home
+30,116,8,2025-05-16,2025-05-17,Elective,Pediatric Severe Pneumonia,General Ward,7182.27,Discharged to Home
+31,11,6,2025-03-17,2025-03-22,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,29480.85,Discharged to Home
+32,45,2,2026-03-14,2026-03-22,Emergency,Coronary Artery Bypass Graft (CABG),ICU,27928.66,Transferred to Inpatient Rehab
+33,32,1,2026-03-02,2026-03-10,Emergency,Coronary Artery Bypass Graft (CABG),ICU,31908.92,Discharged to Home
+34,67,1,2025-02-03,2025-02-04,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,9040.01,Discharged to Home
+35,32,2,2025-01-26,2025-02-01,Elective,Acute Myocardial Infarction,Cardiac Care Unit,17461.14,Discharged to Home
+36,233,4,2025-05-24,2025-05-31,Emergency,Chronic Subdural Hematoma,Private Suite,18421.44,Discharged to Home
+37,106,12,2025-02-01,2025-02-09,Emergency,Bowel Resection & Anastomosis,ICU,27722.48,Discharged to Home
+38,206,11,2025-07-15,2025-07-22,Urgent,Bowel Resection & Anastomosis,ICU,25781.9,Discharged to Home
+39,83,10,2025-04-03,2025-04-09,Emergency,Total Knee Arthroplasty,Semi-Private,17323.22,Transferred to Inpatient Rehab
+40,136,7,2025-03-23,2025-03-26,Emergency,Pediatric Appendectomy,General Ward,7291.14,Discharged to Home
+41,235,1,2025-10-22,2025-10-28,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22473.04,Transferred to Inpatient Rehab
+42,179,7,2025-12-27,2025-12-28,Urgent,Pediatric Appendectomy,General Ward,7994.62,Outpatient Follow-Up
+43,139,7,2025-09-09,2025-09-13,Urgent,Pediatric Severe Pneumonia,General Ward,6528.33,Discharged to Home
+44,88,15,2026-02-15,2026-02-22,Elective,Motor Vehicle Collision Trauma,ICU,24942.83,Discharged to Home
+45,217,12,2025-02-07,2025-02-08,Emergency,Acute Perforated Appendicitis,General Ward,11460.5,Discharged to Home
+46,41,10,2025-11-29,2025-12-07,Emergency,Total Hip Replacement,Semi-Private,22676.49,Transferred to Inpatient Rehab
+47,58,15,2025-07-13,2025-07-20,Emergency,Severe Polytrauma Stabilization,ICU,40922.81,Transferred to Inpatient Rehab
+48,9,4,2026-02-19,2026-02-26,Trauma,Chronic Subdural Hematoma,Private Suite,18160.4,Discharged to Home
+49,20,6,2025-06-13,2025-06-20,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,34792.16,Transferred to Inpatient Rehab
+50,54,5,2025-06-29,2025-07-08,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,28362.91,Discharged to Home
+51,227,10,2025-07-13,2025-07-16,Elective,Total Hip Replacement,Semi-Private,22784.53,Transferred to Inpatient Rehab
+52,19,2,2025-01-11,2025-01-17,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,17735.89,Home Health Care
+53,20,11,2025-06-23,2025-06-27,Emergency,Bowel Resection & Anastomosis,ICU,28837.96,Discharged to Home
+54,14,4,2025-04-16,2025-04-24,Trauma,Brain Tumor Craniotomy,ICU,40938.01,Discharged to Home
+55,73,7,2025-02-19,2025-02-25,Elective,Pediatric Severe Pneumonia,General Ward,6295.88,Discharged to Home
+56,161,14,2025-04-13,2025-04-17,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,9827.57,Discharged to Home
+57,122,4,2026-02-06,2026-02-14,Urgent,Brain Tumor Craniotomy,ICU,40816.57,Discharged to Home
+58,48,9,2025-05-15,2025-05-22,Emergency,Compound Femur Fracture,Semi-Private,18452.27,Discharged to Home
+59,171,3,2025-12-09,2025-12-17,Trauma,Brain Tumor Craniotomy,ICU,40931.8,Discharged to Home
+60,248,12,2025-10-21,2025-10-29,Elective,Bowel Resection & Anastomosis,ICU,22206.37,Discharged to Home
+61,147,11,2025-03-03,2025-03-08,Elective,Acute Perforated Appendicitis,General Ward,11129.76,Discharged to Home
+62,175,9,2026-02-26,2026-03-02,Urgent,Total Hip Replacement,Semi-Private,20633.0,Transferred to Inpatient Rehab
+63,23,10,2025-10-10,2025-10-13,Emergency,Total Knee Arthroplasty,Semi-Private,20154.68,Outpatient Follow-Up
+64,29,9,2025-03-17,2025-03-23,Urgent,Total Hip Replacement,Semi-Private,25383.67,Discharged to Home
+65,202,8,2026-03-26,2026-03-28,Emergency,Pediatric Severe Pneumonia,General Ward,5654.33,Discharged to Home
+66,175,16,2025-01-20,2025-01-27,Emergency,Motor Vehicle Collision Trauma,ICU,30826.52,Outpatient Follow-Up
+67,230,7,2025-06-22,2025-06-25,Emergency,Pediatric Appendectomy,General Ward,8308.56,Discharged to Home
+68,77,10,2025-05-18,2025-05-22,Urgent,Compound Femur Fracture,Semi-Private,14671.43,Discharged to Home
+69,190,12,2026-02-25,2026-03-01,Emergency,Laparoscopic Cholecystectomy,General Ward,9467.57,Transferred to Inpatient Rehab
+70,8,3,2026-03-25,2026-03-31,Elective,Chronic Subdural Hematoma,Private Suite,16461.26,Transferred to Inpatient Rehab
+71,51,6,2026-02-26,2026-02-28,Elective,Breast Cancer Resection,Private Suite,17789.05,Discharged to Home
+72,151,12,2025-06-26,2025-07-03,Emergency,Bowel Resection & Anastomosis,ICU,27352.02,Outpatient Follow-Up
+73,13,3,2026-03-15,2026-03-20,Emergency,Chronic Subdural Hematoma,Private Suite,17879.4,Discharged to Home
+74,3,11,2025-11-28,2025-12-01,Emergency,Laparoscopic Cholecystectomy,General Ward,8938.78,Transferred to Inpatient Rehab
+75,248,16,2025-08-05,2025-08-14,Emergency,Motor Vehicle Collision Trauma,ICU,27408.88,Discharged to Home
+76,27,2,2025-10-15,2025-10-20,Urgent,Coronary Artery Bypass Graft (CABG),ICU,28372.1,Discharged to Home
+77,164,8,2025-05-14,2025-05-15,Urgent,Pediatric Asthma Crisis,General Ward,4049.03,Discharged to Home
+78,104,16,2025-12-15,2025-12-19,Emergency,Severe Polytrauma Stabilization,ICU,36011.42,Discharged to Home
+79,100,1,2025-06-25,2025-06-29,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22849.7,Transferred to Inpatient Rehab
+80,216,15,2025-05-31,2025-06-06,Emergency,Severe Polytrauma Stabilization,ICU,33414.13,Discharged to Home
+81,196,4,2025-12-02,2025-12-08,Urgent,Chronic Subdural Hematoma,Private Suite,19356.77,Discharged to Home
+82,67,14,2025-08-26,2025-09-01,Elective,Severe Sepsis Protocol,ICU,17070.07,Discharged to Home
+83,121,5,2026-03-21,2026-03-24,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,25033.78,Outpatient Follow-Up
+84,229,9,2025-06-11,2025-06-14,Elective,Compound Femur Fracture,Semi-Private,14628.58,Discharged to Home
+85,163,1,2025-08-20,2025-08-24,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,20287.96,Transferred to Inpatient Rehab
+86,112,14,2025-07-26,2025-08-03,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,15505.7,Discharged to Home
+87,229,7,2025-01-10,2025-01-11,Emergency,Pediatric Asthma Crisis,General Ward,3838.73,Discharged to Home
+88,79,3,2026-02-26,2026-02-28,Emergency,Chronic Subdural Hematoma,Private Suite,17571.06,Outpatient Follow-Up
+89,228,15,2025-06-25,2025-07-05,Urgent,Severe Polytrauma Stabilization,ICU,40467.01,Discharged to Home
+90,187,3,2026-01-11,2026-01-17,Emergency,Acute Ischemic Stroke,ICU,21136.77,Discharged to Home
+91,225,14,2026-01-30,2026-02-03,Trauma,Acute Kidney Failure Hemodialysis,Private Suite,19077.24,Discharged to Home
+92,114,9,2025-10-08,2025-10-11,Emergency,Total Knee Arthroplasty,Semi-Private,16900.77,Transferred to Inpatient Rehab
+93,170,4,2025-11-15,2025-11-24,Elective,Brain Tumor Craniotomy,ICU,42940.2,Discharged to Home
+94,30,4,2025-04-12,2025-04-21,Urgent,Brain Tumor Craniotomy,ICU,44311.03,Transferred to Inpatient Rehab
+95,92,16,2025-06-01,2025-06-09,Elective,Motor Vehicle Collision Trauma,ICU,28979.84,Discharged to Home
+96,233,4,2025-03-18,2025-03-29,Elective,Brain Tumor Craniotomy,ICU,35112.59,Transferred to Inpatient Rehab
+97,60,10,2025-05-16,2025-05-21,Emergency,Compound Femur Fracture,Semi-Private,15689.11,Discharged to Home
+98,30,3,2025-01-05,2025-01-15,Elective,Brain Tumor Craniotomy,ICU,36273.43,Discharged to Home
+99,113,14,2026-03-26,2026-03-29,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,9149.91,Discharged to Home
+100,218,12,2025-11-29,2025-11-30,Elective,Laparoscopic Cholecystectomy,General Ward,8670.11,Discharged to Home
+101,27,10,2026-02-15,2026-02-18,Urgent,Total Hip Replacement,Semi-Private,23008.33,Transferred to Inpatient Rehab
+102,250,4,2025-09-07,2025-09-13,Emergency,Acute Ischemic Stroke,ICU,20581.0,Discharged to Home
+103,81,1,2025-12-09,2025-12-18,Urgent,Coronary Artery Bypass Graft (CABG),ICU,29597.57,Discharged to Home
+104,174,14,2025-03-18,2025-03-21,Elective,Acute Kidney Failure Hemodialysis,Private Suite,20916.81,Discharged to Home
+105,130,12,2026-03-22,2026-03-25,Emergency,Laparoscopic Cholecystectomy,General Ward,9098.89,Discharged to Home
+106,104,5,2025-08-24,2025-09-01,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,29237.24,Discharged to Home
+107,191,13,2025-02-22,2025-02-26,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,19837.98,Transferred to Inpatient Rehab
+108,164,7,2025-12-02,2025-12-06,Urgent,Pediatric Severe Pneumonia,General Ward,6300.87,Home Health Care
+109,85,12,2026-01-02,2026-01-07,Emergency,Bowel Resection & Anastomosis,ICU,23303.02,Transferred to Inpatient Rehab
+110,141,12,2025-12-26,2025-12-27,Emergency,Acute Perforated Appendicitis,General Ward,12162.11,Outpatient Follow-Up
+111,28,5,2025-04-07,2025-04-13,Emergency,Breast Cancer Resection,Private Suite,17489.93,Transferred to Inpatient Rehab
+112,238,13,2026-01-31,2026-02-07,Elective,Acute Kidney Failure Hemodialysis,Private Suite,18723.6,Discharged to Home
+113,136,2,2026-03-06,2026-03-07,Urgent,Acute Myocardial Infarction,Cardiac Care Unit,21530.53,Outpatient Follow-Up
+114,209,3,2025-07-18,2025-07-22,Urgent,Acute Ischemic Stroke,ICU,22567.28,Discharged to Home
+115,235,15,2025-05-21,2025-05-26,Emergency,Motor Vehicle Collision Trauma,ICU,25965.98,Transferred to Inpatient Rehab
+116,77,16,2025-12-31,2026-01-07,Urgent,Motor Vehicle Collision Trauma,ICU,26662.61,Discharged to Home
+117,89,15,2025-12-30,2026-01-04,Emergency,Severe Polytrauma Stabilization,ICU,34107.51,Discharged to Home
+118,150,14,2025-12-12,2025-12-14,Urgent,Severe Sepsis Protocol,ICU,14376.71,Transferred to Inpatient Rehab
+119,28,2,2025-03-16,2025-03-24,Emergency,Coronary Artery Bypass Graft (CABG),ICU,34619.82,Transferred to Inpatient Rehab
+120,177,7,2026-01-21,2026-01-25,Emergency,Pediatric Severe Pneumonia,General Ward,6477.95,Discharged to Home
+121,173,11,2026-01-16,2026-01-21,Emergency,Bowel Resection & Anastomosis,ICU,26946.27,Transferred to Inpatient Rehab
+122,171,2,2025-07-18,2025-07-21,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,21489.55,Transferred to Inpatient Rehab
+123,65,6,2026-03-01,2026-03-05,Urgent,Malignant Lymphoma Chemotherapy,Private Suite,28730.68,Discharged to Home
+124,247,6,2025-08-18,2025-08-24,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,25339.58,Discharged to Home
+125,11,10,2025-10-12,2025-10-16,Elective,Total Hip Replacement,Semi-Private,22033.75,Discharged to Home
+126,11,4,2025-11-02,2025-11-10,Emergency,Acute Ischemic Stroke,ICU,24682.38,Outpatient Follow-Up
+127,126,14,2025-02-07,2025-02-13,Emergency,Severe Sepsis Protocol,ICU,13366.34,Discharged to Home
+128,104,2,2025-04-24,2025-04-25,Elective,Atrial Fibrillation Management,Cardiac Care Unit,7846.34,Discharged to Home
+129,136,11,2025-02-28,2025-03-01,Elective,Laparoscopic Cholecystectomy,General Ward,10108.61,Discharged to Home
+130,175,8,2026-02-12,2026-02-13,Elective,Pediatric Asthma Crisis,General Ward,4076.93,Discharged to Home
+131,132,12,2025-09-07,2025-09-14,Emergency,Acute Perforated Appendicitis,General Ward,13839.42,Discharged to Home
+132,245,11,2025-11-17,2025-11-25,Emergency,Bowel Resection & Anastomosis,ICU,27541.11,Discharged to Home
+133,53,12,2025-11-28,2025-12-05,Urgent,Bowel Resection & Anastomosis,ICU,27105.55,Discharged to Home
+134,204,5,2025-10-22,2025-10-25,Elective,Breast Cancer Resection,Private Suite,18754.05,Outpatient Follow-Up
+135,5,9,2025-10-01,2025-10-07,Emergency,Total Knee Arthroplasty,Semi-Private,16004.89,Transferred to Inpatient Rehab
+136,28,8,2025-11-07,2025-11-11,Emergency,Pediatric Severe Pneumonia,General Ward,6448.35,Transferred to Inpatient Rehab
+137,41,11,2025-03-11,2025-03-17,Elective,Bowel Resection & Anastomosis,ICU,26469.47,Discharged to Home
+138,166,7,2025-10-11,2025-10-12,Elective,Pediatric Appendectomy,General Ward,6758.92,Discharged to Home
+139,243,2,2025-04-18,2025-04-20,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8632.25,Discharged to Home
+140,158,5,2025-02-28,2025-03-01,Emergency,Breast Cancer Resection,Private Suite,21343.51,Transferred to Inpatient Rehab
+141,119,13,2025-05-29,2025-06-02,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,20717.28,Discharged to Home
+142,172,13,2025-02-21,2025-02-24,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,16545.02,Discharged to Home
+143,79,15,2025-10-17,2025-10-21,Trauma,Motor Vehicle Collision Trauma,ICU,27506.29,Discharged to Home
+144,112,6,2025-03-10,2025-03-12,Urgent,Breast Cancer Resection,Private Suite,19175.25,Discharged to Home
+145,142,3,2025-11-27,2025-12-04,Elective,Brain Tumor Craniotomy,ICU,40749.6,Discharged to Home
+146,187,1,2026-03-11,2026-03-12,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8472.4,Discharged to Home
+147,142,6,2025-12-01,2025-12-05,Emergency,Breast Cancer Resection,Private Suite,20650.31,Transferred to Inpatient Rehab
+148,24,10,2025-09-15,2025-09-17,Emergency,Total Knee Arthroplasty,Semi-Private,21148.4,Discharged to Home
+149,36,9,2025-04-02,2025-04-05,Elective,Compound Femur Fracture,Semi-Private,17921.01,Discharged to Home
+150,60,2,2025-07-09,2025-07-11,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8312.64,Discharged to Home
+151,226,1,2025-11-29,2025-12-02,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22409.46,Transferred to Inpatient Rehab
+152,149,11,2025-07-12,2025-07-21,Urgent,Bowel Resection & Anastomosis,ICU,26617.62,Discharged to Home
+153,250,6,2025-06-30,2025-07-06,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,28416.5,Outpatient Follow-Up
+154,113,3,2025-02-09,2025-02-12,Emergency,Chronic Subdural Hematoma,Private Suite,15927.69,Discharged to Home
+155,170,6,2026-02-20,2026-02-25,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,34305.17,Discharged to Home
+156,106,1,2025-01-23,2025-01-31,Emergency,Coronary Artery Bypass Graft (CABG),ICU,26878.68,Discharged to Home
+157,229,13,2025-01-29,2025-02-06,Emergency,Severe Sepsis Protocol,ICU,17547.29,Discharged to Home
+158,170,7,2025-04-21,2025-04-28,Emergency,Pediatric Severe Pneumonia,General Ward,7300.73,Home Health Care
+159,213,9,2026-02-11,2026-02-13,Urgent,Total Hip Replacement,Semi-Private,20027.09,Discharged to Home
+160,152,1,2025-07-13,2025-07-14,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,7525.06,Discharged to Home
+161,130,16,2026-02-28,2026-03-08,Emergency,Severe Polytrauma Stabilization,ICU,31024.72,Discharged to Home
+162,24,11,2025-11-05,2025-11-07,Emergency,Laparoscopic Cholecystectomy,General Ward,11040.69,Discharged to Home
+163,95,2,2025-04-28,2025-05-04,Urgent,Acute Myocardial Infarction,Cardiac Care Unit,22223.59,Discharged to Home
+164,215,15,2025-08-06,2025-08-12,Emergency,Motor Vehicle Collision Trauma,ICU,26796.11,Discharged to Home
+165,73,14,2025-05-12,2025-05-17,Urgent,Diabetic Ketoacidosis Crisis,Semi-Private,8345.58,Discharged to Home
+166,206,8,2025-07-05,2025-07-09,Emergency,Pediatric Asthma Crisis,General Ward,4131.81,Discharged to Home
+167,94,14,2025-12-15,2025-12-18,Urgent,Diabetic Ketoacidosis Crisis,Semi-Private,8518.99,Discharged to Home
+168,143,12,2025-06-07,2025-06-09,Urgent,Laparoscopic Cholecystectomy,General Ward,9452.09,Transferred to Inpatient Rehab
+169,192,6,2026-02-05,2026-02-10,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,31761.45,Discharged to Home
+170,14,4,2025-11-22,2025-11-25,Emergency,Chronic Subdural Hematoma,Private Suite,15901.29,Discharged to Home
+171,68,6,2025-02-10,2025-02-13,Elective,Lung Carcinoma Targeted Therapy,Private Suite,34964.25,Discharged to Home
+172,243,4,2025-08-13,2025-08-16,Emergency,Chronic Subdural Hematoma,Private Suite,20123.76,Outpatient Follow-Up
+173,131,11,2025-11-11,2025-11-15,Emergency,Acute Perforated Appendicitis,General Ward,10929.4,Discharged to Home
+174,172,10,2025-10-28,2025-11-01,Emergency,Total Knee Arthroplasty,Semi-Private,19690.28,Discharged to Home
+175,213,12,2025-06-27,2025-07-05,Urgent,Bowel Resection & Anastomosis,ICU,28740.2,Discharged to Home
+176,130,3,2025-09-15,2025-09-24,Emergency,Brain Tumor Craniotomy,ICU,43963.78,Outpatient Follow-Up
+177,65,16,2025-07-13,2025-07-17,Urgent,Motor Vehicle Collision Trauma,ICU,28787.87,Home Health Care
+178,124,4,2025-02-04,2025-02-12,Emergency,Brain Tumor Craniotomy,ICU,36879.85,Transferred to Inpatient Rehab
+179,245,7,2025-12-25,2025-12-28,Emergency,Pediatric Appendectomy,General Ward,8604.3,Discharged to Home
+180,81,7,2025-10-21,2025-10-22,Emergency,Pediatric Appendectomy,General Ward,8277.6,Outpatient Follow-Up
+181,61,6,2025-04-16,2025-04-22,Elective,Lung Carcinoma Targeted Therapy,Private Suite,36201.7,Discharged to Home
+182,127,13,2026-01-27,2026-02-03,Elective,Diabetic Ketoacidosis Crisis,Semi-Private,10425.13,Home Health Care
+183,81,12,2025-09-09,2025-09-12,Emergency,Laparoscopic Cholecystectomy,General Ward,10488.5,Discharged to Home
+184,123,11,2025-09-15,2025-09-24,Emergency,Bowel Resection & Anastomosis,ICU,27558.94,Outpatient Follow-Up
+185,31,16,2025-06-11,2025-06-17,Emergency,Motor Vehicle Collision Trauma,ICU,27613.84,Discharged to Home
+186,68,6,2025-08-30,2025-09-04,Trauma,Lung Carcinoma Targeted Therapy,Private Suite,30203.85,Discharged to Home
+187,94,10,2025-08-19,2025-08-23,Urgent,Total Knee Arthroplasty,Semi-Private,16309.27,Discharged to Home
+188,206,6,2026-03-15,2026-03-21,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,38018.21,Discharged to Home
+189,108,11,2026-03-11,2026-03-12,Emergency,Laparoscopic Cholecystectomy,General Ward,9018.87,Discharged to Home
+190,177,3,2025-04-21,2025-04-24,Elective,Chronic Subdural Hematoma,Private Suite,18506.14,Discharged to Home
+191,86,6,2025-07-04,2025-07-05,Emergency,Breast Cancer Resection,Private Suite,17086.09,Discharged to Home
+192,148,13,2026-02-04,2026-02-08,Emergency,Severe Sepsis Protocol,ICU,15418.46,Discharged to Home
+193,98,14,2025-08-26,2025-08-29,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,8970.88,Transferred to Inpatient Rehab
+194,21,4,2025-04-27,2025-05-01,Emergency,Chronic Subdural Hematoma,Private Suite,18939.29,Discharged to Home
+195,102,6,2026-02-04,2026-02-09,Urgent,Breast Cancer Resection,Private Suite,18791.07,Home Health Care
+196,61,16,2026-01-16,2026-01-22,Urgent,Severe Polytrauma Stabilization,ICU,32415.99,Discharged to Home
+197,141,1,2026-01-30,2026-02-01,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,18234.01,Discharged to Home
+198,59,6,2025-08-15,2025-08-22,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,36802.26,Discharged to Home
+199,222,12,2026-03-22,2026-03-23,Emergency,Laparoscopic Cholecystectomy,General Ward,10333.8,Home Health Care
+200,192,14,2025-09-26,2025-09-30,Urgent,Acute Kidney Failure Hemodialysis,Private Suite,20482.71,Discharged to Home
+201,114,8,2025-07-31,2025-08-03,Emergency,Pediatric Severe Pneumonia,General Ward,7262.33,Transferred to Inpatient Rehab
+202,177,12,2025-06-03,2025-06-06,Emergency,Laparoscopic Cholecystectomy,General Ward,9142.36,Discharged to Home
+203,2,12,2025-04-07,2025-04-12,Emergency,Bowel Resection & Anastomosis,ICU,27261.07,Discharged to Home
+204,97,6,2025-02-10,2025-02-17,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,36056.55,Discharged to Home
+205,70,8,2025-07-31,2025-08-04,Emergency,Pediatric Severe Pneumonia,General Ward,6483.4,Discharged to Home
+206,49,7,2025-03-19,2025-03-21,Emergency,Pediatric Asthma Crisis,General Ward,3646.1,Discharged to Home
+207,113,1,2025-02-16,2025-02-25,Emergency,Coronary Artery Bypass Graft (CABG),ICU,32941.1,Discharged to Home
+208,85,1,2025-01-29,2025-02-02,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8375.81,Discharged to Home
+209,210,9,2025-03-04,2025-03-10,Emergency,Total Knee Arthroplasty,Semi-Private,17134.11,Home Health Care
+210,198,3,2025-08-31,2025-09-09,Emergency,Brain Tumor Craniotomy,ICU,45584.38,Home Health Care
+211,240,11,2025-05-10,2025-05-15,Emergency,Bowel Resection & Anastomosis,ICU,26720.22,Discharged to Home
+212,84,1,2026-02-11,2026-02-19,Emergency,Coronary Artery Bypass Graft (CABG),ICU,32846.99,Discharged to Home
+213,122,15,2025-07-10,2025-07-17,Emergency,Motor Vehicle Collision Trauma,ICU,27728.11,Discharged to Home
+214,16,7,2025-12-26,2025-12-27,Emergency,Pediatric Appendectomy,General Ward,7815.21,Discharged to Home
+215,194,8,2026-01-11,2026-01-14,Emergency,Pediatric Appendectomy,General Ward,8788.03,Discharged to Home
+216,139,16,2025-04-08,2025-04-17,Urgent,Motor Vehicle Collision Trauma,ICU,27598.39,Discharged to Home
+217,235,11,2025-02-05,2025-02-10,Elective,Bowel Resection & Anastomosis,ICU,25087.33,Discharged to Home
+218,48,2,2026-02-02,2026-02-09,Urgent,Coronary Artery Bypass Graft (CABG),ICU,26227.68,Discharged to Home
+219,135,16,2026-01-28,2026-02-02,Emergency,Severe Polytrauma Stabilization,ICU,31801.85,Discharged to Home
+220,46,1,2025-02-24,2025-02-28,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,20788.3,Discharged to Home
+221,169,12,2025-01-26,2025-01-27,Emergency,Laparoscopic Cholecystectomy,General Ward,8894.52,Outpatient Follow-Up
+222,228,2,2026-02-15,2026-02-19,Urgent,Atrial Fibrillation Management,Cardiac Care Unit,8875.72,Discharged to Home
+223,15,14,2025-09-28,2025-10-02,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,10745.75,Outpatient Follow-Up
+224,186,6,2025-04-08,2025-04-14,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,34095.88,Discharged to Home
+225,107,4,2025-12-12,2025-12-19,Elective,Brain Tumor Craniotomy,ICU,36393.62,Discharged to Home
+226,137,14,2025-06-30,2025-07-04,Elective,Diabetic Ketoacidosis Crisis,Semi-Private,10849.03,Discharged to Home
+227,106,14,2026-02-27,2026-03-03,Urgent,Acute Kidney Failure Hemodialysis,Private Suite,19694.46,Discharged to Home
+228,66,8,2025-08-18,2025-08-19,Trauma,Pediatric Appendectomy,General Ward,6742.08,Discharged to Home
+229,228,7,2025-06-03,2025-06-08,Emergency,Pediatric Severe Pneumonia,General Ward,7451.6,Transferred to Inpatient Rehab
+230,143,13,2025-02-18,2025-02-23,Emergency,Severe Sepsis Protocol,ICU,13692.21,Discharged to Home
+231,66,7,2025-10-20,2025-10-21,Urgent,Pediatric Severe Pneumonia,General Ward,7153.12,Transferred to Inpatient Rehab
+232,180,13,2025-11-01,2025-11-09,Urgent,Severe Sepsis Protocol,ICU,16800.7,Discharged to Home
+233,200,2,2025-06-28,2025-07-04,Elective,Acute Myocardial Infarction,Cardiac Care Unit,22013.28,Discharged to Home
+234,163,14,2025-01-28,2025-01-31,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,18451.77,Discharged to Home
+235,40,2,2025-08-17,2025-08-22,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22111.45,Discharged to Home
+236,147,2,2025-05-15,2025-05-17,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22034.38,Discharged to Home
+237,51,12,2025-11-30,2025-12-01,Trauma,Laparoscopic Cholecystectomy,General Ward,8993.38,Discharged to Home
+238,237,13,2025-02-27,2025-03-03,Urgent,Severe Sepsis Protocol,ICU,14666.15,Discharged to Home
+239,198,7,2025-06-29,2025-06-30,Emergency,Pediatric Severe Pneumonia,General Ward,5669.04,Discharged to Home
+240,40,1,2026-01-14,2026-01-15,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,9333.12,Outpatient Follow-Up
+241,88,15,2025-06-06,2025-06-12,Emergency,Motor Vehicle Collision Trauma,ICU,26543.45,Discharged to Home
+242,160,3,2025-07-12,2025-07-19,Urgent,Acute Ischemic Stroke,ICU,20563.07,Discharged to Home
+243,73,6,2025-01-28,2025-01-29,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,29360.87,Discharged to Home
+244,5,8,2025-04-29,2025-05-03,Trauma,Pediatric Severe Pneumonia,General Ward,6988.02,Discharged to Home
+245,137,1,2025-04-12,2025-04-13,Elective,Atrial Fibrillation Management,Cardiac Care Unit,7637.49,Discharged to Home
+246,86,12,2026-01-17,2026-01-18,Emergency,Laparoscopic Cholecystectomy,General Ward,9316.03,Discharged to Home
+247,71,2,2026-03-26,2026-03-27,Trauma,Acute Myocardial Infarction,Cardiac Care Unit,23111.37,Outpatient Follow-Up
+248,169,3,2026-01-09,2026-01-21,Emergency,Acute Ischemic Stroke,ICU,24659.63,Home Health Care
+249,59,9,2025-10-21,2025-10-28,Elective,Total Hip Replacement,Semi-Private,22543.81,Discharged to Home
+250,176,5,2025-06-08,2025-06-15,Urgent,Malignant Lymphoma Chemotherapy,Private Suite,31443.99,Outpatient Follow-Up
+251,168,13,2025-06-12,2025-06-20,Urgent,Severe Sepsis Protocol,ICU,16945.38,Discharged to Home
+252,226,10,2025-06-05,2025-06-10,Emergency,Total Hip Replacement,Semi-Private,24908.55,Outpatient Follow-Up
+253,71,3,2025-02-24,2025-03-03,Trauma,Acute Ischemic Stroke,ICU,24610.35,Discharged to Home
+254,176,2,2025-02-10,2025-02-18,Urgent,Coronary Artery Bypass Graft (CABG),ICU,30231.2,Discharged to Home
+255,48,10,2025-08-31,2025-09-04,Emergency,Total Knee Arthroplasty,Semi-Private,15834.08,Transferred to Inpatient Rehab
+256,172,5,2025-02-03,2025-02-07,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,27471.08,Home Health Care
+257,228,6,2025-07-27,2025-08-02,Elective,Lung Carcinoma Targeted Therapy,Private Suite,32323.04,Transferred to Inpatient Rehab
+258,135,13,2025-09-24,2025-09-26,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,20311.23,Discharged to Home
+259,102,2,2025-09-22,2025-09-27,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22713.74,Discharged to Home
+260,109,7,2025-12-20,2025-12-21,Emergency,Pediatric Severe Pneumonia,General Ward,7226.51,Discharged to Home
+261,47,13,2025-07-21,2025-07-25,Emergency,Severe Sepsis Protocol,ICU,16356.62,Discharged to Home
+262,117,2,2025-06-15,2025-06-19,Urgent,Atrial Fibrillation Management,Cardiac Care Unit,9008.03,Outpatient Follow-Up
+263,181,10,2025-02-13,2025-02-17,Urgent,Compound Femur Fracture,Semi-Private,19021.96,Discharged to Home
+264,234,7,2025-03-25,2025-03-26,Elective,Pediatric Asthma Crisis,General Ward,4285.85,Discharged to Home
+265,80,10,2025-11-17,2025-11-24,Trauma,Compound Femur Fracture,Semi-Private,18089.84,Discharged to Home
+266,128,11,2025-11-08,2025-11-13,Elective,Laparoscopic Cholecystectomy,General Ward,10013.61,Discharged to Home
+267,105,9,2025-11-04,2025-11-08,Emergency,Compound Femur Fracture,Semi-Private,17038.97,Discharged to Home
+268,15,14,2025-01-19,2025-01-23,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,18661.82,Discharged to Home
+269,85,1,2025-02-25,2025-02-27,Urgent,Atrial Fibrillation Management,Cardiac Care Unit,8746.02,Discharged to Home
+270,248,10,2025-01-19,2025-01-25,Emergency,Compound Femur Fracture,Semi-Private,16083.49,Discharged to Home
+271,216,11,2025-05-30,2025-06-05,Elective,Bowel Resection & Anastomosis,ICU,24777.66,Discharged to Home
+272,54,13,2025-02-25,2025-03-01,Urgent,Diabetic Ketoacidosis Crisis,Semi-Private,9516.44,Home Health Care
+273,240,16,2025-08-07,2025-08-12,Emergency,Motor Vehicle Collision Trauma,ICU,27863.91,Home Health Care
+274,187,14,2025-09-10,2025-09-14,Elective,Acute Kidney Failure Hemodialysis,Private Suite,16760.9,Outpatient Follow-Up
+275,7,9,2026-01-13,2026-01-20,Trauma,Compound Femur Fracture,Semi-Private,15907.65,Discharged to Home
+276,164,6,2025-05-11,2025-05-12,Urgent,Malignant Lymphoma Chemotherapy,Private Suite,28040.51,Discharged to Home
+277,86,8,2026-01-06,2026-01-07,Elective,Pediatric Asthma Crisis,General Ward,4433.93,Discharged to Home
+278,205,1,2025-09-04,2025-09-07,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22595.94,Discharged to Home
+279,119,9,2026-03-04,2026-03-06,Urgent,Total Hip Replacement,Semi-Private,19025.79,Discharged to Home
+280,85,7,2025-03-18,2025-03-20,Emergency,Pediatric Appendectomy,General Ward,8989.21,Discharged to Home
+281,156,9,2025-11-01,2025-11-07,Emergency,Total Knee Arthroplasty,Semi-Private,19725.1,Outpatient Follow-Up
+282,96,10,2025-04-21,2025-04-29,Emergency,Compound Femur Fracture,Semi-Private,16112.03,Discharged to Home
+283,114,11,2026-02-14,2026-02-15,Emergency,Acute Perforated Appendicitis,General Ward,13045.38,Outpatient Follow-Up
+284,197,3,2025-04-16,2025-04-26,Urgent,Brain Tumor Craniotomy,ICU,42878.32,Discharged to Home
+285,2,7,2025-12-18,2025-12-24,Emergency,Pediatric Severe Pneumonia,General Ward,5784.56,Outpatient Follow-Up
+286,191,7,2025-10-23,2025-10-24,Urgent,Pediatric Severe Pneumonia,General Ward,5996.33,Discharged to Home
+287,50,8,2025-09-30,2025-10-03,Emergency,Pediatric Severe Pneumonia,General Ward,6122.9,Discharged to Home
+288,27,6,2025-10-09,2025-10-14,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,29710.38,Discharged to Home
+289,80,14,2025-10-04,2025-10-07,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,8311.68,Discharged to Home
+290,110,9,2025-12-27,2025-12-31,Urgent,Total Knee Arthroplasty,Semi-Private,20432.58,Discharged to Home
+291,86,5,2026-01-22,2026-01-26,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,29661.77,Transferred to Inpatient Rehab
+292,182,10,2025-04-29,2025-05-02,Elective,Compound Femur Fracture,Semi-Private,18748.66,Discharged to Home
+293,94,9,2025-12-25,2025-12-30,Elective,Total Knee Arthroplasty,Semi-Private,18480.04,Discharged to Home
+294,122,4,2025-09-03,2025-09-12,Emergency,Brain Tumor Craniotomy,ICU,43538.17,Discharged to Home
+295,104,15,2025-06-16,2025-06-22,Emergency,Motor Vehicle Collision Trauma,ICU,29946.72,Discharged to Home
+296,250,12,2025-02-03,2025-02-04,Emergency,Laparoscopic Cholecystectomy,General Ward,10019.82,Transferred to Inpatient Rehab
+297,112,14,2025-10-06,2025-10-11,Urgent,Severe Sepsis Protocol,ICU,16353.26,Transferred to Inpatient Rehab
+298,119,7,2026-02-25,2026-02-26,Emergency,Pediatric Asthma Crisis,General Ward,3913.45,Discharged to Home
+299,176,14,2025-06-17,2025-06-18,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,10536.92,Transferred to Inpatient Rehab
+300,194,3,2025-08-20,2025-08-27,Emergency,Acute Ischemic Stroke,ICU,24411.11,Discharged to Home
+301,77,14,2025-08-11,2025-08-16,Trauma,Severe Sepsis Protocol,ICU,15887.32,Discharged to Home
+302,16,7,2025-01-01,2025-01-02,Urgent,Pediatric Appendectomy,General Ward,7510.69,Transferred to Inpatient Rehab
+303,111,16,2025-11-17,2025-11-23,Emergency,Motor Vehicle Collision Trauma,ICU,30579.89,Discharged to Home
+304,216,8,2025-03-20,2025-03-24,Emergency,Pediatric Appendectomy,General Ward,6957.3,Outpatient Follow-Up
+305,166,1,2026-01-05,2026-01-14,Trauma,Coronary Artery Bypass Graft (CABG),ICU,26901.45,Discharged to Home
+306,155,9,2025-08-21,2025-08-24,Emergency,Total Hip Replacement,Semi-Private,21924.31,Discharged to Home
+307,48,9,2025-10-23,2025-10-25,Urgent,Total Hip Replacement,Semi-Private,25126.51,Discharged to Home
+308,146,12,2025-02-27,2025-03-01,Urgent,Laparoscopic Cholecystectomy,General Ward,8515.71,Home Health Care
+309,120,11,2025-09-25,2025-09-29,Emergency,Acute Perforated Appendicitis,General Ward,13884.31,Transferred to Inpatient Rehab
+310,80,13,2025-06-25,2025-06-28,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,9303.09,Discharged to Home
+311,147,8,2025-06-30,2025-07-05,Emergency,Pediatric Asthma Crisis,General Ward,4542.2,Discharged to Home
+312,67,2,2025-10-24,2025-10-28,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,23364.8,Discharged to Home
+313,125,1,2025-09-16,2025-09-21,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,7706.94,Discharged to Home
+314,45,13,2025-12-04,2025-12-11,Emergency,Severe Sepsis Protocol,ICU,14262.21,Transferred to Inpatient Rehab
+315,221,2,2025-02-13,2025-02-20,Elective,Acute Myocardial Infarction,Cardiac Care Unit,21904.97,Transferred to Inpatient Rehab
+316,113,13,2025-04-18,2025-04-22,Urgent,Acute Kidney Failure Hemodialysis,Private Suite,15779.01,Transferred to Inpatient Rehab
+317,43,10,2025-09-01,2025-09-06,Urgent,Compound Femur Fracture,Semi-Private,16140.27,Discharged to Home
+318,136,9,2025-05-28,2025-06-04,Elective,Total Hip Replacement,Semi-Private,23459.48,Discharged to Home
+319,175,1,2025-09-30,2025-10-02,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22553.74,Outpatient Follow-Up
+320,66,14,2025-08-25,2025-08-26,Urgent,Acute Kidney Failure Hemodialysis,Private Suite,19521.66,Transferred to Inpatient Rehab
+321,174,15,2025-06-10,2025-06-14,Elective,Motor Vehicle Collision Trauma,ICU,25609.75,Discharged to Home
+322,186,8,2025-04-09,2025-04-12,Emergency,Pediatric Severe Pneumonia,General Ward,5692.85,Discharged to Home
+323,244,13,2025-12-29,2026-01-02,Urgent,Diabetic Ketoacidosis Crisis,Semi-Private,10185.47,Discharged to Home
+324,206,3,2025-12-23,2025-12-27,Emergency,Chronic Subdural Hematoma,Private Suite,18670.73,Discharged to Home
+325,197,10,2025-05-12,2025-05-17,Urgent,Total Hip Replacement,Semi-Private,21135.44,Discharged to Home
+326,245,5,2025-08-14,2025-08-18,Emergency,Breast Cancer Resection,Private Suite,17548.7,Home Health Care
+327,37,12,2025-04-22,2025-04-28,Emergency,Bowel Resection & Anastomosis,ICU,21867.73,Discharged to Home
+328,187,6,2025-01-10,2025-01-13,Elective,Breast Cancer Resection,Private Suite,20109.31,Discharged to Home
+329,39,16,2025-07-20,2025-07-25,Elective,Motor Vehicle Collision Trauma,ICU,28587.31,Discharged to Home
+330,139,5,2025-07-16,2025-07-21,Trauma,Lung Carcinoma Targeted Therapy,Private Suite,33209.23,Transferred to Inpatient Rehab
+331,86,16,2025-07-25,2025-08-07,Urgent,Severe Polytrauma Stabilization,ICU,39884.36,Discharged to Home
+332,166,5,2025-10-11,2025-10-17,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,25373.59,Discharged to Home
+333,177,8,2025-02-13,2025-02-17,Emergency,Pediatric Appendectomy,General Ward,6720.06,Discharged to Home
+334,62,12,2025-02-02,2025-02-03,Urgent,Laparoscopic Cholecystectomy,General Ward,9751.07,Discharged to Home
+335,10,7,2025-06-22,2025-06-24,Emergency,Pediatric Asthma Crisis,General Ward,4231.46,Transferred to Inpatient Rehab
+336,174,11,2026-01-15,2026-01-21,Urgent,Bowel Resection & Anastomosis,ICU,21883.22,Outpatient Follow-Up
+337,233,13,2025-05-05,2025-05-08,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,8885.3,Discharged to Home
+338,214,13,2026-02-23,2026-02-28,Elective,Severe Sepsis Protocol,ICU,15810.7,Discharged to Home
+339,110,8,2025-06-16,2025-06-19,Emergency,Pediatric Asthma Crisis,General Ward,4593.07,Discharged to Home
+340,86,1,2025-05-21,2025-05-25,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8757.95,Discharged to Home
+341,11,3,2026-02-10,2026-02-18,Urgent,Acute Ischemic Stroke,ICU,23756.17,Discharged to Home
+342,46,2,2025-08-02,2025-08-03,Urgent,Atrial Fibrillation Management,Cardiac Care Unit,8208.13,Transferred to Inpatient Rehab
+343,37,14,2025-09-25,2025-09-28,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,18761.88,Discharged to Home
+344,157,2,2025-06-28,2025-07-01,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,7498.99,Discharged to Home
+345,93,11,2025-08-26,2025-09-02,Emergency,Bowel Resection & Anastomosis,ICU,27717.99,Discharged to Home
+346,248,12,2025-04-01,2025-04-02,Emergency,Laparoscopic Cholecystectomy,General Ward,8439.06,Outpatient Follow-Up
+347,86,14,2025-01-23,2025-01-27,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,8092.78,Discharged to Home
+348,185,10,2025-08-03,2025-08-09,Emergency,Compound Femur Fracture,Semi-Private,15866.66,Discharged to Home
+349,84,5,2025-05-02,2025-05-07,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,33097.58,Discharged to Home
+350,56,14,2025-04-02,2025-04-03,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,10060.05,Discharged to Home
+351,250,5,2025-06-21,2025-06-26,Emergency,Breast Cancer Resection,Private Suite,21340.02,Discharged to Home
+352,44,7,2025-06-01,2025-06-04,Urgent,Pediatric Asthma Crisis,General Ward,4195.81,Transferred to Inpatient Rehab
+353,219,5,2025-07-30,2025-08-06,Trauma,Lung Carcinoma Targeted Therapy,Private Suite,36786.85,Discharged to Home
+354,224,5,2025-06-17,2025-06-21,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,37699.0,Discharged to Home
+355,107,1,2025-08-29,2025-09-02,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22254.9,Discharged to Home
+356,62,1,2025-12-21,2025-12-22,Urgent,Atrial Fibrillation Management,Cardiac Care Unit,7351.25,Outpatient Follow-Up
+357,5,12,2025-03-24,2025-03-25,Urgent,Laparoscopic Cholecystectomy,General Ward,9619.05,Discharged to Home
+358,48,8,2025-12-27,2025-12-28,Urgent,Pediatric Appendectomy,General Ward,6827.41,Outpatient Follow-Up
+359,76,10,2025-12-24,2025-12-31,Urgent,Total Hip Replacement,Semi-Private,19444.04,Transferred to Inpatient Rehab
+360,189,2,2025-01-27,2025-01-31,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,21083.96,Discharged to Home
+361,181,1,2025-03-12,2025-03-16,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,9364.11,Discharged to Home
+362,193,6,2025-06-30,2025-07-05,Elective,Lung Carcinoma Targeted Therapy,Private Suite,32613.13,Discharged to Home
+363,125,11,2025-08-29,2025-09-01,Emergency,Acute Perforated Appendicitis,General Ward,12635.1,Discharged to Home
+364,49,9,2025-02-11,2025-02-14,Emergency,Compound Femur Fracture,Semi-Private,19064.94,Discharged to Home
+365,179,4,2025-03-19,2025-03-27,Urgent,Acute Ischemic Stroke,ICU,27230.94,Discharged to Home
+366,108,9,2025-05-30,2025-06-03,Emergency,Compound Femur Fracture,Semi-Private,18274.86,Discharged to Home
+367,106,14,2025-12-02,2025-12-07,Urgent,Severe Sepsis Protocol,ICU,16956.45,Discharged to Home
+368,78,13,2026-02-09,2026-02-13,Emergency,Severe Sepsis Protocol,ICU,14102.27,Transferred to Inpatient Rehab
+369,38,8,2025-08-22,2025-08-27,Emergency,Pediatric Appendectomy,General Ward,7091.64,Discharged to Home
+370,182,15,2025-03-24,2025-03-30,Emergency,Motor Vehicle Collision Trauma,ICU,27536.31,Discharged to Home
+371,67,7,2025-04-16,2025-04-18,Emergency,Pediatric Appendectomy,General Ward,7543.06,Discharged to Home
+372,32,2,2025-09-13,2025-09-20,Urgent,Coronary Artery Bypass Graft (CABG),ICU,34111.64,Outpatient Follow-Up
+373,250,12,2025-11-28,2025-12-01,Emergency,Acute Perforated Appendicitis,General Ward,13958.94,Outpatient Follow-Up
+374,38,14,2025-06-23,2025-06-27,Urgent,Severe Sepsis Protocol,ICU,17226.81,Transferred to Inpatient Rehab
+375,142,4,2025-01-13,2025-01-20,Emergency,Brain Tumor Craniotomy,ICU,34869.21,Discharged to Home
+376,201,5,2025-01-12,2025-01-17,Emergency,Breast Cancer Resection,Private Suite,20323.22,Transferred to Inpatient Rehab
+377,50,12,2025-11-05,2025-11-06,Elective,Laparoscopic Cholecystectomy,General Ward,8715.55,Discharged to Home
+378,4,8,2025-06-29,2025-06-30,Emergency,Pediatric Severe Pneumonia,General Ward,6693.09,Discharged to Home
+379,107,10,2025-03-25,2025-04-01,Emergency,Compound Femur Fracture,Semi-Private,14925.65,Outpatient Follow-Up
+380,78,12,2025-02-03,2025-02-04,Elective,Laparoscopic Cholecystectomy,General Ward,9386.27,Discharged to Home
+381,107,4,2025-12-30,2025-12-31,Emergency,Chronic Subdural Hematoma,Private Suite,16676.15,Transferred to Inpatient Rehab
+382,214,14,2025-09-10,2025-09-14,Urgent,Severe Sepsis Protocol,ICU,13174.54,Discharged to Home
+383,214,14,2025-03-05,2025-03-07,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,19265.89,Discharged to Home
+384,127,2,2025-10-25,2025-10-26,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,7663.75,Discharged to Home
+385,250,15,2025-07-11,2025-07-15,Elective,Motor Vehicle Collision Trauma,ICU,25264.89,Discharged to Home
+386,225,15,2025-07-02,2025-07-08,Emergency,Motor Vehicle Collision Trauma,ICU,28441.72,Discharged to Home
+387,75,11,2025-09-21,2025-09-25,Urgent,Acute Perforated Appendicitis,General Ward,10965.06,Discharged to Home
+388,81,16,2025-05-19,2025-05-29,Urgent,Severe Polytrauma Stabilization,ICU,31642.67,Discharged to Home
+389,36,12,2025-07-10,2025-07-14,Elective,Acute Perforated Appendicitis,General Ward,11151.78,Discharged to Home
+390,158,15,2025-08-02,2025-08-07,Emergency,Motor Vehicle Collision Trauma,ICU,31955.83,Discharged to Home
+391,177,7,2026-02-23,2026-02-24,Emergency,Pediatric Appendectomy,General Ward,7067.79,Home Health Care
+392,191,3,2025-03-07,2025-03-18,Elective,Brain Tumor Craniotomy,ICU,36955.15,Discharged to Home
+393,54,3,2025-08-06,2025-08-11,Emergency,Acute Ischemic Stroke,ICU,25702.81,Transferred to Inpatient Rehab
+394,132,13,2025-08-29,2025-09-01,Emergency,Severe Sepsis Protocol,ICU,13357.39,Discharged to Home
+395,194,3,2025-11-05,2025-11-16,Emergency,Brain Tumor Craniotomy,ICU,35303.88,Discharged to Home
+396,90,7,2026-03-14,2026-03-20,Emergency,Pediatric Appendectomy,General Ward,7232.64,Transferred to Inpatient Rehab
+397,18,3,2025-09-28,2025-10-08,Emergency,Brain Tumor Craniotomy,ICU,40731.46,Outpatient Follow-Up
+398,26,6,2025-07-07,2025-07-12,Urgent,Malignant Lymphoma Chemotherapy,Private Suite,29449.95,Discharged to Home
+399,214,8,2025-08-06,2025-08-09,Emergency,Pediatric Appendectomy,General Ward,6952.72,Home Health Care
+400,181,7,2025-02-12,2025-02-17,Emergency,Pediatric Severe Pneumonia,General Ward,6142.69,Discharged to Home
+401,58,12,2025-05-29,2025-06-06,Elective,Bowel Resection & Anastomosis,ICU,27762.71,Outpatient Follow-Up
+402,173,11,2025-07-22,2025-07-23,Emergency,Laparoscopic Cholecystectomy,General Ward,8530.26,Discharged to Home
+403,102,9,2026-01-15,2026-01-23,Emergency,Total Knee Arthroplasty,Semi-Private,17646.34,Home Health Care
+404,60,10,2025-05-23,2025-05-25,Urgent,Total Hip Replacement,Semi-Private,22889.33,Transferred to Inpatient Rehab
+405,92,12,2025-09-06,2025-09-07,Emergency,Laparoscopic Cholecystectomy,General Ward,9720.62,Discharged to Home
+406,26,1,2025-09-13,2025-09-17,Urgent,Acute Myocardial Infarction,Cardiac Care Unit,19630.9,Home Health Care
+407,40,7,2026-01-25,2026-01-31,Urgent,Pediatric Severe Pneumonia,General Ward,5980.63,Transferred to Inpatient Rehab
+408,139,7,2026-01-27,2026-01-30,Emergency,Pediatric Asthma Crisis,General Ward,4532.57,Discharged to Home
+409,114,9,2025-01-17,2025-01-24,Urgent,Compound Femur Fracture,Semi-Private,15049.91,Outpatient Follow-Up
+410,125,4,2025-12-04,2025-12-16,Urgent,Brain Tumor Craniotomy,ICU,39912.99,Discharged to Home
+411,101,6,2025-10-30,2025-11-05,Emergency,Breast Cancer Resection,Private Suite,18246.49,Home Health Care
+412,12,4,2025-06-28,2025-07-04,Elective,Acute Ischemic Stroke,ICU,25759.4,Discharged to Home
+413,98,4,2025-06-26,2025-07-07,Emergency,Brain Tumor Craniotomy,ICU,37053.0,Discharged to Home
+414,17,7,2025-06-22,2025-06-25,Emergency,Pediatric Severe Pneumonia,General Ward,5654.16,Discharged to Home
+415,231,10,2025-01-11,2025-01-15,Trauma,Total Hip Replacement,Semi-Private,21522.82,Discharged to Home
+416,177,15,2025-06-22,2025-06-27,Emergency,Severe Polytrauma Stabilization,ICU,37861.18,Transferred to Inpatient Rehab
+417,77,8,2025-04-14,2025-04-15,Urgent,Pediatric Appendectomy,General Ward,7928.85,Transferred to Inpatient Rehab
+418,103,5,2026-01-03,2026-01-09,Elective,Lung Carcinoma Targeted Therapy,Private Suite,31745.33,Discharged to Home
+419,110,6,2026-02-12,2026-02-18,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,29364.88,Discharged to Home
+420,160,12,2025-12-10,2025-12-15,Urgent,Acute Perforated Appendicitis,General Ward,10418.46,Discharged to Home
+421,221,4,2025-04-20,2025-04-23,Elective,Chronic Subdural Hematoma,Private Suite,18549.49,Discharged to Home
+422,240,13,2025-09-25,2025-09-28,Emergency,Severe Sepsis Protocol,ICU,14165.34,Discharged to Home
+423,106,7,2025-11-21,2025-11-23,Elective,Pediatric Asthma Crisis,General Ward,3731.84,Discharged to Home
+424,104,5,2025-03-18,2025-03-25,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,36688.47,Discharged to Home
+425,109,13,2025-04-14,2025-04-19,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,19105.32,Transferred to Inpatient Rehab
+426,125,1,2026-03-17,2026-03-25,Elective,Coronary Artery Bypass Graft (CABG),ICU,28367.57,Discharged to Home
+427,172,15,2025-07-23,2025-08-02,Emergency,Severe Polytrauma Stabilization,ICU,38591.15,Discharged to Home
+428,244,12,2025-09-12,2025-09-14,Elective,Acute Perforated Appendicitis,General Ward,10799.98,Discharged to Home
+429,85,14,2026-02-17,2026-02-22,Emergency,Severe Sepsis Protocol,ICU,13862.72,Discharged to Home
+430,221,13,2025-09-09,2025-09-13,Emergency,Severe Sepsis Protocol,ICU,13574.14,Discharged to Home
+431,247,5,2025-07-05,2025-07-07,Emergency,Breast Cancer Resection,Private Suite,21652.06,Discharged to Home
+432,177,15,2025-05-10,2025-05-18,Urgent,Severe Polytrauma Stabilization,ICU,41028.3,Discharged to Home
+433,208,15,2025-10-01,2025-10-11,Emergency,Severe Polytrauma Stabilization,ICU,34875.57,Outpatient Follow-Up
+434,240,6,2025-04-18,2025-04-21,Elective,Lung Carcinoma Targeted Therapy,Private Suite,32773.57,Discharged to Home
+435,105,2,2026-03-20,2026-03-27,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,22972.4,Transferred to Inpatient Rehab
+436,212,4,2025-09-17,2025-09-23,Emergency,Chronic Subdural Hematoma,Private Suite,19040.35,Discharged to Home
+437,84,9,2026-01-26,2026-02-03,Urgent,Compound Femur Fracture,Semi-Private,14908.08,Transferred to Inpatient Rehab
+438,148,1,2025-03-22,2025-03-25,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8935.95,Transferred to Inpatient Rehab
+439,176,10,2025-08-20,2025-08-22,Emergency,Total Hip Replacement,Semi-Private,24455.89,Discharged to Home
+440,95,4,2026-03-25,2026-03-30,Emergency,Chronic Subdural Hematoma,Private Suite,18186.42,Transferred to Inpatient Rehab
+441,6,11,2025-02-15,2025-02-23,Urgent,Bowel Resection & Anastomosis,ICU,24679.95,Discharged to Home
+442,246,7,2025-10-18,2025-10-20,Emergency,Pediatric Appendectomy,General Ward,7690.46,Transferred to Inpatient Rehab
+443,117,16,2025-03-02,2025-03-10,Elective,Severe Polytrauma Stabilization,ICU,33496.29,Transferred to Inpatient Rehab
+444,220,5,2026-02-26,2026-03-03,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,27294.06,Discharged to Home
+445,38,2,2025-05-15,2025-05-23,Emergency,Coronary Artery Bypass Graft (CABG),ICU,31552.79,Discharged to Home
+446,121,4,2025-12-21,2025-12-29,Emergency,Acute Ischemic Stroke,ICU,23011.17,Discharged to Home
+447,25,11,2025-01-27,2025-02-02,Elective,Bowel Resection & Anastomosis,ICU,28813.99,Home Health Care
+448,208,1,2025-05-10,2025-05-16,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,23285.91,Discharged to Home
+449,11,13,2025-05-14,2025-05-21,Emergency,Severe Sepsis Protocol,ICU,13465.97,Discharged to Home
+450,111,4,2025-03-01,2025-03-09,Emergency,Acute Ischemic Stroke,ICU,23844.32,Home Health Care
+451,238,10,2026-03-25,2026-03-29,Elective,Total Hip Replacement,Semi-Private,21828.41,Discharged to Home
+452,196,4,2025-01-28,2025-02-07,Emergency,Acute Ischemic Stroke,ICU,21568.62,Discharged to Home
+453,42,16,2025-08-12,2025-08-21,Emergency,Motor Vehicle Collision Trauma,ICU,33451.6,Discharged to Home
+454,217,3,2025-06-28,2025-07-07,Emergency,Acute Ischemic Stroke,ICU,21550.72,Outpatient Follow-Up
+455,131,5,2025-10-26,2025-10-30,Urgent,Breast Cancer Resection,Private Suite,21740.49,Discharged to Home
+456,228,7,2025-05-26,2025-05-27,Urgent,Pediatric Asthma Crisis,General Ward,3899.31,Discharged to Home
+457,40,1,2025-08-24,2025-09-02,Emergency,Coronary Artery Bypass Graft (CABG),ICU,31069.14,Home Health Care
+458,160,10,2026-01-10,2026-01-13,Trauma,Compound Femur Fracture,Semi-Private,18249.8,Outpatient Follow-Up
+459,221,2,2025-06-15,2025-06-20,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,17848.63,Discharged to Home
+460,23,1,2025-03-25,2025-03-30,Emergency,Coronary Artery Bypass Graft (CABG),ICU,31552.17,Discharged to Home
+461,126,10,2025-12-17,2025-12-20,Emergency,Total Hip Replacement,Semi-Private,20243.13,Discharged to Home
+462,145,14,2025-02-16,2025-02-18,Urgent,Diabetic Ketoacidosis Crisis,Semi-Private,9758.3,Transferred to Inpatient Rehab
+463,132,8,2025-12-13,2025-12-15,Emergency,Pediatric Asthma Crisis,General Ward,4185.54,Discharged to Home
+464,75,10,2025-02-10,2025-02-18,Elective,Compound Femur Fracture,Semi-Private,14971.35,Discharged to Home
+465,232,7,2025-09-25,2025-09-26,Urgent,Pediatric Severe Pneumonia,General Ward,6598.61,Outpatient Follow-Up
+466,170,14,2025-07-01,2025-07-08,Emergency,Severe Sepsis Protocol,ICU,15385.98,Discharged to Home
+467,170,9,2026-02-07,2026-02-13,Emergency,Compound Femur Fracture,Semi-Private,15724.91,Outpatient Follow-Up
+468,117,16,2025-11-16,2025-11-25,Elective,Severe Polytrauma Stabilization,ICU,40589.06,Discharged to Home
+469,192,14,2026-03-23,2026-03-26,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,8047.89,Discharged to Home
+470,223,16,2025-06-05,2025-06-11,Urgent,Severe Polytrauma Stabilization,ICU,34524.73,Home Health Care
+471,206,7,2025-03-06,2025-03-10,Elective,Pediatric Severe Pneumonia,General Ward,5953.43,Discharged to Home
+472,167,6,2026-03-08,2026-03-14,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,30274.42,Transferred to Inpatient Rehab
+473,109,1,2025-03-27,2025-04-06,Emergency,Coronary Artery Bypass Graft (CABG),ICU,25829.01,Discharged to Home
+474,146,9,2025-06-20,2025-06-22,Emergency,Total Knee Arthroplasty,Semi-Private,19743.32,Discharged to Home
+475,149,14,2025-01-19,2025-01-20,Urgent,Diabetic Ketoacidosis Crisis,Semi-Private,9942.85,Discharged to Home
+476,16,11,2025-08-05,2025-08-09,Urgent,Acute Perforated Appendicitis,General Ward,11335.68,Discharged to Home
+477,127,14,2025-08-18,2025-08-21,Emergency,Diabetic Ketoacidosis Crisis,Semi-Private,8989.28,Discharged to Home
+478,57,14,2025-11-05,2025-11-10,Elective,Severe Sepsis Protocol,ICU,15223.69,Transferred to Inpatient Rehab
+479,186,16,2025-08-02,2025-08-10,Urgent,Motor Vehicle Collision Trauma,ICU,31787.84,Transferred to Inpatient Rehab
+480,177,2,2025-03-08,2025-03-09,Emergency,Atrial Fibrillation Management,Cardiac Care Unit,8248.5,Discharged to Home
+481,242,12,2025-05-01,2025-05-03,Emergency,Laparoscopic Cholecystectomy,General Ward,9331.14,Outpatient Follow-Up
+482,212,11,2026-02-18,2026-02-22,Emergency,Acute Perforated Appendicitis,General Ward,12622.63,Discharged to Home
+483,58,12,2025-06-24,2025-06-26,Urgent,Laparoscopic Cholecystectomy,General Ward,10918.76,Discharged to Home
+484,172,3,2025-08-13,2025-08-19,Urgent,Brain Tumor Craniotomy,ICU,43390.09,Home Health Care
+485,201,3,2025-09-17,2025-09-29,Elective,Brain Tumor Craniotomy,ICU,36109.52,Outpatient Follow-Up
+486,128,3,2025-11-28,2025-12-09,Emergency,Brain Tumor Craniotomy,ICU,35695.48,Transferred to Inpatient Rehab
+487,249,9,2025-05-06,2025-05-12,Emergency,Total Hip Replacement,Semi-Private,20687.63,Discharged to Home
+488,171,5,2026-01-21,2026-01-25,Urgent,Lung Carcinoma Targeted Therapy,Private Suite,30650.07,Discharged to Home
+489,230,10,2025-01-16,2025-01-19,Urgent,Compound Femur Fracture,Semi-Private,14571.8,Discharged to Home
+490,112,2,2026-01-24,2026-01-30,Emergency,Acute Myocardial Infarction,Cardiac Care Unit,18207.45,Outpatient Follow-Up
+491,205,16,2025-08-03,2025-08-08,Urgent,Severe Polytrauma Stabilization,ICU,38680.55,Discharged to Home
+492,3,5,2025-12-25,2025-12-30,Emergency,Breast Cancer Resection,Private Suite,21549.26,Discharged to Home
+493,179,8,2026-02-02,2026-02-05,Emergency,Pediatric Appendectomy,General Ward,8377.03,Discharged to Home
+494,73,5,2025-09-19,2025-09-24,Urgent,Malignant Lymphoma Chemotherapy,Private Suite,30155.53,Discharged to Home
+495,152,5,2026-03-03,2026-03-07,Trauma,Breast Cancer Resection,Private Suite,16729.12,Discharged to Home
+496,161,12,2025-03-05,2025-03-06,Emergency,Acute Perforated Appendicitis,General Ward,10809.08,Discharged to Home
+497,147,2,2025-06-23,2025-07-04,Trauma,Coronary Artery Bypass Graft (CABG),ICU,33806.37,Discharged to Home
+498,60,8,2025-05-26,2025-05-28,Urgent,Pediatric Appendectomy,General Ward,8016.31,Transferred to Inpatient Rehab
+499,64,4,2025-09-22,2025-09-29,Emergency,Brain Tumor Craniotomy,ICU,42853.55,Discharged to Home
+500,109,4,2025-04-20,2025-04-25,Emergency,Acute Ischemic Stroke,ICU,24039.04,Discharged to Home
+501,224,6,2025-11-22,2025-11-24,Elective,Breast Cancer Resection,Private Suite,22048.34,Discharged to Home
+502,125,16,2025-03-08,2025-03-15,Trauma,Motor Vehicle Collision Trauma,ICU,29406.44,Discharged to Home
+503,192,4,2025-03-02,2025-03-05,Emergency,Chronic Subdural Hematoma,Private Suite,15336.56,Discharged to Home
+504,78,8,2025-01-15,2025-01-17,Urgent,Pediatric Severe Pneumonia,General Ward,6749.81,Discharged to Home
+505,56,4,2025-01-02,2025-01-08,Elective,Chronic Subdural Hematoma,Private Suite,18200.77,Discharged to Home
+506,231,8,2025-09-01,2025-09-04,Elective,Pediatric Asthma Crisis,General Ward,3581.5,Transferred to Inpatient Rehab
+507,171,9,2026-03-20,2026-03-25,Urgent,Compound Femur Fracture,Semi-Private,16177.86,Discharged to Home
+508,246,16,2026-01-12,2026-01-19,Emergency,Severe Polytrauma Stabilization,ICU,32401.89,Discharged to Home
+509,162,16,2025-10-15,2025-10-20,Emergency,Motor Vehicle Collision Trauma,ICU,29518.14,Home Health Care
+510,49,11,2025-03-03,2025-03-04,Urgent,Laparoscopic Cholecystectomy,General Ward,11113.24,Discharged to Home
+511,215,14,2025-02-13,2025-02-19,Emergency,Severe Sepsis Protocol,ICU,17049.56,Discharged to Home
+512,112,4,2025-01-13,2025-01-15,Elective,Chronic Subdural Hematoma,Private Suite,16502.59,Discharged to Home
+513,74,3,2025-05-11,2025-05-18,Trauma,Acute Ischemic Stroke,ICU,20674.18,Discharged to Home
+514,47,1,2025-06-02,2025-06-08,Emergency,Coronary Artery Bypass Graft (CABG),ICU,29414.94,Discharged to Home
+515,97,3,2025-04-14,2025-04-24,Emergency,Brain Tumor Craniotomy,ICU,40333.76,Discharged to Home
+516,119,12,2025-02-03,2025-02-12,Emergency,Bowel Resection & Anastomosis,ICU,23395.13,Discharged to Home
+517,69,11,2025-05-07,2025-05-14,Emergency,Bowel Resection & Anastomosis,ICU,25025.14,Discharged to Home
+518,96,11,2026-02-05,2026-02-09,Emergency,Bowel Resection & Anastomosis,ICU,28983.18,Home Health Care
+519,247,14,2025-12-01,2025-12-05,Elective,Diabetic Ketoacidosis Crisis,Semi-Private,9712.73,Discharged to Home
+520,216,13,2025-10-27,2025-10-31,Elective,Acute Kidney Failure Hemodialysis,Private Suite,16368.44,Discharged to Home
+521,18,7,2025-07-22,2025-07-24,Urgent,Pediatric Severe Pneumonia,General Ward,7322.51,Home Health Care
+522,130,8,2025-11-22,2025-11-23,Emergency,Pediatric Asthma Crisis,General Ward,3970.51,Transferred to Inpatient Rehab
+523,54,10,2025-01-09,2025-01-15,Elective,Compound Femur Fracture,Semi-Private,14241.64,Discharged to Home
+524,230,16,2026-01-26,2026-02-01,Emergency,Motor Vehicle Collision Trauma,ICU,32465.14,Discharged to Home
+525,114,15,2025-06-30,2025-07-09,Urgent,Severe Polytrauma Stabilization,ICU,39729.91,Discharged to Home
+526,119,7,2025-08-16,2025-08-18,Emergency,Pediatric Appendectomy,General Ward,8455.94,Transferred to Inpatient Rehab
+527,182,7,2025-02-16,2025-02-20,Elective,Pediatric Appendectomy,General Ward,8980.92,Discharged to Home
+528,10,6,2025-12-27,2025-12-28,Urgent,Breast Cancer Resection,Private Suite,17522.01,Discharged to Home
+529,102,4,2025-10-19,2025-10-27,Emergency,Brain Tumor Craniotomy,ICU,42373.65,Transferred to Inpatient Rehab
+530,33,1,2025-05-13,2025-05-15,Elective,Atrial Fibrillation Management,Cardiac Care Unit,9218.98,Outpatient Follow-Up
+531,71,5,2025-12-21,2025-12-23,Urgent,Malignant Lymphoma Chemotherapy,Private Suite,23776.52,Outpatient Follow-Up
+532,14,8,2026-03-09,2026-03-10,Trauma,Pediatric Asthma Crisis,General Ward,4247.09,Discharged to Home
+533,227,5,2025-05-23,2025-05-30,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,31723.83,Discharged to Home
+534,58,16,2025-02-08,2025-02-13,Elective,Motor Vehicle Collision Trauma,ICU,27647.18,Discharged to Home
+535,123,9,2025-10-31,2025-11-06,Elective,Total Hip Replacement,Semi-Private,22082.43,Discharged to Home
+536,214,2,2025-09-24,2025-09-25,Urgent,Acute Myocardial Infarction,Cardiac Care Unit,22046.2,Outpatient Follow-Up
+537,115,13,2025-02-13,2025-02-22,Emergency,Severe Sepsis Protocol,ICU,16267.21,Outpatient Follow-Up
+538,15,8,2025-02-03,2025-02-06,Emergency,Pediatric Severe Pneumonia,General Ward,5683.57,Discharged to Home
+539,103,4,2025-04-30,2025-05-12,Urgent,Brain Tumor Craniotomy,ICU,39844.78,Discharged to Home
+540,87,13,2025-08-21,2025-08-23,Emergency,Acute Kidney Failure Hemodialysis,Private Suite,16074.47,Discharged to Home
+541,203,5,2025-11-23,2025-11-25,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,25330.68,Discharged to Home
+542,12,1,2025-06-09,2025-06-13,Urgent,Acute Myocardial Infarction,Cardiac Care Unit,21284.08,Discharged to Home
+543,150,11,2025-03-17,2025-03-21,Emergency,Bowel Resection & Anastomosis,ICU,25575.79,Home Health Care
+544,130,11,2025-08-05,2025-08-12,Emergency,Bowel Resection & Anastomosis,ICU,26519.46,Home Health Care
+545,171,12,2025-11-04,2025-11-05,Urgent,Laparoscopic Cholecystectomy,General Ward,9162.12,Discharged to Home
+546,127,5,2025-11-24,2025-11-26,Emergency,Lung Carcinoma Targeted Therapy,Private Suite,34639.11,Discharged to Home
+547,189,8,2025-04-16,2025-04-17,Emergency,Pediatric Asthma Crisis,General Ward,3855.19,Discharged to Home
+548,50,14,2025-01-23,2025-01-29,Trauma,Acute Kidney Failure Hemodialysis,Private Suite,17043.69,Discharged to Home
+549,87,11,2025-04-02,2025-04-09,Emergency,Bowel Resection & Anastomosis,ICU,27985.5,Discharged to Home
+550,87,6,2025-08-22,2025-08-27,Emergency,Malignant Lymphoma Chemotherapy,Private Suite,29343.36,Transferred to Inpatient Rehab
