@@ -242,16 +242,29 @@ def generate_and_seed_healthcare_500():
     df_doctors.to_csv("datasets/doctors.csv", index=False)
     df_departments.to_csv("datasets/hospital_departments.csv", index=False)
 
-    # 5. SEED INTO SQLITE
+    # 5. SEED INTO SQLITE (Unified Healthcare EHR Only)
     lite_conn = sqlite3.connect("database/demo.db")
+    lite_cur = lite_conn.cursor()
+    # Drop legacy non-healthcare tables
+    legacy_tables = [
+        "departments", "employees", "projects", "employee_projects",
+        "customers", "products", "orders", "order_items",
+        "hospital_rooms", "students", "courses", "product_reviews"
+    ]
+    for lt in legacy_tables:
+        lite_cur.execute(f"DROP TABLE IF EXISTS {lt};")
+    lite_conn.commit()
+
     df_patients.to_sql("patients", lite_conn, if_exists="replace", index=False)
     df_admissions.to_sql("patient_admissions", lite_conn, if_exists="replace", index=False)
     df_billing.to_sql("medical_billing", lite_conn, if_exists="replace", index=False)
     df_doctors.to_sql("doctors", lite_conn, if_exists="replace", index=False)
     df_departments.to_sql("hospital_departments", lite_conn, if_exists="replace", index=False)
+    lite_cur.execute("VACUUM;")
     lite_conn.commit()
+    lite_cur.close()
     lite_conn.close()
-    print("Successfully seeded into SQLite (database/demo.db)!")
+    print("Successfully seeded into SQLite (database/demo.db) with 100% Healthcare theme!")
 
     # 6. SEED INTO MYSQL (IF RUNNING)
     config = load_config()
