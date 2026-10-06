@@ -142,12 +142,44 @@ def show_voice_query_page():
         height=85,
     )
 
+    # Browser Microphone Recording (Cloud & Local compatible)
+    st.markdown("##### 🎙️ Speak into your Microphone")
+    st.caption("Click the red microphone button below to record your voice from your browser, then click stop:")
+    audio_val = st.audio_input("Record Voice Query", key="browser_mic_input", label_visibility="collapsed")
+    if audio_val is not None:
+        audio_bytes = audio_val.getvalue()
+        audio_hash = hash(audio_bytes)
+        if st.session_state.get("last_recorded_audio_hash") != audio_hash:
+            st.session_state["last_recorded_audio_hash"] = audio_hash
+            os.makedirs("audio", exist_ok=True)
+            with open("audio/audio.wav", "wb") as f:
+                f.write(audio_bytes)
+            st.session_state.raw_audio_path = "audio/audio.wav"
+
+            status_box = st.empty()
+            with status_box.container():
+                st.info("🔇 **Cleaning audio & transcribing speech...**")
+            clean_audio = remove_noise(input_file="audio/audio.wav", output_file="audio/clean_audio.wav")
+            st.session_state.clean_audio_path = clean_audio
+            transcribed = speech_to_text(clean_audio)
+
+            if transcribed and transcribed.strip():
+                st.session_state.user_query_text = transcribed.strip()
+                with status_box.container():
+                    st.info(f"🤖 **Interpreting:** \"{transcribed.strip()}\"")
+                _run_pipeline(transcribed.strip(), tts_enabled)
+                st.session_state.trigger_browser_tts = True
+                status_box.empty()
+                st.rerun()
+            else:
+                status_box.warning("⚠️ No speech was detected in your recording. Please try speaking again.")
+
     col_btn1, col_btn2, col_btn3 = st.columns([2.5, 2, 1])
 
     with col_btn1:
-        record_clicked = st.button("🎙️ Speak Query (Record Voice)", type="primary", use_container_width=True)
+        record_clicked = st.button("🎙️ Local PC Mic (5s Timer)", use_container_width=True)
     with col_btn2:
-        run_clicked = st.button("⚡ Run SQL Query", use_container_width=True)
+        run_clicked = st.button("⚡ Run SQL Query", type="primary", use_container_width=True)
     with col_btn3:
         clear_clicked = st.button("🔄 Reset", use_container_width=True)
 
@@ -163,7 +195,7 @@ def show_voice_query_page():
         st.rerun()
 
     # ==========================================
-    # VOICE PIPELINE EXECUTION
+    # VOICE PIPELINE EXECUTION (LOCAL PC SOUNDCARD)
     # ==========================================
     if record_clicked:
         try:
@@ -197,8 +229,12 @@ def show_voice_query_page():
             st.rerun()
 
         except Exception as e:
-            st.error(f"❌ Microphone/Audio Error: {e}")
-            st.info("💡 Ensure your microphone is connected and authorized in Windows settings.")
+            err_str = str(e)
+            if "device -1" in err_str or "querying device" in err_str:
+                st.warning("⚠️ **Cloud Server Note:** When deployed on the cloud, the remote Linux server has no physical sound card. Please use the **🎙️ Speak into your Microphone** widget above to record directly from your browser!")
+            else:
+                st.error(f"❌ Microphone/Audio Error: {e}")
+                st.info("💡 Ensure your microphone is connected and authorized in Windows settings.")
 
     # Manual Run Triggered
     if run_clicked:
