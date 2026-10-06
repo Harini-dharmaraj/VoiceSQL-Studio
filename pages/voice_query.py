@@ -165,15 +165,15 @@ def show_voice_query_page():
                 transcribed = speech_to_text(clean_audio)
 
                 if transcribed and transcribed.strip():
-                    st.session_state.user_query_text = transcribed.strip()
-                    with status_box.container():
-                        st.info(f"🤖 **Interpreting:** \"{transcribed.strip()}\"")
-                    _run_pipeline(transcribed.strip(), tts_enabled)
+                    clean_text = transcribed.strip().rstrip(".").strip()
+                    st.session_state.user_query_text = clean_text
+                    st.session_state["last_transcribed_speech"] = clean_text
+                    _run_pipeline(clean_text, tts_enabled)
                     st.session_state.trigger_browser_tts = True
                     status_box.empty()
                     st.rerun()
                 else:
-                    status_box.warning("⚠️ No speech was detected in your recording. Please try speaking again.")
+                    status_box.warning("⚠️ No speech was detected in your recording. Please try speaking clearly again.")
 
     # Check if a physical microphone hardware exists on this host
     has_local_mic = False
@@ -208,6 +208,8 @@ def show_voice_query_page():
         st.session_state.pop("active_result", None)
         st.session_state.pop("voice_summary", None)
         st.session_state.pop("voice_audio_path", None)
+        st.session_state.pop("last_transcribed_speech", None)
+        st.session_state.pop("last_recorded_audio_hash", None)
         st.session_state.trigger_browser_tts = False
         st.rerun()
 
@@ -268,6 +270,17 @@ def show_voice_query_page():
     # ==========================================
     # TEXT-TO-SPEECH (VOICE OUTPUT) CARD
     # ==========================================
+    if "last_transcribed_speech" in st.session_state and st.session_state["last_transcribed_speech"]:
+        st.markdown(f"""
+        <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 10px 14px; margin: 12px 0; display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 20px;">🗣️</span>
+            <div>
+                <span style="font-size: 11px; font-weight: 700; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.05em;">AI Speech Recognition Heard:</span>
+                <div style="font-size: 14.5px; font-weight: 600; color: #1E3A8A;">"{st.session_state['last_transcribed_speech']}"</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     if "voice_summary" in st.session_state and st.session_state.voice_summary:
         summary_text = st.session_state.voice_summary
         audio_path = st.session_state.get("voice_audio_path")

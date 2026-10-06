@@ -82,28 +82,37 @@ def generate_sql_mock(question):
     # ==========================================
     # HEALTHCARE & CLINIC QUERIES (550+ Records EHR)
     # ==========================================
-    elif "admission" in q and ("all" in q or "show" in q or "list" in q or "recent" in q):
-        return "SELECT a.admission_id, p.patient_name, d.doctor_name, a.diagnosis, a.treatment_cost, a.discharge_status FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id JOIN doctors d ON a.doctor_id = d.doctor_id ORDER BY a.admission_id DESC LIMIT 25;"
+    elif any(w in q for w in ["doctor", "doctors", "physician", "physicians", "specialist", "specialists", "doc", "docs", "daughter", "daughters", "dr."]):
+        if any(w in q for w in ["fee", "expensive", "highest", "cost", "salary", "charge", "rate"]):
+            return "SELECT doctor_name, department, consultation_fee, experience_years FROM doctors ORDER BY consultation_fee DESC LIMIT 5;"
+        return "SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors ORDER BY experience_years DESC;"
+
     elif "icu" in q or "intensive care" in q:
         return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.admission_type, a.room_type, a.treatment_cost FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id WHERE a.room_type = 'ICU' ORDER BY a.treatment_cost DESC LIMIT 20;"
-    elif "expensive treatment" in q or ("highest" in q and "treatment" in q) or ("highest" in q and "cost" in q) or ("most expensive" in q):
-        return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.room_type, a.treatment_cost, d.doctor_name FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id JOIN doctors d ON a.doctor_id = d.doctor_id ORDER BY a.treatment_cost DESC LIMIT 10;"
+
     elif "cardio" in q or "heart" in q or "coronary" in q:
         return "SELECT a.admission_id, p.patient_name, p.age, a.diagnosis, a.treatment_cost FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id WHERE a.diagnosis LIKE '%Coronary%' OR a.diagnosis LIKE '%Myocardial%' OR a.diagnosis LIKE '%Atrial%' LIMIT 20;"
+
     elif "emergency" in q or "trauma" in q:
         return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.treatment_cost, a.discharge_status FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id WHERE a.admission_type IN ('Emergency', 'Trauma') ORDER BY a.admission_id DESC LIMIT 20;"
-    elif "claim" in q or "billing" in q or "bill" in q or "denied" in q or "pending" in q:
-        return "SELECT b.bill_id, p.patient_name, b.total_billed_amount, b.insurance_paid_amount, b.patient_copay_amount, b.claim_status, b.payment_method FROM medical_billing b JOIN patients p ON b.patient_id = p.patient_id WHERE b.claim_status LIKE '%Denied%' OR b.claim_status LIKE '%Pending%' ORDER BY b.total_billed_amount DESC LIMIT 20;"
-    elif "cost by department" in q or "revenue by department" in q or ("department" in q and "cost" in q):
+
+    elif any(w in q for w in ["claim", "claims", "billing", "bill", "bills", "denied", "pending", "copay", "insurance payout"]):
+        return "SELECT b.bill_id, p.patient_name, b.total_billed_amount, b.insurance_paid_amount, b.patient_copay_amount, b.claim_status, b.payment_method FROM medical_billing b JOIN patients p ON b.patient_id = p.patient_id ORDER BY b.total_billed_amount DESC LIMIT 25;"
+
+    elif "cost by department" in q or "revenue by department" in q or ("department" in q and ("cost" in q or "revenue" in q or "budget" in q)):
         return "SELECT d.department, COUNT(a.admission_id) AS total_admissions, ROUND(SUM(a.treatment_cost), 2) AS total_revenue FROM patient_admissions a JOIN doctors d ON a.doctor_id = d.doctor_id GROUP BY d.department ORDER BY total_revenue DESC;"
-    elif "doctor" in q and ("all" in q or "show" in q or "list" in q):
-        return "SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors ORDER BY experience_years DESC;"
-    elif "doctor" in q and ("fee" in q or "expensive" in q or "highest" in q):
-        return "SELECT doctor_name, department, consultation_fee, experience_years FROM doctors ORDER BY consultation_fee DESC LIMIT 5;"
-    elif "patient" in q and ("all" in q or "show" in q or "list" in q):
-        return "SELECT patient_id, patient_name, age, gender, blood_type, city, insurance_provider FROM patients LIMIT 25;"
-    elif "hospital department" in q or "departments" in q:
+
+    elif any(w in q for w in ["hospital department", "departments", "dept", "depts"]):
         return "SELECT dept_id, dept_name, head_of_department, total_beds, annual_operating_budget FROM hospital_departments ORDER BY total_beds DESC;"
+
+    elif any(w in q for w in ["patient", "patients", "demographics", "sick"]) and not any(w in q for w in ["admission", "admitted", "stay", "ward"]):
+        return "SELECT patient_id, patient_name, age, gender, blood_type, city, insurance_provider FROM patients LIMIT 25;"
+
+    elif any(w in q for w in ["admission", "admissions", "admitted", "hospitalized", "stay", "ward", "discharge"]):
+        return "SELECT a.admission_id, p.patient_name, d.doctor_name, a.diagnosis, a.treatment_cost, a.discharge_status FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id JOIN doctors d ON a.doctor_id = d.doctor_id ORDER BY a.admission_id DESC LIMIT 25;"
+
+    elif "expensive treatment" in q or ("highest" in q and "treatment" in q) or ("highest" in q and "cost" in q) or ("most expensive" in q):
+        return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.room_type, a.treatment_cost, d.doctor_name FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id JOIN doctors d ON a.doctor_id = d.doctor_id ORDER BY a.treatment_cost DESC LIMIT 10;"
 
     # ==========================================
     # EDUCATION & ACADEMIC QUERIES
