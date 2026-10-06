@@ -143,45 +143,62 @@ def show_voice_query_page():
     )
 
     # Browser Microphone Recording (Cloud & Local compatible)
-    st.markdown("##### 🎙️ Speak into your Microphone")
-    st.caption("Click the red microphone button below to record your voice from your browser, then click stop:")
-    audio_val = st.audio_input("Record Voice Query", key="browser_mic_input", label_visibility="collapsed")
-    if audio_val is not None:
-        audio_bytes = audio_val.getvalue()
-        audio_hash = hash(audio_bytes)
-        if st.session_state.get("last_recorded_audio_hash") != audio_hash:
-            st.session_state["last_recorded_audio_hash"] = audio_hash
-            os.makedirs("audio", exist_ok=True)
-            with open("audio/audio.wav", "wb") as f:
-                f.write(audio_bytes)
-            st.session_state.raw_audio_path = "audio/audio.wav"
+    if hasattr(st, "audio_input"):
+        st.markdown("##### 🎙️ Record Voice Query (Browser Microphone)")
+        st.caption("Click the microphone button below to record your voice from your browser, then click stop:")
+        audio_val = st.audio_input("Speak your query here", key="browser_mic_input")
+        if audio_val is not None:
+            audio_bytes = audio_val.getvalue()
+            audio_hash = hash(audio_bytes)
+            if st.session_state.get("last_recorded_audio_hash") != audio_hash:
+                st.session_state["last_recorded_audio_hash"] = audio_hash
+                os.makedirs("audio", exist_ok=True)
+                with open("audio/audio.wav", "wb") as f:
+                    f.write(audio_bytes)
+                st.session_state.raw_audio_path = "audio/audio.wav"
 
-            status_box = st.empty()
-            with status_box.container():
-                st.info("🔇 **Cleaning audio & transcribing speech...**")
-            clean_audio = remove_noise(input_file="audio/audio.wav", output_file="audio/clean_audio.wav")
-            st.session_state.clean_audio_path = clean_audio
-            transcribed = speech_to_text(clean_audio)
-
-            if transcribed and transcribed.strip():
-                st.session_state.user_query_text = transcribed.strip()
+                status_box = st.empty()
                 with status_box.container():
-                    st.info(f"🤖 **Interpreting:** \"{transcribed.strip()}\"")
-                _run_pipeline(transcribed.strip(), tts_enabled)
-                st.session_state.trigger_browser_tts = True
-                status_box.empty()
-                st.rerun()
-            else:
-                status_box.warning("⚠️ No speech was detected in your recording. Please try speaking again.")
+                    st.info("🔇 **Cleaning audio & transcribing speech...**")
+                clean_audio = remove_noise(input_file="audio/audio.wav", output_file="audio/clean_audio.wav")
+                st.session_state.clean_audio_path = clean_audio
+                transcribed = speech_to_text(clean_audio)
 
-    col_btn1, col_btn2, col_btn3 = st.columns([2.5, 2, 1])
+                if transcribed and transcribed.strip():
+                    st.session_state.user_query_text = transcribed.strip()
+                    with status_box.container():
+                        st.info(f"🤖 **Interpreting:** \"{transcribed.strip()}\"")
+                    _run_pipeline(transcribed.strip(), tts_enabled)
+                    st.session_state.trigger_browser_tts = True
+                    status_box.empty()
+                    st.rerun()
+                else:
+                    status_box.warning("⚠️ No speech was detected in your recording. Please try speaking again.")
 
-    with col_btn1:
-        record_clicked = st.button("🎙️ Local PC Mic (5s Timer)", use_container_width=True)
-    with col_btn2:
-        run_clicked = st.button("⚡ Run SQL Query", type="primary", use_container_width=True)
-    with col_btn3:
-        clear_clicked = st.button("🔄 Reset", use_container_width=True)
+    # Check if a physical microphone hardware exists on this host
+    has_local_mic = False
+    try:
+        import sounddevice as sd
+        devices = sd.query_devices()
+        has_local_mic = any(d.get('max_input_channels', 0) > 0 for d in devices)
+    except Exception:
+        has_local_mic = False
+
+    record_clicked = False
+    if has_local_mic:
+        col_btn1, col_btn2, col_btn3 = st.columns([2.5, 2, 1])
+        with col_btn1:
+            record_clicked = st.button("🎙️ Local PC Mic (5s Timer)", use_container_width=True)
+        with col_btn2:
+            run_clicked = st.button("⚡ Run SQL Query", type="primary", use_container_width=True)
+        with col_btn3:
+            clear_clicked = st.button("🔄 Reset", use_container_width=True)
+    else:
+        col_btn2, col_btn3 = st.columns([3, 1])
+        with col_btn2:
+            run_clicked = st.button("⚡ Run SQL Query", type="primary", use_container_width=True)
+        with col_btn3:
+            clear_clicked = st.button("🔄 Reset", use_container_width=True)
 
     if clear_clicked:
         st.session_state.user_query_text = ""
