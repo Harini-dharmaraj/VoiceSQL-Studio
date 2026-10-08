@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import altair as alt
 from speech.voice_recorder import record_audio
-from speech.noise_removal import remove_noise
+from speech.noise_removal import remove_noise, is_audio_silent
 from speech.speech_to_text import speech_to_text
 from speech.text_to_speech import summarize_query_for_voice, generate_voice_response, get_browser_tts_html
 from sql_generator.generate_sql import generate_sql
@@ -133,14 +133,20 @@ def show_voice_query_page():
     st.write("")
 
     # ==========================================
-    # QUERY INPUT & ACTION BAR
+    # QUERY INPUT & ACTION BAR (FORM WITH ENTER TO SUBMIT)
     # ==========================================
-    user_input = st.text_area(
-        "Ask in plain English or speak into your microphone:",
-        value=st.session_state.user_query_text,
-        placeholder="E.g., 'Find the top 5 highest paid employees' or 'Show all projects with their budgets'...",
-        height=85,
-    )
+    with st.form(key="query_submission_form", clear_on_submit=False, border=False):
+        col_inp, col_run = st.columns([4.2, 1.2])
+        with col_inp:
+            user_input = st.text_input(
+                "Ask in plain English or speak into your microphone (press Enter ↵ to run):",
+                value=st.session_state.user_query_text,
+                placeholder="E.g., 'Show all the doctors', 'Find patients admitted to ICU'...",
+                label_visibility="visible"
+            )
+        with col_run:
+            st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+            run_clicked = st.form_submit_button("⚡ Run SQL Query", type="primary", use_container_width=True)
 
     # Browser Microphone Recording (Cloud & Local compatible)
     if hasattr(st, "audio_input"):
@@ -158,22 +164,25 @@ def show_voice_query_page():
                 st.session_state.raw_audio_path = "audio/audio.wav"
 
                 status_box = st.empty()
-                with status_box.container():
-                    st.info("🔇 **Cleaning audio & transcribing speech...**")
-                clean_audio = remove_noise(input_file="audio/audio.wav", output_file="audio/clean_audio.wav")
-                st.session_state.clean_audio_path = clean_audio
-                transcribed = speech_to_text(clean_audio)
-
-                if transcribed and transcribed.strip():
-                    clean_text = transcribed.strip().rstrip(".").strip()
-                    st.session_state.user_query_text = clean_text
-                    st.session_state["last_transcribed_speech"] = clean_text
-                    _run_pipeline(clean_text, tts_enabled)
-                    st.session_state.trigger_browser_tts = True
-                    status_box.empty()
-                    st.rerun()
+                if is_audio_silent("audio/audio.wav"):
+                    status_box.warning("⚠️ No audible speech detected. The recording was too faint or silent. Please speak closer to your microphone.")
                 else:
-                    status_box.warning("⚠️ No speech was detected in your recording. Please try speaking clearly again.")
+                    with status_box.container():
+                        st.info("🔇 **Enhancing audio & transcribing speech with Whisper AI...**")
+                    clean_audio = remove_noise(input_file="audio/audio.wav", output_file="audio/clean_audio.wav")
+                    st.session_state.clean_audio_path = clean_audio
+                    transcribed = speech_to_text(clean_audio)
+
+                    if transcribed and transcribed.strip():
+                        clean_text = transcribed.strip().rstrip(".").strip()
+                        st.session_state.user_query_text = clean_text
+                        st.session_state["last_transcribed_speech"] = clean_text
+                        _run_pipeline(clean_text, tts_enabled)
+                        st.session_state.trigger_browser_tts = True
+                        status_box.empty()
+                        st.rerun()
+                    else:
+                        status_box.warning("⚠️ Could not clearly recognize speech. Please speak clearly into your microphone or try the prompt buttons above.")
 
     # Check if a physical microphone hardware exists on this host
     has_local_mic = False
@@ -186,19 +195,13 @@ def show_voice_query_page():
 
     record_clicked = False
     if has_local_mic:
-        col_btn1, col_btn2, col_btn3 = st.columns([2.5, 2, 1])
+        col_btn1, col_btn2 = st.columns([3, 1])
         with col_btn1:
             record_clicked = st.button("🎙️ Local PC Mic (5s Timer)", use_container_width=True)
         with col_btn2:
-            run_clicked = st.button("⚡ Run SQL Query", type="primary", use_container_width=True)
-        with col_btn3:
             clear_clicked = st.button("🔄 Reset", use_container_width=True)
     else:
-        col_btn2, col_btn3 = st.columns([3, 1])
-        with col_btn2:
-            run_clicked = st.button("⚡ Run SQL Query", type="primary", use_container_width=True)
-        with col_btn3:
-            clear_clicked = st.button("🔄 Reset", use_container_width=True)
+        clear_clicked = st.button("🔄 Reset", use_container_width=True)
 
     if clear_clicked:
         st.session_state.user_query_text = ""
@@ -225,27 +228,31 @@ def show_voice_query_page():
             st.session_state.raw_audio_path = "audio/audio.wav"
 
             with status_container.container():
-                st.info("🔇 **[Stage 2/5] Cleaning audio...** Removing background environmental noise via spectral gating.")
+                st.info("🔇 **[Stage 2/5] Enhancing audio...** Normalizing gain and gently removing background noise.")
             clean_audio = remove_noise(input_file="audio/audio.wav", output_file="audio/clean_audio.wav")
             st.session_state.clean_audio_path = clean_audio
 
-            with status_container.container():
-                st.info("🧠 **[Stage 3/5] Transcribing speech...** Running OpenAI Whisper speech recognition.")
-            transcribed = speech_to_text(clean_audio)
-
-            if not transcribed.strip():
-                status_container.empty()
-                st.warning("⚠️ No clear speech was detected. Please speak closer to your microphone and try again.")
+            if is_audio_silent("audio/audio.wav"):
+                status_container.warning("⚠️ Microphone recording was too faint or silent. Please speak closer to your microphone and ensure your microphone input volume is turned up.")
             else:
-                st.session_state.user_query_text = transcribed
                 with status_container.container():
-                    st.info(f"🤖 **[Stage 4/5] Generating SQL...** Interpreting: \"{transcribed}\"")
-                _run_pipeline(transcribed, tts_enabled)
-                with status_container.container():
-                    st.success("✅ **[Stage 5/5] Complete!** Query executed and voice response generated.")
-                st.session_state.trigger_browser_tts = True
-                status_container.empty()
-            st.rerun()
+                    st.info("🧠 **[Stage 3/5] Transcribing speech...** Running OpenAI Whisper English speech recognition.")
+                transcribed = speech_to_text(clean_audio)
+
+                if not transcribed or not transcribed.strip():
+                    status_container.warning("⚠️ No clear speech was recognized. Please speak closer to your microphone and try again.")
+                else:
+                    clean_text = transcribed.strip().rstrip(".").strip()
+                    st.session_state.user_query_text = clean_text
+                    st.session_state["last_transcribed_speech"] = clean_text
+                    with status_container.container():
+                        st.info(f"🤖 **[Stage 4/5] Generating SQL...** Interpreting: \"{clean_text}\"")
+                    _run_pipeline(clean_text, tts_enabled)
+                    with status_container.container():
+                        st.success("✅ **[Stage 5/5] Complete!** Query executed and voice response generated.")
+                    st.session_state.trigger_browser_tts = True
+                    status_container.empty()
+                    st.rerun()
 
         except Exception as e:
             err_str = str(e)
@@ -262,6 +269,7 @@ def show_voice_query_page():
             st.warning("⚠️ Please speak into the microphone or type a question in the box above.")
         else:
             st.session_state.user_query_text = q
+            st.session_state["last_transcribed_speech"] = q
             with st.spinner("🤖 Translating query and fetching results..."):
                 _run_pipeline(q, tts_enabled)
             st.session_state.trigger_browser_tts = True
@@ -275,7 +283,7 @@ def show_voice_query_page():
         <div style="background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 10px 14px; margin: 12px 0; display: flex; align-items: center; gap: 10px;">
             <span style="font-size: 20px;">🗣️</span>
             <div>
-                <span style="font-size: 11px; font-weight: 700; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.05em;">AI Speech Recognition Heard:</span>
+                <span style="font-size: 11px; font-weight: 700; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.05em;">Active Natural Language Query:</span>
                 <div style="font-size: 14.5px; font-weight: 600; color: #1E3A8A;">"{st.session_state['last_transcribed_speech']}"</div>
             </div>
         </div>

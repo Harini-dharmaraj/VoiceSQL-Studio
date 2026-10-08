@@ -13,7 +13,8 @@ DEFAULT_CONFIG = {
     "ai_provider": "Mock",
     "gemini_api_key": "",
     "openai_api_key": "",
-    "recording_duration": 5
+    "recording_duration": 5,
+    "whisper_model": "base.en"
 }
 
 def load_config():

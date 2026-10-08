@@ -173,7 +173,8 @@ def generate_sql_mock(question):
     except Exception:
         pass
 
-    return "SELECT * FROM patient_admissions LIMIT 10;"
+    # Never silently fall back to random patient admissions if query is unrecognized
+    return "SELECT 'I did not recognize that query. Please ask for doctors, patients, ICU admissions, billing, or products.' AS notice;"
 
 def generate_sql_gemini(question, schema_context, api_key):
     """Generate SQL using Google Gemini API (via direct REST API)."""

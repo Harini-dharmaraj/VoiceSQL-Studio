@@ -127,6 +127,16 @@ def show_settings():
     with tab_voice:
         st.subheader("🎙️ Voice Input & Text-to-Speech (TTS)")
         
+        whisper_options = ["base.en", "small.en", "tiny.en", "base", "small"]
+        current_whisper = config.get("whisper_model", "base.en")
+        whisper_idx = whisper_options.index(current_whisper) if current_whisper in whisper_options else 0
+        whisper_model_choice = st.selectbox(
+            "OpenAI Whisper Model (Speech-to-Text)",
+            whisper_options,
+            index=whisper_idx,
+            help="base.en is recommended: specialized for English speech recognition with high speed and low hallucinations."
+        )
+
         recording_duration = st.slider(
             "Voice Recording Duration (seconds)", 
             min_value=3, 
@@ -137,6 +147,7 @@ def show_settings():
 
         st.markdown("<hr style='margin: 15px 0;'>", unsafe_allow_html=True)
         st.subheader("🔊 AI Voice Output (Spoken Results)")
+
 
         tts_enabled = st.checkbox(
             "Enable Spoken Voice Answers (Text-to-Speech)",
@@ -184,6 +195,7 @@ def show_settings():
         config["openai_api_key"] = openai_api_key
         config["recording_duration"] = int(recording_duration)
         config["tts_enabled"] = bool(tts_enabled)
+        config["whisper_model"] = whisper_model_choice
         
         if save_config(config):
             st.success("💾 Settings saved successfully! Page will refresh...")

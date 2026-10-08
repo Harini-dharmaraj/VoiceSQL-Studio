@@ -9,5 +9,6 @@
     "gemini_api_key": "",
     "openai_api_key": "",
     "recording_duration": 5,
-    "tts_enabled": true
+    "tts_enabled": true,
+    "whisper_model": "base.en"
 }

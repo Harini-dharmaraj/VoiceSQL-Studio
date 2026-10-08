@@ -23,6 +23,10 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
         first_err = str(df.iloc[0, 0])
         return f"Query returned an error notice: {first_err[:60]}."
 
+    # Check if table only contains a notice column
+    if "notice" in [c.lower() for c in df.columns]:
+        return str(df.iloc[0, 0])
+
     if row_count == 0:
         return "The query executed successfully, but returned zero matching records."
 
