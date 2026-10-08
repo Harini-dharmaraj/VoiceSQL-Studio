@@ -100,6 +100,8 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
             details.append(f"{row['doctor_name']}")
             if "specialization" in df.columns:
                 details.append(f"specializing in {row['specialization']}")
+            elif "department" in df.columns:
+                details.append(f"in {row['department']}")
             if "consultation_fee" in df.columns:
                 try:
                     details.append(f"consultation fee ${float(row['consultation_fee']):,.0f}")

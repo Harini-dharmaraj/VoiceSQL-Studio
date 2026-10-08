@@ -83,8 +83,36 @@ def generate_sql_mock(question):
     # HEALTHCARE & CLINIC QUERIES (550+ Records EHR)
     # ==========================================
     elif any(w in q for w in ["doctor", "doctors", "physician", "physicians", "specialist", "specialists", "doc", "docs", "daughter", "daughters", "dr."]):
+        # 1. Department filter (e.g. "doctors in cardiology")
+        for dept in ["cardiology", "neurology", "oncology", "pediatrics", "orthopedics", "general surgery", "internal medicine", "emergency", "trauma"]:
+            if dept in q:
+                return f"SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors WHERE LOWER(department) LIKE '%{dept}%' ORDER BY experience_years DESC;"
+
+        # 2. Specific Doctor Name Matching (matches Grey's Anatomy & EHR seeded doctors)
+        known_doctors = [
+            "Owen Hunt", "Cristina Yang", "Preston Burke", "Derek Shepherd",
+            "Amelia Shepherd", "James Wilson", "Allison Cameron", "Shaun Murphy",
+            "Arizona Robbins", "Callie Torres", "Atticus Lincoln", "Meredith Grey",
+            "Miranda Bailey", "John Watson", "Gregory House", "Robert Chase"
+        ]
+        for d_name in known_doctors:
+            parts = d_name.lower().split()
+            if d_name.lower() in q or (len(parts) > 1 and parts[-1] in q and len(parts[-1]) >= 4):
+                return f"SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors WHERE doctor_name LIKE '%{parts[-1]}%';"
+
+        # 3. Dynamic name extraction (e.g., "doctor Dr. Owen Hunt", "doctor John Smith")
+        name_match = re.search(r'(?:doctor|dr\.?)\s+(?:dr\.?\s+)?([A-Za-z]+(?:\s+[A-Za-z]+)?)', question, re.IGNORECASE)
+        if name_match:
+            candidate = name_match.group(1).strip()
+            stop_words = ["details", "detail", "list", "all", "information", "info", "who", "with", "the", "highest", "lowest", "fee", "cost", "salary", "profile", "profiles"]
+            if candidate.lower() not in stop_words and len(candidate) > 2:
+                return f"SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors WHERE doctor_name LIKE '%{candidate}%';"
+
+        # 4. Fee / Cost filtering
         if any(w in q for w in ["fee", "expensive", "highest", "cost", "salary", "charge", "rate"]):
             return "SELECT doctor_name, department, consultation_fee, experience_years FROM doctors ORDER BY consultation_fee DESC LIMIT 5;"
+
+        # 5. Default: return all doctors
         return "SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors ORDER BY experience_years DESC;"
 
     elif "icu" in q or "intensive care" in q:
