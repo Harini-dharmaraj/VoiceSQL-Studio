@@ -142,7 +142,7 @@ def show_voice_query_page():
             user_input = st.text_input(
                 "Ask in plain English or speak into your microphone (press Enter ↵ to run):",
                 value=st.session_state.user_query_text,
-                placeholder="E.g., 'Show all the doctors', 'Find patients admitted to ICU'...",
+                placeholder="E.g., 'Show the movies released on 2008', 'Movies directed by Christopher Nolan', 'Top 5 highest rated movies'...",
                 label_visibility="visible"
             )
         with col_run:

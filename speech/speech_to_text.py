@@ -9,7 +9,8 @@ WHISPER_DOMAIN_PROMPT = (
     "Show all movies, Christopher Nolan, Quentin Tarantino, Steven Spielberg, "
     "highest rated movies, sci-fi movies, box office, budget, actors, directors, "
     "Inception, The Dark Knight, Interstellar, Oppenheimer, streaming platform, "
-    "Netflix, Disney+, rating, genre, reviews, Oscar, SQL query database."
+    "Netflix, Disney+, rating, genre, reviews, Oscar, SQL query database, "
+    "released in 2008, movies released on 2008, released after 2020, 1994, 2010."
 )
 
 KNOWN_HALLUCINATIONS = [
