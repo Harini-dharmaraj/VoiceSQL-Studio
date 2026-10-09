@@ -66,7 +66,33 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
         row = df.iloc[0]
         details = []
 
-        if "product_name" in df.columns:
+        if "title" in df.columns:
+            details.append(f"{row['title']}")
+            if "release_year" in df.columns:
+                details.append(f"({row['release_year']})")
+            if "genre" in df.columns:
+                details.append(f"genre {row['genre']}")
+            if "rating" in df.columns:
+                details.append(f"rated {row['rating']} out of 10")
+            if "box_office_millions" in df.columns:
+                try:
+                    details.append(f"earning ${float(row['box_office_millions']):,.0f} million")
+                except Exception:
+                    pass
+
+        elif "director_name" in df.columns:
+            details.append(f"{row['director_name']}")
+            if "nationality" in df.columns:
+                details.append(f"from {row['nationality']}")
+            if "oscars_won" in df.columns:
+                details.append(f"with {row['oscars_won']} Oscars")
+
+        elif "actor_name" in df.columns:
+            details.append(f"{row['actor_name']}")
+            if "role_name" in df.columns:
+                details.append(f"playing {row['role_name']}")
+
+        elif "product_name" in df.columns:
             details.append(f"{row['product_name']}")
             if "category" in df.columns:
                 details.append(f"in {row['category']}")
@@ -80,60 +106,6 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
             details.append(f"{row['customer_name']}")
             if "city" in df.columns:
                 details.append(f"from {row['city']}")
-            if "total_spent" in df.columns:
-                try:
-                    details.append(f"spending a total of ${float(row['total_spent']):,.0f}")
-                except Exception:
-                    pass
-
-        elif "patient_name" in df.columns:
-            details.append(f"{row['patient_name']}")
-            if "diagnosis" in df.columns:
-                details.append(f"diagnosed with {row['diagnosis']}")
-            if "treatment_cost" in df.columns:
-                try:
-                    details.append(f"treatment cost ${float(row['treatment_cost']):,.0f}")
-                except Exception:
-                    pass
-
-        elif "doctor_name" in df.columns:
-            details.append(f"{row['doctor_name']}")
-            if "specialization" in df.columns:
-                details.append(f"specializing in {row['specialization']}")
-            elif "department" in df.columns:
-                details.append(f"in {row['department']}")
-            if "consultation_fee" in df.columns:
-                try:
-                    details.append(f"consultation fee ${float(row['consultation_fee']):,.0f}")
-                except Exception:
-                    pass
-
-        elif "student_name" in df.columns:
-            details.append(f"{row['student_name']}")
-            if "major" in df.columns:
-                details.append(f"majoring in {row['major']}")
-            if "gpa" in df.columns:
-                details.append(f"with GPA {row['gpa']}")
-
-        elif "first_name" in df.columns and "last_name" in df.columns:
-            details.append(f"{row['first_name']} {row['last_name']}")
-            if "job_title" in df.columns:
-                details.append(f"working as {row['job_title']}")
-            if "salary" in df.columns:
-                try:
-                    details.append(f"with a salary of ${float(row['salary']):,.0f}")
-                except Exception:
-                    pass
-
-        elif "order_id" in df.columns:
-            details.append(f"Order #{row['order_id']}")
-            if "order_status" in df.columns:
-                details.append(f"status is {row['order_status']}")
-            if "order_total" in df.columns:
-                try:
-                    details.append(f"total amount ${float(row['order_total']):,.0f}")
-                except Exception:
-                    pass
 
         if details:
             return f"Found 1 result: {', '.join(details)}."
@@ -144,20 +116,16 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     # 3. Small list (2 to 5 items)
     if 2 <= row_count <= 5:
         names = []
-        if "patient_name" in df.columns:
-            names = [str(r) for r in df["patient_name"].tolist()]
-        elif "doctor_name" in df.columns:
-            names = [str(r) for r in df["doctor_name"].tolist()]
-        elif "student_name" in df.columns:
-            names = [str(r) for r in df["student_name"].tolist()]
-        elif "customer_name" in df.columns:
-            names = [str(r) for r in df["customer_name"].tolist()]
+        if "title" in df.columns:
+            names = [f"{r}" for r in df["title"].tolist()]
+        elif "director_name" in df.columns:
+            names = [str(r) for r in df["director_name"].tolist()]
+        elif "actor_name" in df.columns:
+            names = [str(r) for r in df["actor_name"].tolist()]
         elif "product_name" in df.columns:
             names = [str(r) for r in df["product_name"].tolist()]
-        elif "first_name" in df.columns and "last_name" in df.columns:
-            names = [f"{r['first_name']} {r['last_name']}" for _, r in df.iterrows()]
-        elif "category" in df.columns:
-            names = [str(r) for r in df["category"].tolist()]
+        elif "customer_name" in df.columns:
+            names = [str(r) for r in df["customer_name"].tolist()]
 
         if names:
             if len(names) == 2:
@@ -169,16 +137,14 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
 
     # 4. Larger result sets (> 5 rows)
     item_type = "records"
-    if "admission_id" in df.columns or "diagnosis" in df.columns:
-        item_type = "patient admissions"
-    elif "bill_id" in df.columns or "claim_status" in df.columns:
-        item_type = "medical billing claims"
-    elif "patient_name" in df.columns and "age" in df.columns:
-        item_type = "patient profiles"
-    elif "doctor_name" in df.columns or "license_number" in df.columns:
-        item_type = "physicians"
-    elif "dept_name" in df.columns or "head_of_department" in df.columns:
-        item_type = "hospital departments"
+    if "title" in df.columns or "movie_id" in df.columns:
+        item_type = "movies"
+    elif "director_name" in df.columns:
+        item_type = "directors"
+    elif "actor_name" in df.columns:
+        item_type = "actors"
+    elif "review_score" in df.columns or "review_text" in df.columns:
+        item_type = "movie reviews"
     elif "product_name" in df.columns:
         item_type = "products"
     elif "customer_name" in df.columns:

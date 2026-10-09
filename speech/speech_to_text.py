@@ -4,12 +4,12 @@ import whisper
 import streamlit as st
 from utils.config_manager import load_config
 
-# Domain prompt primes Whisper with relevant database & healthcare/e-commerce vocabulary
+# Domain prompt primes Whisper with relevant IMDb movies, streaming, and database vocabulary
 WHISPER_DOMAIN_PROMPT = (
-    "Show all the doctors, list doctors, show patients, patient admissions, "
-    "ICU admissions, hospital departments, treatment cost, medical billing, "
-    "consultation fee, doctors list, products, orders, customers, employees, "
-    "SQL query database."
+    "Show all movies, Christopher Nolan, Quentin Tarantino, Steven Spielberg, "
+    "highest rated movies, sci-fi movies, box office, budget, actors, directors, "
+    "Inception, The Dark Knight, Interstellar, Oppenheimer, streaming platform, "
+    "Netflix, Disney+, rating, genre, reviews, Oscar, SQL query database."
 )
 
 KNOWN_HALLUCINATIONS = [

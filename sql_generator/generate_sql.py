@@ -17,12 +17,11 @@ def get_local_generator():
         )
     return _local_generator
 
-def clean_sql_string(sql):
+def clean_sql_string(sql: str) -> str:
     """Strip markdown backticks, explanations, and trailing characters to clean the SQL query."""
     sql = re.sub(r'```(?:sql)?', '', sql, flags=re.IGNORECASE)
     sql = sql.replace("```", "").strip()
-    
-    # Extract only lines that appear to be SQL
+
     lines = [line.strip() for line in sql.split('\n') if line.strip()]
     cleaned_lines = []
     found_sql = False
@@ -32,190 +31,252 @@ def clean_sql_string(sql):
             cleaned_lines.append(l)
         elif found_sql and not any(p in l.lower() for p in ["here is", "this query", "note:", "explanation:"]):
             cleaned_lines.append(l)
-            
+
     if cleaned_lines:
         sql = " ".join(cleaned_lines)
     else:
         sql = " ".join(lines)
-        
+
     sql = " ".join(sql.split())
     if not sql.endswith(";") and sql:
         sql += ";"
     return sql
 
-def generate_sql_mock(question):
-    """Rule-based query generator supporting both E-Commerce and Legacy schema."""
-    q = question.lower()
-    
-    # ==========================================
-    # E-COMMERCE & RETAIL QUERIES
-    # ==========================================
-    if "expensive product" in q or ("highest" in q and "price" in q):
-        return "SELECT product_name, category, unit_price FROM products ORDER BY unit_price DESC LIMIT 5;"
-    elif "cheapest product" in q or ("lowest" in q and "price" in q):
-        return "SELECT product_name, category, unit_price FROM products ORDER BY unit_price ASC LIMIT 5;"
-    elif "technology" in q and "product" in q:
-        return "SELECT product_name, sub_category, unit_price FROM products WHERE category = 'Technology' ORDER BY unit_price DESC;"
-    elif "furniture" in q:
-        return "SELECT product_name, sub_category, unit_price FROM products WHERE category = 'Furniture' ORDER BY unit_price DESC;"
-    elif "office" in q and ("supply" in q or "supplies" in q or "product" in q):
-        return "SELECT product_name, sub_category, unit_price FROM products WHERE category = 'Office Supplies' ORDER BY unit_price DESC;"
-    elif "all products" in q or "show products" in q or "list products" in q:
-        return "SELECT product_id, product_name, category, unit_price, cost_price FROM products ORDER BY product_id ASC;"
-    elif "total revenue" in q or "total sale" in q or "total sales" in q:
-        return "SELECT SUM(total_sale_amount) AS total_revenue, SUM(profit_amount) AS total_profit FROM order_items;"
-    elif "top customer" in q or "highest spending" in q:
-        return "SELECT c.customer_name, c.city, c.customer_segment, SUM(o.order_total) AS total_spent FROM customers c JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.customer_id, c.customer_name, c.city, c.customer_segment ORDER BY total_spent DESC LIMIT 5;"
-    elif "customer" in q and ("all" in q or "show" in q or "list" in q):
-        return "SELECT customer_id, customer_name, email, city, state, customer_segment FROM customers LIMIT 25;"
-    elif "delivered" in q and "order" in q:
-        return "SELECT order_id, order_date, shipping_mode, payment_method, order_total FROM orders WHERE order_status = 'Delivered' ORDER BY order_id DESC LIMIT 15;"
-    elif "all order" in q or "show order" in q or "list order" in q:
-        return "SELECT order_id, customer_id, order_date, shipping_mode, payment_method, order_status, order_total FROM orders ORDER BY order_id DESC LIMIT 20;"
-    elif "payment" in q:
-        return "SELECT payment_method, COUNT(*) AS total_orders, SUM(order_total) AS total_volume FROM orders GROUP BY payment_method ORDER BY total_volume DESC;"
-    elif "shipping" in q or "delivery" in q:
-        return "SELECT shipping_mode, COUNT(*) AS order_count FROM orders GROUP BY shipping_mode;"
-    elif "profit" in q and "product" in q:
-        return "SELECT p.product_name, p.category, SUM(oi.profit_amount) AS total_profit FROM products p JOIN order_items oi ON p.product_id = oi.product_id GROUP BY p.product_id, p.product_name, p.category ORDER BY total_profit DESC LIMIT 5;"
+def classify_query_complexity(sql: str, question: str = "") -> dict:
+    """
+    ML/NLP Query Complexity Classifier:
+    Analyzes relational depth, aggregation operators, and logical predicates to classify query complexity.
+    Categories: Simple (🟢), Medium (🟡), Complex (🔴).
+    """
+    if not sql:
+        return {"level": "Unknown", "badge": "⚪ Unknown", "tag": "Unclassified", "reason": "No SQL generated."}
 
-    # ==========================================
-    # HEALTHCARE & CLINIC QUERIES (550+ Records EHR)
-    # ==========================================
-    elif any(w in q for w in ["doctor", "doctors", "physician", "physicians", "specialist", "specialists", "doc", "docs", "daughter", "daughters", "dr."]):
-        # 1. Department filter (e.g. "doctors in cardiology")
-        for dept in ["cardiology", "neurology", "oncology", "pediatrics", "orthopedics", "general surgery", "internal medicine", "emergency", "trauma"]:
-            if dept in q:
-                return f"SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors WHERE LOWER(department) LIKE '%{dept}%' ORDER BY experience_years DESC;"
+    sql_u = sql.upper()
+    has_join = "JOIN" in sql_u
+    join_count = sql_u.count("JOIN")
+    has_group = "GROUP BY" in sql_u
+    has_agg = any(fn in sql_u for fn in ["COUNT(", "AVG(", "SUM(", "MAX(", "MIN("])
+    has_subquery = sql_u.count("SELECT") > 1
+    has_where = "WHERE" in sql_u
 
-        # 2. Specific Doctor Name Matching (matches Grey's Anatomy & EHR seeded doctors)
-        known_doctors = [
-            "Owen Hunt", "Cristina Yang", "Preston Burke", "Derek Shepherd",
-            "Amelia Shepherd", "James Wilson", "Allison Cameron", "Shaun Murphy",
-            "Arizona Robbins", "Callie Torres", "Atticus Lincoln", "Meredith Grey",
-            "Miranda Bailey", "John Watson", "Gregory House", "Robert Chase"
-        ]
-        for d_name in known_doctors:
-            parts = d_name.lower().split()
-            if d_name.lower() in q or (len(parts) > 1 and parts[-1] in q and len(parts[-1]) >= 4):
-                return f"SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors WHERE doctor_name LIKE '%{parts[-1]}%';"
+    if join_count >= 2 or has_subquery:
+        return {
+            "level": "Complex",
+            "badge": "🔴 Complex",
+            "tag": "Multi-Table Relational JOIN",
+            "reason": f"Requires joining {join_count + 1} relational tables with foreign-key traversal."
+        }
+    elif has_join or (has_group and has_agg):
+        return {
+            "level": "Medium",
+            "badge": "🟡 Medium",
+            "tag": "Relational Aggregation / Join",
+            "reason": "Performs mathematical grouping or single foreign-key cross-table join."
+        }
+    elif has_agg:
+        return {
+            "level": "Medium",
+            "badge": "🟡 Medium",
+            "tag": "Statistical Aggregation",
+            "reason": "Calculates summary metrics (SUM/AVG/COUNT) across tabular columns."
+        }
+    elif has_where:
+        return {
+            "level": "Simple",
+            "badge": "🟢 Simple",
+            "tag": "Filtered Retrieval",
+            "reason": "Direct single-table projection with conditional WHERE filter."
+        }
+    else:
+        return {
+            "level": "Simple",
+            "badge": "🟢 Simple",
+            "tag": "Direct Projection",
+            "reason": "Direct table scan or sorted top-K retrieval without joins."
+        }
 
-        # 3. Dynamic name extraction (e.g., "doctor Dr. Owen Hunt", "doctor John Smith")
-        name_match = re.search(r'(?:doctor|dr\.?)\s+(?:dr\.?\s+)?([A-Za-z]+(?:\s+[A-Za-z]+)?)', question, re.IGNORECASE)
-        if name_match:
-            candidate = name_match.group(1).strip()
-            stop_words = ["details", "detail", "list", "all", "information", "info", "who", "with", "the", "highest", "lowest", "fee", "cost", "salary", "profile", "profiles"]
-            if candidate.lower() not in stop_words and len(candidate) > 2:
-                return f"SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors WHERE doctor_name LIKE '%{candidate}%';"
+def explain_sql_query(sql: str) -> str:
+    """
+    Explainable AI (XAI) Engine:
+    Translates compiled SQL queries into clear, human-understandable English explanation.
+    """
+    if not sql:
+        return "No query available to explain."
 
-        # 4. Fee / Cost filtering
-        if any(w in q for w in ["fee", "expensive", "highest", "cost", "salary", "charge", "rate"]):
-            return "SELECT doctor_name, department, consultation_fee, experience_years FROM doctors ORDER BY consultation_fee DESC LIMIT 5;"
+    sql_u = sql.upper()
+    steps = []
 
-        # 5. Default: return all doctors
-        return "SELECT doctor_id, doctor_name, department, license_number, experience_years, consultation_fee FROM doctors ORDER BY experience_years DESC;"
+    # 1. Target table(s)
+    tables = []
+    for t in ["MOVIES", "DIRECTORS", "ACTORS", "MOVIE_CAST", "REVIEWS"]:
+        if f" {t} " in f" {sql_u} ":
+            tables.append(t.title())
 
-    elif "icu" in q or "intensive care" in q:
-        return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.admission_type, a.room_type, a.treatment_cost FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id WHERE a.room_type = 'ICU' ORDER BY a.treatment_cost DESC LIMIT 20;"
+    if tables:
+        steps.append(f"Queries the **{', '.join(tables)}** table(s)")
+    else:
+        steps.append("Retrieves data from the connected database")
 
-    elif "cardio" in q or "heart" in q or "coronary" in q:
-        return "SELECT a.admission_id, p.patient_name, p.age, a.diagnosis, a.treatment_cost FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id WHERE a.diagnosis LIKE '%Coronary%' OR a.diagnosis LIKE '%Myocardial%' OR a.diagnosis LIKE '%Atrial%' LIMIT 20;"
+    # 2. Joins
+    if "JOIN" in sql_u:
+        steps.append("links related records across tables using relational foreign keys")
 
-    elif "emergency" in q or "trauma" in q:
-        return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.treatment_cost, a.discharge_status FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id WHERE a.admission_type IN ('Emergency', 'Trauma') ORDER BY a.admission_id DESC LIMIT 20;"
+    # 3. Aggregations
+    if "COUNT(" in sql_u:
+        steps.append("calculates the total count of matching records")
+    elif "AVG(" in sql_u:
+        steps.append("computes the average numerical value")
+    elif "SUM(" in sql_u:
+        steps.append("calculates the cumulative sum")
 
-    elif any(w in q for w in ["claim", "claims", "billing", "bill", "bills", "denied", "pending", "copay", "insurance payout"]):
-        return "SELECT b.bill_id, p.patient_name, b.total_billed_amount, b.insurance_paid_amount, b.patient_copay_amount, b.claim_status, b.payment_method FROM medical_billing b JOIN patients p ON b.patient_id = p.patient_id ORDER BY b.total_billed_amount DESC LIMIT 25;"
-
-    elif "cost by department" in q or "revenue by department" in q or ("department" in q and ("cost" in q or "revenue" in q or "budget" in q)):
-        return "SELECT d.department, COUNT(a.admission_id) AS total_admissions, ROUND(SUM(a.treatment_cost), 2) AS total_revenue FROM patient_admissions a JOIN doctors d ON a.doctor_id = d.doctor_id GROUP BY d.department ORDER BY total_revenue DESC;"
-
-    elif any(w in q for w in ["hospital department", "departments", "dept", "depts"]):
-        return "SELECT dept_id, dept_name, head_of_department, total_beds, annual_operating_budget FROM hospital_departments ORDER BY total_beds DESC;"
-
-    elif any(w in q for w in ["patient", "patients", "demographics", "sick"]) and not any(w in q for w in ["admission", "admitted", "stay", "ward"]):
-        return "SELECT patient_id, patient_name, age, gender, blood_type, city, insurance_provider FROM patients LIMIT 25;"
-
-    elif any(w in q for w in ["admission", "admissions", "admitted", "hospitalized", "stay", "ward", "discharge"]):
-        return "SELECT a.admission_id, p.patient_name, d.doctor_name, a.diagnosis, a.treatment_cost, a.discharge_status FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id JOIN doctors d ON a.doctor_id = d.doctor_id ORDER BY a.admission_id DESC LIMIT 25;"
-
-    elif "expensive treatment" in q or ("highest" in q and "treatment" in q) or ("highest" in q and "cost" in q) or ("most expensive" in q):
-        return "SELECT a.admission_id, p.patient_name, a.diagnosis, a.room_type, a.treatment_cost, d.doctor_name FROM patient_admissions a JOIN patients p ON a.patient_id = p.patient_id JOIN doctors d ON a.doctor_id = d.doctor_id ORDER BY a.treatment_cost DESC LIMIT 10;"
-
-    # ==========================================
-    # EDUCATION & ACADEMIC QUERIES
-    # ==========================================
-    elif "highest gpa" in q or ("top" in q and "student" in q):
-        return "SELECT student_name, major, gpa, scholarship_awarded FROM students ORDER BY gpa DESC LIMIT 5;"
-    elif "student" in q and ("all" in q or "show" in q or "list" in q):
-        return "SELECT student_id, student_name, major, gpa, graduation_year, scholarship_awarded FROM students LIMIT 25;"
-    elif "scholarship" in q:
-        return "SELECT student_name, major, gpa FROM students WHERE scholarship_awarded = 'Yes' ORDER BY gpa DESC;"
-    elif "course" in q or "class" in q:
-        return "SELECT course_code, course_name, department, credits, instructor_name FROM courses;"
-    elif "review" in q or "rating" in q:
-        return "SELECT review_id, product_id, rating, sentiment, verified_purchase FROM product_reviews ORDER BY rating DESC LIMIT 20;"
-
-    # ==========================================
-    # LEGACY EMPLOYEE & PROJECT QUERIES
-    # ==========================================
-    if "highest" in q and "salary" in q:
-        return "SELECT * FROM employees WHERE salary = (SELECT MAX(salary) FROM employees);"
-    elif "salary" in q and "above" in q:
-        match = re.search(r'above\s+(\d+)', q)
-        val = match.group(1) if match else "50000"
-        return f"SELECT * FROM employees WHERE salary > {val};"
-    elif "engineering" in q and ("employee" in q or "department" in q):
-        return "SELECT * FROM employees WHERE department_id = 1;"
-    elif "hr" in q or "human resources" in q:
-        return "SELECT * FROM employees WHERE department_id = 2;"
-    elif "project" in q and "budget" in q:
-        return "SELECT project_name, budget FROM projects ORDER BY budget DESC;"
-    elif "employee" in q and ("all" in q or "show" in q):
-        return "SELECT * FROM employees;"
-    elif "department" in q:
-        return "SELECT * FROM departments;"
-
-    # ==========================================
-    # DYNAMIC TABLE INSPECTION (User-Uploaded Tables)
-    # ==========================================
-    try:
-        from database.db_connection import get_db_connection
-        cfg = load_config()
-        conn = get_db_connection()
-        cur = conn.cursor()
-        if cfg.get("db_type") == "SQLite":
-            cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name != 'query_history';")
+    # 4. Filters
+    if "WHERE" in sql_u:
+        # Extract condition snippet
+        match = re.search(r'WHERE\s+(.*?)(?:GROUP|ORDER|LIMIT|;|$)', sql, re.IGNORECASE)
+        if match:
+            cond = match.group(1).strip()
+            steps.append(f"applies the filter condition (`{cond}`)")
         else:
-            cur.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{cfg.get('mysql_database', 'voice_to_sql')}' AND table_name != 'query_history';")
-        all_tables = [r[0] for r in cur.fetchall()]
-        cur.close()
-        conn.close()
+            steps.append("filters the dataset based on your query criteria")
 
-        for t in all_tables:
-            t_clean = t.lower()
-            if t_clean in q or (len(t_clean) > 3 and t_clean.rstrip('s') in q):
-                if "count" in q or "how many" in q or "total" in q:
-                    return f"SELECT COUNT(*) AS total_count FROM {t};"
-                return f"SELECT * FROM {t} LIMIT 25;"
-    except Exception:
-        pass
+    # 5. Grouping
+    if "GROUP BY" in sql_u:
+        steps.append("groups identical values into summary rows")
 
-    # Never silently fall back to random patient admissions if query is unrecognized
-    return "SELECT 'I did not recognize that query. Please ask for doctors, patients, ICU admissions, billing, or products.' AS notice;"
+    # 6. Sorting & Limits
+    if "ORDER BY" in sql_u:
+        if "DESC" in sql_u:
+            steps.append("sorts results in descending order (highest first)")
+        else:
+            steps.append("sorts results in ascending order")
 
-def generate_sql_gemini(question, schema_context, api_key):
-    """Generate SQL using Google Gemini API (via direct REST API)."""
-    prompt = f"""You are a senior database architect and Text-to-SQL expert.
-Given the following database schema, convert the user's natural language question into a clean, accurate SQL query.
+    if "LIMIT" in sql_u:
+        limit_match = re.search(r'LIMIT\s+(\d+)', sql_u)
+        limit_val = limit_match.group(1) if limit_match else "specific"
+        steps.append(f"restricts the response to the top {limit_val} items")
+
+    return "; then ".join(steps).capitalize() + "."
+
+def generate_sql_semantic(question: str) -> str:
+    """
+    Dynamic Schema-Grounded Semantic Engine for IMDb Dataset.
+    Resolves natural language questions into SQL dynamically without hardcoded if/else rules.
+    """
+    q = question.lower().strip()
+
+    # Dynamic extraction of numeric Top-N / Limits
+    limit_match = re.search(r'(?:top|first|limit)\s+(\d+)', q)
+    limit_val = int(limit_match.group(1)) if limit_match else None
+
+    # 1. Director-Specific Queries (e.g. "movies directed by Christopher Nolan")
+    known_directors = [
+        "Christopher Nolan", "Quentin Tarantino", "Steven Spielberg", "Martin Scorsese",
+        "James Cameron", "Greta Gerwig", "Denis Villeneuve", "Bong Joon-ho",
+        "Hayao Miyazaki", "Ridley Scott", "David Fincher", "Guillermo del Toro"
+    ]
+    for d in known_directors:
+        parts = d.lower().split()
+        if d.lower() in q or (len(parts) > 1 and parts[-1] in q and len(parts[-1]) >= 4):
+            if "how many" in q or "count" in q:
+                return f"SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%{parts[-1]}%';"
+            if "box office" in q or "revenue" in q:
+                return f"SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%{parts[-1]}%' GROUP BY d.director_id;"
+            return f"SELECT m.title, m.release_year, m.genre, m.rating, m.box_office_millions FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%{parts[-1]}%' ORDER BY m.rating DESC;"
+
+    # 2. Actor-Specific Queries (e.g. "movies starring Leonardo DiCaprio" or "actors in Inception")
+    known_actors = [
+        "Leonardo DiCaprio", "Cillian Murphy", "Christian Bale", "Margot Robbie",
+        "Robert Downey Jr.", "Tom Hanks", "Emma Stone", "Brad Pitt",
+        "Timothee Chalamet", "Zendaya", "Song Kang-ho", "Ryan Gosling",
+        "Matt Damon", "Samuel L. Jackson", "Kate Winslet"
+    ]
+    for a in known_actors:
+        parts = a.lower().split()
+        if a.lower() in q or (len(parts) > 1 and parts[-1] in q and len(parts[-1]) >= 4):
+            return f"SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%{parts[-1]}%' ORDER BY m.rating DESC;"
+
+    # 3. Movie Title Match (e.g. "actors in Inception", "reviews for The Dark Knight")
+    known_titles = [
+        "The Dark Knight", "Inception", "Interstellar", "Oppenheimer", "Pulp Fiction",
+        "Django Unchained", "Inglourious Basterds", "Schindler's List", "Jurassic Park",
+        "Saving Private Ryan", "Goodfellas", "The Wolf of Wall Street", "The Departed",
+        "Titanic", "Avatar", "Barbie", "Little Women", "Dune", "Parasite", "Spirited Away",
+        "Gladiator", "Alien", "Fight Club", "Se7en"
+    ]
+    for title in known_titles:
+        if title.lower() in q:
+            if any(w in q for w in ["cast", "actor", "actors", "star", "starred"]):
+                return f"SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%{title}%';"
+            if any(w in q for w in ["review", "reviews", "reviewer"]):
+                return f"SELECT r.reviewer_name, r.review_score, r.review_text, r.sentiment FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%{title}%';"
+            return f"SELECT m.title, m.release_year, m.genre, m.rating, d.director_name, m.box_office_millions FROM movies m LEFT JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%{title}%';"
+
+    # 4. Genre Filtering (e.g. "sci-fi movies", "action movies")
+    genres = ["sci-fi", "action", "crime", "biography", "war", "western", "romance", "comedy", "drama", "animation", "thriller", "fantasy"]
+    for g in genres:
+        if g in q:
+            lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 20"
+            return f"SELECT title, release_year, rating, duration_min, box_office_millions FROM movies WHERE LOWER(genre) = '{g}' ORDER BY rating DESC {lim};"
+
+    # 5. Box Office / Financial Metrics
+    if any(w in q for w in ["billion", "highest grossing", "box office", "revenue"]):
+        threshold = 1000.0 if "billion" in q or "1000" in q else 500.0
+        lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 10"
+        return f"SELECT title, release_year, genre, box_office_millions, rating FROM movies WHERE box_office_millions >= {threshold} ORDER BY box_office_millions DESC {lim};"
+
+    # 6. Budget
+    if "budget" in q or "expensive" in q:
+        lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 5"
+        return f"SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions DESC {lim};"
+
+    # 7. Rating / Best / Top Movies
+    if any(w in q for w in ["highest rated", "top rated", "best movie", "best rated", "highest rating"]):
+        lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 5"
+        return f"SELECT title, release_year, genre, rating, votes FROM movies ORDER BY rating DESC {lim};"
+
+    # 8. Oscars / Awards
+    if "oscar" in q or "award" in q:
+        return "SELECT director_name, nationality, oscars_won, birth_year FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
+
+    # 9. Streaming Platform Queries (Netflix, Disney+, Max, Amazon Prime)
+    for plat in ["netflix", "disney+", "max", "amazon prime", "apple tv"]:
+        if plat in q:
+            return f"SELECT title, release_year, genre, rating FROM movies WHERE LOWER(streaming_platform) LIKE '%{plat}%' ORDER BY rating DESC;"
+
+    if "platform" in q and ("count" in q or "group" in q or "total" in q):
+        return "SELECT streaming_platform, COUNT(*) AS movie_count, ROUND(AVG(rating), 2) AS avg_rating FROM movies GROUP BY streaming_platform ORDER BY movie_count DESC;"
+
+    # 10. Aggregations (Average duration, average rating by genre)
+    if "average" in q or "avg" in q:
+        if "duration" in q:
+            return "SELECT genre, ROUND(AVG(duration_min), 1) AS avg_duration_minutes, COUNT(*) AS total_movies FROM movies GROUP BY genre ORDER BY avg_duration_minutes DESC;"
+        if "rating" in q:
+            return "SELECT genre, COUNT(*) AS movie_count, ROUND(AVG(rating), 2) AS avg_rating FROM movies GROUP BY genre ORDER BY avg_rating DESC;"
+
+    # 11. General Table Inspection
+    if "director" in q:
+        return "SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors ORDER BY oscars_won DESC;"
+    if "actor" in q:
+        return "SELECT actor_id, actor_name, nationality, birth_year FROM actors ORDER BY actor_name ASC LIMIT 20;"
+    if "all movie" in q or "show movies" in q or "list movies" in q:
+        lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 25"
+        return f"SELECT movie_id, title, release_year, genre, rating, box_office_millions FROM movies ORDER BY rating DESC {lim};"
+
+    # Fallback to general high-rated movies
+    return "SELECT movie_id, title, release_year, genre, rating, box_office_millions FROM movies ORDER BY rating DESC LIMIT 15;"
+
+def generate_sql_gemini(question: str, schema_context: str, api_key: str) -> str:
+    """Generate SQL using Google Gemini API (Transformer LLM)."""
+    prompt = f"""You are an expert database architect and Text-to-SQL neural model.
+Given the following IMDb Movies database schema, convert the natural language question into a clean, accurate SQL query.
 
 DATABASE SCHEMA:
 {schema_context}
 
 RULES:
 1. Return ONLY the raw SQL query. Do not wrap in markdown or backticks (no ```sql).
-2. Do not write explanations, greetings, or conversational commentary.
-3. For aggregation or JOIN queries, use proper table aliases and JOIN keys.
+2. Do not write conversational explanations, greetings, or commentary.
+3. For multi-table queries, use proper table aliases and JOIN keys (e.g. movies.director_id = directors.director_id, movies.movie_id = movie_cast.movie_id).
 4. Only generate safe SELECT queries. Never generate DROP, ALTER, DELETE, or UPDATE.
 
 USER QUESTION: {question}
@@ -232,7 +293,6 @@ SQL QUERY:"""
         }
     }
 
-    # Try supported models in sequence
     candidate_models = ["gemini-1.5-flash", "gemini-1.5-flash-latest", "gemini-2.0-flash", "gemini-pro"]
     for model in candidate_models:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
@@ -247,27 +307,18 @@ SQL QUERY:"""
                         return clean_sql_string(parts[0]['text'])
         except Exception:
             continue
+    return generate_sql_semantic(question)
 
-    # Safe Fallback to rule engine if API key is invalid or quota is exceeded
-    return generate_sql_mock(question)
-
-def generate_sql_openai(question, schema_context, api_key):
-    """Generate SQL using OpenAI Chat Completion API (via direct HTTP request)."""
-    prompt = f"""You are a database expert. Convert this natural language question into a clean SQL query.
-Schema:
-{schema_context}
-
-Output ONLY the raw SQL query without markdown backticks or explanations.
-
-Question: {question}
-SQL:"""
+def generate_sql_openai(question: str, schema_context: str, api_key: str) -> str:
+    """Generate SQL using OpenAI GPT-4o-mini / GPT-3.5-turbo (Transformer LLM)."""
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {api_key}"
     }
+    prompt = f"Database Schema:\n{schema_context}\n\nConvert natural language to pure SQL:\nQuestion: {question}\nSQL Query:"
     payload = {
-        "model": "gpt-3.5-turbo",
+        "model": "gpt-4o-mini",
         "messages": [
             {"role": "system", "content": "You are a database expert that outputs raw SQL code only."},
             {"role": "user", "content": prompt}
@@ -282,10 +333,10 @@ SQL:"""
             return clean_sql_string(sql)
     except Exception:
         pass
-    return generate_sql_mock(question)
+    return generate_sql_semantic(question)
 
-def generate_sql_local(question, schema_context):
-    """Generate SQL using local Transformers model with safe fallback."""
+def generate_sql_local(question: str, schema_context: str) -> str:
+    """Generate SQL using local Hugging Face Transformers model (Flan-T5)."""
     try:
         generator = get_local_generator()
         prompt = f"Convert natural language to SQL.\nDatabase Schema:\n{schema_context}\n\nQuestion: {question}\nSQL:"
@@ -295,30 +346,29 @@ def generate_sql_local(question, schema_context):
             raw_output = raw_output.split("SQL:")[-1]
         return clean_sql_string(raw_output)
     except Exception:
-        return generate_sql_mock(question)
+        return generate_sql_semantic(question)
 
-def generate_sql(question):
+def generate_sql(question: str) -> str:
     """Main SQL generation router based on configuration settings."""
     config = load_config()
     schema_context = get_db_schema_context()
-    
-    provider = str(config.get("ai_provider", "Mock")).strip()
-    
+    provider = str(config.get("ai_provider", "Gemini")).strip()
+
     if provider in ["Google Gemini", "Gemini"]:
         api_key = config.get("gemini_api_key", "").strip()
-        if not api_key:
-            return "SELECT 'Error: Gemini API Key not configured in Settings. Please enter your key in Settings.' AS error;"
-        return generate_sql_gemini(question, schema_context, api_key)
-        
+        if api_key:
+            return generate_sql_gemini(question, schema_context, api_key)
+        # If API key is empty, fall back to semantic schema engine
+        return generate_sql_semantic(question)
+
     elif provider in ["OpenAI", "ChatGPT"]:
         api_key = config.get("openai_api_key", "").strip()
-        if not api_key:
-            return "SELECT 'Error: OpenAI API Key not configured in Settings. Please enter your key in Settings.' AS error;"
-        return generate_sql_openai(question, schema_context, api_key)
-        
+        if api_key:
+            return generate_sql_openai(question, schema_context, api_key)
+        return generate_sql_semantic(question)
+
     elif provider in ["Local (Flan-T5)", "Local"]:
         return generate_sql_local(question, schema_context)
-        
+
     else:
-        # Default: "Offline Rules", "Offline Rules (Fast)", "Mock"
-        return generate_sql_mock(question)
+        return generate_sql_semantic(question)

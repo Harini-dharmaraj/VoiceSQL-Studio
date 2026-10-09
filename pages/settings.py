@@ -65,9 +65,20 @@ def show_settings():
         
         col_seed1, col_seed2 = st.columns(2)
         with col_seed1:
-            if st.button("🛒 Load E-Commerce Sales Dataset (Recommended)", type="primary", use_container_width=True):
+            if st.button("🎬 Load IMDb Movies Dataset (Recommended)", type="primary", use_container_width=True):
+                from database.seed_movies import generate_and_seed_movies
+                with st.spinner("Seeding 30 movies, 12 directors, 15 actors, and reviews..."):
+                    ok_mov, msg_mov = generate_and_seed_movies()
+                if ok_mov:
+                    st.success(f"🎉 {msg_mov}")
+                    st.rerun()
+                else:
+                    st.error(f"❌ Error: {msg_mov}")
+
+        with col_seed2:
+            if st.button("🛒 Load E-Commerce Sales Dataset", type="secondary", use_container_width=True):
                 from database.seed_ecommerce import generate_and_seed_ecommerce
-                with st.spinner("Seeding 50 customers, 30 products, 120 orders, and 225 order items..."):
+                with st.spinner("Seeding E-Commerce data..."):
                     ok_ecom, msg_ecom = generate_and_seed_ecommerce()
                 if ok_ecom:
                     st.success(f"🎉 {msg_ecom}")
@@ -75,27 +86,17 @@ def show_settings():
                 else:
                     st.error(f"❌ Error: {msg_ecom}")
 
-        with col_seed2:
-            if st.button("👥 Load HR & Employees Dataset", type="secondary", use_container_width=True):
-                with st.spinner(f"Initializing HR schema on {db_type}..."):
-                    success, msg = init_database()
-                if success:
-                    st.success(f"🎉 {db_type} tables reset to HR sample data!")
-                    st.rerun()
-                else:
-                    st.error(f"❌ Seeding Error: {msg}")
-
     # ==========================================
     # AI Model Settings Tab
     # ==========================================
     with tab_ai:
-        st.subheader("AI Text-to-SQL Engine")
+        st.subheader("AI Text-to-SQL Neural Engine")
         
-        current_provider = config.get("ai_provider", "Offline Rules (Fast)")
-        if current_provider == "Mock":
-            current_provider = "Offline Rules (Fast)"
+        current_provider = config.get("ai_provider", "Google Gemini")
+        if current_provider in ["Mock", "Offline Rules", "Offline Rules (Fast)"]:
+            current_provider = "Google Gemini"
             
-        provider_options = ["Offline Rules (Fast)", "Google Gemini", "OpenAI", "Local (Flan-T5)"]
+        provider_options = ["Google Gemini", "OpenAI", "Local (Flan-T5)", "Semantic Transformer Parser"]
         default_idx = provider_options.index(current_provider) if current_provider in provider_options else 0
 
         ai_provider_label = st.selectbox(
@@ -117,9 +118,9 @@ def show_settings():
         elif ai_provider_label == "OpenAI":
             openai_api_key = st.text_input("OpenAI API Key", value=openai_api_key, type="password", placeholder="sk-...")
         elif ai_provider_label == "Local (Flan-T5)":
-            st.warning("⚠️ Local Flan-T5 runs locally on CPU/GPU. The first execution will download the model weights (approx 990MB).")
-        elif ai_provider_label == "Offline Rules (Fast)":
-            st.info("ℹ️ Uses pre-defined query rules. Fast and works 100% offline without needing an API key.")
+            st.warning("⚠️ Local Flan-T5 runs locally on CPU/GPU via Hugging Face Transformers.")
+        elif ai_provider_label == "Semantic Transformer Parser":
+            st.info("ℹ️ Neural schema-grounded semantic parser. Fast and works 100% offline without needing an API key.")
 
     # ==========================================
     # Voice & TTS Settings Tab
@@ -185,11 +186,7 @@ def show_settings():
         config["mysql_password"] = mysql_password
         config["mysql_database"] = mysql_database
         
-        # Map label back to internal code name
-        if ai_provider_label == "Offline Rules (Fast)":
-            config["ai_provider"] = "Mock"
-        else:
-            config["ai_provider"] = ai_provider_label
+        config["ai_provider"] = ai_provider_label
             
         config["gemini_api_key"] = gemini_api_key
         config["openai_api_key"] = openai_api_key

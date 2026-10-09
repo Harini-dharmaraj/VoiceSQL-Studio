@@ -38,10 +38,10 @@ def show_database_page():
         else:
             st.markdown("🔴 **Status:** Offline / Disconnected")
     with col3:
-        if st.button("🏥 Seed 550+ Healthcare Data", use_container_width=True, type="primary"):
-            from database.seed_healthcare_500 import generate_and_seed_healthcare_500
-            with st.spinner("Seeding 550+ Hospital EHR records..."):
-                ok, seed_msg = generate_and_seed_healthcare_500()
+        if st.button("🎬 Seed IMDb Movies Data", use_container_width=True, type="primary"):
+            from database.seed_movies import generate_and_seed_movies
+            with st.spinner("Seeding IMDb Movies, Directors, and Actors..."):
+                ok, seed_msg = generate_and_seed_movies()
             if ok:
                 st.success("✅ " + seed_msg)
                 st.rerun()

@@ -33,8 +33,8 @@ from database.db_connection import init_database
 config = load_config()
 if config.get("db_type") == "SQLite" and not os.path.exists("database/demo.db"):
     try:
-        from database.seed_ecommerce import generate_and_seed_ecommerce
-        generate_and_seed_ecommerce()
+        from database.seed_movies import generate_and_seed_movies
+        generate_and_seed_movies()
     except Exception:
         init_database()
 
