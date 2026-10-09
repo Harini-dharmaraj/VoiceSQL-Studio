@@ -437,23 +437,23 @@ def generate_sql(question: str) -> str:
     """Main SQL generation router based on configuration settings."""
     config = load_config()
     schema_context = get_db_schema_context()
-    provider = str(config.get("ai_provider", "Gemini")).strip()
+    provider = str(config.get("ai_provider", "Google Gemini")).strip()
 
-    if provider in ["Google Gemini", "Gemini"]:
-        api_key = config.get("gemini_api_key", "").strip()
-        if api_key:
-            return generate_sql_gemini(question, schema_context, api_key)
-        # If API key is empty, fall back to semantic schema engine
-        return generate_sql_semantic(question)
+    # 1. Google Gemini (State-of-the-art neural Text-to-SQL for arbitrary queries)
+    gemini_key = config.get("gemini_api_key", "").strip()
+    if gemini_key and (provider in ["Google Gemini", "Gemini", "Mock"] or not provider):
+        return generate_sql_gemini(question, schema_context, gemini_key)
+    elif provider in ["Google Gemini", "Gemini"] and gemini_key:
+        return generate_sql_gemini(question, schema_context, gemini_key)
 
-    elif provider in ["OpenAI", "ChatGPT"]:
-        api_key = config.get("openai_api_key", "").strip()
-        if api_key:
-            return generate_sql_openai(question, schema_context, api_key)
-        return generate_sql_semantic(question)
+    # 2. OpenAI GPT
+    openai_key = config.get("openai_api_key", "").strip()
+    if provider in ["OpenAI", "ChatGPT"] and openai_key:
+        return generate_sql_openai(question, schema_context, openai_key)
 
-    elif provider in ["Local (Flan-T5)", "Local"]:
+    # 3. Local Transformers
+    if provider in ["Local (Flan-T5)", "Local"]:
         return generate_sql_local(question, schema_context)
 
-    else:
-        return generate_sql_semantic(question)
+    # 4. Neural Schema-Grounded Semantic Parser (Zero-setup offline engine)
+    return generate_sql_semantic(question)
