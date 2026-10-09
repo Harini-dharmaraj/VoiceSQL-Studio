@@ -271,6 +271,52 @@ def generate_sql_semantic(question: str) -> str:
     if "oscar" in q or "award" in q:
         return "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
 
+    # Nationalities mapping
+    NATIONALITIES = {
+        "american": "American", "america": "American", "usa": "American", "us": "American",
+        "british": "British", "uk": "British", "english": "British", "britain": "British",
+        "irish": "Irish", "ireland": "Irish",
+        "australian": "Australian", "australia": "Australian",
+        "canadian": "Canadian", "canada": "Canadian",
+        "south korean": "South Korean", "korean": "South Korean", "korea": "South Korean",
+        "japanese": "Japanese", "japan": "Japanese",
+        "mexican": "Mexican", "mexico": "Mexican",
+        "french": "French", "france": "French"
+    }
+    found_nat = None
+    for nat_key, nat_val in NATIONALITIES.items():
+        if re.search(r'\b' + re.escape(nat_key) + r'\b', q):
+            found_nat = nat_val
+            break
+
+    # Actor Queries (e.g. "show all American actors", "list British actors", "all actors")
+    if any(w in q for w in ["actor", "actors", "actress", "actresses"]):
+        if not any(title.lower() in q for title in known_titles):
+            if "how many" in q or "count" in q:
+                if found_nat:
+                    return f"SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%';"
+                return "SELECT COUNT(*) AS total_actors FROM actors;"
+            if found_nat:
+                lim = f"LIMIT {limit_val}" if limit_val else ""
+                lim_str = f" {lim}" if lim else ""
+                return f"SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%' ORDER BY actor_name ASC{lim_str};"
+            lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 20"
+            return f"SELECT actor_id, actor_name, nationality, birth_year FROM actors ORDER BY actor_name ASC {lim};"
+
+    # Director Queries (e.g. "American directors", "British directors", "show all directors")
+    if any(w in q for w in ["director", "directors"]):
+        if not any(title.lower() in q for title in known_titles):
+            if "how many" in q or "count" in q:
+                if found_nat:
+                    return f"SELECT COUNT(*) AS total_directors FROM directors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%';"
+                return "SELECT COUNT(*) AS total_directors FROM directors;"
+            if found_nat:
+                lim = f"LIMIT {limit_val}" if limit_val else ""
+                lim_str = f" {lim}" if lim else ""
+                return f"SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%' ORDER BY oscars_won DESC{lim_str};"
+            lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 20"
+            return f"SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors ORDER BY oscars_won DESC {lim};"
+
     # 5. Budget queries
     if "budget" in q or "expensive" in q:
         lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 5"
