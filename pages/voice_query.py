@@ -13,6 +13,7 @@ from database.execute_query import execute_sql_query
 from database.history import log_query
 from utils.config_manager import load_config
 from database.db_connection import get_db_connection
+from sql_generator.semantic_matcher import semantic_vector_engine
 
 def show_voice_query_page():
     config = load_config()
@@ -330,10 +331,11 @@ def show_voice_query_page():
     if "active_sql" in st.session_state and st.session_state.active_sql:
         st.markdown("<hr style='margin: 18px 0;'>", unsafe_allow_html=True)
 
-        tab_grid, tab_chart, tab_sql, tab_eval, tab_audio = st.tabs([
+        tab_grid, tab_chart, tab_sql, tab_vectors, tab_eval, tab_audio = st.tabs([
             "📊 Query Output", 
             "📈 Smart Chart", 
             "💻 Generated SQL & Explainable AI", 
+            "🧠 Semantic Vector Embeddings",
             "🧪 ML Evaluation & Benchmark",
             "🎧 Voice & Audio Inspector"
         ])
@@ -406,7 +408,55 @@ def show_voice_query_page():
             </div>
             """, unsafe_allow_html=True)
 
-        # TAB 4: ML Model Evaluation & Accuracy Benchmark
+        # TAB 4: Semantic Vector Embeddings & Schema Grounding
+        with tab_vectors:
+            st.markdown("##### 🧠 Semantic Vector Representation & Schema Grounding")
+            st.caption("Maps natural language tokens, colloquialisms, and synonyms into continuous dense vector space ($\mathbb{R}^{384}$) using Cosine Similarity.")
+
+            query_text = st.session_state.get("user_query_text", "")
+            matches = semantic_vector_engine.analyze_query_embeddings(query_text)
+            df_emb = semantic_vector_engine.get_embedding_dataframe(query_text)
+
+            top_sim = matches[0]["similarity"] if matches else 0.0
+            top_col = matches[0]["column"] if matches else "N/A"
+            top_conf = matches[0]["confidence_pct"] if matches else 0.0
+
+            col_vec1, col_vec2, col_vec3, col_vec4 = st.columns(4)
+            with col_vec1:
+                st.metric("Vector Space", "384-D Real Space", help="Embedding dimension: continuous dense vector space R^384.")
+            with col_vec2:
+                st.metric("Top Matched Feature", top_col, help="Database column exhibiting maximum cosine similarity.")
+            with col_vec3:
+                st.metric("Cosine Similarity", f"{top_sim:.3f}", help="Normalized dot product: (A . B) / (||A|| * ||B||)")
+            with col_vec4:
+                st.metric("Alignment Confidence", f"{top_conf:.1f}%", help="Semantic confidence score.")
+
+            st.markdown("""
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 10px 14px; margin: 12px 0; font-size: 13px; color: #166534;">
+                📐 <b>Vector Similarity Formula:</b> 
+                <code>Cosine Similarity(u, v) = (u · v) / (||u|| · ||v||)</code>
+                &nbsp;—&nbsp;Measures directional alignment of natural language tokens in continuous semantic space to resolve synonyms without hardcoded heuristics.
+            </div>
+            """, unsafe_allow_html=True)
+
+            if not df_emb.empty:
+                col_chart_vec, col_table_vec = st.columns([1.8, 2.2])
+                with col_chart_vec:
+                    st.markdown("###### 📊 Cosine Similarity Distribution")
+                    vec_chart = alt.Chart(df_emb).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color="#059669").encode(
+                        x=alt.X("Target Column:N", sort="-y", title="Database Column"),
+                        y=alt.Y("Cosine Similarity:Q", scale=alt.Scale(domain=[0, 1.0]), title="Cosine Similarity Score"),
+                        tooltip=["Target Column:N", "Cosine Similarity:Q", "Confidence:N", "Matched Synonym:N"]
+                    ).properties(height=260)
+                    st.altair_chart(vec_chart, use_container_width=True)
+
+                with col_table_vec:
+                    st.markdown("###### 📋 Semantic Entity Alignment Table")
+                    st.dataframe(df_emb, use_container_width=True, hide_index=True)
+            else:
+                st.info("Enter or speak a query to inspect its semantic vector alignment.")
+
+        # TAB 5: ML Model Evaluation & Accuracy Benchmark
         with tab_eval:
             st.markdown("##### 🧪 ML Model Accuracy & Benchmark Evaluation")
             st.caption("Quantitative scientific evaluation measuring Execution Accuracy (EX), Exact Match (EM), and Latency against an IMDb ground-truth benchmark suite.")
@@ -438,7 +488,7 @@ def show_voice_query_page():
             else:
                 st.info("Click **'▶️ Run Live Evaluation Benchmark'** to execute all 15 test cases in real-time.")
 
-        # TAB 5: Voice Inspector
+        # TAB 6: Voice Inspector
         with tab_audio:
             st.markdown("##### Audio Stream Analysis")
             col_a1, col_a2 = st.columns(2)

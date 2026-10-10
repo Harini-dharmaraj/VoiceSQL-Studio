@@ -3,6 +3,7 @@ import requests
 import json
 from utils.config_manager import load_config
 from database.db_connection import get_db_schema_context
+from sql_generator.semantic_matcher import semantic_vector_engine
 
 _local_generator = None
 
@@ -317,22 +318,25 @@ def generate_sql_semantic(question: str) -> str:
             lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 20"
             return f"SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors ORDER BY oscars_won DESC {lim};"
 
-    # 5. Budget queries
-    if "budget" in q or "expensive" in q:
+    # 5. Budget queries (Expensive / Cheap)
+    if "cheap" in q or "low budget" in q:
+        lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 5"
+        return f"SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions ASC {lim};"
+    if any(w in q for w in ["budget", "expensive", "costly", "high budget", "pricey"]):
         lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 5"
         return f"SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions DESC {lim};"
 
-    # 6. Box office queries
-    if any(w in q for w in ["box office", "revenue", "grossing", "made more than", "billion"]):
+    # 6. Box office queries (Revenue / Blockbuster / Grossing)
+    if any(w in q for w in ["box office", "revenue", "grossing", "made more than", "billion", "blockbuster", "commercial success", "earnings", "collection"]):
         num_m = re.search(r'(\d+)', q)
-        threshold = int(num_m.group(1)) if num_m else 1000
+        threshold = int(num_m.group(1)) if num_m else (800 if "blockbuster" in q else 1000)
         lim = f"LIMIT {limit_val}" if limit_val else ""
         lim_str = f" {lim}" if lim else ""
         return f"SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= {threshold} ORDER BY box_office_millions DESC{lim_str};"
 
-    # 7. Duration queries
+    # 7. Duration queries (Runtime / Lengthy / Longest)
     dur_match = re.search(r'(?:duration|runtime|longer than|over)\s*(?:over|more than|above)?\s*(\d+)', q)
-    if "duration" in q or "runtime" in q or "longest" in q or dur_match:
+    if any(w in q for w in ["duration", "runtime", "longest", "lengthy", "running time"]) or dur_match:
         thresh = int(dur_match.group(1)) if dur_match else 160
         lim = f"LIMIT {limit_val}" if limit_val else ""
         lim_str = f" {lim}" if lim else ""
@@ -387,8 +391,8 @@ def generate_sql_semantic(question: str) -> str:
         val = float(rating_match.group(1))
         return f"SELECT title, release_year, genre, rating FROM movies WHERE rating >= {val} ORDER BY rating DESC;"
 
-    # Best / Top Rated
-    if any(w in q for w in ["highest rated", "top rated", "best movie", "best rated", "highest rating", "top"]):
+    # Best / Top Rated / Acclaimed
+    if any(w in q for w in ["highest rated", "top rated", "best movie", "best rated", "highest rating", "top", "acclaimed", "critically acclaimed"]):
         lim = limit_val if limit_val else 5
         return f"SELECT title, release_year, genre, rating FROM movies ORDER BY rating DESC LIMIT {lim};"
 
