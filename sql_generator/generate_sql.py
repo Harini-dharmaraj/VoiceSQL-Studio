@@ -290,33 +290,53 @@ def generate_sql_semantic(question: str) -> str:
             found_nat = nat_val
             break
 
-    # Actor Queries (e.g. "show all American actors", "list British actors", "all actors")
+    # Actor Queries (e.g. "show all American actors", "actors born on the year 1956", "actors born after 1980")
     if any(w in q for w in ["actor", "actors", "actress", "actresses"]):
         if not any(title.lower() in q for title in known_titles):
-            if "how many" in q or "count" in q:
-                if found_nat:
-                    return f"SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%';"
-                return "SELECT COUNT(*) AS total_actors FROM actors;"
+            clauses = []
             if found_nat:
-                lim = f"LIMIT {limit_val}" if limit_val else ""
-                lim_str = f" {lim}" if lim else ""
-                return f"SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%' ORDER BY actor_name ASC{lim_str};"
-            lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 20"
-            return f"SELECT actor_id, actor_name, nationality, birth_year FROM actors ORDER BY actor_name ASC {lim};"
+                clauses.append(f"LOWER(nationality) LIKE '%{found_nat.lower()}%'")
+            if after_match:
+                clauses.append(f"birth_year >= {int(after_match.group(1))}")
+            elif before_match:
+                clauses.append(f"birth_year <= {int(before_match.group(1))}")
+            elif between_match:
+                clauses.append(f"birth_year BETWEEN {int(between_match.group(1))} AND {int(between_match.group(2))}")
+            elif year_found:
+                clauses.append(f"birth_year = {year_found}")
 
-    # Director Queries (e.g. "American directors", "British directors", "show all directors")
+            where_str = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+            if "how many" in q or "count" in q:
+                return f"SELECT COUNT(*) AS total_actors FROM actors{where_str};"
+            lim = f" LIMIT {limit_val}" if limit_val else ("" if clauses else " LIMIT 20")
+            return f"SELECT actor_id, actor_name, nationality, birth_year FROM actors{where_str} ORDER BY birth_year DESC, actor_name ASC{lim};"
+
+    # Director Queries (e.g. "American directors", "directors born in 1970", "directors with more than 2 oscars")
     if any(w in q for w in ["director", "directors"]):
         if not any(title.lower() in q for title in known_titles):
-            if "how many" in q or "count" in q:
-                if found_nat:
-                    return f"SELECT COUNT(*) AS total_directors FROM directors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%';"
-                return "SELECT COUNT(*) AS total_directors FROM directors;"
+            clauses = []
             if found_nat:
-                lim = f"LIMIT {limit_val}" if limit_val else ""
-                lim_str = f" {lim}" if lim else ""
-                return f"SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors WHERE LOWER(nationality) LIKE '%{found_nat.lower()}%' ORDER BY oscars_won DESC{lim_str};"
-            lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 20"
-            return f"SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors ORDER BY oscars_won DESC {lim};"
+                clauses.append(f"LOWER(nationality) LIKE '%{found_nat.lower()}%'")
+            if after_match:
+                clauses.append(f"birth_year >= {int(after_match.group(1))}")
+            elif before_match:
+                clauses.append(f"birth_year <= {int(before_match.group(1))}")
+            elif between_match:
+                clauses.append(f"birth_year BETWEEN {int(between_match.group(1))} AND {int(between_match.group(2))}")
+            elif year_found:
+                clauses.append(f"birth_year = {year_found}")
+
+            oscar_num_match = re.search(r'(?:more than|over|at least|>|>=)\s*(\d+)\s*(?:oscar|award)', q)
+            if oscar_num_match:
+                clauses.append(f"oscars_won >= {int(oscar_num_match.group(1))}")
+            elif "oscar" in q or "award" in q:
+                clauses.append("oscars_won > 0")
+
+            where_str = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+            if "how many" in q or "count" in q:
+                return f"SELECT COUNT(*) AS total_directors FROM directors{where_str};"
+            lim = f" LIMIT {limit_val}" if limit_val else ("" if clauses else " LIMIT 20")
+            return f"SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors{where_str} ORDER BY oscars_won DESC, birth_year DESC{lim};"
 
     # 5. Budget queries (Expensive / Cheap)
     if "cheap" in q or "low budget" in q:
