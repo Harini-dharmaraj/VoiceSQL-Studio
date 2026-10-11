@@ -8,6 +8,28 @@ def show_sidebar():
     ai_provider = config.get("ai_provider", "Offline Rules")
     if ai_provider == "Mock":
         ai_provider = "Offline Rules"
+    
+    gemini_key = config.get("gemini_api_key", "").strip()
+    openai_key = config.get("openai_api_key", "").strip()
+
+    if ai_provider in ["Google Gemini", "Gemini"]:
+        if gemini_key:
+            engine_text = "Google Gemini"
+            engine_color = "#C084FC"
+        else:
+            engine_text = "Offline Rules"
+            engine_color = "#F59E0B"
+    elif ai_provider in ["OpenAI", "ChatGPT"]:
+        if openai_key:
+            engine_text = "OpenAI GPT"
+            engine_color = "#34D399"
+        else:
+            engine_text = "Offline Rules"
+            engine_color = "#F59E0B"
+    else:
+        engine_text = "Offline Rules"
+        engine_color = "#F59E0B"
+
     tts_enabled = config.get("tts_enabled", True)
 
     # Check live DB status
@@ -77,7 +99,7 @@ def show_sidebar():
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
         <span style="color: #64748B;">AI Engine:</span>
-        <span style="color: #C084FC; font-weight: 600;">{ai_provider}</span>
+        <span style="color: {engine_color}; font-weight: 600;">{engine_text}</span>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between;">
         <span style="color: #64748B;">Spoken TTS:</span>

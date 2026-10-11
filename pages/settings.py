@@ -114,7 +114,41 @@ def show_settings():
                 🔑 <b>Get your free API Key:</b> Visit <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #2563EB; font-weight: 700; text-decoration: underline;">Google AI Studio</a>, click <i>"Create API Key"</i>, and paste it below. (Free tier, no credit card required).
             </div>
             """, unsafe_allow_html=True)
-            gemini_api_key = st.text_input("Google Gemini API Key", value=gemini_api_key, type="password", placeholder="AIzaSy...")
+            col_k, col_t = st.columns([3, 1])
+            with col_k:
+                gemini_api_key = st.text_input("Google Gemini API Key", value=gemini_api_key, type="password", placeholder="AIzaSy...")
+            with col_t:
+                st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+                test_gemini = st.button("🔌 Test Key", use_container_width=True)
+
+            if test_gemini:
+                if not gemini_api_key.strip():
+                    st.warning("⚠️ Please paste your Gemini API Key first.")
+                else:
+                    with st.spinner("Testing connection to Google Gemini API..."):
+                        import requests
+                        from sql_generator.generate_sql import get_gemini_models
+                        candidates = get_gemini_models(gemini_api_key.strip())
+                        success = False
+                        err_msg = ""
+                        for m in candidates:
+                            test_url = f"https://generativelanguage.googleapis.com/v1beta/models/{m}:generateContent?key={gemini_api_key.strip()}"
+                            test_payload = {"contents": [{"parts": [{"text": "Translate to SQL: count movies"}]}]}
+                            try:
+                                resp = requests.post(test_url, json=test_payload, timeout=8)
+                                if resp.status_code == 200:
+                                    st.session_state["gemini_working_model"] = m
+                                    st.session_state["active_llm_model"] = f"Gemini ({m})"
+                                    st.session_state.pop("llm_warning", None)
+                                    st.success(f"✅ Google Gemini Connected Successfully! Active Model: `{m}`")
+                                    success = True
+                                    break
+                                else:
+                                    err_msg = f"HTTP {resp.status_code}: {resp.text[:140]}"
+                            except Exception as e:
+                                err_msg = str(e)
+                        if not success:
+                            st.error(f"❌ Gemini Connection Failed: {err_msg}")
         elif ai_provider_label == "OpenAI":
             openai_api_key = st.text_input("OpenAI API Key", value=openai_api_key, type="password", placeholder="sk-...")
         elif ai_provider_label == "Local (Flan-T5)":

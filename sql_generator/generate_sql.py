@@ -691,6 +691,36 @@ def generate_sql_semantic(question: str) -> str:
     lim = f"LIMIT {limit_val}" if limit_val else "LIMIT 15"
     return f"SELECT movie_id, title, release_year, genre, rating, box_office_millions FROM movies ORDER BY rating DESC {lim};"
 
+def get_gemini_models(api_key: str) -> list:
+    """Fetch active models from Google AI Studio for this key, prioritizing fast flash models."""
+    default_candidates = [
+        "gemini-2.5-flash",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash",
+        "gemini-1.5-flash-latest",
+        "gemini-1.5-pro",
+        "gemini-1.5-pro-latest"
+    ]
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
+        res = requests.get(url, timeout=4)
+        if res.status_code == 200:
+            models_data = res.json().get("models", [])
+            valid_models = []
+            for m in models_data:
+                name = m.get("name", "").replace("models/", "")
+                methods = m.get("supportedGenerationMethods", [])
+                if "generateContent" in methods and "gemini" in name.lower() and not name.endswith("-vision"):
+                    valid_models.append(name)
+            if valid_models:
+                flash_models = [m for m in valid_models if "flash" in m]
+                pro_models = [m for m in valid_models if "pro" in m]
+                others = [m for m in valid_models if m not in flash_models and m not in pro_models]
+                return flash_models + pro_models + others
+    except Exception:
+        pass
+    return default_candidates
+
 def generate_sql_gemini(question: str, schema_context: str, api_key: str) -> str:
     """Generate SQL using Google Gemini API (Transformer LLM)."""
     prompt = f"""You are an expert database architect and Text-to-SQL neural model.
@@ -721,7 +751,20 @@ SQL QUERY:"""
         }
     }
 
-    candidate_models = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro", "gemini-pro"]
+    # Retrieve cached working model if available
+    cached_model = None
+    try:
+        import streamlit as st
+        cached_model = st.session_state.get("gemini_working_model")
+    except Exception:
+        pass
+
+    candidate_models = [cached_model] if cached_model else []
+    discovered_models = get_gemini_models(api_key)
+    for m in discovered_models:
+        if m and m not in candidate_models:
+            candidate_models.append(m)
+
     last_err = None
     for model in candidate_models:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
@@ -736,6 +779,7 @@ SQL QUERY:"""
                         try:
                             import streamlit as st
                             st.session_state["active_llm_model"] = f"Gemini ({model})"
+                            st.session_state["gemini_working_model"] = model
                             st.session_state.pop("llm_warning", None)
                         except Exception:
                             pass
