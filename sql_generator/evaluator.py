@@ -108,6 +108,48 @@ IMDB_BENCHMARK_TESTS = [
         "category": "Foreign Key Join",
         "complexity": "Medium",
         "ground_truth_sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+    },
+    {
+        "id": 16,
+        "question": "which picture collected more",
+        "category": "Local English / Financials",
+        "complexity": "Simple",
+        "ground_truth_sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 5;"
+    },
+    {
+        "id": 17,
+        "question": "who is the hero of Inception",
+        "category": "Local English / Multi-table Cast",
+        "complexity": "Complex",
+        "ground_truth_sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+    },
+    {
+        "id": 18,
+        "question": "who is the directer of Oppenheimer",
+        "category": "Local English / Director Join",
+        "complexity": "Medium",
+        "ground_truth_sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Oppenheimer%';"
+    },
+    {
+        "id": 19,
+        "question": "what is the public talk of Inception",
+        "category": "Local English / Reviews Join",
+        "complexity": "Medium",
+        "ground_truth_sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+    },
+    {
+        "id": 20,
+        "question": "movies in netflix ott",
+        "category": "Local English / Platform Filter",
+        "complexity": "Simple",
+        "ground_truth_sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+    },
+    {
+        "id": 21,
+        "question": "show the directors who won 2 oscars",
+        "category": "Relational Filter / Exact Count",
+        "complexity": "Simple",
+        "ground_truth_sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 2 ORDER BY oscars_won DESC;"
     }
 ]
 

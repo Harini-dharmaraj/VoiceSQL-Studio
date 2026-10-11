@@ -7,3 +7,4 @@ noisereduce>=3.0.0
 sounddevice>=0.4.6
 openai-whisper
 mysql-connector-python>=8.0.0
+openpyxl>=3.1.0

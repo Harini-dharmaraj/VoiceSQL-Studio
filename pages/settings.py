@@ -118,7 +118,22 @@ def show_settings():
         elif ai_provider_label == "OpenAI":
             openai_api_key = st.text_input("OpenAI API Key", value=openai_api_key, type="password", placeholder="sk-...")
         elif ai_provider_label == "Local (Flan-T5)":
-            st.warning("⚠️ Local Flan-T5 runs locally on CPU/GPU via Hugging Face Transformers.")
+            if os.path.isdir("saved_model") and os.path.exists(os.path.join("saved_model", "config.json")):
+                st.success("🟢 **Custom Fine-Tuned Model Active**: Trained weights loaded from `saved_model/`.")
+            else:
+                st.info("ℹ️ **Local Base Model Mode**: Base `google/flan-t5-small` active. You can train your custom fine-tuned model anytime by running `python training/train_sql_model.py`.")
+            if st.button("🚀 Re-Train Model (690+ Movie & Local English Pairs)"):
+                with st.spinner("Training model with local English dataset..."):
+                    try:
+                        import subprocess
+                        res = subprocess.run([r".\venv\Scripts\python.exe", "training/train_sql_model.py"], capture_output=True, text=True, timeout=300)
+                        if res.returncode == 0:
+                            st.success("✅ Model training complete and saved to `saved_model/`!")
+                            st.rerun()
+                        else:
+                            st.error(f"❌ Training error: {res.stderr[:300]}")
+                    except Exception as e:
+                        st.error(f"❌ Execution error: {e}")
         elif ai_provider_label == "Semantic Transformer Parser":
             st.info("ℹ️ Neural schema-grounded semantic parser. Fast and works 100% offline without needing an API key.")
 
@@ -188,11 +203,16 @@ def show_settings():
         
         config["ai_provider"] = ai_provider_label
             
-        config["gemini_api_key"] = gemini_api_key
-        config["openai_api_key"] = openai_api_key
+        config["gemini_api_key"] = gemini_api_key.strip()
+        config["openai_api_key"] = openai_api_key.strip()
         config["recording_duration"] = int(recording_duration)
         config["tts_enabled"] = bool(tts_enabled)
         config["whisper_model"] = whisper_model_choice
+
+        # Persist across ephemeral Cloud containers
+        st.session_state["gemini_api_key"] = gemini_api_key.strip()
+        st.session_state["openai_api_key"] = openai_api_key.strip()
+        st.session_state["ai_provider"] = ai_provider_label
         
         if save_config(config):
             st.success("💾 Settings saved successfully! Page will refresh...")

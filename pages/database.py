@@ -115,46 +115,212 @@ def show_database_page():
             st.dataframe(schema_df, use_container_width=True, hide_index=True)
 
     # ========================================================
-    # TAB 2: UPLOAD CUSTOM DATASET (CSV)
+    # TAB 2: UPLOAD & INSERT CUSTOM DATASETS
     # ========================================================
     with tab_upload:
-        st.subheader("📤 Add Your Own Dataset")
-        st.caption("Upload any CSV file to instantly create a new database table and query it using your voice.")
+        st.subheader("📤 Insert & Manage Your Own Data")
+        st.caption("Upload your own CSV or Excel spreadsheets, seed instant business datasets, or build custom tables to query them with your voice in Voice Studio.")
 
-        uploaded_file = st.file_uploader("Choose a CSV file to import into the database:", type=["csv"])
+        upload_mode = st.radio(
+            "Choose How You Want to Add Your Data:",
+            ["📁 Upload File (CSV or Excel)", "⚡ 1-Click Instant Datasets", "✏️ Interactive Table Builder"],
+            horizontal=True
+        )
 
-        if uploaded_file is not None:
-            try:
-                df_upload = pd.read_csv(uploaded_file)
-                default_name = os.path.splitext(uploaded_file.name)[0].lower().replace(" ", "_").replace("-", "_")
+        # ----------------------------------------------------
+        # OPTION 1: FILE UPLOADER (CSV & EXCEL)
+        # ----------------------------------------------------
+        if upload_mode == "📁 Upload File (CSV or Excel)":
+            st.markdown("##### 📁 Upload CSV or Excel Spreadsheet")
+            uploaded_file = st.file_uploader(
+                "Choose a CSV or Excel file (.csv, .xlsx, .xls) to import into the database:",
+                type=["csv", "xlsx", "xls"],
+                help="Your file will be converted into a queryable SQL table instantly."
+            )
 
-                st.write(f"📊 **File Preview:** `{uploaded_file.name}` ({len(df_upload)} rows, {len(df_upload.columns)} columns)")
-                st.dataframe(df_upload.head(5), use_container_width=True)
+            if uploaded_file is not None:
+                try:
+                    fname = uploaded_file.name.lower()
+                    if fname.endswith(".csv"):
+                        df_upload = pd.read_csv(uploaded_file)
+                    else:
+                        df_upload = pd.read_excel(uploaded_file)
 
-                col_name, col_import = st.columns([2, 1])
-                with col_name:
-                    custom_table_name = st.text_input("Database Table Name:", value=default_name)
-                with col_import:
-                    st.write("")
-                    st.write("")
-                    import_clicked = st.button("🚀 Import as New Table", type="primary", use_container_width=True)
+                    default_name = os.path.splitext(uploaded_file.name)[0].lower().replace(" ", "_").replace("-", "_")
 
-                if import_clicked:
-                    table_clean = custom_table_name.strip().lower().replace(" ", "_")
+                    st.write(f"📊 **File Preview:** `{uploaded_file.name}` ({len(df_upload)} records, {len(df_upload.columns)} columns)")
+                    st.dataframe(df_upload.head(6), use_container_width=True)
+
+                    col_name, col_import = st.columns([2, 1])
+                    with col_name:
+                        custom_table_name = st.text_input("Database Table Name:", value=default_name)
+                    with col_import:
+                        st.write("")
+                        st.write("")
+                        import_clicked = st.button("🚀 Import Table into Database", type="primary", use_container_width=True)
+
+                    if import_clicked:
+                        table_clean = custom_table_name.strip().lower().replace(" ", "_")
+                        if not table_clean:
+                            st.warning("Please provide a valid table name.")
+                        else:
+                            with st.spinner(f"Creating table `{table_clean}` and importing {len(df_upload)} records..."):
+                                success_imp, err_imp = _import_df_to_database(df_upload, table_clean, config)
+                            if success_imp:
+                                st.success(f"🎉 Successfully created table `{table_clean}` with {len(df_upload)} records!")
+                                st.markdown(f"""
+                                <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 8px; padding: 12px 16px; margin: 12px 0;">
+                                    <b>🎙️ Ready for Voice Studio!</b> Try asking with your voice or typing:
+                                    <ul>
+                                        <li><i>"Show all records from {table_clean}"</i></li>
+                                        <li><i>"How many {table_clean} are there?"</i></li>
+                                        <li><i>"Show top 5 {table_clean}"</i></li>
+                                    </ul>
+                                </div>
+                                """, unsafe_allow_html=True)
+                                st.rerun()
+                            else:
+                                st.error(f"❌ Import failed: {err_imp}")
+
+                except Exception as ex:
+                    st.error(f"❌ Failed to parse uploaded file: {ex}")
+
+        # ----------------------------------------------------
+        # OPTION 2: 1-CLICK INSTANT DATASETS
+        # ----------------------------------------------------
+        elif upload_mode == "⚡ 1-Click Instant Datasets":
+            st.markdown("##### ⚡ Instant Ready-to-Use Business Datasets")
+            st.write("Visitors can test the Voice Studio on various industry datasets with a single click:")
+
+            col_ds1, col_ds2 = st.columns(2)
+            with col_ds1:
+                st.markdown("""
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-bottom: 12px;">
+                    <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">🎬 IMDb Movies & Streaming</div>
+                    <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;">
+                        30 blockbuster movies, 12 award-winning directors, 15 top actors, cast junctions, and critic reviews.
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                if st.button("🎬 Load IMDb Movies Dataset", use_container_width=True, type="primary"):
+                    from database.seed_movies import generate_and_seed_movies
+                    with st.spinner("Seeding IMDb Movies, Directors, and Reviews..."):
+                        ok, seed_msg = generate_and_seed_movies()
+                    if ok:
+                        st.success("✅ " + seed_msg)
+                        st.rerun()
+                    else:
+                        st.error(f"❌ {seed_msg}")
+
+                st.markdown("""
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-top: 14px; margin-bottom: 4px;">
+                    <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">🛒 E-Commerce & Retail</div>
+                    <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;">
+                        Customers, product catalogs, customer orders, and sales revenue items.
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                if st.button("🛒 Load E-Commerce Sales Dataset", use_container_width=True):
+                    from database.seed_ecommerce import generate_and_seed_ecommerce
+                    with st.spinner("Seeding E-Commerce data..."):
+                        ok_ecom, msg_ecom = generate_and_seed_ecommerce()
+                    if ok_ecom:
+                        st.success(f"✅ {msg_ecom}")
+                        st.rerun()
+                    else:
+                        st.error(f"❌ {msg_ecom}")
+
+            with col_ds2:
+                st.markdown("""
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-bottom: 4px;">
+                    <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">🏥 Healthcare & Patients</div>
+                    <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;">
+                        Doctors, patient demographics, clinical diagnoses, and billing admissions.
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                if st.button("🏥 Load Healthcare & Hospital Dataset", use_container_width=True):
+                    from database.seed_healthcare_500 import generate_and_seed_healthcare
+                    with st.spinner("Seeding Healthcare data..."):
+                        ok_hc, msg_hc = generate_and_seed_healthcare()
+                    if ok_hc:
+                        st.success(f"✅ {msg_hc}")
+                        st.rerun()
+                    else:
+                        st.error(f"❌ {msg_hc}")
+
+                st.markdown("""
+                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-top: 14px; margin-bottom: 4px;">
+                    <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">🎓 University & Students</div>
+                    <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;">
+                        Student records, course enrollments, grade point averages, and majors.
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                if st.button("🎓 Load University Education Dataset", use_container_width=True):
+                    # Check if datasets/students.csv exists
+                    if os.path.exists("datasets/students.csv"):
+                        df_st = pd.read_csv("datasets/students.csv")
+                        _import_df_to_database(df_st, "students", config)
+                        if os.path.exists("datasets/courses.csv"):
+                            df_co = pd.read_csv("datasets/courses.csv")
+                            _import_df_to_database(df_co, "courses", config)
+                        st.success("✅ University students and courses loaded successfully!")
+                        st.rerun()
+                    else:
+                        st.info("Creating students dataset...")
+                        df_sample_st = pd.DataFrame([
+                            {"student_id": 1, "student_name": "Alice Chen", "major": "Computer Science", "gpa": 3.9, "graduation_year": 2025},
+                            {"student_id": 2, "student_name": "Bob Miller", "major": "Data Science", "gpa": 3.5, "graduation_year": 2026},
+                            {"student_id": 3, "student_name": "Charlie Davis", "major": "Cybersecurity", "gpa": 3.8, "graduation_year": 2025},
+                            {"student_id": 4, "student_name": "Diana Prince", "major": "Artificial Intelligence", "gpa": 4.0, "graduation_year": 2024},
+                            {"student_id": 5, "student_name": "Ethan Hunt", "major": "Software Engineering", "gpa": 3.2, "graduation_year": 2027}
+                        ])
+                        _import_df_to_database(df_sample_st, "students", config)
+                        st.success("✅ University students dataset created successfully!")
+                        st.rerun()
+
+        # ----------------------------------------------------
+        # OPTION 3: INTERACTIVE TABLE BUILDER
+        # ----------------------------------------------------
+        elif upload_mode == "✏️ Interactive Table Builder":
+            st.markdown("##### ✏️ Create Custom Table In-Browser")
+            st.caption("Design your own schema and enter records directly without uploading files.")
+
+            col_tb_name, col_tb_rows = st.columns([2, 1])
+            with col_tb_name:
+                builder_table_name = st.text_input("New Table Name:", value="custom_data")
+            with col_tb_rows:
+                num_init_rows = st.number_input("Number of Initial Rows:", min_value=1, max_value=20, value=3)
+
+            col_names_input = st.text_input(
+                "Column Names (comma separated):",
+                value="item_name, category, price, quantity",
+                help="Specify the column names you want in your table."
+            )
+
+            raw_cols = [c.strip().replace(" ", "_") for c in col_names_input.split(",") if c.strip()]
+            if raw_cols:
+                # Default starter data grid
+                template_data = {c: [f"Sample {i+1}" if "name" in c or "cat" in c else (i + 1) * 10 for i in range(int(num_init_rows))] for c in raw_cols}
+                df_template = pd.DataFrame(template_data)
+
+                st.markdown("**Enter or Edit Table Rows:**")
+                edited_df = st.data_editor(df_template, use_container_width=True, num_rows="dynamic")
+
+                if st.button("💾 Save & Create Table", type="primary", use_container_width=True):
+                    table_clean = builder_table_name.strip().lower().replace(" ", "_")
                     if not table_clean:
                         st.warning("Please provide a valid table name.")
                     else:
-                        with st.spinner(f"Creating table `{table_clean}` and importing {len(df_upload)} records..."):
-                            success_imp, err_imp = _import_df_to_database(df_upload, table_clean, config)
-                        if success_imp:
-                            st.success(f"🎉 Successfully created table `{table_clean}` with {len(df_upload)} records!")
+                        with st.spinner(f"Creating table `{table_clean}`..."):
+                            success_bld, err_bld = _import_df_to_database(edited_df, table_clean, config)
+                        if success_bld:
+                            st.success(f"🎉 Created table `{table_clean}` with {len(edited_df)} records!")
                             st.info("💡 You can now speak in the **Voice Studio** to query this data!")
                             st.rerun()
                         else:
-                            st.error(f"❌ Import failed: {err_imp}")
-
-            except Exception as ex:
-                st.error(f"❌ Failed to parse CSV: {ex}")
+                            st.error(f"❌ Error creating table: {err_bld}")
 
 
 def _get_all_tables(config):

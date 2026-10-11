@@ -6,11 +6,12 @@ from utils.config_manager import load_config
 
 # Domain prompt primes Whisper with relevant IMDb movies, streaming, and database vocabulary
 WHISPER_DOMAIN_PROMPT = (
-    "Show all movies, Christopher Nolan, Quentin Tarantino, Steven Spielberg, "
-    "highest rated movies, sci-fi movies, box office, budget, actors, directors, "
-    "Inception, The Dark Knight, Interstellar, Oppenheimer, streaming platform, "
-    "Netflix, Disney+, rating, genre, reviews, Oscar, SQL query database, "
-    "released in 2008, movies released on 2008, released after 2020, 1994, 2010."
+    "Show all movies, cinema, picture, film, actors, hero, heroine, cast, director, "
+    "Christopher Nolan, Quentin Tarantino, Steven Spielberg, Cillian Murphy, Leonardo DiCaprio, "
+    "highest rated movies, sci-fi movies, box office, collection, budget, rating, reviews, "
+    "Inception, The Dark Knight, Interstellar, Oppenheimer, streaming platform, OTT, "
+    "Netflix, Disney+, rating, genre, reviews, Oscar awards, "
+    "released in 2008, movies released on 2008, released after 2020, 1994, 2010, born in 1956, born in 1974."
 )
 
 KNOWN_HALLUCINATIONS = [
@@ -62,12 +63,22 @@ def speech_to_text(audio_file: str) -> str:
         except Exception:
             model = get_whisper_model("base")
 
+    dynamic_prompt = WHISPER_DOMAIN_PROMPT
+    try:
+        from sql_generator.generate_sql import get_active_tables_info
+        tables_meta = get_active_tables_info()
+        tbl_names = list(tables_meta.keys())
+        if tbl_names:
+            dynamic_prompt += ", " + ", ".join(tbl_names)
+    except Exception:
+        pass
+
     try:
         result = model.transcribe(
             audio_file,
             language="en",
             temperature=0.0,
-            initial_prompt=WHISPER_DOMAIN_PROMPT,
+            initial_prompt=dynamic_prompt,
             condition_on_previous_text=False,
             no_speech_threshold=0.6,
             fp16=False,

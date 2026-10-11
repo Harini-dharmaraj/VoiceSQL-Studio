@@ -92,6 +92,14 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
             if "role_name" in df.columns:
                 details.append(f"playing {row['role_name']}")
 
+        elif "reviewer_name" in df.columns:
+            details.append(f"Review by {row['reviewer_name']}")
+            if "review_score" in df.columns:
+                details.append(f"score {row['review_score']} out of 10")
+            if "review_text" in df.columns:
+                clean_txt = str(row['review_text'])[:60]
+                details.append(f"saying: {clean_txt}")
+
         elif "product_name" in df.columns:
             details.append(f"{row['product_name']}")
             if "category" in df.columns:

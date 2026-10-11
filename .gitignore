@@ -22,3 +22,6 @@ audio/*.mp3
 .idea/
 .DS_Store
 Thumbs.db
+
+# Large Model Checkpoints
+saved_model/

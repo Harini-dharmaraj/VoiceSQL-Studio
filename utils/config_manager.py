@@ -28,9 +28,16 @@ def load_config():
         except Exception as e:
             print(f"Error reading config: {e}")
 
-    # Check Streamlit Cloud secrets if available
+    # Check Streamlit Cloud secrets and session_state if available
     try:
         import streamlit as st
+        if hasattr(st, "session_state"):
+            if "gemini_api_key" in st.session_state and st.session_state["gemini_api_key"]:
+                config["gemini_api_key"] = str(st.session_state["gemini_api_key"]).strip()
+                config["ai_provider"] = "Google Gemini"
+            if "ai_provider" in st.session_state and st.session_state["ai_provider"]:
+                config["ai_provider"] = str(st.session_state["ai_provider"]).strip()
+
         if hasattr(st, "secrets"):
             if "GEMINI_API_KEY" in st.secrets and not config.get("gemini_api_key"):
                 config["gemini_api_key"] = str(st.secrets["GEMINI_API_KEY"]).strip()

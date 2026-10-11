@@ -1,0 +1,2806 @@
+[
+  {
+    "question": "Show the actors who were born on the year 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "Which actors were born in 1956?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "Actors born in 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "Find actors whose birth year is 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "actors born on 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "hero born in 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "who are the heroes born on 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "actor list with dob 1956",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1956;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "Which actors were born in 1963?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "Actors born in 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "Find actors whose birth year is 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "actors born on 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "hero born in 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "who are the heroes born on 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "actor list with dob 1963",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1963;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "Which actors were born in 1965?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "Actors born in 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "Find actors whose birth year is 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "actors born on 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "hero born in 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "who are the heroes born on 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "actor list with dob 1965",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1965;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "Which actors were born in 1970?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "Actors born in 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "Find actors whose birth year is 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "actors born on 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "hero born in 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "who are the heroes born on 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "actor list with dob 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1970;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "Which actors were born in 1974?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "Actors born in 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "Find actors whose birth year is 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "actors born on 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "hero born in 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "who are the heroes born on 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "actor list with dob 1974",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1974;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "Which actors were born in 1976?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "Actors born in 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "Find actors whose birth year is 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "actors born on 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "hero born in 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "who are the heroes born on 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "actor list with dob 1976",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1976;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "Which actors were born in 1980?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "Actors born in 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "Find actors whose birth year is 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "actors born on 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "hero born in 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "who are the heroes born on 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "actor list with dob 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1980;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "Which actors were born in 1988?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "Actors born in 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "Find actors whose birth year is 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "actors born on 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "hero born in 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "who are the heroes born on 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "actor list with dob 1988",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1988;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "Which actors were born in 1990?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "Actors born in 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "Find actors whose birth year is 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "actors born on 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "hero born in 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "who are the heroes born on 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "actor list with dob 1990",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1990;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "Which actors were born in 1995?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "Actors born in 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "Find actors whose birth year is 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "actors born on 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "hero born in 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "who are the heroes born on 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "actor list with dob 1995",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1995;"
+  },
+  {
+    "question": "Show the actors who were born on the year 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "Which actors were born in 1996?",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "Actors born in 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "Find actors whose birth year is 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "actors born on 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "hero born in 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "who are the heroes born on 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "actor list with dob 1996",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year = 1996;"
+  },
+  {
+    "question": "Show actors born after 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year >= 1980 ORDER BY birth_year DESC;"
+  },
+  {
+    "question": "List actors born since 1985",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year >= 1985 ORDER BY birth_year DESC;"
+  },
+  {
+    "question": "young actors born after 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year >= 1980 ORDER BY birth_year DESC;"
+  },
+  {
+    "question": "Find actors born before 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year <= 1970 ORDER BY birth_year ASC;"
+  },
+  {
+    "question": "old actors born before 1970",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year <= 1970 ORDER BY birth_year ASC;"
+  },
+  {
+    "question": "Actors born between 1970 and 1980",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE birth_year BETWEEN 1970 AND 1980;"
+  },
+  {
+    "question": "How many actors are in the database?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors;"
+  },
+  {
+    "question": "total actors count",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors;"
+  },
+  {
+    "question": "count how many hero and heroine are there",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors;"
+  },
+  {
+    "question": "show all actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "tell me full actor list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the American actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%american%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List American actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%american%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from American",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%american%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many American actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%american%';"
+  },
+  {
+    "question": "who are the American heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%american%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "American country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%american%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the British actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%british%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List British actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%british%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from British",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%british%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many British actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%british%';"
+  },
+  {
+    "question": "who are the British heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%british%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "British country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%british%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the Irish actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%irish%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List Irish actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%irish%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from Irish",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%irish%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many Irish actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%irish%';"
+  },
+  {
+    "question": "who are the Irish heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%irish%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Irish country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%irish%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the Australian actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%australian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List Australian actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%australian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from Australian",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%australian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many Australian actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%australian%';"
+  },
+  {
+    "question": "who are the Australian heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%australian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Australian country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%australian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the Canadian actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%canadian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List Canadian actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%canadian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from Canadian",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%canadian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many Canadian actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%canadian%';"
+  },
+  {
+    "question": "who are the Canadian heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%canadian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Canadian country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%canadian%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the South Korean actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%south korean%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List South Korean actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%south korean%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from South Korean",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%south korean%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many South Korean actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%south korean%';"
+  },
+  {
+    "question": "who are the South Korean heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%south korean%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "South Korean country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%south korean%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show all the French actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%french%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "List French actors",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%french%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Actors from French",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%french%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "How many French actors are there?",
+    "sql": "SELECT COUNT(*) AS total_actors FROM actors WHERE LOWER(nationality) LIKE '%french%';"
+  },
+  {
+    "question": "who are the French heroes",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%french%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "French country actors list",
+    "sql": "SELECT actor_id, actor_name, nationality, birth_year FROM actors WHERE LOWER(nationality) LIKE '%french%' ORDER BY actor_name ASC;"
+  },
+  {
+    "question": "Show directors who have won Oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "Which directors won more than 2 Oscars?",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 2 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "show the directors who won 2 oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 2 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "directors who won 2 oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 2 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "directors with 2 oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 2 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "which directors won 3 oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 3 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "directors who won 1 oscar",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 1 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "directors with 0 oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 0 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "which director won the most oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors ORDER BY oscars_won DESC LIMIT 1;"
+  },
+  {
+    "question": "how many directors won 2 oscars",
+    "sql": "SELECT COUNT(*) AS total_directors FROM directors WHERE oscars_won = 2;"
+  },
+  {
+    "question": "Directors with academy awards",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "Show American directors",
+    "sql": "SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors WHERE LOWER(nationality) LIKE '%american%' ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "Show British directors",
+    "sql": "SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors WHERE LOWER(nationality) LIKE '%british%' ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "How many directors are there?",
+    "sql": "SELECT COUNT(*) AS total_directors FROM directors;"
+  },
+  {
+    "question": "total directors count",
+    "sql": "SELECT COUNT(*) AS total_directors FROM directors;"
+  },
+  {
+    "question": "which directer got oscar award",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "who won oscar director",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "who won 2 oscar awards",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 2 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "directer with two oscars",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won = 2 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "directers with oscar trophies",
+    "sql": "SELECT director_name, nationality, oscars_won FROM directors WHERE oscars_won > 0 ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "give me american directer list",
+    "sql": "SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors WHERE LOWER(nationality) LIKE '%american%' ORDER BY oscars_won DESC;"
+  },
+  {
+    "question": "all directers list",
+    "sql": "SELECT director_id, director_name, nationality, oscars_won, birth_year FROM directors ORDER BY director_name ASC;"
+  },
+  {
+    "question": "Show all movies directed by Christopher Nolan",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%';"
+  },
+  {
+    "question": "Movies by Nolan",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%';"
+  },
+  {
+    "question": "How many movies did Christopher Nolan direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%';"
+  },
+  {
+    "question": "Total box office revenue by Nolan",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Nolan",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%';"
+  },
+  {
+    "question": "Nolan cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%';"
+  },
+  {
+    "question": "how many cinema taken by Nolan",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%';"
+  },
+  {
+    "question": "what is the total collection of Nolan movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Christopher Nolan films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Nolan%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Quentin Tarantino",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%';"
+  },
+  {
+    "question": "Movies by Tarantino",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%';"
+  },
+  {
+    "question": "How many movies did Quentin Tarantino direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%';"
+  },
+  {
+    "question": "Total box office revenue by Tarantino",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Tarantino",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%';"
+  },
+  {
+    "question": "Tarantino cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%';"
+  },
+  {
+    "question": "how many cinema taken by Tarantino",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%';"
+  },
+  {
+    "question": "what is the total collection of Tarantino movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Quentin Tarantino films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Tarantino%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Steven Spielberg",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%';"
+  },
+  {
+    "question": "Movies by Spielberg",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%';"
+  },
+  {
+    "question": "How many movies did Steven Spielberg direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%';"
+  },
+  {
+    "question": "Total box office revenue by Spielberg",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Spielberg",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%';"
+  },
+  {
+    "question": "Spielberg cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%';"
+  },
+  {
+    "question": "how many cinema taken by Spielberg",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%';"
+  },
+  {
+    "question": "what is the total collection of Spielberg movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Steven Spielberg films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Spielberg%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Martin Scorsese",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%';"
+  },
+  {
+    "question": "Movies by Scorsese",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%';"
+  },
+  {
+    "question": "How many movies did Martin Scorsese direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%';"
+  },
+  {
+    "question": "Total box office revenue by Scorsese",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Scorsese",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%';"
+  },
+  {
+    "question": "Scorsese cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%';"
+  },
+  {
+    "question": "how many cinema taken by Scorsese",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%';"
+  },
+  {
+    "question": "what is the total collection of Scorsese movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Martin Scorsese films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scorsese%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by James Cameron",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%';"
+  },
+  {
+    "question": "Movies by Cameron",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%';"
+  },
+  {
+    "question": "How many movies did James Cameron direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%';"
+  },
+  {
+    "question": "Total box office revenue by Cameron",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Cameron",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%';"
+  },
+  {
+    "question": "Cameron cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%';"
+  },
+  {
+    "question": "how many cinema taken by Cameron",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%';"
+  },
+  {
+    "question": "what is the total collection of Cameron movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of James Cameron films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Cameron%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Greta Gerwig",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%';"
+  },
+  {
+    "question": "Movies by Gerwig",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%';"
+  },
+  {
+    "question": "How many movies did Greta Gerwig direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%';"
+  },
+  {
+    "question": "Total box office revenue by Gerwig",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Gerwig",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%';"
+  },
+  {
+    "question": "Gerwig cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%';"
+  },
+  {
+    "question": "how many cinema taken by Gerwig",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%';"
+  },
+  {
+    "question": "what is the total collection of Gerwig movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Greta Gerwig films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Gerwig%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Denis Villeneuve",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%';"
+  },
+  {
+    "question": "Movies by Villeneuve",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%';"
+  },
+  {
+    "question": "How many movies did Denis Villeneuve direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%';"
+  },
+  {
+    "question": "Total box office revenue by Villeneuve",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Villeneuve",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%';"
+  },
+  {
+    "question": "Villeneuve cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%';"
+  },
+  {
+    "question": "how many cinema taken by Villeneuve",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%';"
+  },
+  {
+    "question": "what is the total collection of Villeneuve movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Denis Villeneuve films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Villeneuve%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Bong Joon-ho",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%';"
+  },
+  {
+    "question": "Movies by Bong",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%';"
+  },
+  {
+    "question": "How many movies did Bong Joon-ho direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%';"
+  },
+  {
+    "question": "Total box office revenue by Bong",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Bong",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%';"
+  },
+  {
+    "question": "Bong cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%';"
+  },
+  {
+    "question": "how many cinema taken by Bong",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%';"
+  },
+  {
+    "question": "what is the total collection of Bong movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Bong Joon-ho films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Bong%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Hayao Miyazaki",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%';"
+  },
+  {
+    "question": "Movies by Miyazaki",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%';"
+  },
+  {
+    "question": "How many movies did Hayao Miyazaki direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%';"
+  },
+  {
+    "question": "Total box office revenue by Miyazaki",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Miyazaki",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%';"
+  },
+  {
+    "question": "Miyazaki cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%';"
+  },
+  {
+    "question": "how many cinema taken by Miyazaki",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%';"
+  },
+  {
+    "question": "what is the total collection of Miyazaki movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Hayao Miyazaki films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Miyazaki%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Ridley Scott",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%';"
+  },
+  {
+    "question": "Movies by Scott",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%';"
+  },
+  {
+    "question": "How many movies did Ridley Scott direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%';"
+  },
+  {
+    "question": "Total box office revenue by Scott",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Scott",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%';"
+  },
+  {
+    "question": "Scott cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%';"
+  },
+  {
+    "question": "how many cinema taken by Scott",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%';"
+  },
+  {
+    "question": "what is the total collection of Scott movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Ridley Scott films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Scott%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by David Fincher",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%';"
+  },
+  {
+    "question": "Movies by Fincher",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%';"
+  },
+  {
+    "question": "How many movies did David Fincher direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%';"
+  },
+  {
+    "question": "Total box office revenue by Fincher",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Fincher",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%';"
+  },
+  {
+    "question": "Fincher cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%';"
+  },
+  {
+    "question": "how many cinema taken by Fincher",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%';"
+  },
+  {
+    "question": "what is the total collection of Fincher movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of David Fincher films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Fincher%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Show all movies directed by Guillermo del Toro",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%';"
+  },
+  {
+    "question": "Movies by Toro",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%';"
+  },
+  {
+    "question": "How many movies did Guillermo del Toro direct?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%';"
+  },
+  {
+    "question": "Total box office revenue by Toro",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "which pictures directed by Toro",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%';"
+  },
+  {
+    "question": "Toro cinema list",
+    "sql": "SELECT m.title, m.release_year, m.genre, m.rating FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%';"
+  },
+  {
+    "question": "how many cinema taken by Toro",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%';"
+  },
+  {
+    "question": "what is the total collection of Toro movies",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "box office collection of Guillermo del Toro films",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE d.director_name LIKE '%Toro%' GROUP BY d.director_id;"
+  },
+  {
+    "question": "Total box office revenue by director",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id GROUP BY d.director_id, d.director_name ORDER BY total_box_office DESC;"
+  },
+  {
+    "question": "directors collection list",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id GROUP BY d.director_id, d.director_name ORDER BY total_box_office DESC;"
+  },
+  {
+    "question": "which directer collected highest money",
+    "sql": "SELECT d.director_name, COUNT(m.movie_id) AS total_movies, ROUND(SUM(m.box_office_millions), 1) AS total_box_office FROM movies m JOIN directors d ON m.director_id = d.director_id GROUP BY d.director_id, d.director_name ORDER BY total_box_office DESC LIMIT 5;"
+  },
+  {
+    "question": "Find actors who acted in Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "Who acted in Inception?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "Cast of Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "who is the hero of Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "hero in Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "who acted inside Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "star cast of Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "who are the acting people in Inception",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "who directed Inception?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "directer of Inception",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "who took the movie Inception",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "Find actors who acted in The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "Who acted in The Dark Knight?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "Cast of The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "who is the hero of The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "hero in The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "who acted inside The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "star cast of The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "who are the acting people in The Dark Knight",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "who directed The Dark Knight?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "directer of The Dark Knight",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "who took the movie The Dark Knight",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "Find actors who acted in Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "Who acted in Titanic?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "Cast of Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "who is the hero of Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "hero in Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "who acted inside Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "star cast of Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "who are the acting people in Titanic",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "who directed Titanic?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "directer of Titanic",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "who took the movie Titanic",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "Find actors who acted in Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "Who acted in Oppenheimer?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "Cast of Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "who is the hero of Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "hero in Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "who acted inside Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "star cast of Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "who are the acting people in Oppenheimer",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "who directed Oppenheimer?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "directer of Oppenheimer",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "who took the movie Oppenheimer",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "Find actors who acted in Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "Who acted in Pulp Fiction?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "Cast of Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "who is the hero of Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "hero in Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "who acted inside Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "star cast of Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "who are the acting people in Pulp Fiction",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "who directed Pulp Fiction?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "directer of Pulp Fiction",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "who took the movie Pulp Fiction",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Pulp Fiction%';"
+  },
+  {
+    "question": "Find actors who acted in Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "Who acted in Django Unchained?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "Cast of Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "who is the hero of Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "hero in Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "who acted inside Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "star cast of Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "who are the acting people in Django Unchained",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "who directed Django Unchained?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "directer of Django Unchained",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "who took the movie Django Unchained",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Django Unchained%';"
+  },
+  {
+    "question": "Find actors who acted in Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "Who acted in Barbie?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "Cast of Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "who is the hero of Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "hero in Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "who acted inside Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "star cast of Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "who are the acting people in Barbie",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "who directed Barbie?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "directer of Barbie",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "who took the movie Barbie",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "Find actors who acted in Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "Who acted in Dune?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "Cast of Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "who is the hero of Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "hero in Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "who acted inside Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "star cast of Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "who are the acting people in Dune",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "who directed Dune?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "directer of Dune",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "who took the movie Dune",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Dune%';"
+  },
+  {
+    "question": "Find actors who acted in Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "Who acted in Fight Club?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "Cast of Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "who is the hero of Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "hero in Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "who acted inside Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "star cast of Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "who are the acting people in Fight Club",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "who directed Fight Club?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "directer of Fight Club",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "who took the movie Fight Club",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "Find actors who acted in Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "Who acted in Avatar?",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "Cast of Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "who is the hero of Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "hero in Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "who acted inside Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "star cast of Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "who are the acting people in Avatar",
+    "sql": "SELECT a.actor_name, c.role_name FROM movie_cast c JOIN movies m ON c.movie_id = m.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "who directed Avatar?",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "directer of Avatar",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "who took the movie Avatar",
+    "sql": "SELECT d.director_name, d.nationality, d.oscars_won FROM movies m JOIN directors d ON m.director_id = d.director_id WHERE m.title LIKE '%Avatar%';"
+  },
+  {
+    "question": "Show all movies starring Leonardo DiCaprio",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%DiCaprio%';"
+  },
+  {
+    "question": "Movies starring DiCaprio",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%DiCaprio%';"
+  },
+  {
+    "question": "What movies did Leonardo DiCaprio act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%DiCaprio%';"
+  },
+  {
+    "question": "DiCaprio pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%DiCaprio%';"
+  },
+  {
+    "question": "films acted by DiCaprio",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%DiCaprio%';"
+  },
+  {
+    "question": "which cinema hero is DiCaprio",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%DiCaprio%';"
+  },
+  {
+    "question": "Show all movies starring Christian Bale",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Bale%';"
+  },
+  {
+    "question": "Movies starring Bale",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Bale%';"
+  },
+  {
+    "question": "What movies did Christian Bale act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Bale%';"
+  },
+  {
+    "question": "Bale pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Bale%';"
+  },
+  {
+    "question": "films acted by Bale",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Bale%';"
+  },
+  {
+    "question": "which cinema hero is Bale",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Bale%';"
+  },
+  {
+    "question": "Show all movies starring Cillian Murphy",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Murphy%';"
+  },
+  {
+    "question": "Movies starring Murphy",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Murphy%';"
+  },
+  {
+    "question": "What movies did Cillian Murphy act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Murphy%';"
+  },
+  {
+    "question": "Murphy pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Murphy%';"
+  },
+  {
+    "question": "films acted by Murphy",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Murphy%';"
+  },
+  {
+    "question": "which cinema hero is Murphy",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Murphy%';"
+  },
+  {
+    "question": "Show all movies starring Margot Robbie",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Robbie%';"
+  },
+  {
+    "question": "Movies starring Robbie",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Robbie%';"
+  },
+  {
+    "question": "What movies did Margot Robbie act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Robbie%';"
+  },
+  {
+    "question": "Robbie pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Robbie%';"
+  },
+  {
+    "question": "films acted by Robbie",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Robbie%';"
+  },
+  {
+    "question": "which cinema hero is Robbie",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Robbie%';"
+  },
+  {
+    "question": "Show all movies starring Brad Pitt",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Pitt%';"
+  },
+  {
+    "question": "Movies starring Pitt",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Pitt%';"
+  },
+  {
+    "question": "What movies did Brad Pitt act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Pitt%';"
+  },
+  {
+    "question": "Pitt pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Pitt%';"
+  },
+  {
+    "question": "films acted by Pitt",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Pitt%';"
+  },
+  {
+    "question": "which cinema hero is Pitt",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Pitt%';"
+  },
+  {
+    "question": "Show all movies starring Matt Damon",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Damon%';"
+  },
+  {
+    "question": "Movies starring Damon",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Damon%';"
+  },
+  {
+    "question": "What movies did Matt Damon act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Damon%';"
+  },
+  {
+    "question": "Damon pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Damon%';"
+  },
+  {
+    "question": "films acted by Damon",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Damon%';"
+  },
+  {
+    "question": "which cinema hero is Damon",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Damon%';"
+  },
+  {
+    "question": "Show all movies starring Timothee Chalamet",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Chalamet%';"
+  },
+  {
+    "question": "Movies starring Chalamet",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Chalamet%';"
+  },
+  {
+    "question": "What movies did Timothee Chalamet act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Chalamet%';"
+  },
+  {
+    "question": "Chalamet pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Chalamet%';"
+  },
+  {
+    "question": "films acted by Chalamet",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Chalamet%';"
+  },
+  {
+    "question": "which cinema hero is Chalamet",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Chalamet%';"
+  },
+  {
+    "question": "Show all movies starring Zendaya",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Zendaya%';"
+  },
+  {
+    "question": "Movies starring Zendaya",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Zendaya%';"
+  },
+  {
+    "question": "What movies did Zendaya act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Zendaya%';"
+  },
+  {
+    "question": "Zendaya pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Zendaya%';"
+  },
+  {
+    "question": "films acted by Zendaya",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Zendaya%';"
+  },
+  {
+    "question": "which cinema hero is Zendaya",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Zendaya%';"
+  },
+  {
+    "question": "Show all movies starring Tom Hanks",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Hanks%';"
+  },
+  {
+    "question": "Movies starring Hanks",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Hanks%';"
+  },
+  {
+    "question": "What movies did Tom Hanks act in?",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Hanks%';"
+  },
+  {
+    "question": "Hanks pictures list",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Hanks%';"
+  },
+  {
+    "question": "films acted by Hanks",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Hanks%';"
+  },
+  {
+    "question": "which cinema hero is Hanks",
+    "sql": "SELECT m.title, m.release_year, m.genre, c.role_name FROM movies m JOIN movie_cast c ON m.movie_id = c.movie_id JOIN actors a ON c.actor_id = a.actor_id WHERE a.actor_name LIKE '%Hanks%';"
+  },
+  {
+    "question": "Reviews for the movie Oppenheimer",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "Show reviews for Oppenheimer",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "what is the public talk of Oppenheimer",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "audience talk for Oppenheimer",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "people feedback for Oppenheimer",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "what critics say about Oppenheimer",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Oppenheimer%';"
+  },
+  {
+    "question": "Reviews for the movie Inception",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "Show reviews for Inception",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "what is the public talk of Inception",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "audience talk for Inception",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "people feedback for Inception",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "what critics say about Inception",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Inception%';"
+  },
+  {
+    "question": "Reviews for the movie The Dark Knight",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "Show reviews for The Dark Knight",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "what is the public talk of The Dark Knight",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "audience talk for The Dark Knight",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "people feedback for The Dark Knight",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "what critics say about The Dark Knight",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%The Dark Knight%';"
+  },
+  {
+    "question": "Reviews for the movie Interstellar",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Interstellar%';"
+  },
+  {
+    "question": "Show reviews for Interstellar",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Interstellar%';"
+  },
+  {
+    "question": "what is the public talk of Interstellar",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Interstellar%';"
+  },
+  {
+    "question": "audience talk for Interstellar",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Interstellar%';"
+  },
+  {
+    "question": "people feedback for Interstellar",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Interstellar%';"
+  },
+  {
+    "question": "what critics say about Interstellar",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Interstellar%';"
+  },
+  {
+    "question": "Reviews for the movie Titanic",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "Show reviews for Titanic",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "what is the public talk of Titanic",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "audience talk for Titanic",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "people feedback for Titanic",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "what critics say about Titanic",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Titanic%';"
+  },
+  {
+    "question": "Reviews for the movie Barbie",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "Show reviews for Barbie",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "what is the public talk of Barbie",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "audience talk for Barbie",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "people feedback for Barbie",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "what critics say about Barbie",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Barbie%';"
+  },
+  {
+    "question": "Reviews for the movie Fight Club",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "Show reviews for Fight Club",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "what is the public talk of Fight Club",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "audience talk for Fight Club",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "people feedback for Fight Club",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "what critics say about Fight Club",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Fight Club%';"
+  },
+  {
+    "question": "Reviews for the movie Parasite",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Parasite%';"
+  },
+  {
+    "question": "Show reviews for Parasite",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Parasite%';"
+  },
+  {
+    "question": "what is the public talk of Parasite",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Parasite%';"
+  },
+  {
+    "question": "audience talk for Parasite",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Parasite%';"
+  },
+  {
+    "question": "people feedback for Parasite",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Parasite%';"
+  },
+  {
+    "question": "what critics say about Parasite",
+    "sql": "SELECT r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE m.title LIKE '%Parasite%';"
+  },
+  {
+    "question": "Show all positive reviews",
+    "sql": "SELECT m.title, r.reviewer_name, r.review_score, r.review_text, r.sentiment FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE r.sentiment = 'Positive' ORDER BY r.review_score DESC;"
+  },
+  {
+    "question": "Which movies got positive reviews?",
+    "sql": "SELECT m.title, r.reviewer_name, r.review_score, r.review_text, r.sentiment FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE r.sentiment = 'Positive' ORDER BY r.review_score DESC;"
+  },
+  {
+    "question": "positive talk movies",
+    "sql": "SELECT m.title, r.reviewer_name, r.review_score, r.review_text, r.sentiment FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE r.sentiment = 'Positive' ORDER BY r.review_score DESC;"
+  },
+  {
+    "question": "good feedback movies",
+    "sql": "SELECT m.title, r.reviewer_name, r.review_score, r.review_text, r.sentiment FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE r.sentiment = 'Positive' ORDER BY r.review_score DESC;"
+  },
+  {
+    "question": "Reviews with score above 9",
+    "sql": "SELECT m.title, r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE r.review_score >= 9.0 ORDER BY r.review_score DESC;"
+  },
+  {
+    "question": "highest rated reviews",
+    "sql": "SELECT m.title, r.reviewer_name, r.review_score, r.review_text FROM reviews r JOIN movies m ON r.movie_id = m.movie_id WHERE r.review_score >= 9.0 ORDER BY r.review_score DESC;"
+  },
+  {
+    "question": "How many reviews are there?",
+    "sql": "SELECT COUNT(*) AS total_reviews FROM reviews;"
+  },
+  {
+    "question": "total reviews count",
+    "sql": "SELECT COUNT(*) AS total_reviews FROM reviews;"
+  },
+  {
+    "question": "Which movies made more than 1000 million at the box office?",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 1000 ORDER BY box_office_millions DESC;"
+  },
+  {
+    "question": "Show blockbuster movies",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 800 ORDER BY box_office_millions DESC;"
+  },
+  {
+    "question": "Highest grossing movies of all time",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 10;"
+  },
+  {
+    "question": "Movies that made over 1 billion",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 1000 ORDER BY box_office_millions DESC;"
+  },
+  {
+    "question": "which picture collected more",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "highest collection movies",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "top collected cinema",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "tell me highest collection movie",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "which film collection is highest",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies ORDER BY box_office_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "which cinema collected more than 1000 million",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 1000 ORDER BY box_office_millions DESC;"
+  },
+  {
+    "question": "cinema colletion above 1000",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 1000 ORDER BY box_office_millions DESC;"
+  },
+  {
+    "question": "superhit movies list",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 800 ORDER BY box_office_millions DESC;"
+  },
+  {
+    "question": "top 5 super hit cinema",
+    "sql": "SELECT title, release_year, box_office_millions FROM movies WHERE box_office_millions >= 800 ORDER BY box_office_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "Top 5 most expensive budget movies",
+    "sql": "SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "Show cheap low budget movies",
+    "sql": "SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions ASC LIMIT 5;"
+  },
+  {
+    "question": "costliest movie in database",
+    "sql": "SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "which picture spent more money",
+    "sql": "SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "low budget cinema list",
+    "sql": "SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions ASC LIMIT 5;"
+  },
+  {
+    "question": "costly films list",
+    "sql": "SELECT title, release_year, budget_millions, box_office_millions FROM movies ORDER BY budget_millions DESC LIMIT 5;"
+  },
+  {
+    "question": "Show top 5 highest rated movies",
+    "sql": "SELECT title, release_year, genre, rating FROM movies ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "Critically acclaimed top rated films",
+    "sql": "SELECT title, release_year, genre, rating FROM movies ORDER BY rating DESC LIMIT 10;"
+  },
+  {
+    "question": "Movies with rating above 8.5",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE rating >= 8.5 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Average movie rating by genre",
+    "sql": "SELECT genre, COUNT(*) AS movie_count, ROUND(AVG(rating), 2) AS avg_rating FROM movies GROUP BY genre ORDER BY avg_rating DESC;"
+  },
+  {
+    "question": "Movies with highest votes",
+    "sql": "SELECT title, release_year, rating, votes FROM movies ORDER BY votes DESC LIMIT 5;"
+  },
+  {
+    "question": "best rating cinema",
+    "sql": "SELECT title, release_year, genre, rating FROM movies ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "which picture got good rating",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE rating >= 8.5 ORDER BY rating DESC;"
+  },
+  {
+    "question": "top rated movies in database",
+    "sql": "SELECT title, release_year, genre, rating FROM movies ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "cinema with rating more than 8.5",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE rating >= 8.5 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which film public voted more",
+    "sql": "SELECT title, release_year, rating, votes FROM movies ORDER BY votes DESC LIMIT 5;"
+  },
+  {
+    "question": "Longest movies with duration over 160 minutes",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 160 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "Show lengthy movies",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 160 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "Show movies longer than 150 minutes",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 150 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "What is the average duration of movies by genre?",
+    "sql": "SELECT genre, ROUND(AVG(duration_min), 1) AS avg_duration_minutes, COUNT(*) AS total_movies FROM movies GROUP BY genre ORDER BY avg_duration_minutes DESC;"
+  },
+  {
+    "question": "lengthy picture list",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 160 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "which movie running time is more",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 160 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "cinema running more than 150 minutes",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 150 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "long duration films",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies WHERE duration_min >= 160 ORDER BY duration_min DESC;"
+  },
+  {
+    "question": "shortest duration movies",
+    "sql": "SELECT title, duration_min, genre, rating FROM movies ORDER BY duration_min ASC LIMIT 5;"
+  },
+  {
+    "question": "Movies available on Netflix",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show movies streaming on Netflix",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+  },
+  {
+    "question": "which cinema is inside netflix",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies in netflix ott",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+  },
+  {
+    "question": "netflix ott films list",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+  },
+  {
+    "question": "pictures streaming in netflix",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Netflix' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies available on Disney+",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Disney+' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show movies streaming on Disney+",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Disney+' ORDER BY rating DESC;"
+  },
+  {
+    "question": "which cinema is inside disney+",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Disney+' ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies in disney+ ott",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Disney+' ORDER BY rating DESC;"
+  },
+  {
+    "question": "disney+ ott films list",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Disney+' ORDER BY rating DESC;"
+  },
+  {
+    "question": "pictures streaming in disney+",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Disney+' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies available on Max",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Max' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show movies streaming on Max",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Max' ORDER BY rating DESC;"
+  },
+  {
+    "question": "which cinema is inside max",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Max' ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies in max ott",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Max' ORDER BY rating DESC;"
+  },
+  {
+    "question": "max ott films list",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Max' ORDER BY rating DESC;"
+  },
+  {
+    "question": "pictures streaming in max",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Max' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies available on Amazon Prime",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Amazon Prime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show movies streaming on Amazon Prime",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Amazon Prime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "which cinema is inside amazon prime",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Amazon Prime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies in amazon prime ott",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Amazon Prime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "amazon prime ott films list",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Amazon Prime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "pictures streaming in amazon prime",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE streaming_platform = 'Amazon Prime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Count of movies by streaming platform",
+    "sql": "SELECT streaming_platform, COUNT(*) AS movie_count FROM movies GROUP BY streaming_platform ORDER BY movie_count DESC;"
+  },
+  {
+    "question": "how many movies in each streaming platform",
+    "sql": "SELECT streaming_platform, COUNT(*) AS movie_count FROM movies GROUP BY streaming_platform ORDER BY movie_count DESC;"
+  },
+  {
+    "question": "ott platform movies count",
+    "sql": "SELECT streaming_platform, COUNT(*) AS movie_count FROM movies GROUP BY streaming_platform ORDER BY movie_count DESC;"
+  },
+  {
+    "question": "Show the movies released on 2008",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 2008",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 2008",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 2008?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 2008",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 2008",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 2008",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "2008 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2008 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 2008",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 2008;"
+  },
+  {
+    "question": "Show the movies released on 1994",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 1994",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 1994",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 1994?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 1994",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 1994",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 1994",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "1994 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1994 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 1994",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 1994;"
+  },
+  {
+    "question": "Show the movies released on 2010",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 2010",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 2010",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 2010?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 2010",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 2010",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 2010",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "2010 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2010 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 2010",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 2010;"
+  },
+  {
+    "question": "Show the movies released on 2014",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 2014",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 2014",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 2014?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 2014",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 2014",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 2014",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "2014 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2014 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 2014",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 2014;"
+  },
+  {
+    "question": "Show the movies released on 2020",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 2020",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 2020",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 2020?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 2020",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 2020",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 2020",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "2020 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2020 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 2020",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 2020;"
+  },
+  {
+    "question": "Show the movies released on 2023",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 2023",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 2023",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 2023?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 2023",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 2023",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 2023",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "2023 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 2023 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 2023",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 2023;"
+  },
+  {
+    "question": "Show the movies released on 1993",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 1993",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 1993",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 1993?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 1993",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 1993",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 1993",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "1993 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1993 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 1993",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 1993;"
+  },
+  {
+    "question": "Show the movies released on 1997",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 1997",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 1997",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 1997?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 1997",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 1997",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 1997",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "1997 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1997 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 1997",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 1997;"
+  },
+  {
+    "question": "Show the movies released on 1999",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "Movies released in 1999",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List movies from 1999",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "What movies came out in 1999?",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "cinema relised on 1999",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "movies relesed in 1999",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "which picture came in 1999",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "1999 cinema list",
+    "sql": "SELECT title, release_year, genre, rating, box_office_millions FROM movies WHERE release_year = 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "how many movies released in 1999",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE release_year = 1999;"
+  },
+  {
+    "question": "Movies released after 2020",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year >= 2020 ORDER BY release_year DESC;"
+  },
+  {
+    "question": "Show films made since 2015",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year >= 2015 ORDER BY release_year DESC;"
+  },
+  {
+    "question": "Movies released before 2000",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year <= 2000 ORDER BY release_year ASC;"
+  },
+  {
+    "question": "Classic movies from the 90s",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year BETWEEN 1990 AND 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "latest cinema after 2020",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year >= 2020 ORDER BY release_year DESC;"
+  },
+  {
+    "question": "old pictures before 2000",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year <= 2000 ORDER BY release_year ASC;"
+  },
+  {
+    "question": "cinema released between 1990 and 1999",
+    "sql": "SELECT title, release_year, genre, rating FROM movies WHERE release_year BETWEEN 1990 AND 1999 ORDER BY rating DESC;"
+  },
+  {
+    "question": "List all sci-fi movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Sci-Fi' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top sci-fi movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Sci-Fi' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many sci-fi movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Sci-Fi';"
+  },
+  {
+    "question": "give me sci-fi cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Sci-Fi' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top sci-fi picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Sci-Fi' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "sci-fi films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Sci-Fi';"
+  },
+  {
+    "question": "List all action movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Action' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top action movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Action' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many action movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Action';"
+  },
+  {
+    "question": "give me action cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Action' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top action picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Action' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "action films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Action';"
+  },
+  {
+    "question": "List all crime movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Crime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top crime movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Crime' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many crime movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Crime';"
+  },
+  {
+    "question": "give me crime cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Crime' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top crime picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Crime' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "crime films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Crime';"
+  },
+  {
+    "question": "List all biography movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Biography' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top biography movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Biography' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many biography movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Biography';"
+  },
+  {
+    "question": "give me biography cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Biography' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top biography picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Biography' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "biography films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Biography';"
+  },
+  {
+    "question": "List all war movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'War' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top war movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'War' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many war movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'War';"
+  },
+  {
+    "question": "give me war cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'War' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top war picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'War' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "war films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'War';"
+  },
+  {
+    "question": "List all drama movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Drama' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top drama movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Drama' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many drama movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Drama';"
+  },
+  {
+    "question": "give me drama cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Drama' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top drama picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Drama' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "drama films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Drama';"
+  },
+  {
+    "question": "List all comedy movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Comedy' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top comedy movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Comedy' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many comedy movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Comedy';"
+  },
+  {
+    "question": "give me comedy cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Comedy' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top comedy picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Comedy' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "comedy films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Comedy';"
+  },
+  {
+    "question": "List all fantasy movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Fantasy' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top fantasy movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Fantasy' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many fantasy movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Fantasy';"
+  },
+  {
+    "question": "give me fantasy cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Fantasy' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top fantasy picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Fantasy' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "fantasy films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Fantasy';"
+  },
+  {
+    "question": "List all romance movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Romance' ORDER BY rating DESC;"
+  },
+  {
+    "question": "Show top romance movies",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Romance' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "How many romance movies are there?",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Romance';"
+  },
+  {
+    "question": "give me romance cinema list",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Romance' ORDER BY rating DESC;"
+  },
+  {
+    "question": "top romance picture",
+    "sql": "SELECT title, release_year, rating FROM movies WHERE genre = 'Romance' ORDER BY rating DESC LIMIT 5;"
+  },
+  {
+    "question": "romance films count",
+    "sql": "SELECT COUNT(*) AS total_movies FROM movies WHERE genre = 'Romance';"
+  }
+]

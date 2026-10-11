@@ -63,6 +63,26 @@ def show_voice_query_page():
         tts_badge_border = "#BFDBFE" if tts_enabled else "#CBD5E1"
         tts_badge_color = "#1D4ED8" if tts_enabled else "#64748B"
 
+        ai_provider = config.get("ai_provider", "Google Gemini")
+        has_gemini_key = bool(config.get("gemini_api_key", "").strip())
+        has_openai_key = bool(config.get("openai_api_key", "").strip())
+
+        if ai_provider in ["Google Gemini", "Gemini"] and has_gemini_key:
+            ai_badge_text = "✨ Gemini LLM (Neural)"
+            ai_badge_bg = "#F3E8FF"
+            ai_badge_color = "#7E22CE"
+            ai_badge_border = "#D8B4FE"
+        elif ai_provider in ["OpenAI", "ChatGPT"] and has_openai_key:
+            ai_badge_text = "⚡ GPT-4o (Neural)"
+            ai_badge_bg = "#ECFDF5"
+            ai_badge_color = "#047857"
+            ai_badge_border = "#A7F3D0"
+        else:
+            ai_badge_text = "⚙️ Offline Rules Engine"
+            ai_badge_bg = "#FEF3C7"
+            ai_badge_color = "#B45309"
+            ai_badge_border = "#FDE68A"
+
         st.markdown(f"""
         <div style="display: flex; justify-content: flex-end; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 8px;">
             <span style="
@@ -81,6 +101,20 @@ def show_voice_query_page():
                 {db_status_text}
             </span>
             <span style="
+                background: {ai_badge_bg};
+                color: {ai_badge_color};
+                border: 1px solid {ai_badge_border};
+                padding: 5px 12px;
+                border-radius: 9999px;
+                font-weight: 600;
+                font-size: 12px;
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+            ">
+                {ai_badge_text}
+            </span>
+            <span style="
                 background: {tts_badge_bg};
                 color: {tts_badge_color};
                 border: 1px solid {tts_badge_border};
@@ -97,7 +131,17 @@ def show_voice_query_page():
         </div>
         """, unsafe_allow_html=True)
 
-    st.markdown("<hr style='margin: 8px 0 18px 0;'>", unsafe_allow_html=True)
+    if not has_gemini_key and not has_openai_key:
+        st.markdown("""
+        <div style="background: #FFFBEB; border: 1px solid #FDE68A; border-left: 4px solid #F59E0B; border-radius: 6px; padding: 8px 14px; margin: 8px 0 12px 0; font-size: 12.5px; color: #92400E; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div>
+                💡 <b>Running in Offline Rules Engine:</b> For 100% universal accuracy on any complex, nested, or spoken query, connect your free <b>Google Gemini API Key</b> in <b>Settings > AI Model Settings</b> (Free tier, zero cost).
+            </div>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" style="background: #F59E0B; color: #FFFFFF; font-weight: 600; font-size: 11.5px; padding: 4px 10px; border-radius: 4px; text-decoration: none;">Get Free Gemini Key ↗</a>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown("<hr style='margin: 8px 0 18px 0;'>", unsafe_allow_html=True)
 
     # Session state initialization
     if "user_query_text" not in st.session_state:
@@ -106,31 +150,62 @@ def show_voice_query_page():
         st.session_state.trigger_browser_tts = False
 
     # ==========================================
-    # QUICK INSPIRATION PROMPT CHIPS
+    # DYNAMIC ACTIVE DATASETS & INSPIRATION CHIPS
     # ==========================================
-    st.markdown("""
-    <div style="font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
-        💡 Click to try sample queries:
-    </div>
-    """, unsafe_allow_html=True)
+    active_tables = []
+    custom_tables = []
+    try:
+        from sql_generator.generate_sql import get_active_tables_info
+        tables_meta = get_active_tables_info()
+        active_tables = list(tables_meta.keys())
+        movie_tables = {"movies", "directors", "actors", "movie_cast", "reviews"}
+        custom_tables = [t for t in active_tables if t not in movie_tables]
+    except Exception:
+        tables_meta = {}
+        active_tables = []
+        custom_tables = []
 
-    chips = [
-        ("🎬 Nolan Movies", "Show all movies directed by Christopher Nolan"),
-        ("⭐ Top 5 Rated", "Show top 5 highest rated movies"),
-        ("🚀 Sci-Fi Movies", "List all sci-fi movies"),
-        ("💰 $1B+ Box Office", "Which movies made more than 1000 million at the box office?"),
-        ("🎭 Inception Cast", "Find actors who acted in Inception"),
-        ("🏆 Oscar Directors", "Show directors who have won Oscars"),
-    ]
+    if active_tables:
+        display_tbls = ", ".join([f"`{t}`" for t in active_tables[:6]])
+        extra_txt = f" (+{len(active_tables)-6} more)" if len(active_tables) > 6 else ""
+        st.markdown(f"""
+        <div style="background: #F1F5F9; border-left: 3px solid #3B82F6; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; color: #334155; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div><b>🗄️ Queryable Tables:</b> {display_tbls}{extra_txt}</div>
+            <div style="font-size: 11.5px; color: #64748B;">Upload your own data or CSVs in <b>Database</b> tab anytime</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    chip_cols = st.columns(len(chips))
-    for col, (label, prompt) in zip(chip_cols, chips):
-        with col:
-            if st.button(label, key=f"chip_{label}", use_container_width=True):
-                st.session_state.user_query_text = prompt
-                _run_pipeline(prompt, tts_enabled)
-                st.session_state.trigger_browser_tts = True
-                st.rerun()
+    chips = []
+    for ct in custom_tables[:2]:
+        c_title = ct.replace("_", " ").title()
+        chips.append((f"📊 All {c_title}", f"Show all records from {ct}"))
+        chips.append((f"🔢 Count {c_title}", f"How many {ct} are there?"))
+
+    if "movies" in active_tables or not custom_tables:
+        chips.extend([
+            ("🏆 2 Oscars", "show the directors who won 2 oscars"),
+            ("🎬 Nolan Movies", "Show all movies directed by Christopher Nolan"),
+            ("⭐ Top 5 Rated", "Show top 5 highest rated movies"),
+            ("💰 Highest Collection", "which picture collected more"),
+            ("🎭 Inception Hero", "who is the hero of Inception"),
+        ])
+
+    chips = chips[:6]
+    if chips:
+        st.markdown("""
+        <div style="font-size: 12px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px;">
+            💡 Click to try sample queries on active data:
+        </div>
+        """, unsafe_allow_html=True)
+
+        chip_cols = st.columns(len(chips))
+        for col, (label, prompt) in zip(chip_cols, chips):
+            with col:
+                if st.button(label, key=f"chip_{label}", use_container_width=True):
+                    st.session_state.user_query_text = prompt
+                    _run_pipeline(prompt, tts_enabled)
+                    st.session_state.trigger_browser_tts = True
+                    st.rerun()
 
     st.write("")
 
@@ -342,6 +417,9 @@ def show_voice_query_page():
 
         # TAB 1: Query Output
         with tab_grid:
+            if "llm_warning" in st.session_state and st.session_state["llm_warning"]:
+                st.warning(st.session_state["llm_warning"])
+
             if st.session_state.get("active_sql_valid", False):
                 if "active_result" in st.session_state and st.session_state.active_result is not None:
                     success, df_or_msg, latency, err = st.session_state.active_result
@@ -384,7 +462,8 @@ def show_voice_query_page():
 
         # TAB 3: SQL Breakdown & Explainable AI (XAI)
         with tab_sql:
-            st.markdown("##### 💻 Executed SQL Query")
+            active_model = st.session_state.get("active_llm_model", "Schema Rules Engine")
+            st.markdown(f"##### 💻 Executed SQL Query <span style='font-size:12px; font-weight:normal; color:#64748B;'>Generated by: <b>{active_model}</b></span>", unsafe_allow_html=True)
             st.code(st.session_state.active_sql, language="sql")
 
             # Query Complexity Classifier Badge
@@ -610,8 +689,8 @@ def _explain_sql(sql: str) -> str:
         else:
             parts.append("Retrieves matching records from the database")
 
-    for tbl in ["EMPLOYEES", "DEPARTMENTS", "PROJECTS", "EMPLOYEE_PROJECTS"]:
-        if f"FROM {tbl}" in sql_upper or f"JOIN {tbl}" in sql_upper:
+    for tbl in ["MOVIES", "DIRECTORS", "ACTORS", "MOVIE_CAST", "REVIEWS"]:
+        if f"FROM {tbl}" in sql_upper or f"JOIN {tbl}" in sql_upper or f" {tbl} " in f" {sql_upper} ":
             parts.append(f"from the `{tbl.lower()}` table")
 
     if "JOIN" in sql_upper:
