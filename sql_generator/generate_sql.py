@@ -282,7 +282,65 @@ def resolve_custom_table_query(q: str, target_table: str, meta: dict, limit_val:
         val = below_match.group(1)
         return f"SELECT * FROM {target_table} WHERE {matched_num} <= {val}{lim_str};"
 
-    # 7. Default projection
+    # 7. Specific entity lookup & column projection (e.g. "Show the gpa of the student Alice Chen")
+    requested_cols = [c for c in cols if c.lower() in q or c.lower().replace("_", " ") in q]
+    entity_clause = None
+
+    try:
+        from database.db_connection import get_db_connection
+        conn = get_db_connection()
+        cur = conn.cursor()
+        
+        stopwords = {
+            "show", "the", "of", "student", "students", "details", "for", "named", "called",
+            "is", "what", "who", "which", "are", "get", "give", "me", "find", "all",
+            "table", "data", "records", "record", "list", "select", "from", "where", "with",
+            "a", "an", "on", "at", "to", "info", "information"
+        }
+        for c in cols:
+            stopwords.add(c.lower())
+            for part in c.lower().split("_"):
+                stopwords.add(part)
+
+        tokens = [w for w in re.findall(r'[a-zA-Z0-9]+', q) if w.lower() not in stopwords and len(w) > 1]
+        
+        candidates = []
+        if len(tokens) >= 2:
+            candidates.append(" ".join(tokens))
+            for i in range(len(tokens) - 1):
+                candidates.append(f"{tokens[i]} {tokens[i+1]}")
+        for t in tokens:
+            candidates.append(t)
+
+        for cand in candidates:
+            for tc in text_cols:
+                try:
+                    cur.execute(f"SELECT COUNT(*) FROM {target_table} WHERE LOWER({tc}) LIKE ?;", (f"%{cand.lower()}%",))
+                    cnt = cur.fetchone()[0]
+                except Exception:
+                    cur.execute(f"SELECT COUNT(*) FROM {target_table} WHERE LOWER({tc}) LIKE %s;", (f"%{cand.lower()}%",))
+                    cnt = cur.fetchone()[0]
+                if cnt > 0:
+                    entity_clause = f"LOWER({tc}) LIKE '%{cand.lower()}%'"
+                    if tc not in requested_cols:
+                        requested_cols.insert(0, tc)
+                    break
+            if entity_clause:
+                break
+        cur.close()
+        conn.close()
+    except Exception:
+        pass
+
+    if entity_clause:
+        proj = ", ".join(requested_cols) if requested_cols else "*"
+        return f"SELECT {proj} FROM {target_table} WHERE {entity_clause};"
+
+    if requested_cols:
+        proj = ", ".join(requested_cols)
+        return f"SELECT {proj} FROM {target_table}{lim_str or ' LIMIT 15'};"
+
+    # 8. Default projection
     lim_def = f" LIMIT {limit_val or 15}"
     return f"SELECT * FROM {target_table}{lim_def};"
 
