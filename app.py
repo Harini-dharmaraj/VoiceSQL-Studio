@@ -39,15 +39,23 @@ if config.get("db_type") == "SQLite" and not os.path.exists("database/demo.db"):
         init_database()
 
 # ==========================================
-# PAGE IMPORTS
+# PAGE IMPORTS & AUTH GUARD
 # ==========================================
 
+from database.auth import init_auth_tables
+from pages.login import show_login_page
 from components.sidebar import show_sidebar
 from pages.voice_query import show_voice_query_page
 from pages.analytics import show_analytics_page
 from pages.database import show_database_page
 from pages.history import show_history_page
 from pages.settings import show_settings
+
+init_auth_tables()
+
+if not st.session_state.get("authenticated", False):
+    show_login_page()
+    st.stop()
 
 # ==========================================
 # SIDEBAR NAVIGATION & ROUTING

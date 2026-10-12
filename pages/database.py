@@ -76,6 +76,19 @@ def show_database_page():
             st.info("No tables found. Click 'Re-seed Default Sample Data' above or upload a CSV in the next tab.")
             return
 
+        # Show user's active datasets
+        user = st.session_state.get("current_user", {})
+        user_id = user.get("user_id", 0)
+        from database.auth import get_user_datasets
+        my_datasets = get_user_datasets(user_id) if user_id else []
+        if my_datasets:
+            ds_tags = ", ".join([f"`{d['table_name']}` ({d['row_count']} rows)" for d in my_datasets])
+            st.markdown(f"""
+            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: #166534;">
+                📁 <b>Your Uploaded Datasets (@{user.get('username', 'user')}):</b> {ds_tags}
+            </div>
+            """, unsafe_allow_html=True)
+
         selected_table = st.selectbox("Select Table to View:", sorted(tables))
 
         schema_df, total_rows = _get_table_info(selected_table, config)
@@ -102,8 +115,13 @@ def show_database_page():
                     use_container_width=True
                 )
             with col_d2:
-                # Protect core tables from accidental deletion
-                is_core = selected_table in ["departments", "employees", "projects", "employee_projects", "query_history"]
+                # Protect core and system tables from accidental deletion
+                protected_tables = [
+                    "departments", "employees", "projects", "employee_projects", 
+                    "query_history", "movies", "directors", "actors", "movie_cast", 
+                    "reviews", "users", "user_datasets", "sqlite_sequence"
+                ]
+                is_core = selected_table.lower() in protected_tables
                 if not is_core:
                     if st.button(f"🗑️ Delete `{selected_table}`", use_container_width=True):
                         _drop_table(selected_table)
@@ -167,7 +185,12 @@ def show_database_page():
                             with st.spinner(f"Creating table `{table_clean}` and importing {len(df_upload)} records..."):
                                 success_imp, err_imp = _import_df_to_database(df_upload, table_clean, config)
                             if success_imp:
-                                st.success(f"🎉 Successfully created table `{table_clean}` with {len(df_upload)} records!")
+                                from database.auth import record_user_dataset
+                                user = st.session_state.get("current_user", {})
+                                user_id = user.get("user_id", 0)
+                                if user_id:
+                                    record_user_dataset(user_id, table_clean, display_name=uploaded_file.name, row_count=len(df_upload))
+                                st.success(f"🎉 Successfully created table `{table_clean}` with {len(df_upload)} records linked to @{user.get('username', 'user')}!")
                                 st.markdown(f"""
                                 <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 8px; padding: 12px 16px; margin: 12px 0;">
                                     <b>🎙️ Ready for Voice Studio!</b> Try asking with your voice or typing:

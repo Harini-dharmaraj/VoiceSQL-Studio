@@ -40,15 +40,18 @@ def show_voice_query_page():
     # ==========================================
     # HEADER & SYSTEM STATUS BADGES
     # ==========================================
+    user = st.session_state.get("current_user", {})
+    user_name = user.get("full_name", user.get("username", "Explorer"))
+
     col_head1, col_head2 = st.columns([3, 2])
     with col_head1:
-        st.markdown("""
+        st.markdown(f"""
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 2px;">
             <span style="font-size: 32px;">🎙️</span>
             <span style="font-size: 28px; font-weight: 800; color: #0F172A; letter-spacing: -0.03em;">AI Voice Studio</span>
         </div>
         <p style="font-size: 14px; color: #64748B; margin-top: 0; margin-bottom: 12px;">
-            Speak naturally or type your query — AI translates voice to SQL, queries the database, and speaks the results aloud.
+            Welcome back, <b style="color: #2563EB;">{user_name}</b>! Speak naturally or type your query — AI translates voice to SQL for your custom datasets or movies.
         </p>
         """, unsafe_allow_html=True)
 
@@ -490,7 +493,7 @@ def show_voice_query_page():
         # TAB 4: Semantic Vector Embeddings & Schema Grounding
         with tab_vectors:
             st.markdown("##### 🧠 Semantic Vector Representation & Schema Grounding")
-            st.caption("Maps natural language tokens, colloquialisms, and synonyms into continuous dense vector space ($\mathbb{R}^{384}$) using Cosine Similarity.")
+            st.caption(r"Maps natural language tokens, colloquialisms, and synonyms into continuous dense vector space ($\mathbb{R}^{384}$) using Cosine Similarity.")
 
             query_text = st.session_state.get("user_query_text", "")
             matches = semantic_vector_engine.analyze_query_embeddings(query_text)

@@ -67,6 +67,25 @@ def show_sidebar():
 </div>
 """, unsafe_allow_html=True)
 
+        # Active User Profile Card
+        user = st.session_state.get("current_user", {})
+        username = user.get("username", "Guest")
+        full_name = user.get("full_name", username)
+        initial = (username[:1] if username else "U").upper()
+
+        user_card_html = f"""
+<div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+    <div style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #FFF; font-weight: 700;">
+        {initial}
+    </div>
+    <div style="overflow: hidden;">
+        <div style="font-size: 13px; font-weight: 700; color: #F8FAFC; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{full_name}</div>
+        <div style="font-size: 11px; color: #38BDF8; font-weight: 500;">@{username}</div>
+    </div>
+</div>
+"""
+        st.markdown(user_card_html.strip(), unsafe_allow_html=True)
+
         st.caption("WORKSPACE NAVIGATION")
 
         page = st.radio(
@@ -76,7 +95,7 @@ def show_sidebar():
             label_visibility="collapsed"
         )
 
-        st.markdown("<hr style='border-color: #1E293B; margin: 24px 0 16px 0;'>", unsafe_allow_html=True)
+        st.markdown("<hr style='border-color: #1E293B; margin: 20px 0 16px 0;'>", unsafe_allow_html=True)
 
         # Environment Status Card (No inner blank lines and unindented to prevent markdown code-block parsing)
         db_color = "#10B981" if db_online else "#EF4444"
@@ -108,5 +127,11 @@ def show_sidebar():
 </div>
 """
         st.markdown(status_html.strip(), unsafe_allow_html=True)
+
+        st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+        if st.button("🚪 Sign Out", use_container_width=True):
+            st.session_state.pop("authenticated", None)
+            st.session_state.pop("current_user", None)
+            st.rerun()
 
     return page
