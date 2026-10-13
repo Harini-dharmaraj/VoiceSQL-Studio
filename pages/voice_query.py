@@ -6,7 +6,7 @@ from speech.voice_recorder import record_audio
 from speech.noise_removal import remove_noise, is_audio_silent
 from speech.speech_to_text import speech_to_text
 from speech.text_to_speech import summarize_query_for_voice, generate_voice_response, get_browser_tts_html
-from sql_generator.generate_sql import generate_sql, classify_query_complexity, explain_sql_query
+from sql_generator.generate_sql import generate_sql, classify_query_complexity, explain_sql_query, get_active_tables_info
 from sql_generator.evaluator import run_ml_benchmark, IMDB_BENCHMARK_TESTS
 from sql_generator.validator import validate_sql
 from database.execute_query import execute_sql_query
@@ -14,6 +14,7 @@ from database.history import log_query
 from utils.config_manager import load_config
 from database.db_connection import get_db_connection
 from sql_generator.semantic_matcher import semantic_vector_engine
+from ml_engine.universal_automl import UniversalAutoMLEngine
 
 def show_voice_query_page():
     config = load_config()
@@ -158,7 +159,6 @@ def show_voice_query_page():
     active_tables = []
     custom_tables = []
     try:
-        from sql_generator.generate_sql import get_active_tables_info
         tables_meta = get_active_tables_info()
         active_tables = list(tables_meta.keys())
         movie_tables = {"movies", "directors", "actors", "movie_cast", "reviews"}
@@ -468,12 +468,6 @@ def show_voice_query_page():
         with tab_predict:
             st.markdown("##### 🔮 Universal AutoML & Predictive Decision Engine")
             st.caption("Works dynamically with ANY dataset — user-uploaded CSVs, custom tables, or database records. Automatically detects regression and classification targets, trains models on the fly, and forecasts outcomes.")
-
-            from ml_engine.universal_automl import UniversalAutoMLEngine
-            from database.db_connection import get_db_connection
-            from utils.config_manager import load_config
-            import altair as alt
-
             # 1. Collect Available Datasets / Tables
             dataset_options = {}
             if "active_result" in st.session_state and st.session_state.active_result is not None:
