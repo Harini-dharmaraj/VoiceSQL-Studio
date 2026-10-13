@@ -42,9 +42,14 @@ if config.get("db_type") == "SQLite" and not os.path.exists("database/demo.db"):
 # PAGE IMPORTS & AUTH GUARD
 # ==========================================
 
+import sys
+import importlib
+
 from database.auth import init_auth_tables
 from pages.login import show_login_page
 from components.sidebar import show_sidebar
+import pages.voice_query
+importlib.reload(pages.voice_query)
 from pages.voice_query import show_voice_query_page
 from pages.analytics import show_analytics_page
 from pages.database import show_database_page
