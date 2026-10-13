@@ -38,23 +38,26 @@ class UniversalAutoMLEngine:
         df_clean = df.copy()
         df_clean.columns = [str(c).strip() for c in df_clean.columns]
         
-        # Exclude pure ID / timestamp columns from default predictors
+        # Exclude pure ID / timestamp / text name columns from default predictors
         candidate_cols = []
         for c in df_clean.columns:
             lower_c = c.lower()
             if lower_c in ["id", "_id"] or lower_c.endswith("_id") or "timestamp" in lower_c or "created_at" in lower_c:
                 continue
-            # Drop columns with 100% unique strings (e.g. names/descriptions) if high cardinality
-            if df_clean[c].dtype == object and df_clean[c].nunique() > len(df_clean) * 0.9 and len(df_clean) > 20:
-                continue
+            # Drop high-cardinality string columns (e.g. movie titles, descriptions, names)
+            if df_clean[c].dtype == object:
+                if lower_c in ["title", "name", "description", "review_text", "summary", "address", "email", "url"]:
+                    continue
+                if df_clean[c].nunique() > len(df_clean) * 0.7:
+                    continue
             candidate_cols.append(c)
 
         numeric_cols = [c for c in candidate_cols if pd.api.types.is_numeric_dtype(df_clean[c])]
         categorical_cols = [c for c in candidate_cols if not pd.api.types.is_numeric_dtype(df_clean[c])]
 
-        # Identify default target: prefer last numeric column, or column with 'target', 'score', 'price', 'gpa', 'revenue', 'cost'
+        # Identify default target: prefer business outcome metrics (revenue, box office, sales, GPA, rating)
         default_target = None
-        target_keywords = ["gpa", "revenue", "price", "box_office", "sales", "salary", "cost", "score", "rating", "target", "label", "risk", "status"]
+        target_keywords = ["box_office", "revenue", "sales", "gpa", "profit", "price", "budget", "rating", "score", "cost", "salary", "target", "label", "status"]
         for kw in target_keywords:
             for c in candidate_cols:
                 if kw in c.lower():
