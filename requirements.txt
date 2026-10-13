@@ -8,3 +8,4 @@ sounddevice>=0.4.6
 openai-whisper
 mysql-connector-python>=8.0.0
 openpyxl>=3.1.0
+scikit-learn>=1.3.0
