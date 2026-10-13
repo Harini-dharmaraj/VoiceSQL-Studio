@@ -818,16 +818,87 @@ def _render_smart_chart(df: pd.DataFrame):
     cat_cols = df.select_dtypes(include=['object', 'string', 'category']).columns.tolist()
 
     if metric_cols and cat_cols:
-        x_col = cat_cols[0]
-        y_col = metric_cols[0]
-        st.markdown(f"###### 📊 {y_col.replace('_', ' ').title()} by {x_col.replace('_', ' ').title()}")
-        
-        chart = alt.Chart(df).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color="#2563EB").encode(
-            x=alt.X(f"{x_col}:N", sort="-y", title=x_col.replace('_', ' ').title()),
-            y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title()),
-            tooltip=[f"{c}:N" if c in cat_cols else f"{c}:Q" for c in [x_col, y_col]]
-        ).properties(height=340).interactive()
-        
+        # Determine smartest metric based on active question and business priority
+        user_q = str(st.session_state.get("user_query_text", "")).lower()
+        best_metric_idx = 0
+
+        # Prioritize metric explicitly mentioned in query
+        matched_idx = None
+        for i, m in enumerate(metric_cols):
+            clean_m = m.replace('_', ' ').lower()
+            if any(term in user_q for term in [clean_m, m.lower()]):
+                matched_idx = i
+                break
+        if matched_idx is None:
+            if "box office" in user_q or "collection" in user_q or "gross" in user_q or "earning" in user_q:
+                for i, m in enumerate(metric_cols):
+                    if "box_office" in m.lower() or "revenue" in m.lower():
+                        matched_idx = i
+                        break
+            elif "budget" in user_q or "cost" in user_q:
+                for i, m in enumerate(metric_cols):
+                    if "budget" in m.lower():
+                        matched_idx = i
+                        break
+            elif "rating" in user_q or "score" in user_q:
+                for i, m in enumerate(metric_cols):
+                    if "rating" in m.lower() or "score" in m.lower():
+                        matched_idx = i
+                        break
+
+        # Fallback priority: real business metrics over calendar year
+        if matched_idx is None:
+            priority_names = ["box_office_millions", "revenue", "sales", "budget_millions", "rating", "votes", "amount", "price", "gpa"]
+            for pname in priority_names:
+                for i, m in enumerate(metric_cols):
+                    if pname in m.lower():
+                        matched_idx = i
+                        break
+                if matched_idx is not None:
+                    break
+
+        if matched_idx is not None:
+            best_metric_idx = matched_idx
+
+        # Interactive Controls
+        col_ctl1, col_ctl2, col_ctl3 = st.columns([2.5, 2.5, 1.5])
+        with col_ctl1:
+            y_col = st.selectbox("📊 Metric (Y-Axis):", metric_cols, index=best_metric_idx, key="smart_chart_y_metric")
+        with col_ctl2:
+            x_col = st.selectbox("🏷️ Dimension (X-Axis):", cat_cols, index=0, key="smart_chart_x_dim")
+        with col_ctl3:
+            chart_type = st.selectbox("📈 Chart Type:", ["Bar Chart", "Line Chart", "Area Chart"], key="smart_chart_type")
+
+        # Color schemes based on metric
+        color_hex = "#2563EB"
+        if "box_office" in y_col.lower() or "revenue" in y_col.lower():
+            color_hex = "#10B981"
+        elif "budget" in y_col.lower():
+            color_hex = "#F59E0B"
+        elif "rating" in y_col.lower():
+            color_hex = "#8B5CF6"
+
+        is_year = "year" in y_col.lower() or "date" in y_col.lower()
+        y_scale = alt.Scale(zero=False) if is_year else alt.Scale(zero=True)
+
+        # Plot with explicit encoding
+        base = alt.Chart(df).encode(
+            x=alt.X(f"{x_col}:N", sort=alt.EncodingSortField(field=y_col, order="descending"), title=x_col.replace('_', ' ').title()),
+            y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), scale=y_scale),
+            tooltip=[
+                alt.Tooltip(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
+                alt.Tooltip(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), format=",.2f" if df[y_col].dtype == float else ",d")
+            ]
+        )
+
+        if chart_type == "Bar Chart":
+            chart = base.mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color=color_hex)
+        elif chart_type == "Line Chart":
+            chart = base.mark_line(point=True, color=color_hex, strokeWidth=3)
+        else:
+            chart = base.mark_area(opacity=0.65, color=color_hex)
+
+        chart = chart.properties(height=360).interactive()
         st.altair_chart(chart, use_container_width=True)
 
     elif len(cat_cols) >= 1 and len(df) <= 15:
