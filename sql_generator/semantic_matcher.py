@@ -152,6 +152,74 @@ class SemanticVectorEngine:
             return 0.0
         return round(float(dot_product / (mag1 * mag2)), 4)
 
+    def get_dynamic_schema_concepts(self) -> dict:
+        """
+        Dynamically introspects the active database (SQLite or MySQL) and synthesizes
+        vector semantic targets for all live tables and columns.
+        Works automatically for any user-uploaded dataset or custom database schema.
+        """
+        concepts = {k: dict(v) for k, v in self.SCHEMA_CONCEPTS.items()}
+        try:
+            from sql_generator.generate_sql import get_active_tables_info
+            tables_info = get_active_tables_info()
+            for tbl, meta in tables_info.items():
+                if tbl in ["sqlite_sequence", "query_history", "users", "user_datasets"]:
+                    continue
+
+                # Table-level concept
+                clean_tbl = tbl.replace("_", " ").lower().strip()
+                tbl_anchors = [tbl.lower(), clean_tbl]
+                if clean_tbl.endswith("s"):
+                    tbl_anchors.append(clean_tbl[:-1])
+                else:
+                    tbl_anchors.append(clean_tbl + "s")
+
+                tbl_key = f"{tbl} (Table)"
+                if tbl_key not in concepts:
+                    concepts[tbl_key] = {
+                        "table": tbl,
+                        "type": "Relational Table",
+                        "description": f"Entity table '{tbl}' containing {len(meta.get('columns', []))} columns",
+                        "anchors": tbl_anchors
+                    }
+
+                # Column-level concepts
+                for col in meta.get("columns", []):
+                    clean_col = col.replace("_", " ").lower().strip()
+                    words_in_col = [w for w in clean_col.split() if len(w) > 2]
+                    is_num = col in meta.get("numeric_cols", [])
+                    col_type = "Continuous/Numeric Metric" if is_num else "Categorical/Text Dimension"
+
+                    col_anchors = [col.lower(), clean_col] + words_in_col
+
+                    # Dynamic domain expansion based on column naming patterns
+                    if any(t in clean_col for t in ["count", "number", "qty", "quantity", "num"]):
+                        col_anchors.extend(["count", "how many", "quantity", "total", "most", "highest number", "number of"])
+                    if any(t in clean_col for t in ["year", "date", "created", "time"]):
+                        col_anchors.extend(["year", "date", "when", "time", "calendar", "era", "released", "joined"])
+                    if any(t in clean_col for t in ["rate", "rating", "score", "grade", "gpa"]):
+                        col_anchors.extend(["rating", "score", "rate", "grade", "rank", "acclaimed", "marks", "gpa"])
+                    if any(t in clean_col for t in ["price", "cost", "budget", "revenue", "sales", "fee", "amount", "salary", "gross"]):
+                        col_anchors.extend(["cost", "money", "expensive", "cheap", "financial", "sales", "revenue", "amount", "earnings", "collection"])
+                    if any(t in clean_col for t in ["director", "author", "creator", "maker"]):
+                        col_anchors.extend(["director", "directors", "directed", "filmmaker", "who made", "author"])
+                    if any(t in clean_col for t in ["actor", "star", "lead", "hero", "player"]):
+                        col_anchors.extend(["actor", "actors", "star", "starred", "starring", "hero", "lead", "cast"])
+
+                    if col not in concepts:
+                        concepts[col] = {
+                            "table": tbl,
+                            "type": col_type,
+                            "description": f"Dynamic column '{col}' from table '{tbl}'",
+                            "anchors": list(set(col_anchors))
+                        }
+                    else:
+                        existing = concepts[col].get("anchors", [])
+                        concepts[col]["anchors"] = list(set(existing + col_anchors))
+        except Exception:
+            pass
+        return concepts
+
     def analyze_query_embeddings(self, question: str) -> list:
         """
         Computes multi-target cosine similarity across schema representations.
@@ -164,7 +232,8 @@ class SemanticVectorEngine:
         words = re.findall(r'\b\w+\b', q_low)
 
         results = []
-        for col, meta in self.SCHEMA_CONCEPTS.items():
+        active_concepts = self.get_dynamic_schema_concepts()
+        for col, meta in active_concepts.items():
             best_sim = 0.0
             best_matched_term = ""
 
