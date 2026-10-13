@@ -78,6 +78,46 @@ class SemanticVectorEngine:
                 "genre", "category", "action", "sci-fi", "scifi", "science fiction", "crime", "biography", "war", "western",
                 "romance", "comedy", "drama", "animation", "thriller", "fantasy", "adventure"
             ]
+        },
+        "director_name": {
+            "table": "directors",
+            "type": "Relational Entity",
+            "description": "Filmmaker, director, director name, who directed or made the movie",
+            "anchors": [
+                "director", "directors", "directed", "filmmaker", "directing", "who made", "maker", "helmed", "directed by"
+            ]
+        },
+        "actor_name": {
+            "table": "actors",
+            "type": "Relational Entity",
+            "description": "Movie actor, actress, star, lead performer, cast member, hero, heroine",
+            "anchors": [
+                "actor", "actors", "actress", "star", "starred", "starring", "hero", "heroine", "cast", "lead actor", "performed"
+            ]
+        },
+        "movie_count": {
+            "table": "movies / directors",
+            "type": "Aggregation Metric",
+            "description": "Volume, quantity, total number of movies, most films directed, movie count",
+            "anchors": [
+                "highest number of movies", "most movies", "number of movies", "movie count", "how many movies", "film count", "directed the most", "quantity of movies"
+            ]
+        },
+        "release_year": {
+            "table": "movies",
+            "type": "Temporal Dimension",
+            "description": "Movie release calendar year, vintage, decade, release date",
+            "anchors": [
+                "release year", "year", "released", "released in", "decade", "calendar year", "date"
+            ]
+        },
+        "title": {
+            "table": "movies",
+            "type": "Primary Entity",
+            "description": "Movie title, picture name, film, cinema release",
+            "anchors": [
+                "movie", "movies", "film", "films", "picture", "pictures", "title", "cinema"
+            ]
         }
     }
 
