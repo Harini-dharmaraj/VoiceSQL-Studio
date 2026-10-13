@@ -464,124 +464,182 @@ def show_voice_query_page():
             else:
                 st.info("No query results available to visualize.")
 
-        # TAB 3: Ask & Predict (AutoML & Decision Making)
+        # TAB 3: Ask & Predict (Universal AutoML & Decision Engine)
         with tab_predict:
-            st.markdown("##### 🔮 Automated Movie Box Office & Commercial Success Prediction (AutoML)")
-            st.caption("On-the-fly Machine Learning model trained across 125 movie industry benchmarks. Simulates investment decisions, forecasts box office revenue, and flags statistical anomalies.")
+            st.markdown("##### 🔮 Universal AutoML & Predictive Decision Engine")
+            st.caption("Works dynamically with ANY dataset — user-uploaded CSVs, custom tables, or database records. Automatically detects regression and classification targets, trains models on the fly, and forecasts outcomes.")
 
-            from ml_engine.movie_predictor import movie_automl
+            from ml_engine.universal_automl import UniversalAutoMLEngine
+            from database.db_connection import get_db_connection
+            from utils.config_manager import load_config
             import altair as alt
 
+            # 1. Collect Available Datasets / Tables
+            dataset_options = {}
+            if "active_result" in st.session_state and st.session_state.active_result is not None:
+                success, df_or_msg, latency, err = st.session_state.active_result
+                if success and isinstance(df_or_msg, pd.DataFrame) and len(df_or_msg) >= 4:
+                    dataset_options[f"⚡ Active Query Output ({len(df_or_msg)} rows)"] = df_or_msg
+
+            # Query all tables from DB
             try:
-                ml_metrics = movie_automl.train_models()
-            except Exception as e:
-                ml_metrics = {"clf_accuracy": 80.0, "r2_score": 0.44, "total_samples": 125}
+                conn = get_db_connection()
+                cur = conn.cursor()
+                config = load_config()
+                if config.get("db_type") == "SQLite":
+                    cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT IN ('sqlite_sequence', 'query_history', 'users', 'user_datasets');")
+                else:
+                    cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = %s AND table_name NOT IN ('query_history', 'users', 'user_datasets');", (config.get("mysql_database", "voice_to_sql"),))
+                tables = [r[0] for r in cur.fetchall()]
+                for t in tables:
+                    df_t = pd.read_sql_query(f"SELECT * FROM {t} LIMIT 500;", conn)
+                    if len(df_t) >= 4:
+                        dataset_options[f"📁 Table: {t} ({len(df_t)} rows)"] = df_t
+                cur.close()
+                conn.close()
+            except Exception:
+                pass
 
-            col_m1, col_m2, col_m3, col_m4 = st.columns(4)
-            with col_m1:
-                st.metric("Model Algorithm", "Random Forest Regressor", help="Ensemble of 100 decision trees predicting continuous box office gross.")
-            with col_m2:
-                st.metric("Classification Accuracy", f"{ml_metrics['clf_accuracy']}%", help="Accuracy predicting Hit, Break-Even, or Flop.")
-            with col_m3:
-                st.metric("Goodness of Fit (R²)", f"{ml_metrics['r2_score']:.2f}", help="Coefficient of determination.")
-            with col_m4:
-                st.metric("Training Samples", f"{ml_metrics['total_samples']} Movies", help="Real movie benchmark records utilized for training.")
-
-            st.markdown("<hr style='margin: 16px 0;'>", unsafe_allow_html=True)
-            st.markdown("#### 🎬 Real-Time Movie Investment Simulator")
-            st.write("Adjust production parameters below to simulate greenlighting a new film and predict its financial outcome:")
-
-            col_sim_l, col_sim_r = st.columns([1.2, 1.8])
-            with col_sim_l:
-                sim_budget = st.slider("💰 Production Budget ($ Millions)", min_value=5, max_value=350, value=100, step=5)
-                sim_genre = st.selectbox("🎭 Target Genre", ["Action", "Sci-Fi", "Drama", "Horror", "Comedy", "Crime", "Adventure", "Animation", "Biography", "Western"])
-                sim_rating = st.slider("⭐ Expected Critical Rating (IMDb)", min_value=4.0, max_value=9.5, value=8.0, step=0.1)
-                sim_duration = st.slider("⏱️ Runtime Duration (Minutes)", min_value=85, max_value=210, value=140, step=5)
-                sim_oscars = st.selectbox("🏆 Director Oscar Pedigree", [0, 1, 2, 3, 4], index=1)
-
-            with col_sim_r:
-                pred_res = movie_automl.predict_new_movie(
-                    budget_millions=float(sim_budget),
-                    genre=sim_genre,
-                    rating=float(sim_rating),
-                    duration_min=int(sim_duration),
-                    oscars_won=int(sim_oscars)
-                )
-
-                verdict = pred_res["success_verdict"]
-                verdict_color = "#10B981" if verdict == "Blockbuster Hit" else ("#F59E0B" if verdict == "Moderate Hit" else "#EF4444")
-                verdict_bg = "rgba(16, 185, 129, 0.1)" if verdict == "Blockbuster Hit" else ("rgba(245, 158, 11, 0.1)" if verdict == "Moderate Hit" else "rgba(239, 68, 68, 0.1)")
-
-                st.markdown(f"""
-                <div style="background: {verdict_bg}; border: 1.5px solid {verdict_color}; border-radius: 12px; padding: 18px; margin-bottom: 14px;">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-                        <span style="font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">AI Commercial Forecast</span>
-                        <span style="font-size: 14px; font-weight: 800; color: {verdict_color}; background: #FFF; padding: 4px 10px; border-radius: 9999px; border: 1px solid {verdict_color};">
-                            {verdict}
-                        </span>
-                    </div>
-                    <div style="font-size: 28px; font-weight: 800; color: #0F172A; margin-bottom: 4px;">
-                        ${pred_res['predicted_box_office']:,.1f} Million
-                    </div>
-                    <div style="font-size: 13px; color: #64748B;">
-                        Predicted Global Box Office Gross • Expected ROI: <b>{pred_res['predicted_roi']}x</b> (Profit: <b>${pred_res['predicted_profit']:+,.1f}M</b>)
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-
-                st.markdown("##### 📊 Outcome Probability Distribution")
-                probs = pred_res["class_probabilities"]
-                prob_df = pd.DataFrame({
-                    "Outcome": list(probs.keys()),
-                    "Probability (%)": list(probs.values())
-                })
-                prob_chart = alt.Chart(prob_df).mark_bar(cornerRadius=6).encode(
-                    x=alt.X("Probability (%):Q", scale=alt.Scale(domain=[0, 100])),
-                    y=alt.Y("Outcome:N", sort="-x"),
-                    color=alt.Color("Outcome:N", scale=alt.Scale(
-                        domain=["Blockbuster Hit", "Moderate Hit", "Box Office Flop"],
-                        range=["#10B981", "#F59E0B", "#EF4444"]
-                    )),
-                    tooltip=["Outcome", "Probability (%)"]
-                ).properties(height=130)
-                st.altair_chart(prob_chart, use_container_width=True)
-
-            st.markdown("<hr style='margin: 18px 0;'>", unsafe_allow_html=True)
-            st.markdown("#### 🚨 Unsupervised Anomaly Detection (Isolation Forest)")
-            st.caption("Statistical outliers detected by machine learning — identifying rare runaway hits and massive production disasters:")
-
-            supers, disasters = movie_automl.get_detected_anomalies()
-            col_anom1, col_anom2 = st.columns(2)
-            with col_anom1:
-                st.markdown("""
-                <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 10px; padding: 12px; margin-bottom: 10px;">
-                    <div style="font-weight: 700; color: #166534; font-size: 14px;">🌟 Super-Performers (Astronomical ROI Outliers)</div>
-                    <div style="font-size: 12px; color: #4B5563;">Tiny budgets with massive, runaway box office collections:</div>
-                </div>
-                """, unsafe_allow_html=True)
-                if not supers.empty:
-                    st.dataframe(
-                        supers[["title", "budget_millions", "box_office_millions", "roi_multiple"]].head(5).rename(
-                            columns={"title": "Title", "budget_millions": "Budget ($M)", "box_office_millions": "Gross ($M)", "roi_multiple": "ROI Multiple"}
-                        ),
-                        use_container_width=True,
-                        hide_index=True
+            if not dataset_options:
+                st.info("No datasets with sufficient rows (minimum 4) available for machine learning. Please upload a dataset in Database Manager or execute a query.")
+            else:
+                col_sel1, col_sel2 = st.columns([2, 1])
+                with col_sel1:
+                    chosen_source = st.selectbox(
+                        "📁 Select Dataset to Analyze & Predict:",
+                        list(dataset_options.keys()),
+                        index=0
                     )
-            with col_anom2:
-                st.markdown("""
-                <div style="background: #FEF2F2; border: 1px solid #FECACA; border-radius: 10px; padding: 12px; margin-bottom: 10px;">
-                    <div style="font-weight: 700; color: #991B1B; font-size: 14px;">⚠️ Box Office Disasters (Heavy Loss Outliers)</div>
-                    <div style="font-size: 12px; color: #4B5563;">Huge budgets with catastrophic, underperforming returns:</div>
-                </div>
-                """, unsafe_allow_html=True)
-                if not disasters.empty:
-                    st.dataframe(
-                        disasters[["title", "budget_millions", "box_office_millions", "roi_multiple"]].head(5).rename(
-                            columns={"title": "Title", "budget_millions": "Budget ($M)", "box_office_millions": "Gross ($M)", "roi_multiple": "ROI Multiple"}
-                        ),
-                        use_container_width=True,
-                        hide_index=True
-                    )
+                target_df = dataset_options[chosen_source]
+
+                # Inspect chosen dataset
+                auto_engine = UniversalAutoMLEngine()
+                info = auto_engine.inspect_dataframe(target_df)
+                cand_cols = info["candidate_columns"]
+
+                if not cand_cols or len(cand_cols) < 2:
+                    st.warning("⚠️ The selected dataset does not have enough distinct feature columns for machine learning.")
+                else:
+                    col_t_l, col_t_r = st.columns([1, 2])
+                    with col_t_l:
+                        default_t_idx = cand_cols.index(info["default_target"]) if info["default_target"] in cand_cols else 0
+                        chosen_target = st.selectbox("🎯 Target Column to Predict:", cand_cols, index=default_t_idx)
+                    with col_t_r:
+                        feat_candidates = [c for c in cand_cols if c != chosen_target]
+                        chosen_features = st.multiselect("🧩 Feature Predictors:", feat_candidates, default=feat_candidates)
+
+                    if not chosen_features:
+                        st.warning("Please select at least one feature column to train the model.")
+                    else:
+                        with st.spinner("Training predictive machine learning model..."):
+                            try:
+                                ml_res = auto_engine.train(target_df, chosen_target, chosen_features)
+                                is_train_ok = True
+                            except Exception as ex:
+                                st.error(f"❌ Training error: {ex}")
+                                is_train_ok = False
+
+                        if is_train_ok:
+                            # KPI Cards
+                            col_k1, col_k2, col_k3, col_k4 = st.columns(4)
+                            with col_k1:
+                                st.metric("ML Task Type", ml_res["task_type"], help="Auto-detected problem formulation.")
+                            with col_k2:
+                                st.metric(ml_res["primary_metric_name"], f"{ml_res['primary_metric_value']}", help="Validation test score.")
+                            with col_k3:
+                                sec_name = "Mean Abs Error (MAE)" if ml_res["task_type"] == "Regression" else "F1-Score"
+                                sec_val = f"{ml_res.get('mae', 'N/A')}" if ml_res["task_type"] == "Regression" else f"{ml_res.get('f1_score', 'N/A')}"
+                                st.metric(sec_name, sec_val)
+                            with col_k4:
+                                st.metric("Sample Size", f"{ml_res['total_rows']} Rows", help="Number of records analyzed.")
+
+                            st.markdown("<hr style='margin: 16px 0;'>", unsafe_allow_html=True)
+                            st.markdown(f"#### 🎛️ Live Prediction Simulator for `{chosen_target}`")
+                            st.caption(f"Adjust feature inputs below to predict the outcome for any new record in this dataset:")
+
+                            col_sim_in, col_sim_out = st.columns([1.3, 1.7])
+                            input_values = {}
+                            with col_sim_in:
+                                for feat in chosen_features:
+                                    if feat in auto_engine.numeric_features:
+                                        series = target_df[feat].dropna()
+                                        min_v = float(series.min())
+                                        max_v = float(series.max())
+                                        med_v = float(series.median())
+                                        step_v = 1.0 if pd.api.types.is_integer_dtype(series) else round((max_v - min_v) / 100.0, 2)
+                                        if min_v == max_v:
+                                            max_v = min_v + 10.0
+                                        step_v = max(step_v, 0.01)
+                                        input_values[feat] = st.slider(f"{feat}", min_value=min_v, max_value=max_v, value=med_v, step=step_v)
+                                    elif feat in auto_engine.categorical_features:
+                                        unique_opts = sorted(list(target_df[feat].dropna().astype(str).unique()))
+                                        input_values[feat] = st.selectbox(f"{feat}", unique_opts if unique_opts else ["N/A"])
+
+                            with col_sim_out:
+                                try:
+                                    pred_output = auto_engine.predict(input_values)
+                                    if pred_output["task_type"] == "regression":
+                                        val = pred_output["predicted_value"]
+                                        st.markdown(f"""
+                                        <div style="background: rgba(16, 185, 129, 0.1); border: 1.5px solid #10B981; border-radius: 12px; padding: 20px; margin-bottom: 14px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">
+                                                Predicted {chosen_target}
+                                            </div>
+                                            <div style="font-size: 32px; font-weight: 800; color: #0F172A; margin-bottom: 4px;">
+                                                {val:,.2f}
+                                            </div>
+                                            <div style="font-size: 13px; color: #64748B;">
+                                                Continuous regression estimate based on selected feature parameters.
+                                            </div>
+                                        </div>
+                                        """, unsafe_allow_html=True)
+                                    else:
+                                        cls_val = pred_output["predicted_class"]
+                                        st.markdown(f"""
+                                        <div style="background: rgba(59, 130, 246, 0.1); border: 1.5px solid #3B82F6; border-radius: 12px; padding: 20px; margin-bottom: 14px;">
+                                            <div style="font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">
+                                                Predicted Class: {chosen_target}
+                                            </div>
+                                            <div style="font-size: 28px; font-weight: 800; color: #1E40AF; margin-bottom: 4px;">
+                                                {cls_val}
+                                            </div>
+                                        </div>
+                                        """, unsafe_allow_html=True)
+
+                                        probs = pred_output.get("probabilities", {})
+                                        if probs:
+                                            st.markdown("##### Probability Breakdown")
+                                            prob_df = pd.DataFrame({"Class": list(probs.keys()), "Probability (%)": list(probs.values())})
+                                            p_chart = alt.Chart(prob_df).mark_bar(cornerRadius=6).encode(
+                                                x=alt.X("Probability (%):Q", scale=alt.Scale(domain=[0, 100])),
+                                                y=alt.Y("Class:N", sort="-x"),
+                                                color=alt.Color("Class:N", legend=None),
+                                                tooltip=["Class", "Probability (%)"]
+                                            ).properties(height=120)
+                                            st.altair_chart(p_chart, use_container_width=True)
+                                except Exception as p_ex:
+                                    st.error(f"Prediction error: {p_ex}")
+
+                            # Feature Importance Bar Chart
+                            df_imp = auto_engine.get_feature_importances()
+                            if not df_imp.empty and len(df_imp) > 1:
+                                st.markdown("<hr style='margin: 16px 0;'>", unsafe_allow_html=True)
+                                st.markdown("#### 📊 Feature Importance Ranking")
+                                st.caption("Shows which columns in this dataset have the greatest predictive influence on the target:")
+                                imp_chart = alt.Chart(df_imp.head(8)).mark_bar(cornerRadius=4, color="#6366F1").encode(
+                                    x=alt.X("Importance:Q", title="Relative Weight"),
+                                    y=alt.Y("Feature:N", sort="-x", title=None),
+                                    tooltip=["Feature", alt.Tooltip("Importance:Q", format=".3f")]
+                                ).properties(height=min(220, len(df_imp) * 30))
+                                st.altair_chart(imp_chart, use_container_width=True)
+
+                            # Anomaly detection for this dataset
+                            if hasattr(auto_engine, "anomalies_df") and auto_engine.anomalies_df is not None and not auto_engine.anomalies_df.empty:
+                                st.markdown("<hr style='margin: 16px 0;'>", unsafe_allow_html=True)
+                                st.markdown("#### 🚨 Outlier & Anomaly Detection (Isolation Forest)")
+                                st.caption(f"Found {len(auto_engine.anomalies_df)} unusual records exhibiting extreme mathematical deviation in this dataset:")
+                                disp_cols = [c for c in auto_engine.anomalies_df.columns if c != "is_outlier"]
+                                st.dataframe(auto_engine.anomalies_df[disp_cols].head(6), use_container_width=True, hide_index=True)
 
         # TAB 3: SQL Breakdown & Explainable AI (XAI)
         with tab_sql:
