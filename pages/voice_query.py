@@ -466,12 +466,15 @@ def show_voice_query_page():
 
         # TAB 3: Ask & Predict (Universal AutoML & Decision Engine)
         with tab_predict:
-            # 1. Collect Available Datasets / Tables
+            user_q = str(st.session_state.get("user_query_text", "")).lower()
             dataset_options = {}
+            active_df = None
             if "active_result" in st.session_state and st.session_state.active_result is not None:
                 success, df_or_msg, latency, err = st.session_state.active_result
-                if success and isinstance(df_or_msg, pd.DataFrame) and len(df_or_msg) >= 4:
-                    dataset_options[f"⚡ Active Query Output ({len(df_or_msg)} rows)"] = df_or_msg
+                if success and isinstance(df_or_msg, pd.DataFrame):
+                    active_df = df_or_msg
+                    if len(df_or_msg) >= 4:
+                        dataset_options[f"⚡ Active Query Output ({len(df_or_msg)} rows)"] = df_or_msg
 
             # Query all tables from DB
             try:
@@ -483,6 +486,22 @@ def show_voice_query_page():
                 else:
                     cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = %s AND table_name NOT IN ('query_history', 'users', 'user_datasets');", (config.get("mysql_database", "voice_to_sql"),))
                 tables = [r[0] for r in cur.fetchall()]
+
+                # Smart relevance sorting: prioritize table matching active question
+                def table_relevance(tbl_name):
+                    t_low = tbl_name.lower()
+                    if "director" in user_q and "director" in t_low:
+                        return 0
+                    if any(w in user_q for w in ["movie", "film", "box office", "budget", "rating"]) and "movie" in t_low:
+                        return 0
+                    if "actor" in user_q and "actor" in t_low:
+                        return 0
+                    if "student" in user_q and "student" in t_low:
+                        return 0
+                    return 1
+
+                tables = sorted(tables, key=table_relevance)
+
                 for t in tables:
                     df_t = pd.read_sql_query(f"SELECT * FROM {t} LIMIT 500;", conn)
                     if len(df_t) >= 4:
@@ -495,8 +514,22 @@ def show_voice_query_page():
             if not dataset_options:
                 st.info("ℹ️ Run a voice or text query above, or upload a dataset in **Database Manager** to activate predictive forecasting.")
             else:
-                chosen_source = list(dataset_options.keys())[0]
+                col_d_sel1, col_d_sel2 = st.columns([3.2, 1.2])
+                with col_d_sel1:
+                    chosen_source = st.selectbox(
+                        "📁 Active Dataset for Machine Learning:",
+                        list(dataset_options.keys()),
+                        index=0,
+                        key="predict_active_dataset_selector"
+                    )
+                with col_d_sel2:
+                    st.caption("Change dataset anytime via dropdown")
+
                 target_df = dataset_options[chosen_source]
+
+                # If query had < 4 rows, inform user clearly why table was used
+                if active_df is not None and len(active_df) < 4 and not chosen_source.startswith("⚡ Active Query"):
+                    st.info(f"ℹ️ **Sample Size Notice:** Your active query returned **{len(active_df)} rows**. Machine learning models require at least 4 rows to train. The AI automatically selected **{chosen_source}** so you can forecast trends on related data!")
 
                 # Inspect dataset & find target
                 auto_engine = UniversalAutoMLEngine()
@@ -670,12 +703,8 @@ def show_voice_query_page():
                                     st.altair_chart(imp_chart, use_container_width=True)
 
                             st.write("---")
-                            st.caption("You can switch datasets or select other target columns here:")
-                            col_cfg1, col_cfg2 = st.columns(2)
-                            with col_cfg1:
-                                st.selectbox("Switch Dataset Source:", list(dataset_options.keys()), index=0, key="adv_dataset_switch")
-                            with col_cfg2:
-                                st.selectbox("Switch Target Column:", cand_cols, index=cand_cols.index(chosen_target) if chosen_target in cand_cols else 0, key="adv_target_switch")
+                            st.caption("Inspect target prediction column:")
+                            st.selectbox("Target Column Evaluated:", cand_cols, index=cand_cols.index(chosen_target) if chosen_target in cand_cols else 0, key="adv_target_switch")
 
         # TAB 3: SQL Breakdown & Explainable AI (XAI)
         with tab_sql:
