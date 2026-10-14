@@ -803,7 +803,8 @@ def show_voice_query_page():
                                     st.write(f"- **F1 Score:** `{ml_res.get('f1_score', 'N/A')}`")
 
                             with col_adv2:
-                                if not df_imp.empty:
+                                df_imp = auto_engine.get_feature_importances()
+                                if df_imp is not None and not df_imp.empty:
                                     st.write("**Top Feature Importances:**")
                                     imp_chart = alt.Chart(df_imp.head(6)).mark_bar(cornerRadius=4, color="#6366F1").encode(
                                         x=alt.X("Importance:Q", title="Weight"),
