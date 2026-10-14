@@ -597,10 +597,23 @@ def show_voice_query_page():
 
                     if is_train_ok:
                         st.markdown("<hr style='margin: 20px 0 16px 0;'>", unsafe_allow_html=True)
-                        st.markdown("#### 🎮 Live 'What-If' Decision Simulator")
-                        st.caption(f"Adjust 1 or 2 key business parameters below to see how the AI predicts future **{chosen_target.replace('_', ' ').title()}** in real-time:")
 
-                        # Pick ONLY the top 2 or 3 most influential features to keep UI super clean and user-friendly!
+                        # SECTION A: Direct Natural Language Predictive Question
+                        st.markdown("#### 💬 Ask a Predictive Question (Natural Language)")
+                        st.caption(f"Type any hypothetical or predictive question in plain English to forecast **{chosen_target.replace('_', ' ').title()}**:")
+
+                        col_nl_q, col_nl_b = st.columns([4, 1.2])
+                        with col_nl_q:
+                            user_pred_q = st.text_input(
+                                "Predictive Question Input:",
+                                placeholder=f"e.g. Predict {chosen_target.replace('_', ' ')} for an 80 million budget movie (or: What if budget is 120M?)",
+                                label_visibility="collapsed",
+                                key="ask_predict_nl_input"
+                            )
+                        with col_nl_b:
+                            predict_btn_clicked = st.button("🔮 Predict Outcome", type="primary", use_container_width=True, key="ask_predict_nl_btn")
+
+                        # Pick ONLY the top 2 or 3 most influential features to keep UI super clean
                         df_imp = auto_engine.get_feature_importances()
                         top_features = []
                         if not df_imp.empty:
@@ -608,9 +621,7 @@ def show_voice_query_page():
                         if not top_features:
                             top_features = feat_candidates[:3]
 
-                        col_sim_in, col_sim_out = st.columns([1.3, 1.7])
                         input_values = {}
-
                         # Populate default median values for all features in background
                         for feat in feat_candidates:
                             if feat in auto_engine.numeric_features:
@@ -618,6 +629,58 @@ def show_voice_query_page():
                             elif feat in auto_engine.categorical_features:
                                 opts = target_df[feat].dropna().unique()
                                 input_values[feat] = str(opts[0]) if len(opts) > 0 else "N/A"
+
+                        # Parse user natural language predictive question if provided
+                        parsed_from_text = {}
+                        if user_pred_q and user_pred_q.strip():
+                            import re
+                            text_low = user_pred_q.lower()
+                            num_matches = [float(n) for n in re.findall(r'(\d+(?:\.\d+)?)', text_low)]
+                            for i, feat in enumerate(top_features):
+                                if feat in auto_engine.numeric_features and i < len(num_matches):
+                                    parsed_from_text[feat] = num_matches[i]
+                                    input_values[feat] = num_matches[i]
+                                elif feat in auto_engine.categorical_features:
+                                    for opt in target_df[feat].dropna().unique():
+                                        if str(opt).lower() in text_low:
+                                            parsed_from_text[feat] = str(opt)
+                                            input_values[feat] = str(opt)
+                                            break
+
+                            # Display prominent Natural Language Prediction Card
+                            try:
+                                nl_pred_out = auto_engine.predict(input_values)
+                                if nl_pred_out["task_type"] == "regression":
+                                    nl_val = nl_pred_out["predicted_value"]
+                                    nl_val_str = f"${nl_val:,.1f} Million" if "million" in chosen_target.lower() or "box_office" in chosen_target.lower() else f"{nl_val:,.2f}"
+                                else:
+                                    nl_val_str = str(nl_pred_out["predicted_class"])
+
+                                parsed_summary = ", ".join([f"<b>{k.replace('_', ' ').title()}:</b> {v}" for k, v in parsed_from_text.items()]) if parsed_from_text else "Based on typical baseline inputs"
+
+                                st.markdown(f"""
+                                <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 18px 22px; margin: 12px 0 16px 0;">
+                                    <div style="font-size: 12px; font-weight: 700; color: #047857; text-transform: uppercase; letter-spacing: 0.05em;">
+                                        🎯 Prediction for: <i>"{user_pred_q}"</i>
+                                    </div>
+                                    <div style="font-size: 32px; font-weight: 800; color: #065F46; margin: 4px 0;">
+                                        {chosen_target.replace('_', ' ').title()} ≈ {nl_val_str}
+                                    </div>
+                                    <div style="font-size: 13px; color: #047857;">
+                                        Parsed parameters: {parsed_summary}. Calculated by trained Machine Learning model.
+                                    </div>
+                                </div>
+                                """, unsafe_allow_html=True)
+                            except Exception as ex:
+                                st.warning(f"Could not calculate prediction for query: {ex}")
+
+                        st.markdown("<hr style='margin: 16px 0 14px 0;'>", unsafe_allow_html=True)
+
+                        # SECTION B: Live Interactive 'What-If' Simulator
+                        st.markdown("#### 🎮 Or Adjust Live 'What-If' Simulator Dials")
+                        st.caption(f"Prefer using interactive sliders? Adjust the key business dials below to see how future **{chosen_target.replace('_', ' ').title()}** changes in real-time:")
+
+                        col_sim_in, col_sim_out = st.columns([1.3, 1.7])
 
                         # Display ONLY the clean top controls for the user
                         with col_sim_in:
@@ -627,15 +690,20 @@ def show_voice_query_page():
                                     series = target_df[feat].dropna()
                                     min_v = float(series.min())
                                     max_v = float(series.max())
-                                    med_v = float(series.median())
+                                    med_v = float(parsed_from_text.get(feat, series.median()))
+                                    min_v = min(min_v, med_v)
+                                    max_v = max(max_v, med_v)
                                     if min_v == max_v:
                                         max_v = min_v + 10.0
                                     step_v = 1.0 if pd.api.types.is_integer_dtype(series) else round((max_v - min_v) / 50.0, 2)
                                     step_v = max(step_v, 0.01)
-                                    input_values[feat] = st.slider(f"⚙️ {feat_label}", min_value=min_v, max_value=max_v, value=med_v, step=step_v)
+                                    input_values[feat] = st.slider(f"⚙️ {feat_label}", min_value=min_v, max_value=max_v, value=med_v, step=step_v, key=f"sim_slider_{feat}")
                                 elif feat in auto_engine.categorical_features:
                                     unique_opts = sorted(list(target_df[feat].dropna().astype(str).unique()))
-                                    input_values[feat] = st.selectbox(f"🏷️ {feat_label}", unique_opts if unique_opts else ["N/A"])
+                                    default_opt_idx = 0
+                                    if feat in parsed_from_text and str(parsed_from_text[feat]) in unique_opts:
+                                        default_opt_idx = unique_opts.index(str(parsed_from_text[feat]))
+                                    input_values[feat] = st.selectbox(f"🏷️ {feat_label}", unique_opts if unique_opts else ["N/A"], index=default_opt_idx, key=f"sim_select_{feat}")
 
                         with col_sim_out:
                             try:
