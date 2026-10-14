@@ -613,13 +613,27 @@ def show_voice_query_page():
                         with col_nl_b:
                             predict_btn_clicked = st.button("🔮 Predict Outcome", type="primary", use_container_width=True, key="ask_predict_nl_btn")
 
-                        # Pick ONLY the top 2 or 3 most influential features to keep UI super clean
-                        df_imp = auto_engine.get_feature_importances()
+                        # Select 1 primary numeric business lever (Budget) and 1 primary category (Genre)
                         top_features = []
-                        if not df_imp.empty:
-                            top_features = [f for f in df_imp["Feature"].tolist() if f in feat_candidates][:3]
-                        if not top_features:
-                            top_features = feat_candidates[:3]
+                        primary_num = None
+                        for f in auto_engine.numeric_features:
+                            if any(k in f.lower() for k in ["budget", "cost", "price", "spending"]):
+                                primary_num = f
+                                break
+                        if not primary_num and auto_engine.numeric_features:
+                            primary_num = auto_engine.numeric_features[0]
+                        if primary_num:
+                            top_features.append(primary_num)
+
+                        primary_cat = None
+                        for f in auto_engine.categorical_features:
+                            if any(k in f.lower() for k in ["genre", "category", "type", "dept"]):
+                                primary_cat = f
+                                break
+                        if not primary_cat and auto_engine.categorical_features:
+                            primary_cat = auto_engine.categorical_features[0]
+                        if primary_cat and primary_cat not in top_features:
+                            top_features.append(primary_cat)
 
                         input_values = {}
                         # Populate default median values for all features in background
@@ -636,16 +650,16 @@ def show_voice_query_page():
                             import re
                             text_low = user_pred_q.lower()
                             num_matches = [float(n) for n in re.findall(r'(\d+(?:\.\d+)?)', text_low)]
-                            for i, feat in enumerate(top_features):
-                                if feat in auto_engine.numeric_features and i < len(num_matches):
-                                    parsed_from_text[feat] = num_matches[i]
-                                    input_values[feat] = num_matches[i]
-                                elif feat in auto_engine.categorical_features:
-                                    for opt in target_df[feat].dropna().unique():
-                                        if str(opt).lower() in text_low:
-                                            parsed_from_text[feat] = str(opt)
-                                            input_values[feat] = str(opt)
-                                            break
+                            if primary_num and num_matches:
+                                parsed_from_text[primary_num] = num_matches[0]
+                                input_values[primary_num] = num_matches[0]
+
+                            if primary_cat and primary_cat in target_df.columns:
+                                for opt in target_df[primary_cat].dropna().unique():
+                                    if str(opt).lower() in text_low:
+                                        parsed_from_text[primary_cat] = str(opt)
+                                        input_values[primary_cat] = str(opt)
+                                        break
 
                             # Display prominent Natural Language Prediction Card
                             try:
@@ -656,119 +670,116 @@ def show_voice_query_page():
                                 else:
                                     nl_val_str = str(nl_pred_out["predicted_class"])
 
-                                parsed_summary = ", ".join([f"<b>{k.replace('_', ' ').title()}:</b> {v}" for k, v in parsed_from_text.items()]) if parsed_from_text else "Based on typical baseline inputs"
+                                parsed_summary = ", ".join([f"<b>{k.replace('_', ' ').title()}:</b> {v}" for k, v in parsed_from_text.items()]) if parsed_from_text else "Default baseline values"
 
                                 # Calculate ROI multiplier for explanation
                                 roi_info = ""
-                                if "budget" in str(parsed_from_text).lower() and nl_pred_out["task_type"] == "regression":
-                                    for k, v in parsed_from_text.items():
-                                        if "budget" in k.lower() and float(v) > 0:
-                                            mult = nl_val / float(v)
-                                            roi_info = f"• <b>ROI Multiplier:</b> At ${float(v):,.1f}M budget, estimated box office return is <b>{mult:.1f}x</b>.<br/>"
+                                if primary_num and primary_num in parsed_from_text and nl_pred_out["task_type"] == "regression":
+                                    b_val = float(parsed_from_text[primary_num])
+                                    if b_val > 0:
+                                        mult = nl_val / b_val
+                                        roi_info = f"• <b>ROI Multiplier:</b> At ${b_val:,.1f}M budget, estimated box office return is <b>{mult:.1f}x</b>.<br/>"
 
                                 st.markdown(f"""
-                                <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 18px 22px; margin: 12px 0 10px 0;">
+                                <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 20px 24px; margin: 14px 0 10px 0;">
                                     <div style="font-size: 12px; font-weight: 700; color: #047857; text-transform: uppercase; letter-spacing: 0.05em;">
-                                        🎯 Prediction for: <i>"{user_pred_q}"</i>
+                                        🎯 Forecast for: <i>"{user_pred_q}"</i>
                                     </div>
-                                    <div style="font-size: 32px; font-weight: 800; color: #065F46; margin: 4px 0;">
+                                    <div style="font-size: 34px; font-weight: 800; color: #065F46; margin: 4px 0;">
                                         {chosen_target.replace('_', ' ').title()} ≈ {nl_val_str}
                                     </div>
                                 </div>
                                 <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 13px; color: #334155; line-height: 1.6;">
                                     <b>💡 Why did the AI predict this? (Model Explanation):</b><br/>
                                     • <b>Algorithm Used:</b> Random Forest Regressor (Ensemble of 100 Decision Trees).<br/>
-                                    • <b>Extracted Inputs:</b> {parsed_summary}.<br/>
+                                    • <b>Inputs Recognized:</b> {parsed_summary}.<br/>
                                     {roi_info}
-                                    • <b>Learning Baseline:</b> The AI evaluated your <b>{len(target_df)} records</b> to average the predictions of 100 individual decision paths.
+                                    • <b>Learning Baseline:</b> The AI evaluated historical patterns across your <b>{len(target_df)} records</b> to average the predictions of 100 decision trees.
                                 </div>
                                 """, unsafe_allow_html=True)
                             except Exception as ex:
                                 st.warning(f"Could not calculate prediction for query: {ex}")
 
-                        st.markdown("<hr style='margin: 16px 0 14px 0;'>", unsafe_allow_html=True)
+                        # SECTION B: Optional Manual Sliders (Collapsed if question was asked)
+                        has_user_q = bool(user_pred_q and user_pred_q.strip())
+                        expander_label = "🎛️ Manual 'What-If' Parameter Sliders (Optional)" if has_user_q else "🎮 Live 'What-If' Parameter Dials"
+                        with st.expander(expander_label, expanded=not has_user_q):
+                            st.caption(f"Adjust key business parameters manually to test alternative scenarios for **{chosen_target.replace('_', ' ').title()}**:")
+                            col_sim_in, col_sim_out = st.columns([1.3, 1.7])
 
-                        # SECTION B: Live Interactive 'What-If' Simulator
-                        st.markdown("#### 🎮 Or Adjust Live 'What-If' Simulator Dials")
-                        st.caption(f"Prefer using interactive sliders? Adjust the key business dials below to see how future **{chosen_target.replace('_', ' ').title()}** changes in real-time:")
+                            with col_sim_in:
+                                for feat in top_features:
+                                    feat_label = feat.replace('_', ' ').title()
+                                    if feat in auto_engine.numeric_features:
+                                        series = target_df[feat].dropna()
+                                        min_v = float(series.min())
+                                        max_v = float(series.max())
+                                        med_v = float(parsed_from_text.get(feat, series.median()))
+                                        min_v = min(min_v, med_v)
+                                        max_v = max(max_v, med_v)
+                                        if min_v == max_v:
+                                            max_v = min_v + 10.0
+                                        step_v = 1.0 if pd.api.types.is_integer_dtype(series) else round((max_v - min_v) / 50.0, 2)
+                                        step_v = max(step_v, 0.01)
+                                        input_values[feat] = st.slider(f"⚙️ {feat_label}", min_value=min_v, max_value=max_v, value=med_v, step=step_v, key=f"sim_slider_{feat}")
+                                    elif feat in auto_engine.categorical_features:
+                                        unique_opts = sorted(list(target_df[feat].dropna().astype(str).unique()))
+                                        default_opt_idx = 0
+                                        if feat in parsed_from_text and str(parsed_from_text[feat]) in unique_opts:
+                                            default_opt_idx = unique_opts.index(str(parsed_from_text[feat]))
+                                        input_values[feat] = st.selectbox(f"🏷️ {feat_label}", unique_opts if unique_opts else ["N/A"], index=default_opt_idx, key=f"sim_select_{feat}")
 
-                        col_sim_in, col_sim_out = st.columns([1.3, 1.7])
+                            with col_sim_out:
+                                try:
+                                    pred_output = auto_engine.predict(input_values)
+                                    if pred_output["task_type"] == "regression":
+                                        val = pred_output["predicted_value"]
+                                        val_str = f"${val:,.1f} Million" if "million" in chosen_target.lower() or "box_office" in chosen_target.lower() else f"{val:,.2f}"
+                                        
+                                        slider_roi = ""
+                                        for f in top_features:
+                                            if "budget" in f.lower():
+                                                b_amt = float(input_values.get(f, 0))
+                                                if b_amt > 0:
+                                                    mult = val / b_amt
+                                                    slider_roi = f"• <b>Expected ROI Multiplier:</b> At ${b_amt:,.1f}M budget, estimated collection is <b>{mult:.1f}x</b>.<br/>"
 
-                        # Display ONLY the clean top controls for the user
-                        with col_sim_in:
-                            for feat in top_features:
-                                feat_label = feat.replace('_', ' ').title()
-                                if feat in auto_engine.numeric_features:
-                                    series = target_df[feat].dropna()
-                                    min_v = float(series.min())
-                                    max_v = float(series.max())
-                                    med_v = float(parsed_from_text.get(feat, series.median()))
-                                    min_v = min(min_v, med_v)
-                                    max_v = max(max_v, med_v)
-                                    if min_v == max_v:
-                                        max_v = min_v + 10.0
-                                    step_v = 1.0 if pd.api.types.is_integer_dtype(series) else round((max_v - min_v) / 50.0, 2)
-                                    step_v = max(step_v, 0.01)
-                                    input_values[feat] = st.slider(f"⚙️ {feat_label}", min_value=min_v, max_value=max_v, value=med_v, step=step_v, key=f"sim_slider_{feat}")
-                                elif feat in auto_engine.categorical_features:
-                                    unique_opts = sorted(list(target_df[feat].dropna().astype(str).unique()))
-                                    default_opt_idx = 0
-                                    if feat in parsed_from_text and str(parsed_from_text[feat]) in unique_opts:
-                                        default_opt_idx = unique_opts.index(str(parsed_from_text[feat]))
-                                    input_values[feat] = st.selectbox(f"🏷️ {feat_label}", unique_opts if unique_opts else ["N/A"], index=default_opt_idx, key=f"sim_select_{feat}")
+                                        top_feat_str = ", ".join([f"<b>{f.replace('_', ' ').title()}:</b> {input_values.get(f, 'N/A')}" for f in top_features])
 
-                        with col_sim_out:
-                            try:
-                                pred_output = auto_engine.predict(input_values)
-                                if pred_output["task_type"] == "regression":
-                                    val = pred_output["predicted_value"]
-                                    val_str = f"${val:,.1f} Million" if "million" in chosen_target.lower() or "box_office" in chosen_target.lower() else f"{val:,.2f}"
-                                    
-                                    # Calculate ROI multiplier for slider inputs
-                                    slider_roi = ""
-                                    for f in top_features:
-                                        if "budget" in f.lower():
-                                            b_amt = float(input_values.get(f, 0))
-                                            if b_amt > 0:
-                                                mult = val / b_amt
-                                                slider_roi = f"• <b>Expected ROI Multiplier:</b> At ${b_amt:,.1f}M budget, estimated collection is <b>{mult:.1f}x</b>.<br/>"
-
-                                    top_feat_str = ", ".join([f"<b>{f.replace('_', ' ').title()}:</b> {input_values.get(f, 'N/A')}" for f in top_features])
-
-                                    st.markdown(f"""
-                                    <div style="background: #F0FDF4; border: 2px solid #22C55E; border-radius: 12px; padding: 22px; text-align: center; margin-top: 4px;">
-                                        <div style="font-size: 12px; font-weight: 700; color: #166534; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
-                                            🎯 Predicted Outcome: {chosen_target.replace('_', ' ').title()}
+                                        st.markdown(f"""
+                                        <div style="background: #F0FDF4; border: 2px solid #22C55E; border-radius: 12px; padding: 22px; text-align: center; margin-top: 4px;">
+                                            <div style="font-size: 12px; font-weight: 700; color: #166534; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+                                                🎯 Predicted Outcome: {chosen_target.replace('_', ' ').title()}
+                                            </div>
+                                            <div style="font-size: 36px; font-weight: 800; color: #15803D; margin-bottom: 4px;">
+                                                {val_str}
+                                            </div>
+                                            <div style="font-size: 13px; color: #166534;">
+                                                Calculated instantly by trained Machine Learning model based on your slider inputs.
+                                            </div>
                                         </div>
-                                        <div style="font-size: 36px; font-weight: 800; color: #15803D; margin-bottom: 4px;">
-                                            {val_str}
+                                        <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 18px; margin-top: 10px; font-size: 13px; color: #334155; line-height: 1.6;">
+                                            <b>💡 Why was this predicted? (Model Reasoning):</b><br/>
+                                            • <b>Algorithm Used:</b> Random Forest Regressor (100 Decision Trees Ensemble).<br/>
+                                            • <b>Active Inputs:</b> {top_feat_str}.<br/>
+                                            {slider_roi}
+                                            • <b>Mathematical Basis:</b> The model mapped these parameters through 100 decision trees trained on your <b>{len(target_df)} records</b> to compute this consensus forecast.
                                         </div>
-                                        <div style="font-size: 13px; color: #166534;">
-                                            Calculated instantly by trained Machine Learning model based on your slider inputs.
+                                        """, unsafe_allow_html=True)
+                                    else:
+                                        cls_val = pred_output["predicted_class"]
+                                        st.markdown(f"""
+                                        <div style="background: #EFF6FF; border: 2px solid #3B82F6; border-radius: 12px; padding: 22px; text-align: center; margin-top: 4px;">
+                                            <div style="font-size: 12px; font-weight: 700; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
+                                                🎯 Predicted Category: {chosen_target.replace('_', ' ').title()}
+                                            </div>
+                                            <div style="font-size: 32px; font-weight: 800; color: #1D4ED8; margin-bottom: 4px;">
+                                                {cls_val}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 18px; margin-top: 10px; font-size: 13px; color: #334155; line-height: 1.6;">
-                                        <b>💡 Why was this predicted? (Model Reasoning):</b><br/>
-                                        • <b>Algorithm Used:</b> Random Forest Regressor (100 Decision Trees Ensemble).<br/>
-                                        • <b>Active Inputs:</b> {top_feat_str}.<br/>
-                                        {slider_roi}
-                                        • <b>Mathematical Basis:</b> The model mapped these parameters through 100 decision trees trained on your <b>{len(target_df)} records</b> to compute this consensus forecast.
-                                    </div>
-                                    """, unsafe_allow_html=True)
-                                else:
-                                    cls_val = pred_output["predicted_class"]
-                                    st.markdown(f"""
-                                    <div style="background: #EFF6FF; border: 2px solid #3B82F6; border-radius: 12px; padding: 22px; text-align: center; margin-top: 4px;">
-                                        <div style="font-size: 12px; font-weight: 700; color: #1E40AF; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
-                                            🎯 Predicted Category: {chosen_target.replace('_', ' ').title()}
-                                        </div>
-                                        <div style="font-size: 32px; font-weight: 800; color: #1D4ED8; margin-bottom: 4px;">
-                                            {cls_val}
-                                        </div>
-                                    </div>
-                                    """, unsafe_allow_html=True)
-                            except Exception as p_ex:
-                                st.error(f"Prediction calculation: {p_ex}")
+                                        """, unsafe_allow_html=True)
+                                except Exception as p_ex:
+                                    st.error(f"Prediction calculation: {p_ex}")
 
                         # Simple Plain English Anomaly Highlights
                         if hasattr(auto_engine, "anomalies_df") and auto_engine.anomalies_df is not None and not auto_engine.anomalies_df.empty:
