@@ -47,6 +47,7 @@ def show_sidebar():
 
     nav_map = {
         "Voice Assistant": "🎙️  Voice Studio",
+        "Overview": "⚡  Home & Architecture",
         "Analytics": "📊  Metrics & Analytics",
         "Database": "🗄️  Database Manager",
         "History": "📜  Query History",
@@ -88,9 +89,16 @@ def show_sidebar():
 
         st.caption("WORKSPACE NAVIGATION")
 
+        nav_options = list(nav_map.keys())
+        default_idx = 0
+        override = st.session_state.pop("nav_override", None)
+        if override in nav_options:
+            default_idx = nav_options.index(override)
+
         page = st.radio(
             "Navigation",
-            options=list(nav_map.keys()),
+            options=nav_options,
+            index=default_idx,
             format_func=lambda x: nav_map.get(x, x),
             label_visibility="collapsed"
         )

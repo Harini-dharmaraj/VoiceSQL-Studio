@@ -350,3 +350,29 @@ audio {
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
 }
+
+/* ========================================================
+   LANDING PAGE & AUTH STYLING
+   ======================================================== */
+.landing-hero-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+    margin-bottom: 24px;
+}
+
+.landing-telemetry-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.landing-telemetry-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+}

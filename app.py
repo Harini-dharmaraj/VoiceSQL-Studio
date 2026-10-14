@@ -76,6 +76,9 @@ elif selected == "Analytics":
     show_analytics_page()
 elif selected == "Settings":
     show_settings()
+elif selected == "Overview":
+    from pages.login import show_landing_page
+    show_landing_page(authenticated=True)
 else:
     # Default landing: Voice Studio
     show_voice_query_page()
