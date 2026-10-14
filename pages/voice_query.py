@@ -969,19 +969,12 @@ def _render_smart_chart(df: pd.DataFrame):
                 st.warning("Please select at least one numeric metric to compare.")
                 return
 
-            melted = pd.melt(df, id_vars=[dim_choice], value_vars=selected_compare_metrics, var_name="Metric", value_name="Value")
-            chart = alt.Chart(melted).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
-                x=alt.X(f"{dim_choice}:N", title=dim_choice.replace('_', ' ').title()),
-                xOffset="Metric:N",
-                y=alt.Y("Value:Q", title="Value"),
-                color=alt.Color("Metric:N", title="Metric"),
-                tooltip=[
-                    alt.Tooltip(f"{dim_choice}:N", title=dim_choice.replace('_', ' ').title()),
-                    alt.Tooltip("Metric:N"),
-                    alt.Tooltip("Value:Q", format=",.2f")
-                ]
-            ).properties(height=380).interactive()
-            st.altair_chart(chart, use_container_width=True)
+            st.bar_chart(
+                data=df,
+                x=dim_choice,
+                y=selected_compare_metrics,
+                stack=False
+            )
             return
 
         # Standard fallback to single-metric rendering
@@ -991,23 +984,24 @@ def _render_smart_chart(df: pd.DataFrame):
             with col_ctl2:
                 x_col = st.selectbox("🏷️ Dimension (X-Axis):", cat_cols if cat_cols else metric_cols, index=0, key="multi_x_dim")
 
-            base = alt.Chart(df).encode(
-                x=alt.X(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
-                y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title()),
-                tooltip=[
-                    alt.Tooltip(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
-                    alt.Tooltip(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), format=",.2f" if df[y_col].dtype == float else ",d")
-                ]
-            )
-            color_hex = "#10B981" if "box_office" in y_col.lower() or "revenue" in y_col.lower() else ("#F59E0B" if "budget" in y_col.lower() else "#2563EB")
             if "Bar" in chart_type:
-                chart = base.mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color=color_hex)
+                st.bar_chart(
+                    data=df,
+                    x=x_col,
+                    y=y_col
+                )
             elif "Line" in chart_type:
-                chart = base.mark_line(point=True, color=color_hex, strokeWidth=3)
+                st.line_chart(
+                    data=df,
+                    x=x_col,
+                    y=y_col
+                )
             else:
-                chart = base.mark_area(opacity=0.65, color=color_hex)
-
-            st.altair_chart(chart.properties(height=360).interactive(), use_container_width=True)
+                st.area_chart(
+                    data=df,
+                    x=x_col,
+                    y=y_col
+                )
             return
 
     # -------------------------------------------------------------
@@ -1021,23 +1015,24 @@ def _render_smart_chart(df: pd.DataFrame):
         with col_ctl2:
             chart_type = st.selectbox("📈 Chart Type:", ["Bar Chart", "Line Chart", "Area Chart"], key="single_chart_type")
 
-        color_hex = "#10B981" if "box_office" in y_col.lower() or "revenue" in y_col.lower() else ("#F59E0B" if "budget" in y_col.lower() else "#2563EB")
-        base = alt.Chart(df).encode(
-            x=alt.X(f"{x_col}:N", sort=alt.EncodingSortField(field=y_col, order="descending"), title=x_col.replace('_', ' ').title()),
-            y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title()),
-            tooltip=[
-                alt.Tooltip(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
-                alt.Tooltip(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), format=",.2f" if df[y_col].dtype == float else ",d")
-            ]
-        )
         if chart_type == "Bar Chart":
-            chart = base.mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color=color_hex)
+            st.bar_chart(
+                data=df,
+                x=x_col,
+                y=y_col
+            )
         elif chart_type == "Line Chart":
-            chart = base.mark_line(point=True, color=color_hex, strokeWidth=3)
+            st.line_chart(
+                data=df,
+                x=x_col,
+                y=y_col
+            )
         else:
-            chart = base.mark_area(opacity=0.65, color=color_hex)
-
-        st.altair_chart(chart.properties(height=360).interactive(), use_container_width=True)
+            st.area_chart(
+                data=df,
+                x=x_col,
+                y=y_col
+            )
         return
 
     # -------------------------------------------------------------
@@ -1051,12 +1046,11 @@ def _render_smart_chart(df: pd.DataFrame):
 
         st.info(f"ℹ️ **Textual Results:** Your query returned qualitative text columns (`{', '.join(cat_cols)}`). The chart below displays the frequency distribution. To view financial comparisons or numerical metrics, include terms like **budget**, **box office**, or **ratings** in your query.")
 
-        chart = alt.Chart(counts).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color="#8B5CF6").encode(
-            x=alt.X(f"{col_to_count}:N", sort="-y", title=col_to_count.replace('_', ' ').title()),
-            y=alt.Y("Count:Q", title="Total Count"),
-            tooltip=[f"{col_to_count}:N", "Count:Q"]
-        ).properties(height=320)
-        st.altair_chart(chart, use_container_width=True)
+        st.bar_chart(
+            data=counts,
+            x=col_to_count,
+            y="Count"
+        )
         return
 
     else:
