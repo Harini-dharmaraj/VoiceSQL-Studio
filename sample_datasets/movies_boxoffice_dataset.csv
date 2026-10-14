@@ -1,0 +1,31 @@
+movie_id,title,genre,release_year,budget_millions,box_office_millions,rating,votes,director_name
+1,Avatar,Sci-Fi,2009,237.0,2923.7,7.9,1380000,James Cameron
+2,Avengers Endgame,Action,2019,356.0,2799.4,8.4,1240000,Anthony Russo
+3,Titanic,Drama,1997,200.0,2264.7,7.9,1260000,James Cameron
+4,Top Gun Maverick,Action,2022,170.0,1495.7,8.3,680000,Joseph Kosinski
+5,Barbie,Comedy,2023,145.0,1445.6,6.9,520000,Greta Gerwig
+6,The Avengers,Action,2012,220.0,1520.5,8.0,1450000,Joss Whedon
+7,Jurassic World,Sci-Fi,2015,150.0,1671.5,6.9,670000,Colin Trevorrow
+8,The Lion King,Animation,2019,260.0,1663.1,6.8,270000,Jon Favreau
+9,The Dark Knight,Action,2008,185.0,1006.2,9.0,2850000,Christopher Nolan
+10,Inception,Sci-Fi,2010,160.0,839.0,8.8,2520000,Christopher Nolan
+11,Interstellar,Sci-Fi,2014,165.0,733.4,8.7,2050000,Christopher Nolan
+12,Oppenheimer,Drama,2023,100.0,957.8,8.9,780000,Christopher Nolan
+13,Joker,Drama,2019,55.0,1074.4,8.4,1460000,Todd Phillips
+14,Get Out,Horror,2017,4.5,255.4,7.8,690000,Jordan Peele
+15,A Quiet Place,Horror,2018,17.0,341.0,7.5,590000,John Krasinski
+16,The Conjuring,Horror,2013,20.0,320.4,7.5,560000,James Wan
+17,Dune Part Two,Sci-Fi,2024,190.0,714.4,8.6,510000,Denis Villeneuve
+18,Mad Max Fury Road,Action,2015,150.0,380.4,8.1,1090000,George Miller
+19,Gladiator,Action,2000,103.0,503.2,8.5,1610000,Ridley Scott
+20,The Matrix,Sci-Fi,1999,63.0,467.2,8.7,2040000,Lana Wachowski
+21,Parasite,Thriller,2019,11.4,262.9,8.5,920000,Bong Joon-ho
+22,Whiplash,Drama,2014,3.3,49.4,8.5,970000,Damien Chazelle
+23,La La Land,Comedy,2016,30.0,472.0,8.0,640000,Damien Chazelle
+24,Pulp Fiction,Drama,1994,8.5,213.9,8.9,2210000,Quentin Tarantino
+25,Fight Club,Drama,1999,63.0,101.2,8.8,230000,David Fincher
+26,The Prestige,Thriller,2006,40.0,109.7,8.5,1430000,Christopher Nolan
+27,Spider-Man No Way Home,Action,2021,200.0,1921.8,8.2,870000,Jon Watts
+28,Everything Everywhere All at Once,Sci-Fi,2022,25.0,143.4,7.8,530000,Daniel Kwan
+29,The Shawshank Redemption,Drama,1994,25.0,73.3,9.3,2890000,Frank Darabont
+30,Toy Story 3,Animation,2010,200.0,1067.0,8.3,890000,Lee Unkrich

@@ -870,98 +870,166 @@ def _run_pipeline(question, tts_enabled=True):
 
 
 def _render_smart_chart(df: pd.DataFrame):
-    """Dynamically detects columns and generates an appropriate Altair chart."""
+    """Dynamically detects columns and generates an appropriate Altair chart, including relationship & comparison charts."""
     if df.empty:
-        st.info("The query returned an empty table; no data to visualize.")
+        st.info("ℹ️ The query returned 0 records; no data to visualize. Try expanding your search criteria.")
         return
 
-    # Check for single value result
+    # Check for single scalar value result (e.g. COUNT, AVG)
     if df.shape == (1, 1):
         col_name = df.columns[0].replace('_', ' ').title()
         val = df.iloc[0, 0]
         st.metric(label=f"Summary: {col_name}", value=str(val))
         return
 
-    # Identify numeric and text columns
+    # Identify numeric and categorical columns
     num_cols = df.select_dtypes(include=['number']).columns.tolist()
     # Exclude technical IDs from being the primary numeric metric
     metric_cols = [c for c in num_cols if not c.lower().endswith('_id') and c.lower() != 'id']
     cat_cols = df.select_dtypes(include=['object', 'string', 'category']).columns.tolist()
 
-    if metric_cols and cat_cols:
-        # Determine smartest metric based on active question and business priority
-        user_q = str(st.session_state.get("user_query_text", "")).lower()
-        best_metric_idx = 0
+    user_q = str(st.session_state.get("user_query_text", "")).lower()
+    is_compare_q = any(w in user_q for w in ["compare", "vs", "versus", "relationship", "correlation", "against", "scatter"]) or ("budget" in user_q and "box office" in user_q)
 
-        # Prioritize metric explicitly mentioned in query
-        matched_idx = None
-        for i, m in enumerate(metric_cols):
-            clean_m = m.replace('_', ' ').lower()
-            if any(term in user_q for term in [clean_m, m.lower()]):
-                matched_idx = i
-                break
-        if matched_idx is None:
-            if "box office" in user_q or "collection" in user_q or "gross" in user_q or "earning" in user_q:
-                for i, m in enumerate(metric_cols):
-                    if "box_office" in m.lower() or "revenue" in m.lower():
-                        matched_idx = i
-                        break
-            elif "budget" in user_q or "cost" in user_q:
-                for i, m in enumerate(metric_cols):
-                    if "budget" in m.lower():
-                        matched_idx = i
-                        break
-            elif "rating" in user_q or "score" in user_q:
-                for i, m in enumerate(metric_cols):
-                    if "rating" in m.lower() or "score" in m.lower():
-                        matched_idx = i
-                        break
+    # -------------------------------------------------------------
+    # CASE 1: AT LEAST 2 METRICS (Allows Relationship & Comparison Charts)
+    # -------------------------------------------------------------
+    if len(metric_cols) >= 2:
+        chart_options = ["📈 Scatter Plot (Relationship / Correlation)"]
+        if cat_cols:
+            chart_options.extend(["📊 Side-by-Side Comparison (Grouped Bars)", "📊 Bar Chart", "📉 Line Chart", "🌊 Area Chart"])
+        else:
+            chart_options.extend(["📉 Line Chart", "🌊 Area Chart"])
 
-        # Fallback priority: real business metrics over calendar year
-        if matched_idx is None:
-            priority_names = ["box_office_millions", "revenue", "sales", "budget_millions", "rating", "votes", "amount", "price", "gpa"]
-            for pname in priority_names:
-                for i, m in enumerate(metric_cols):
-                    if pname in m.lower():
-                        matched_idx = i
-                        break
-                if matched_idx is not None:
-                    break
+        default_idx = 0 if is_compare_q or not cat_cols else 1
 
-        if matched_idx is not None:
-            best_metric_idx = matched_idx
-
-        # Interactive Controls
-        col_ctl1, col_ctl2, col_ctl3 = st.columns([2.5, 2.5, 1.5])
-        with col_ctl1:
-            y_col = st.selectbox("📊 Metric (Y-Axis):", metric_cols, index=best_metric_idx, key="smart_chart_y_metric")
-        with col_ctl2:
-            x_col = st.selectbox("🏷️ Dimension (X-Axis):", cat_cols, index=0, key="smart_chart_x_dim")
+        col_ctl1, col_ctl2, col_ctl3 = st.columns([2.2, 2.2, 2.0])
         with col_ctl3:
-            chart_type = st.selectbox("📈 Chart Type:", ["Bar Chart", "Line Chart", "Area Chart"], key="smart_chart_type")
+            chart_type = st.selectbox("📈 Chart Type:", chart_options, index=default_idx, key="smart_chart_multi_type")
 
-        # Color schemes based on metric
-        color_hex = "#2563EB"
-        if "box_office" in y_col.lower() or "revenue" in y_col.lower():
-            color_hex = "#10B981"
-        elif "budget" in y_col.lower():
-            color_hex = "#F59E0B"
-        elif "rating" in y_col.lower():
-            color_hex = "#8B5CF6"
+        # SCATTER PLOT: Displays relationship/correlation between 2 metrics
+        if "Scatter Plot" in chart_type:
+            with col_ctl1:
+                x_metric = st.selectbox("👉 X-Axis Metric:", metric_cols, index=0, key="scatter_x_metric")
+            with col_ctl2:
+                y_idx = 1 if len(metric_cols) > 1 else 0
+                y_metric = st.selectbox("👉 Y-Axis Metric:", metric_cols, index=y_idx, key="scatter_y_metric")
 
-        is_year = "year" in y_col.lower() or "date" in y_col.lower()
-        y_scale = alt.Scale(zero=False) if is_year else alt.Scale(zero=True)
+            # Calculate Pearson correlation coefficient
+            series_x = df[x_metric].dropna()
+            series_y = df[y_metric].dropna()
+            r_val = float(series_x.corr(series_y)) if len(series_x) > 1 and not series_x.empty else 0.0
 
-        # Plot with explicit encoding
+            r_color = "#10B981" if r_val >= 0.5 else ("#EF4444" if r_val <= -0.5 else "#3B82F6")
+            r_text = (
+                f"Strong Positive Correlation (r = {r_val:+.2f})" if r_val >= 0.6 else
+                (f"Moderate Positive Correlation (r = {r_val:+.2f})" if r_val >= 0.3 else
+                (f"Strong Negative Correlation (r = {r_val:+.2f})" if r_val <= -0.6 else
+                (f"Moderate Negative Correlation (r = {r_val:+.2f})" if r_val <= -0.3 else
+                f"Weak / Neutral Relationship (r = {r_val:+.2f})")))
+            )
+
+            st.markdown(f"""
+            <div style="background: #F8FAFC; border-left: 4px solid {r_color}; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 13.5px;">
+                <b>🔍 Relationship Analysis:</b> <span style="color: {r_color}; font-weight: 700;">{r_text}</span>
+                <span style="color: #64748B;"> — Shows how <b>{x_metric.replace('_', ' ').title()}</b> relates to <b>{y_metric.replace('_', ' ').title()}</b>.</span>
+            </div>
+            """, unsafe_allow_html=True)
+
+            scatter_enc = {
+                "x": alt.X(f"{x_metric}:Q", title=x_metric.replace('_', ' ').title()),
+                "y": alt.Y(f"{y_metric}:Q", title=y_metric.replace('_', ' ').title()),
+            }
+
+            tooltips = [
+                alt.Tooltip(f"{x_metric}:Q", title=x_metric.replace('_', ' ').title(), format=",.2f" if df[x_metric].dtype == float else ",d"),
+                alt.Tooltip(f"{y_metric}:Q", title=y_metric.replace('_', ' ').title(), format=",.2f" if df[y_metric].dtype == float else ",d")
+            ]
+
+            if cat_cols:
+                color_dim = cat_cols[0]
+                scatter_enc["color"] = alt.Color(f"{color_dim}:N", title=color_dim.replace('_', ' ').title())
+                tooltips.insert(0, alt.Tooltip(f"{color_dim}:N", title=color_dim.replace('_', ' ').title()))
+
+            scatter_enc["tooltip"] = tooltips
+
+            chart = alt.Chart(df).mark_circle(size=140, opacity=0.85).encode(**scatter_enc).properties(height=380).interactive()
+            st.altair_chart(chart, use_container_width=True)
+            return
+
+        # SIDE-BY-SIDE GROUPED BARS: Compare 2 metrics side-by-side
+        elif "Side-by-Side" in chart_type and cat_cols:
+            dim_col = cat_cols[0]
+            with col_ctl1:
+                dim_choice = st.selectbox("🏷️ Entity Dimension (X-Axis):", cat_cols, index=0, key="grouped_dim_choice")
+            with col_ctl2:
+                selected_compare_metrics = st.multiselect("📊 Metrics to Compare:", metric_cols, default=metric_cols[:2], key="grouped_metrics_multiselect")
+
+            if not selected_compare_metrics:
+                st.warning("Please select at least one numeric metric to compare.")
+                return
+
+            melted = pd.melt(df, id_vars=[dim_choice], value_vars=selected_compare_metrics, var_name="Metric", value_name="Value")
+            chart = alt.Chart(melted).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4).encode(
+                x=alt.X(f"{dim_choice}:N", title=dim_choice.replace('_', ' ').title()),
+                xOffset="Metric:N",
+                y=alt.Y("Value:Q", title="Value"),
+                color=alt.Color("Metric:N", title="Metric"),
+                tooltip=[
+                    alt.Tooltip(f"{dim_choice}:N", title=dim_choice.replace('_', ' ').title()),
+                    alt.Tooltip("Metric:N"),
+                    alt.Tooltip("Value:Q", format=",.2f")
+                ]
+            ).properties(height=380).interactive()
+            st.altair_chart(chart, use_container_width=True)
+            return
+
+        # Standard fallback to single-metric rendering
+        else:
+            with col_ctl1:
+                y_col = st.selectbox("📊 Metric (Y-Axis):", metric_cols, index=0, key="multi_y_metric")
+            with col_ctl2:
+                x_col = st.selectbox("🏷️ Dimension (X-Axis):", cat_cols if cat_cols else metric_cols, index=0, key="multi_x_dim")
+
+            base = alt.Chart(df).encode(
+                x=alt.X(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
+                y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title()),
+                tooltip=[
+                    alt.Tooltip(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
+                    alt.Tooltip(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), format=",.2f" if df[y_col].dtype == float else ",d")
+                ]
+            )
+            color_hex = "#10B981" if "box_office" in y_col.lower() or "revenue" in y_col.lower() else ("#F59E0B" if "budget" in y_col.lower() else "#2563EB")
+            if "Bar" in chart_type:
+                chart = base.mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color=color_hex)
+            elif "Line" in chart_type:
+                chart = base.mark_line(point=True, color=color_hex, strokeWidth=3)
+            else:
+                chart = base.mark_area(opacity=0.65, color=color_hex)
+
+            st.altair_chart(chart.properties(height=360).interactive(), use_container_width=True)
+            return
+
+    # -------------------------------------------------------------
+    # CASE 2: EXACTLY 1 METRIC AND CATEGORICAL COLUMNS
+    # -------------------------------------------------------------
+    elif len(metric_cols) == 1 and cat_cols:
+        y_col = metric_cols[0]
+        col_ctl1, col_ctl2 = st.columns([2.5, 1.5])
+        with col_ctl1:
+            x_col = st.selectbox("🏷️ Dimension (X-Axis):", cat_cols, index=0, key="single_x_dim")
+        with col_ctl2:
+            chart_type = st.selectbox("📈 Chart Type:", ["Bar Chart", "Line Chart", "Area Chart"], key="single_chart_type")
+
+        color_hex = "#10B981" if "box_office" in y_col.lower() or "revenue" in y_col.lower() else ("#F59E0B" if "budget" in y_col.lower() else "#2563EB")
         base = alt.Chart(df).encode(
             x=alt.X(f"{x_col}:N", sort=alt.EncodingSortField(field=y_col, order="descending"), title=x_col.replace('_', ' ').title()),
-            y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), scale=y_scale),
+            y=alt.Y(f"{y_col}:Q", title=y_col.replace('_', ' ').title()),
             tooltip=[
                 alt.Tooltip(f"{x_col}:N", title=x_col.replace('_', ' ').title()),
                 alt.Tooltip(f"{y_col}:Q", title=y_col.replace('_', ' ').title(), format=",.2f" if df[y_col].dtype == float else ",d")
             ]
         )
-
         if chart_type == "Bar Chart":
             chart = base.mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color=color_hex)
         elif chart_type == "Line Chart":
@@ -969,24 +1037,30 @@ def _render_smart_chart(df: pd.DataFrame):
         else:
             chart = base.mark_area(opacity=0.65, color=color_hex)
 
-        chart = chart.properties(height=360).interactive()
-        st.altair_chart(chart, use_container_width=True)
+        st.altair_chart(chart.properties(height=360).interactive(), use_container_width=True)
+        return
 
-    elif len(cat_cols) >= 1 and len(df) <= 15:
-        # Category count chart
+    # -------------------------------------------------------------
+    # CASE 3: ONLY CATEGORICAL / TEXT COLUMNS (NO NUMERIC METRICS)
+    # -------------------------------------------------------------
+    elif cat_cols:
         col_to_count = cat_cols[0]
         st.markdown(f"###### 📊 Frequency Distribution: {col_to_count.replace('_', ' ').title()}")
-        counts = df[col_to_count].value_counts().reset_index()
+        counts = df[col_to_count].value_counts().head(15).reset_index()
         counts.columns = [col_to_count, "Count"]
-        
+
+        st.info(f"ℹ️ **Textual Results:** Your query returned qualitative text columns (`{', '.join(cat_cols)}`). The chart below displays the frequency distribution. To view financial comparisons or numerical metrics, include terms like **budget**, **box office**, or **ratings** in your query.")
+
         chart = alt.Chart(counts).mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6, color="#8B5CF6").encode(
-            x=alt.X(f"{col_to_count}:N", sort="-y"),
-            y=alt.Y("Count:Q"),
+            x=alt.X(f"{col_to_count}:N", sort="-y", title=col_to_count.replace('_', ' ').title()),
+            y=alt.Y("Count:Q", title="Total Count"),
             tooltip=[f"{col_to_count}:N", "Count:Q"]
         ).properties(height=320)
         st.altair_chart(chart, use_container_width=True)
+        return
+
     else:
-        st.info("ℹ️ All columns are textual. Please inspect the structured results in the **Query Output** tab.")
+        st.info("ℹ️ Unable to render chart with current data schema. Please inspect the structured results in the **Query Output** tab.")
 
 
 def _explain_sql(sql: str) -> str:

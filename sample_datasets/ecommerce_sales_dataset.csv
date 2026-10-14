@@ -1,0 +1,26 @@
+order_id,product_name,category,units_sold,unit_price,discount_pct,customer_rating,shipping_cost,total_revenue
+101,Apple MacBook Pro,Electronics,45,1999.0,5.0,4.8,25.0,85457.25
+102,Sony WH-1000XM5,Electronics,120,399.0,10.0,4.7,12.0,43092.00
+103,Nike Air Max,Footwear,250,149.0,15.0,4.5,8.0,31662.50
+104,Dell XPS 15,Electronics,35,1799.0,8.0,4.6,22.0,57927.80
+105,Samsung Galaxy S24,Electronics,85,999.0,12.0,4.7,15.0,74725.20
+106,Adidas Ultraboost,Footwear,190,180.0,20.0,4.4,10.0,27360.00
+107,Herman Miller Aeron,Furniture,28,1250.0,5.0,4.9,45.0,33250.00
+108,Bose QuietComfort,Electronics,95,349.0,10.0,4.6,12.0,29839.50
+109,Levis 501 Jeans,Apparel,310,69.0,25.0,4.3,6.0,16042.50
+110,Instant Pot Duo,Home Appliances,220,99.0,15.0,4.7,14.0,18513.00
+111,Dyson V15 Vacuum,Home Appliances,40,749.0,10.0,4.8,20.0,26964.00
+112,Kindle Paperwhite,Electronics,180,139.0,10.0,4.6,8.0,22518.00
+113,PlayStation 5,Gaming,110,499.0,0.0,4.9,25.0,54890.00
+114,Nintendo Switch OLED,Gaming,140,349.0,5.0,4.8,18.0,46417.00
+115,Ray-Ban Aviator,Accessories,160,180.0,15.0,4.5,7.0,24480.00
+116,Apple iPad Air,Electronics,75,599.0,8.0,4.7,15.0,41331.00
+117,Logitech MX Master 3,Accessories,210,99.0,10.0,4.8,6.0,18711.00
+118,Fitbit Charge 6,Fitness,130,159.0,20.0,4.2,8.0,16536.00
+119,Nespresso Vertuo,Home Appliances,90,199.0,15.0,4.6,15.0,15223.50
+120,North Face Thermoball,Apparel,85,220.0,10.0,4.7,12.0,16830.00
+121,Lululemon Align Leggings,Apparel,240,98.0,0.0,4.8,8.0,23520.00
+122,Canon EOS R6,Electronics,22,2499.0,5.0,4.9,35.0,52229.10
+123,Asus ROG Zephyrus,Gaming,30,1699.0,10.0,4.6,28.0,45873.00
+124,KitchenAid Artisan Mixer,Home Appliances,50,449.0,12.0,4.9,30.0,19756.00
+125,Yeti Tundra Cooler,Outdoor,65,275.0,0.0,4.8,25.0,17875.00
