@@ -658,17 +658,29 @@ def show_voice_query_page():
 
                                 parsed_summary = ", ".join([f"<b>{k.replace('_', ' ').title()}:</b> {v}" for k, v in parsed_from_text.items()]) if parsed_from_text else "Based on typical baseline inputs"
 
+                                # Calculate ROI multiplier for explanation
+                                roi_info = ""
+                                if "budget" in str(parsed_from_text).lower() and nl_pred_out["task_type"] == "regression":
+                                    for k, v in parsed_from_text.items():
+                                        if "budget" in k.lower() and float(v) > 0:
+                                            mult = nl_val / float(v)
+                                            roi_info = f"• <b>ROI Multiplier:</b> At ${float(v):,.1f}M budget, estimated box office return is <b>{mult:.1f}x</b>.<br/>"
+
                                 st.markdown(f"""
-                                <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 18px 22px; margin: 12px 0 16px 0;">
+                                <div style="background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border: 2px solid #10B981; border-radius: 12px; padding: 18px 22px; margin: 12px 0 10px 0;">
                                     <div style="font-size: 12px; font-weight: 700; color: #047857; text-transform: uppercase; letter-spacing: 0.05em;">
                                         🎯 Prediction for: <i>"{user_pred_q}"</i>
                                     </div>
                                     <div style="font-size: 32px; font-weight: 800; color: #065F46; margin: 4px 0;">
                                         {chosen_target.replace('_', ' ').title()} ≈ {nl_val_str}
                                     </div>
-                                    <div style="font-size: 13px; color: #047857;">
-                                        Parsed parameters: {parsed_summary}. Calculated by trained Machine Learning model.
-                                    </div>
+                                </div>
+                                <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 13px; color: #334155; line-height: 1.6;">
+                                    <b>💡 Why did the AI predict this? (Model Explanation):</b><br/>
+                                    • <b>Algorithm Used:</b> Random Forest Regressor (Ensemble of 100 Decision Trees).<br/>
+                                    • <b>Extracted Inputs:</b> {parsed_summary}.<br/>
+                                    {roi_info}
+                                    • <b>Learning Baseline:</b> The AI evaluated your <b>{len(target_df)} records</b> to average the predictions of 100 individual decision paths.
                                 </div>
                                 """, unsafe_allow_html=True)
                             except Exception as ex:
@@ -711,6 +723,18 @@ def show_voice_query_page():
                                 if pred_output["task_type"] == "regression":
                                     val = pred_output["predicted_value"]
                                     val_str = f"${val:,.1f} Million" if "million" in chosen_target.lower() or "box_office" in chosen_target.lower() else f"{val:,.2f}"
+                                    
+                                    # Calculate ROI multiplier for slider inputs
+                                    slider_roi = ""
+                                    for f in top_features:
+                                        if "budget" in f.lower():
+                                            b_amt = float(input_values.get(f, 0))
+                                            if b_amt > 0:
+                                                mult = val / b_amt
+                                                slider_roi = f"• <b>Expected ROI Multiplier:</b> At ${b_amt:,.1f}M budget, estimated collection is <b>{mult:.1f}x</b>.<br/>"
+
+                                    top_feat_str = ", ".join([f"<b>{f.replace('_', ' ').title()}:</b> {input_values.get(f, 'N/A')}" for f in top_features])
+
                                     st.markdown(f"""
                                     <div style="background: #F0FDF4; border: 2px solid #22C55E; border-radius: 12px; padding: 22px; text-align: center; margin-top: 4px;">
                                         <div style="font-size: 12px; font-weight: 700; color: #166534; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">
@@ -722,6 +746,13 @@ def show_voice_query_page():
                                         <div style="font-size: 13px; color: #166534;">
                                             Calculated instantly by trained Machine Learning model based on your slider inputs.
                                         </div>
+                                    </div>
+                                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 14px 18px; margin-top: 10px; font-size: 13px; color: #334155; line-height: 1.6;">
+                                        <b>💡 Why was this predicted? (Model Reasoning):</b><br/>
+                                        • <b>Algorithm Used:</b> Random Forest Regressor (100 Decision Trees Ensemble).<br/>
+                                        • <b>Active Inputs:</b> {top_feat_str}.<br/>
+                                        {slider_roi}
+                                        • <b>Mathematical Basis:</b> The model mapped these parameters through 100 decision trees trained on your <b>{len(target_df)} records</b> to compute this consensus forecast.
                                     </div>
                                     """, unsafe_allow_html=True)
                                 else:
