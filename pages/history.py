@@ -4,15 +4,24 @@ from database.history import get_query_history, clear_query_history
 from database.execute_query import execute_sql_query
 
 def show_history_page():
-    st.title("📜 Query History Log")
-    st.caption("Inspect and audit all natural language queries, generated SQL, execution metrics, and logs.")
+    user = st.session_state.get("current_user", {})
+    is_admin = (user.get("role") == "admin")
+    current_username = user.get("username")
+
+    if is_admin:
+        st.title("📜 Query History Log (Admin Audit)")
+        st.caption("Admin view: Monitor all natural language queries and SQL actions executed across all users.")
+    else:
+        st.title("📜 My Query History")
+        st.caption(f"Audit log of queries executed in your personal workspace (@{current_username}).")
     st.divider()
 
-    # Load history
-    df = get_query_history(limit=200)
+    # Load history: Admin sees all queries, standard users only see their own
+    filter_user = None if is_admin else current_username
+    df = get_query_history(limit=200, username=filter_user)
 
     if df.empty:
-        st.info("No queries logged in the history yet. Try running some text or voice queries!")
+        st.info("No queries logged in the history yet. Try running some text or voice queries in Voice Studio!")
         return
 
     # Statistics / KPI summary
@@ -30,28 +39,33 @@ def show_history_page():
     st.divider()
 
     # Search filter bar
-    search_keyword = st.text_input("🔍 Search History by Natural Language or SQL Query", value="")
+    search_keyword = st.text_input("🔍 Search History by Natural Language, SQL Query, or Username", value="")
     
     filtered_df = df.copy()
     if search_keyword.strip():
         k = search_keyword.lower()
-        filtered_df = filtered_df[
+        search_mask = (
             filtered_df["natural_query"].str.lower().str.contains(k, na=False) |
             filtered_df["sql_query"].str.lower().str.contains(k, na=False)
-        ]
+        )
+        if "username" in filtered_df.columns:
+            search_mask = search_mask | filtered_df["username"].str.lower().str.contains(k, na=False)
+        filtered_df = filtered_df[search_mask]
 
     st.subheader(f"Logged Queries ({len(filtered_df)})")
     
     # Format and display DataFrame
     display_df = filtered_df.copy()
-    display_df = display_df.rename(columns={
+    cols_rename = {
         "timestamp": "Timestamp",
+        "username": "User",
         "natural_query": "Natural Language Query",
         "sql_query": "Generated SQL",
         "status": "Execution Status",
         "error_msg": "Errors/Logs",
         "execution_time": "Latency (ms)"
-    })
+    }
+    display_df = display_df.rename(columns=cols_rename)
     
     # Hide id column
     if "id" in display_df.columns:

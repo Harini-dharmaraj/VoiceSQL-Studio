@@ -119,20 +119,28 @@ def init_auth_tables():
 
         conn.commit()
 
-        # Seed default demo account if not exists
-        cur.execute("SELECT COUNT(*) FROM users WHERE username = 'demo' OR email = 'demo@voicesql.com';")
-        if cur.fetchone()[0] == 0:
-            demo_hash = hash_password("demo123")
+        # Seed dedicated Admin account with preset ID & password: admin / admin123
+        admin_hash = hash_password("admin123")
+        cur.execute("SELECT user_id FROM users WHERE username = 'admin' OR email = 'admin@voicesql.com';")
+        admin_row = cur.fetchone()
+        if not admin_row:
             if is_sqlite:
                 cur.execute(
                     "INSERT INTO users (username, email, password_hash, full_name, role) VALUES (?, ?, ?, ?, ?);",
-                    ("demo", "demo@voicesql.com", demo_hash, "Demo Explorer", "user")
+                    ("admin", "admin@voicesql.com", admin_hash, "System Administrator", "admin")
                 )
             else:
                 cur.execute(
                     "INSERT INTO users (username, email, password_hash, full_name, role) VALUES (%s, %s, %s, %s, %s);",
-                    ("demo", "demo@voicesql.com", demo_hash, "Demo Explorer", "user")
+                    ("admin", "admin@voicesql.com", admin_hash, "System Administrator", "admin")
                 )
+            conn.commit()
+        else:
+            # Ensure admin password is reset to admin123 and role is admin
+            if is_sqlite:
+                cur.execute("UPDATE users SET password_hash = ?, role = 'admin' WHERE user_id = ?;", (admin_hash, admin_row[0]))
+            else:
+                cur.execute("UPDATE users SET password_hash = %s, role = 'admin' WHERE user_id = %s;", (admin_hash, admin_row[0]))
             conn.commit()
 
         # Sync configured admin users so developer account always has role = 'admin'
@@ -408,4 +416,39 @@ def delete_user_by_admin(target_user_id: int) -> tuple[bool, str]:
     finally:
         cur.close()
         conn.close()
+
+def get_all_user_datasets_for_admin() -> list[dict]:
+    """Retrieve all datasets uploaded across all users for admin oversight."""
+    init_auth_tables()
+    config = load_config()
+    is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            SELECT d.dataset_id, u.username, u.email, d.table_name, d.display_name, d.row_count, d.created_at
+            FROM user_datasets d
+            JOIN users u ON d.user_id = u.user_id
+            ORDER BY d.created_at DESC;
+        """)
+        rows = cur.fetchall()
+        return [
+            {
+                "dataset_id": r[0],
+                "username": r[1],
+                "email": r[2],
+                "table_name": r[3],
+                "display_name": r[4],
+                "row_count": r[5],
+                "created_at": str(r[6])
+            }
+            for r in rows
+        ]
+    except Exception as e:
+        print(f"Error fetching all user datasets: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
 

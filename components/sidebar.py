@@ -45,6 +45,9 @@ def show_sidebar():
     except Exception:
         db_online = False
 
+    user = st.session_state.get("current_user", {})
+    is_admin = (user.get("role") == "admin")
+
     nav_map = {
         "Voice Assistant": "🎙️  Voice Studio",
         "Analytics": "📊  Metrics & Analytics",
@@ -52,6 +55,8 @@ def show_sidebar():
         "History": "📜  Query History",
         "Settings": "⚙️  Settings"
     }
+    if is_admin:
+        nav_map["Admin Oversight"] = "🛡️  Admin Oversight"
 
     with st.sidebar:
         # Sleek Brand Banner

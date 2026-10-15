@@ -76,6 +76,9 @@ elif selected == "Analytics":
     show_analytics_page()
 elif selected == "Settings":
     show_settings()
+elif selected == "Admin Oversight":
+    from pages.admin_oversight import show_admin_oversight_page
+    show_admin_oversight_page()
 else:
     # Default landing: Voice Studio
     show_voice_query_page()
