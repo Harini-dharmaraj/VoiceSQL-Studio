@@ -34,40 +34,6 @@ def show_landing_page(authenticated: bool = False):
     </div>
     """, unsafe_allow_html=True)
 
-    # If user is already authenticated and visits this landing page:
-    if authenticated or st.session_state.get("authenticated", False):
-        user = st.session_state.get("current_user", {})
-        u_name = user.get("username", "Guest")
-        f_name = user.get("full_name", u_name)
-        
-        st.markdown(f"""
-        <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1.5px solid #93C5FD; border-radius: 16px; padding: 18px 24px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-            <div>
-                <div style="font-size: 17px; font-weight: 700; color: #1E3A8A; margin-bottom: 2px;">
-                    👋 Welcome back, {f_name} (@{u_name})!
-                </div>
-                <div style="font-size: 13px; color: #3B82F6;">
-                    Your workspace is ready. You can query with your voice, explore visual charts, and run What-If machine learning predictions.
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        col_act1, col_act2, col_act3 = st.columns([1.2, 1, 1])
-        with col_act1:
-            if st.button("🎙️ Open Voice Studio", type="primary", use_container_width=True):
-                st.session_state["nav_override"] = "Voice Assistant"
-                st.rerun()
-        with col_act2:
-            if st.button("📊 View Analytics Dashboard", use_container_width=True):
-                st.session_state["nav_override"] = "Analytics"
-                st.rerun()
-        with col_act3:
-            if st.button("🚪 Sign Out", use_container_width=True):
-                st.session_state.pop("authenticated", None)
-                st.session_state.pop("current_user", None)
-                st.rerun()
-        st.markdown("<div style='height: 15px;'></div>", unsafe_allow_html=True)
-
     # ========================================================
     # HERO SECTION: WHAT THIS WEBSITE IS
     # ========================================================

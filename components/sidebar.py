@@ -47,7 +47,6 @@ def show_sidebar():
 
     nav_map = {
         "Voice Assistant": "🎙️  Voice Studio",
-        "Overview": "⚡  Home & Architecture",
         "Analytics": "📊  Metrics & Analytics",
         "Database": "🗄️  Database Manager",
         "History": "📜  Query History",
