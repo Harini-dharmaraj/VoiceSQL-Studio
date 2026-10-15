@@ -153,6 +153,29 @@ def show_voice_query_page():
     if "trigger_browser_tts" not in st.session_state:
         st.session_state.trigger_browser_tts = False
 
+    # Live Demo Visitor Onboarding Banner
+    user = st.session_state.get("current_user", {})
+    is_demo = str(user.get("username", "")).lower() in ["demo", "guest"]
+    if is_demo:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%); border: 1.5px solid #C7D2FE; border-radius: 12px; padding: 12px 18px; margin: 0 0 16px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="font-size: 26px;">🚀</span>
+                <div>
+                    <div style="font-size: 14px; font-weight: 700; color: #3730A3;">
+                        Live Demo Workspace Active
+                    </div>
+                    <div style="font-size: 12.5px; color: #4338CA;">
+                        You're exploring with pre-loaded IMDb movies, box office financials, and ML models. Click any sample prompt below or click the 🎙️ microphone to ask questions hands-free!
+                    </div>
+                </div>
+            </div>
+            <div style="background: #FFFFFF; border: 1px solid #C7D2FE; border-radius: 20px; padding: 4px 12px; font-size: 11.5px; font-weight: 700; color: #4F46E5;">
+                Demo Mode
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
     # ==========================================
     # DYNAMIC ACTIVE DATASETS & INSPIRATION CHIPS
     # ==========================================

@@ -72,18 +72,68 @@ def show_landing_page(authenticated: bool = False):
     # HERO SECTION: WHAT THIS WEBSITE IS
     # ========================================================
     st.markdown("""
-    <div style="text-align: center; max-width: 880px; margin: 0 auto 30px auto; padding: 10px 10px;">
-        <div style="display: inline-flex; align-items: center; gap: 8px; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 30px; padding: 4px 14px; font-size: 12px; font-weight: 700; color: #4F46E5; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em;">
-            🚀 Welcome to VoiceSQL Studio
+    <div style="text-align: center; max-width: 880px; margin: 0 auto 12px auto; padding: 10px 10px 0 10px;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: #EEF2FF; border: 1px solid #C7D2FE; border-radius: 30px; padding: 5px 16px; font-size: 12px; font-weight: 700; color: #4F46E5; margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.05em;">
+            🚀 VoiceSQL Studio • Enterprise AI Voice-to-SQL Platform
         </div>
-        <h1 style="font-size: 42px; font-weight: 800; color: #0F172A; margin: 0 0 16px 0; letter-spacing: -0.04em; line-height: 1.15;">
+        <h1 style="font-size: 42px; font-weight: 800; color: #0F172A; margin: 0 0 14px 0; letter-spacing: -0.04em; line-height: 1.15;">
             Talk to Any Database with Your <span style="background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Voice & Everyday Language</span>
         </h1>
-        <p style="font-size: 17px; color: #475569; margin: 0 auto 10px auto; line-height: 1.6; max-width: 760px;">
+        <p style="font-size: 16.5px; color: #475569; margin: 0 auto 16px auto; line-height: 1.6; max-width: 760px;">
             <b>VoiceSQL Studio</b> is an intelligent, voice-first analytics platform designed to bridge the gap between people and databases. Instead of writing complex SQL queries by hand, simply <b>speak or type in plain English or Tanglish</b>—the AI automatically understands your intent, generates precise SQL, renders interactive charts, and runs predictive machine learning forecasts.
         </p>
     </div>
     """, unsafe_allow_html=True)
+
+    # ========================================================
+    # HERO CALL TO ACTION (INSTANT DEMO FAST-PASS FOR VISITORS)
+    # ========================================================
+    if not authenticated and not st.session_state.get("authenticated", False):
+        col_h_pad1, col_h_center, col_h_pad2 = st.columns([1, 3.2, 1])
+        with col_h_center:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border: 1.5px solid #86EFAC; border-radius: 14px; padding: 16px 20px; margin-bottom: 14px; box-shadow: 0 4px 12px rgba(22, 101, 52, 0.08); text-align: center;">
+                <div style="font-weight: 800; color: #166534; font-size: 15px; margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <span>⚡</span> <span>Evaluator & Visitor 1-Click Fast Pass</span>
+                </div>
+                <div style="font-size: 13px; color: #15803D; margin-bottom: 12px; line-height: 1.4;">
+                    No sign-up or credit card required. Instantly test-drive the live workspace with 500+ IMDb movie records, financial collections, and machine learning models.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            col_cta1, col_cta2 = st.columns([1.6, 1])
+            with col_cta1:
+                if st.button("🚀 Launch 1-Click Live Demo Workspace", type="primary", use_container_width=True, key="hero_fast_demo"):
+                    with st.spinner("Opening live demo workspace..."):
+                        ok, res = authenticate_user("demo", "demo123")
+                    if ok:
+                        st.session_state["authenticated"] = True
+                        st.session_state["current_user"] = res
+                        st.rerun()
+            with col_cta2:
+                if st.button("👤 Continue as Guest", use_container_width=True, key="hero_guest_login"):
+                    guest_user = {
+                        "user_id": 0,
+                        "username": "guest",
+                        "email": "guest@voicesql.com",
+                        "full_name": "Guest Visitor",
+                        "role": "user",
+                        "created_at": "Active Session"
+                    }
+                    st.session_state["authenticated"] = True
+                    st.session_state["current_user"] = guest_user
+                    st.rerun()
+
+            st.markdown("""
+            <div style="text-align: center; margin: 10px auto 28px auto; font-size: 12px; color: #64748B; display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;">
+                <span>✨ <b>100% Free Sandbox</b></span>
+                <span>•</span>
+                <span>🎬 <b>500+ IMDb Records</b> Pre-loaded</span>
+                <span>•</span>
+                <span>🎙️ <b>Browser Microphone</b> Enabled</span>
+            </div>
+            """, unsafe_allow_html=True)
 
     # ========================================================
     # 4 CORE CAPABILITIES OF THIS WEBSITE
@@ -152,31 +202,52 @@ def show_landing_page(authenticated: bool = False):
             </div>
             """, unsafe_allow_html=True)
 
-            tab_in, tab_up, tab_sec = st.tabs(["🔑 Sign In", "📝 Create Account", "🔒 Account & Data Security"])
+            tab_in, tab_up, tab_sec = st.tabs(["🔑 Sign In / Demo", "📝 Create Account", "🔒 Account & Data Security"])
 
             # ----------------------------------------------------
             # TAB 1: SIGN IN
             # ----------------------------------------------------
             with tab_in:
                 st.markdown("<div style='height: 8px;'></div>", unsafe_allow_html=True)
+                
+                # Pre-fill demo state handler
+                if "prefill_demo" not in st.session_state:
+                    st.session_state["prefill_demo"] = False
+                    
+                def_user = "demo" if st.session_state.get("prefill_demo") else ""
+                def_pwd = "demo123" if st.session_state.get("prefill_demo") else ""
+
                 with st.form("signin_form_main", clear_on_submit=False):
                     login_ident = st.text_input(
                         "Username or Email",
+                        value=def_user,
                         placeholder="e.g. demo or demo@voicesql.com",
                         key="login_user_input_field"
                     )
                     login_pwd = st.text_input(
                         "Password",
+                        value=def_pwd,
                         type="password",
-                        placeholder="Enter your account password",
+                        placeholder="Enter your account password (demo123 for demo)",
                         key="login_pwd_input_field"
                     )
 
-                    submit_login = st.form_submit_button(
-                        "🚀 Sign In to Studio",
-                        type="primary",
-                        use_container_width=True
-                    )
+                    col_sbtn1, col_sbtn2 = st.columns([1.5, 1])
+                    with col_sbtn1:
+                        submit_login = st.form_submit_button(
+                            "🚀 Sign In to Studio",
+                            type="primary",
+                            use_container_width=True
+                        )
+                    with col_sbtn2:
+                        demo_fill_btn = st.form_submit_button(
+                            "✏️ Fill Demo Creds",
+                            use_container_width=True
+                        )
+
+                    if demo_fill_btn:
+                        st.session_state["prefill_demo"] = True
+                        st.rerun()
 
                     if submit_login:
                         if not login_ident.strip() or not login_pwd:
