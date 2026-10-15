@@ -161,19 +161,20 @@ def get_db_schema_context():
     from utils.config_manager import load_config
     config = load_config()
     
+    SYSTEM_TABLES = ("users", "user_datasets", "query_history", "sqlite_sequence")
     schema_str = ""
     try:
         if config["db_type"] == "SQLite":
-            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name != 'query_history';")
-            tables = [r[0] for r in cursor.fetchall()]
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name NOT IN ('users', 'user_datasets', 'query_history', 'sqlite_sequence');")
+            tables = [r[0] for r in cursor.fetchall() if r[0].lower() not in SYSTEM_TABLES]
             for table in tables:
                 cursor.execute(f"PRAGMA table_info({table});")
                 columns = cursor.fetchall()
                 col_desc = [f"{col[1]} ({col[2]})" for col in columns]
                 schema_str += f"Table: {table}\nColumns: {', '.join(col_desc)}\n\n"
         else:
-            cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{config['mysql_database']}' AND table_name != 'query_history';")
-            tables = [r[0] for r in cursor.fetchall()]
+            cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{config['mysql_database']}' AND table_name NOT IN ('users', 'user_datasets', 'query_history', 'sqlite_sequence');")
+            tables = [r[0] for r in cursor.fetchall() if r[0].lower() not in SYSTEM_TABLES]
             for table in tables:
                 cursor.execute(f"SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = '{config['mysql_database']}' AND table_name = '{table}';")
                 columns = cursor.fetchall()

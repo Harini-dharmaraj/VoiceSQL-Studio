@@ -18,10 +18,41 @@ def verify_password(password: str, stored_hash: str) -> bool:
     except Exception:
         return False
 
+SYSTEM_TABLES = {"users", "user_datasets", "query_history", "sqlite_sequence"}
+
+def get_admin_usernames() -> list[str]:
+    """Retrieve list of configured admin usernames from config."""
+    try:
+        config = load_config()
+        admins = config.get("admin_users", ["admin", "harini"])
+        if isinstance(admins, list):
+            return [str(a).strip().lower() for a in admins]
+        elif isinstance(admins, str):
+            return [admins.strip().lower()]
+    except Exception:
+        pass
+    return ["admin", "harini"]
+
+def is_admin_user(user: dict = None) -> bool:
+    """Check if given user (or active session user) has admin privileges."""
+    if user is None:
+        try:
+            import streamlit as st
+            user = st.session_state.get("current_user", {})
+        except Exception:
+            user = {}
+    if not user:
+        return False
+    if user.get("role") == "admin":
+        return True
+    u_name = str(user.get("username", "")).strip().lower()
+    return u_name in get_admin_usernames()
+
 def init_auth_tables():
-    """Ensure users and user_datasets tables exist in the database."""
+    """Ensure users and user_datasets tables exist in the database with role column and admin sync."""
     config = load_config()
     is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+    admin_list = get_admin_usernames()
     
     conn = get_db_connection()
     cur = conn.cursor()
@@ -34,6 +65,7 @@ def init_auth_tables():
                 email TEXT UNIQUE NOT NULL,
                 password_hash TEXT NOT NULL,
                 full_name TEXT,
+                role TEXT DEFAULT 'user',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
             """)
@@ -48,6 +80,13 @@ def init_auth_tables():
                 FOREIGN KEY (user_id) REFERENCES users(user_id)
             );
             """)
+            
+            # Migration check: Ensure 'role' column exists in existing SQLite table
+            cur.execute("PRAGMA table_info(users);")
+            cols = [col[1] for col in cur.fetchall()]
+            if "role" not in cols:
+                cur.execute("ALTER TABLE users ADD COLUMN role TEXT DEFAULT 'user';")
+
         else:
             cur.execute("""
             CREATE TABLE IF NOT EXISTS users (
@@ -56,6 +95,7 @@ def init_auth_tables():
                 email VARCHAR(255) UNIQUE NOT NULL,
                 password_hash VARCHAR(255) NOT NULL,
                 full_name VARCHAR(150),
+                role VARCHAR(20) DEFAULT 'user',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
             """)
@@ -70,6 +110,13 @@ def init_auth_tables():
                 FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
             );
             """)
+
+            # Migration check: Ensure 'role' column exists in existing MySQL table
+            db_name = config.get("mysql_database", "voice_to_sql")
+            cur.execute(f"SELECT column_name FROM information_schema.columns WHERE table_schema = '{db_name}' AND table_name = 'users' AND column_name = 'role';")
+            if not cur.fetchone():
+                cur.execute("ALTER TABLE users ADD COLUMN role VARCHAR(20) DEFAULT 'user';")
+
         conn.commit()
 
         # Seed default demo account if not exists
@@ -78,15 +125,24 @@ def init_auth_tables():
             demo_hash = hash_password("demo123")
             if is_sqlite:
                 cur.execute(
-                    "INSERT INTO users (username, email, password_hash, full_name) VALUES (?, ?, ?, ?);",
-                    ("demo", "demo@voicesql.com", demo_hash, "Demo Explorer")
+                    "INSERT INTO users (username, email, password_hash, full_name, role) VALUES (?, ?, ?, ?, ?);",
+                    ("demo", "demo@voicesql.com", demo_hash, "Demo Explorer", "user")
                 )
             else:
                 cur.execute(
-                    "INSERT INTO users (username, email, password_hash, full_name) VALUES (%s, %s, %s, %s);",
-                    ("demo", "demo@voicesql.com", demo_hash, "Demo Explorer")
+                    "INSERT INTO users (username, email, password_hash, full_name, role) VALUES (%s, %s, %s, %s, %s);",
+                    ("demo", "demo@voicesql.com", demo_hash, "Demo Explorer", "user")
                 )
             conn.commit()
+
+        # Sync configured admin users so developer account always has role = 'admin'
+        for adm in admin_list:
+            if is_sqlite:
+                cur.execute("UPDATE users SET role = 'admin' WHERE LOWER(username) = ?;", (adm,))
+            else:
+                cur.execute("UPDATE users SET role = 'admin' WHERE LOWER(username) = %s;", (adm,))
+        conn.commit()
+
     except Exception as e:
         print(f"Error initializing auth tables: {e}")
     finally:
@@ -94,7 +150,7 @@ def init_auth_tables():
         conn.close()
 
 def register_user(username: str, email: str, password: str, full_name: str = "") -> tuple[bool, str]:
-    """Register a new user account."""
+    """Register a new user account with role assignment."""
     init_auth_tables()
     username = username.strip().lower()
     email = email.strip().lower()
@@ -110,6 +166,8 @@ def register_user(username: str, email: str, password: str, full_name: str = "")
     pwd_hash = hash_password(password)
     config = load_config()
     is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+    admin_list = get_admin_usernames()
+    assigned_role = "admin" if username in admin_list else "user"
 
     conn = get_db_connection()
     cur = conn.cursor()
@@ -123,16 +181,16 @@ def register_user(username: str, email: str, password: str, full_name: str = "")
         if cur.fetchone():
             return False, "A user with this username or email already exists."
 
-        # Insert new user
+        # Insert new user with role
         if is_sqlite:
             cur.execute(
-                "INSERT INTO users (username, email, password_hash, full_name) VALUES (?, ?, ?, ?);",
-                (username, email, pwd_hash, full_name or username.capitalize())
+                "INSERT INTO users (username, email, password_hash, full_name, role) VALUES (?, ?, ?, ?, ?);",
+                (username, email, pwd_hash, full_name or username.capitalize(), assigned_role)
             )
         else:
             cur.execute(
-                "INSERT INTO users (username, email, password_hash, full_name) VALUES (%s, %s, %s, %s);",
-                (username, email, pwd_hash, full_name or username.capitalize())
+                "INSERT INTO users (username, email, password_hash, full_name, role) VALUES (%s, %s, %s, %s, %s);",
+                (username, email, pwd_hash, full_name or username.capitalize(), assigned_role)
             )
         conn.commit()
         return True, "Account created successfully! You can now sign in."
@@ -143,7 +201,7 @@ def register_user(username: str, email: str, password: str, full_name: str = "")
         conn.close()
 
 def authenticate_user(username_or_email: str, password: str) -> tuple[bool, dict | str]:
-    """Authenticate user with username/email and password."""
+    """Authenticate user with username/email and password, retrieving role."""
     init_auth_tables()
     ident = username_or_email.strip().lower()
     if not ident or not password:
@@ -151,32 +209,35 @@ def authenticate_user(username_or_email: str, password: str) -> tuple[bool, dict
 
     config = load_config()
     is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+    admin_list = get_admin_usernames()
 
     conn = get_db_connection()
     cur = conn.cursor()
     try:
         if is_sqlite:
             cur.execute(
-                "SELECT user_id, username, email, password_hash, full_name, created_at FROM users WHERE username = ? OR email = ?;",
+                "SELECT user_id, username, email, password_hash, full_name, created_at, role FROM users WHERE username = ? OR email = ?;",
                 (ident, ident)
             )
         else:
             cur.execute(
-                "SELECT user_id, username, email, password_hash, full_name, created_at FROM users WHERE username = %s OR email = %s;",
+                "SELECT user_id, username, email, password_hash, full_name, created_at, role FROM users WHERE username = %s OR email = %s;",
                 (ident, ident)
             )
         row = cur.fetchone()
         if not row:
             return False, "User not found. Check your credentials or create a new account."
 
-        user_id, username, email, stored_hash, full_name, created_at = row
+        user_id, username, email, stored_hash, full_name, created_at, role = row
         if verify_password(password, stored_hash):
+            is_adm = (role == "admin") or (username.lower() in admin_list)
             user_dict = {
                 "user_id": user_id,
                 "username": username,
                 "email": email,
                 "full_name": full_name or username.capitalize(),
-                "created_at": str(created_at)
+                "created_at": str(created_at),
+                "role": "admin" if is_adm else (role or "user")
             }
             return True, user_dict
         else:
@@ -261,3 +322,90 @@ def get_user_datasets(user_id: int) -> list[dict]:
     finally:
         cur.close()
         conn.close()
+
+def get_all_users_for_admin() -> list[dict]:
+    """
+    Retrieve registered users for the admin management view.
+    NOTE: password_hash is strictly excluded for security and privacy.
+    """
+    init_auth_tables()
+    config = load_config()
+    is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute("""
+            SELECT u.user_id, u.username, u.email, u.full_name, u.role, u.created_at,
+                   COUNT(d.dataset_id) as total_datasets
+            FROM users u
+            LEFT JOIN user_datasets d ON u.user_id = d.user_id
+            GROUP BY u.user_id
+            ORDER BY u.user_id ASC;
+        """)
+        rows = cur.fetchall()
+        return [
+            {
+                "user_id": r[0],
+                "username": r[1],
+                "email": r[2],
+                "full_name": r[3],
+                "role": r[4] or "user",
+                "created_at": str(r[5]),
+                "total_datasets": r[6]
+            }
+            for r in rows
+        ]
+    except Exception as e:
+        print(f"Error fetching admin user list: {e}")
+        return []
+    finally:
+        cur.close()
+        conn.close()
+
+def update_user_role(target_user_id: int, new_role: str) -> tuple[bool, str]:
+    """Change a user's role (admin / user)."""
+    if new_role not in ["admin", "user"]:
+        return False, "Invalid role. Must be 'admin' or 'user'."
+    init_auth_tables()
+    config = load_config()
+    is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        if is_sqlite:
+            cur.execute("UPDATE users SET role = ? WHERE user_id = ?;", (new_role, target_user_id))
+        else:
+            cur.execute("UPDATE users SET role = %s WHERE user_id = %s;", (new_role, target_user_id))
+        conn.commit()
+        return True, f"User role updated to '{new_role}' successfully."
+    except Exception as e:
+        return False, f"Failed to update role: {e}"
+    finally:
+        cur.close()
+        conn.close()
+
+def delete_user_by_admin(target_user_id: int) -> tuple[bool, str]:
+    """Delete a user account and associated dataset records."""
+    init_auth_tables()
+    config = load_config()
+    is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        if is_sqlite:
+            cur.execute("DELETE FROM user_datasets WHERE user_id = ?;", (target_user_id,))
+            cur.execute("DELETE FROM users WHERE user_id = ?;", (target_user_id,))
+        else:
+            cur.execute("DELETE FROM user_datasets WHERE user_id = %s;", (target_user_id,))
+            cur.execute("DELETE FROM users WHERE user_id = %s;", (target_user_id,))
+        conn.commit()
+        return True, "User account deleted successfully."
+    except Exception as e:
+        return False, f"Failed to delete user: {e}"
+    finally:
+        cur.close()
+        conn.close()
+

@@ -1,16 +1,51 @@
 import time
+import re
 import warnings
 import pandas as pd
 from database.db_connection import get_db_connection
 
 warnings.filterwarnings('ignore', category=UserWarning, module='pandas')
 
-def execute_sql_query(query):
+RESTRICTED_AUTH_TABLES = ["users", "user_datasets"]
+
+def is_query_authorized(query: str, allow_system_tables: bool = False, user_role: str = None) -> tuple[bool, str]:
+    """Check if query touches sensitive authentication tables without admin clearance."""
+    if allow_system_tables:
+        return True, ""
+    
+    # Auto-detect role from session state if in Streamlit context
+    if user_role is None:
+        try:
+            import streamlit as st
+            user = st.session_state.get("current_user", {})
+            user_role = user.get("role", "user")
+        except Exception:
+            user_role = "user"
+
+    if user_role == "admin":
+        return True, ""
+
+    # Inspect SQL tokens for restricted table names
+    for tbl in RESTRICTED_AUTH_TABLES:
+        pattern = rf"\b{re.escape(tbl)}\b"
+        if re.search(pattern, query, re.IGNORECASE):
+            return False, f"Security Restriction: Access to internal user authentication table '{tbl}' is restricted to administrators."
+
+    return True, ""
+
+def execute_sql_query(query: str, allow_system_tables: bool = False, user_role: str = None):
     """
     Execute SQL, measure execution latency, and return results.
+    Guarded against unauthorized access to authentication/system tables.
     Returns: (success, result_data, execution_time_ms, error_msg)
     """
     start_time = time.time()
+    
+    # Security Guard Check
+    authorized, auth_err = is_query_authorized(query, allow_system_tables, user_role)
+    if not authorized:
+        return False, None, 0, auth_err
+
     conn = None
     cursor = None
     try:

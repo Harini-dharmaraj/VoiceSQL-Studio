@@ -178,10 +178,11 @@ def get_active_tables_info() -> dict:
         conn = get_db_connection()
         cur = conn.cursor()
         tables_meta = {}
+        SYSTEM_TABLES = ("users", "user_datasets", "query_history", "sqlite_sequence")
 
         if config.get("db_type") == "SQLite":
-            cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name != 'query_history';")
-            tables = [r[0] for r in cur.fetchall()]
+            cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name NOT IN ('users', 'user_datasets', 'query_history', 'sqlite_sequence');")
+            tables = [r[0] for r in cur.fetchall() if r[0].lower() not in SYSTEM_TABLES]
             for tbl in tables:
                 cur.execute(f"PRAGMA table_info('{tbl}');")
                 cols = cur.fetchall()
@@ -194,8 +195,8 @@ def get_active_tables_info() -> dict:
                     "text_cols": text_cols
                 }
         else:
-            cur.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{config.get('mysql_database', 'voice_to_sql')}' AND table_name != 'query_history';")
-            tables = [r[0] for r in cur.fetchall()]
+            cur.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{config.get('mysql_database', 'voice_to_sql')}' AND table_name NOT IN ('users', 'user_datasets', 'query_history', 'sqlite_sequence');")
+            tables = [r[0] for r in cur.fetchall() if r[0].lower() not in SYSTEM_TABLES]
             for tbl in tables:
                 cur.execute(f"SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = '{config.get('mysql_database', 'voice_to_sql')}' AND table_name = '{tbl}';")
                 cols = cur.fetchall()

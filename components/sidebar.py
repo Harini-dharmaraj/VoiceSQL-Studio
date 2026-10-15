@@ -72,15 +72,20 @@ def show_sidebar():
         user = st.session_state.get("current_user", {})
         username = user.get("username", "Guest")
         full_name = user.get("full_name", username)
+        role = user.get("role", "user")
         initial = (username[:1] if username else "U").upper()
+        role_badge = '<span style="background: #2563EB; color: #FFF; padding: 2px 7px; border-radius: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.05em; margin-left: 6px;">ADMIN</span>' if role == "admin" else ""
 
         user_card_html = f"""
 <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
     <div style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #FFF; font-weight: 700;">
         {initial}
     </div>
-    <div style="overflow: hidden;">
-        <div style="font-size: 13px; font-weight: 700; color: #F8FAFC; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{full_name}</div>
+    <div style="overflow: hidden; flex: 1;">
+        <div style="font-size: 13px; font-weight: 700; color: #F8FAFC; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; display: flex; align-items: center;">
+            <span>{full_name}</span>
+            {role_badge}
+        </div>
         <div style="font-size: 11px; color: #38BDF8; font-weight: 500;">@{username}</div>
     </div>
 </div>

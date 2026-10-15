@@ -216,6 +216,7 @@ def show_landing_page(authenticated: bool = False):
                             "username": "guest",
                             "email": "guest@voicesql.com",
                             "full_name": "Guest Visitor",
+                            "role": "user",
                             "created_at": "Active Session"
                         }
                         st.session_state["authenticated"] = True
@@ -287,7 +288,7 @@ def show_landing_page(authenticated: bool = False):
                         <span>🔒</span> How Your Account and Data Are Secured
                     </div>
                     <ul style="margin: 0; padding-left: 20px;">
-                        <li><b>Local Database Storage:</b> User accounts are stored safely in the local database <code>users</code> table.</li>
+                        <li><b>Role-Based Access Control (RBAC):</b> System and authentication tables are guarded. Regular users and the AI query engine cannot view, browse, or export account credentials.</li>
                         <li><b>Salted SHA-256 Hashing:</b> Passwords are <b>never saved in plain text</b>. They are hashed with a 16-byte cryptographically secure random salt so no one can reconstruct your original password.</li>
                         <li><b>Data Privacy & Isolation:</b> Any CSV files you upload are tagged to your private account and isolated from other users.</li>
                     </ul>

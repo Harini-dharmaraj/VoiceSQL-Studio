@@ -64,7 +64,21 @@ def show_database_page():
 
     st.divider()
 
-    tab_browse, tab_upload = st.tabs(["📋 Browse Database Tables", "📤 Upload Custom CSV Dataset"])
+    user = st.session_state.get("current_user", {})
+    from database.auth import is_admin_user, get_all_users_for_admin, update_user_role, delete_user_by_admin
+    is_admin = is_admin_user(user)
+
+    if is_admin:
+        tab_browse, tab_upload, tab_admin = st.tabs([
+            "📋 Browse Database Tables", 
+            "📤 Upload Custom CSV Dataset", 
+            "🛡️ Admin: User Management"
+        ])
+    else:
+        tab_browse, tab_upload = st.tabs([
+            "📋 Browse Database Tables", 
+            "📤 Upload Custom CSV Dataset"
+        ])
 
     # ========================================================
     # TAB 1: BROWSE TABLES
@@ -345,19 +359,103 @@ def show_database_page():
                         else:
                             st.error(f"❌ Error creating table: {err_bld}")
 
+    # ========================================================
+    # TAB 3: ADMIN CONSOLE (ONLY VISIBLE TO DEVELOPER/ADMIN)
+    # ========================================================
+    if is_admin:
+        with tab_admin:
+            st.subheader("🛡️ Developer & Administrator Console")
+            st.caption("As the developer/admin, only you have access to this portal to monitor registered accounts and manage roles.")
+            
+            all_users = get_all_users_for_admin()
+            
+            col_m1, col_m2, col_m3 = st.columns(3)
+            with col_m1:
+                st.metric("Total Registered Users", len(all_users))
+            with col_m2:
+                admin_count = sum(1 for u in all_users if u.get("role") == "admin")
+                st.metric("Administrators", admin_count)
+            with col_m3:
+                total_custom_ds = sum(u.get("total_datasets", 0) for u in all_users)
+                st.metric("Total User Datasets", total_custom_ds)
+
+            st.markdown("<hr style='border-color: #E2E8F0; margin: 16px 0;'>", unsafe_allow_html=True)
+            st.markdown("#### 👥 Registered Accounts")
+            st.caption("Passwords are securely salted SHA-256 hashes and are strictly hidden from display.")
+
+            if all_users:
+                users_df = pd.DataFrame(all_users)
+                display_df = users_df.rename(columns={
+                    "user_id": "User ID",
+                    "username": "Username",
+                    "email": "Email Address",
+                    "full_name": "Full Name",
+                    "role": "Role",
+                    "created_at": "Registered Date",
+                    "total_datasets": "Uploaded Datasets"
+                })
+                st.dataframe(display_df, use_container_width=True, hide_index=True)
+
+                st.markdown("<div style='height: 12px;'></div>", unsafe_allow_html=True)
+                st.markdown("#### ⚙️ User Role & Account Management")
+
+                col_u1, col_u2 = st.columns(2)
+                with col_u1:
+                    with st.expander("👑 Promote / Demote User Role", expanded=False):
+                        target_user = st.selectbox(
+                            "Select User:",
+                            options=all_users,
+                            format_func=lambda u: f"ID {u['user_id']} - @{u['username']} ({u['full_name']}) [{u['role'].upper()}]",
+                            key="admin_role_select"
+                        )
+                        new_role = st.selectbox("Assign Role:", ["admin", "user"], index=0 if target_user.get("role") == "admin" else 1, key="admin_new_role")
+                        if st.button("Update Role", type="primary", key="btn_update_role"):
+                            ok_r, msg_r = update_user_role(target_user["user_id"], new_role)
+                            if ok_r:
+                                st.success(msg_r)
+                                st.rerun()
+                            else:
+                                st.error(msg_r)
+
+                with col_u2:
+                    with st.expander("🗑️ Delete User Account", expanded=False):
+                        delete_options = [u for u in all_users if u["user_id"] != user.get("user_id")]
+                        if delete_options:
+                            delete_target = st.selectbox(
+                                "Select User to Delete:",
+                                options=delete_options,
+                                format_func=lambda u: f"ID {u['user_id']} - @{u['username']} ({u['email']})",
+                                key="admin_delete_select"
+                            )
+                            st.warning("⚠️ Deleting an account will permanently remove their datasets as well.")
+                            if st.button(f"Permanently Delete @{delete_target['username']}", type="secondary", key="btn_del_user"):
+                                ok_d, msg_d = delete_user_by_admin(delete_target["user_id"])
+                                if ok_d:
+                                    st.success(msg_d)
+                                    st.rerun()
+                                else:
+                                    st.error(msg_d)
+                        else:
+                            st.info("No other user accounts to delete.")
+            else:
+                st.info("No users registered yet.")
+
+
+SYSTEM_AUTH_TABLES = {"users", "user_datasets", "query_history", "sqlite_sequence"}
 
 def _get_all_tables(config):
-    """Retrieve list of user tables from active database."""
+    """Retrieve list of user tables from active database, strictly excluding authentication/system tables."""
     tables = []
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
         if config["db_type"] == "SQLite":
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';")
-            tables = [r[0] for r in cursor.fetchall()]
+            raw_tables = [r[0] for r in cursor.fetchall()]
         else:
             cursor.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = '{config['mysql_database']}';")
-            tables = [r[0] for r in cursor.fetchall()]
+            raw_tables = [r[0] for r in cursor.fetchall()]
+        tables = [t for t in raw_tables if t.lower() not in SYSTEM_AUTH_TABLES]
     except Exception:
         tables = []
     finally:
