@@ -1,0 +1,16 @@
+employee_id,employee_name,department,role,salary,experience_years,performance_score,city
+101,Aarav Sharma,Engineering,Senior Software Engineer,95000,6,4.8,Bangalore
+102,Priya Nair,Marketing,Marketing Lead,72000,5,4.5,Mumbai
+103,Rohan Verma,Engineering,DevOps Architect,105000,8,4.9,Bangalore
+104,Sneha Patel,Finance,Financial Analyst,68000,4,4.2,Hyderabad
+105,Vikram Singh,Sales,Sales Manager,82000,7,4.6,Delhi
+106,Ananya Iyer,Engineering,AI Research Engineer,115000,7,5.0,Bangalore
+107,Karthik Raj,Marketing,Content Strategist,58000,3,4.1,Chennai
+108,Meera Das,Human Resources,HR Manager,65000,5,4.4,Kolkata
+109,Arjun Reddy,Engineering,Frontend Developer,78000,4,4.7,Hyderabad
+110,Divya Menon,Finance,Senior Accountant,74000,6,4.3,Mumbai
+111,Siddharth Joshi,Sales,Account Executive,62000,3,4.0,Pune
+112,Pooja Hegde,Product,Senior Product Manager,110000,7,4.8,Bangalore
+113,Manoj Kumar,Operations,Operations Lead,70000,5,4.2,Chennai
+114,Kavita Rao,Engineering,QA Automation Engineer,68000,4,4.5,Bangalore
+115,Harish Balan,Data Science,Lead Data Scientist,125000,8,4.9,Bangalore
