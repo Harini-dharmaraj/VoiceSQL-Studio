@@ -228,6 +228,7 @@ def show_voice_query_page():
     with col_target2:
         st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
         if st.button("📤 Upload / Manage Datasets", use_container_width=True):
+            st.session_state["sidebar_nav_selection"] = "Database"
             st.session_state["nav_override"] = "Database"
             st.rerun()
 

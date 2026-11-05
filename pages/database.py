@@ -102,7 +102,7 @@ def show_database_page():
             
             for d in my_datasets:
                 tbl = d['table_name']
-                col_d_info, col_d_action1, col_d_action2 = st.columns([3, 1.4, 0.8])
+                col_d_info, col_d_view, col_d_query, col_d_del = st.columns([2.5, 1.1, 1.4, 0.8])
                 with col_d_info:
                     st.markdown(f"""
                     <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #10B981; border-radius: 6px; padding: 10px 14px; margin-bottom: 8px;">
@@ -113,13 +113,20 @@ def show_database_page():
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
-                with col_d_action1:
+                with col_d_view:
+                    st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+                    if st.button(f"👁️ View Table", key=f"view_ds_{tbl}", use_container_width=True):
+                        st.session_state["active_dataset_table"] = tbl
+                        st.session_state["view_table_selected"] = tbl
+                        st.rerun()
+                with col_d_query:
                     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
                     if st.button(f"🎙️ Query in Voice Studio", key=f"query_ds_{tbl}", use_container_width=True, type="primary"):
                         st.session_state["active_dataset_table"] = tbl
+                        st.session_state["sidebar_nav_selection"] = "Voice Assistant"
                         st.session_state["nav_override"] = "Voice Assistant"
                         st.rerun()
-                with col_d_action2:
+                with col_d_del:
                     st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
                     if st.button(f"🗑️ Delete", key=f"del_ds_{tbl}", use_container_width=True):
                         ok_del, msg_del = delete_user_dataset_by_name(user_id, tbl)
@@ -133,7 +140,19 @@ def show_database_page():
 
             st.markdown("<hr style='border-color: #E2E8F0; margin: 18px 0 14px 0;'>", unsafe_allow_html=True)
 
-        selected_table = st.selectbox("Select Table to View Schema & Data:", sorted(tables))
+        sorted_tables = sorted(tables)
+        # Smart default: prioritize user's active table or selected dataset table over default movie tables
+        def_tbl = st.session_state.get("view_table_selected")
+        if not def_tbl or def_tbl not in sorted_tables:
+            def_tbl = st.session_state.get("active_dataset_table")
+        if not def_tbl or def_tbl not in sorted_tables:
+            if my_datasets and my_datasets[0]["table_name"] in sorted_tables:
+                def_tbl = my_datasets[0]["table_name"]
+            else:
+                def_tbl = sorted_tables[0]
+
+        default_tbl_idx = sorted_tables.index(def_tbl) if def_tbl in sorted_tables else 0
+        selected_table = st.selectbox("Select Table to View Schema & Data:", sorted_tables, index=default_tbl_idx)
 
         schema_df, total_rows = _get_table_info(selected_table, config)
 
@@ -242,6 +261,7 @@ def show_database_page():
                                 with col_act1:
                                     if st.button(f"🎙️ Query `{table_clean}` in Voice Studio Now ➔", type="primary", use_container_width=True, key="launch_voice_after_upload"):
                                         st.session_state["active_dataset_table"] = table_clean
+                                        st.session_state["sidebar_nav_selection"] = "Voice Assistant"
                                         st.session_state["nav_override"] = "Voice Assistant"
                                         st.rerun()
                                 with col_act2:

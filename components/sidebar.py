@@ -109,15 +109,18 @@ def show_sidebar():
         st.caption("WORKSPACE NAVIGATION")
 
         nav_options = list(nav_map.keys())
-        default_idx = 0
+        
+        # Check for programatic navigation overrides
         override = st.session_state.pop("nav_override", None)
         if override in nav_options:
-            default_idx = nav_options.index(override)
+            st.session_state["sidebar_nav_selection"] = override
+        elif "sidebar_nav_selection" not in st.session_state or st.session_state["sidebar_nav_selection"] not in nav_options:
+            st.session_state["sidebar_nav_selection"] = "Voice Assistant"
 
         page = st.radio(
             "Navigation",
             options=nav_options,
-            index=default_idx,
+            key="sidebar_nav_selection",
             format_func=lambda x: nav_map.get(x, x),
             label_visibility="collapsed"
         )
