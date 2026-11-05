@@ -337,13 +337,18 @@ def show_database_page():
                 </div>
                 """, unsafe_allow_html=True)
                 if st.button("🎓 Load University Education Dataset", use_container_width=True):
-                    # Check if datasets/students.csv exists
+                    from database.auth import record_user_dataset
+                    user = st.session_state.get("current_user", {})
+                    user_id = user.get("user_id", 0)
                     if os.path.exists("datasets/students.csv"):
                         df_st = pd.read_csv("datasets/students.csv")
                         _import_df_to_database(df_st, "students", config)
                         if os.path.exists("datasets/courses.csv"):
                             df_co = pd.read_csv("datasets/courses.csv")
                             _import_df_to_database(df_co, "courses", config)
+                        if user_id:
+                            record_user_dataset(user_id, "students", display_name="University Students", row_count=len(df_st))
+                        st.session_state["active_dataset_table"] = "students"
                         st.success("✅ University students and courses loaded successfully!")
                         st.rerun()
                     else:
@@ -356,8 +361,42 @@ def show_database_page():
                             {"student_id": 5, "student_name": "Ethan Hunt", "major": "Software Engineering", "gpa": 3.2, "graduation_year": 2027}
                         ])
                         _import_df_to_database(df_sample_st, "students", config)
+                        if user_id:
+                            record_user_dataset(user_id, "students", display_name="University Students", row_count=len(df_sample_st))
+                        st.session_state["active_dataset_table"] = "students"
                         st.success("✅ University students dataset created successfully!")
                         st.rerun()
+
+            st.markdown("""
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-top: 14px; margin-bottom: 4px;">
+                <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">💼 Corporate Employees & HR (Recommended)</div>
+                <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;">
+                    15 employee records, department salaries, experience years, performance ratings, and branch locations.
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("💼 Load Corporate Employees Dataset", use_container_width=True, type="primary"):
+                from database.auth import record_user_dataset
+                csv_path = "datasets/company_employees.csv"
+                if os.path.exists(csv_path):
+                    df_emp = pd.read_csv(csv_path)
+                else:
+                    df_emp = pd.DataFrame([
+                        {"employee_id": 101, "employee_name": "Arun Kumar", "department": "Engineering", "role": "Senior Cloud Architect", "salary": 145000, "experience_years": 8, "performance_score": 4.8, "city": "Bangalore"},
+                        {"employee_id": 102, "employee_name": "Priya Sharma", "department": "AI & Research", "role": "Lead Data Scientist", "salary": 160000, "experience_years": 7, "performance_score": 4.9, "city": "Hyderabad"},
+                        {"employee_id": 103, "employee_name": "Kavitha Rajan", "department": "Product", "role": "Principal Product Manager", "salary": 138000, "experience_years": 9, "performance_score": 4.7, "city": "Chennai"}
+                    ])
+                ok_emp, err_emp = _import_df_to_database(df_emp, "company_employees", config)
+                if ok_emp:
+                    user = st.session_state.get("current_user", {})
+                    user_id = user.get("user_id", 0)
+                    if user_id:
+                        record_user_dataset(user_id, "company_employees", display_name="Corporate Employees & Salaries", row_count=len(df_emp))
+                    st.session_state["active_dataset_table"] = "company_employees"
+                    st.success("🎉 Corporate Employees dataset loaded & registered to your workspace!")
+                    st.rerun()
+                else:
+                    st.error(f"❌ Failed to load dataset: {err_emp}")
 
         # ----------------------------------------------------
         # OPTION 3: INTERACTIVE TABLE BUILDER
