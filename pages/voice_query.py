@@ -154,44 +154,142 @@ def show_voice_query_page():
         st.session_state.trigger_browser_tts = False
 
     # ==========================================
-    # DYNAMIC ACTIVE DATASETS & INSPIRATION CHIPS
+    # WORKSPACE TARGET DATASET SELECTOR
     # ==========================================
-    active_tables = []
-    custom_tables = []
+    user = st.session_state.get("current_user", {})
+    user_id = user.get("user_id", 0)
+    
+    tables_meta = {}
     try:
         tables_meta = get_active_tables_info()
-        active_tables = list(tables_meta.keys())
-        movie_tables = {"movies", "directors", "actors", "movie_cast", "reviews"}
-        custom_tables = [t for t in active_tables if t not in movie_tables]
     except Exception:
         tables_meta = {}
-        active_tables = []
-        custom_tables = []
 
-    if active_tables:
-        display_tbls = ", ".join([f"`{t}`" for t in active_tables[:6]])
-        extra_txt = f" (+{len(active_tables)-6} more)" if len(active_tables) > 6 else ""
+    all_active_tables = list(tables_meta.keys())
+    movie_tables = {"movies", "directors", "actors", "movie_cast", "reviews"}
+    
+    from database.auth import get_user_datasets
+    user_uploaded_datasets = get_user_datasets(user_id) if user_id else []
+    
+    # Construct options
+    target_options = ["🌟 Auto-Detect (Search Across All Tables)"]
+    opt_to_tbl = {"🌟 Auto-Detect (Search Across All Tables)": "all"}
+    
+    # 1. User's uploaded datasets
+    for ds in user_uploaded_datasets:
+        tbl = ds["table_name"]
+        if tbl in all_active_tables:
+            label = f"📁 {tbl} ({ds.get('row_count', 0)} rows • My Dataset)"
+            target_options.append(label)
+            opt_to_tbl[label] = tbl
+
+    # 2. Other custom tables in DB not in user_uploaded_datasets
+    for tbl in all_active_tables:
+        if tbl not in movie_tables and tbl not in [d["table_name"] for d in user_uploaded_datasets]:
+            row_count_est = len(tables_meta[tbl]["columns"])
+            label = f"📁 {tbl} (Custom Table)"
+            target_options.append(label)
+            opt_to_tbl[label] = tbl
+
+    # 3. Default IMDb Blockbusters dataset
+    if "movies" in all_active_tables:
+        label = "🎬 movies (IMDb Blockbusters • 30 rows)"
+        target_options.append(label)
+        opt_to_tbl[label] = "movies"
+
+    # Determine default selection
+    curr_target = st.session_state.get("active_dataset_table", "all")
+    default_idx = 0
+    for idx, opt in enumerate(target_options):
+        if opt_to_tbl.get(opt) == curr_target:
+            default_idx = idx
+            break
+    if default_idx == 0 and user_uploaded_datasets:
+        # Default to user's first dataset if available and no override set
+        first_user_tbl = user_uploaded_datasets[0]["table_name"]
+        for idx, opt in enumerate(target_options):
+            if opt_to_tbl.get(opt) == first_user_tbl:
+                default_idx = idx
+                curr_target = first_user_tbl
+                st.session_state["active_dataset_table"] = first_user_tbl
+                break
+
+    col_target1, col_target2 = st.columns([3.2, 1.8])
+    with col_target1:
+        selected_opt = st.selectbox(
+            "🎯 Active Workspace Target Dataset:",
+            options=target_options,
+            index=default_idx,
+            help="Select which dataset your voice or typed queries will target. The AI optimizes SQL queries specifically for this table."
+        )
+        selected_tbl = opt_to_tbl.get(selected_opt, "all")
+        st.session_state["active_dataset_table"] = selected_tbl
+
+    with col_target2:
+        st.markdown("<div style='height: 28px;'></div>", unsafe_allow_html=True)
+        if st.button("📤 Upload / Manage Datasets", use_container_width=True):
+            st.session_state["nav_override"] = "Database"
+            st.rerun()
+
+    # Active Target Info Banner
+    if selected_tbl != "all" and selected_tbl in tables_meta:
+        t_meta = tables_meta[selected_tbl]
+        cols_display = ", ".join(t_meta["columns"][:7])
+        more_cols = f" (+{len(t_meta['columns']) - 7} more)" if len(t_meta["columns"]) > 7 else ""
         st.markdown(f"""
-        <div style="background: #F1F5F9; border-left: 3px solid #3B82F6; padding: 6px 12px; border-radius: 4px; font-size: 12.5px; color: #334155; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-            <div><b>🗄️ Queryable Tables:</b> {display_tbls}{extra_txt}</div>
-            <div style="font-size: 11.5px; color: #64748B;">Upload your own data or CSVs in <b>Database</b> tab anytime</div>
+        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div>
+                <span style="font-weight: 700; color: #166534;">🎯 Active Target:</span>
+                <code style="background: #DCFCE7; color: #15803D; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-size: 13px;">{selected_tbl}</code>
+                <span style="font-size: 12.5px; color: #166534; margin-left: 8px;">Columns: {cols_display}{more_cols}</span>
+            </div>
+            <div style="font-size: 12px; color: #15803D; font-weight: 600;">
+                🎙️ Voice & typed queries automatically prioritize this table
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div style="background: #F1F5F9; border-left: 3px solid #3B82F6; padding: 7px 14px; border-radius: 4px; font-size: 12.5px; color: #334155; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div><b>🗄️ Queryable Tables:</b> {', '.join([f'`{t}`' for t in all_active_tables[:6]])}{' (+more)' if len(all_active_tables) > 6 else ''}</div>
+            <div style="font-size: 11.5px; color: #64748B;">Upload your own CSV or Excel in <b>Database</b> tab anytime</div>
         </div>
         """, unsafe_allow_html=True)
 
+    # Dynamic Suggestion Chips based on Target Table
     chips = []
-    for ct in custom_tables[:2]:
-        c_title = ct.replace("_", " ").title()
-        chips.append((f"📊 All {c_title}", f"Show all records from {ct}"))
-        chips.append((f"🔢 Count {c_title}", f"How many {ct} are there?"))
+    if selected_tbl != "all" and selected_tbl in tables_meta:
+        t_meta = tables_meta[selected_tbl]
+        num_c = [c for c in t_meta["numeric_cols"] if not c.lower().endswith("_id") and c.lower() != "id"]
+        text_c = t_meta["text_cols"]
+        t_name = selected_tbl
 
-    if "movies" in active_tables or not custom_tables:
-        chips.extend([
-            ("🏆 2 Oscars", "show the directors who won 2 oscars"),
-            ("🎬 Nolan Movies", "Show all movies directed by Christopher Nolan"),
-            ("⭐ Top 5 Rated", "Show top 5 highest rated movies"),
-            ("💰 Highest Collection", "which picture collected more"),
-            ("🎭 Inception Hero", "who is the hero of Inception"),
-        ])
+        chips.append((f"📋 All Records", f"Show all records from {t_name}"))
+        chips.append((f"🔢 Total Count", f"How many {t_name} are there?"))
+
+        if num_c:
+            primary_num = num_c[0]
+            chips.append((f"⭐ Top 5 by {primary_num.title()}", f"Show top 5 with highest {primary_num}"))
+            chips.append((f"💰 Highest {primary_num.title()}", f"Who has the highest {primary_num}"))
+            if text_c:
+                primary_txt = text_c[0]
+                chips.append((f"📈 Avg by {primary_txt.title()}", f"Average {primary_num} by {primary_txt}"))
+        elif text_c:
+            chips.append((f"🏷️ Unique {text_c[0].title()}s", f"What are the unique {text_c[0]}"))
+
+    else:
+        # Default inspiration chips
+        custom_t = [t for t in all_active_tables if t not in movie_tables]
+        for ct in custom_t[:2]:
+            chips.append((f"📊 All {ct.title()}", f"Show all records from {ct}"))
+            chips.append((f"🔢 Count {ct.title()}", f"How many {ct} are there?"))
+        if "movies" in all_active_tables or not custom_t:
+            chips.extend([
+                ("⭐ Top 5 Rated", "Show top 5 highest rated movies"),
+                ("🏆 2 Oscars", "show the directors who won 2 oscars"),
+                ("🎬 Nolan Movies", "Show all movies directed by Christopher Nolan"),
+                ("💰 Box Office", "Show top 5 movies with highest box office collection"),
+            ])
 
     chips = chips[:6]
     if chips:
@@ -206,7 +304,7 @@ def show_voice_query_page():
             with col:
                 if st.button(label, key=f"chip_{label}", use_container_width=True):
                     st.session_state.user_query_text = prompt
-                    _run_pipeline(prompt, tts_enabled)
+                    _run_pipeline(prompt, tts_enabled, active_table=selected_tbl if selected_tbl != "all" else None)
                     st.session_state.trigger_browser_tts = True
                     st.rerun()
 
@@ -1009,9 +1107,17 @@ def show_voice_query_page():
                     st.caption("No cleaned audio yet.")
 
 
-def _run_pipeline(question, tts_enabled=True):
+def _run_pipeline(question, tts_enabled=True, active_table=None):
     """Core translation, SQL execution, and TTS synthesis pipeline."""
-    sql = generate_sql(question)
+    if active_table is None:
+        try:
+            target = st.session_state.get("active_dataset_table")
+            if target and str(target).lower() not in ["all", "all tables / auto-detect", "none", ""]:
+                active_table = target
+        except Exception:
+            active_table = None
+
+    sql = generate_sql(question, active_table=active_table)
     is_valid = validate_sql(sql)
     st.session_state.active_sql = sql
     st.session_state.active_sql_valid = is_valid

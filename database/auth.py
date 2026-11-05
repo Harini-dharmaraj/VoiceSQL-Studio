@@ -331,6 +331,38 @@ def get_user_datasets(user_id: int) -> list[dict]:
         cur.close()
         conn.close()
 
+def delete_user_dataset_by_name(user_id: int, table_name: str) -> tuple[bool, str]:
+    """Safely drop user-created table and remove from user_datasets registry."""
+    init_auth_tables()
+    config = load_config()
+    is_sqlite = (config.get("db_type", "SQLite") == "SQLite")
+    clean_tbl = table_name.strip().lower()
+
+    # Never delete system or core schema tables
+    protected = {"users", "user_datasets", "query_history", "sqlite_sequence"}
+    if clean_tbl in protected:
+        return False, "Cannot delete protected system tables."
+
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        # Drop the database table
+        cur.execute(f"DROP TABLE IF EXISTS `{clean_tbl}`;" if not is_sqlite else f"DROP TABLE IF EXISTS {clean_tbl};")
+
+        # Delete registry entry
+        if is_sqlite:
+            cur.execute("DELETE FROM user_datasets WHERE user_id = ? AND LOWER(table_name) = ?;", (user_id, clean_tbl))
+        else:
+            cur.execute("DELETE FROM user_datasets WHERE user_id = %s AND LOWER(table_name) = %s;", (user_id, clean_tbl))
+
+        conn.commit()
+        return True, f"Dataset `{clean_tbl}` deleted successfully."
+    except Exception as e:
+        return False, f"Failed to delete dataset: {e}"
+    finally:
+        cur.close()
+        conn.close()
+
 def get_all_users_for_admin() -> list[dict]:
     """
     Retrieve registered users for the admin management view.

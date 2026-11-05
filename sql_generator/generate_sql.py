@@ -110,11 +110,14 @@ def explain_sql_query(sql: str) -> str:
     sql_u = sql.upper()
     steps = []
 
-    # 1. Target table(s)
+    # 1. Target table(s) - dynamically extract from FROM and JOIN
     tables = []
-    for t in ["MOVIES", "DIRECTORS", "ACTORS", "MOVIE_CAST", "REVIEWS"]:
-        if f" {t} " in f" {sql_u} ":
-            tables.append(t.title())
+    found_tbls = re.findall(r'(?:FROM|JOIN)\s+([a-zA-Z0-9_]+)', sql, re.IGNORECASE)
+    for t in found_tbls:
+        t_clean = t.strip('`"[]')
+        if t_clean.upper() not in ["SELECT", "WHERE", "GROUP", "ORDER", "LIMIT", "ON"]:
+            if t_clean.title() not in tables:
+                tables.append(t_clean.title())
 
     if tables:
         steps.append(f"Queries the **{', '.join(tables)}** table(s)")
@@ -215,6 +218,24 @@ def get_active_tables_info() -> dict:
     except Exception:
         return {}
 
+CUSTOM_SYNONYMS = {
+    "gpa": ["gpa", "grade", "grades", "score", "scores", "marks", "percentage", "cgpa"],
+    "salary": ["salary", "salaries", "pay", "income", "compensation", "wage", "wages", "earnings"],
+    "price": ["price", "cost", "rate", "fee", "amount", "charge", "unit price"],
+    "budget": ["budget", "spending", "expense", "expenses"],
+    "revenue": ["revenue", "sales", "turnover", "collection", "gross"],
+    "rating": ["rating", "ratings", "score", "stars"],
+    "age": ["age", "years old"],
+    "quantity": ["quantity", "qty", "count", "units", "items", "stock"],
+    "profit": ["profit", "margin", "gain"],
+    "discount": ["discount", "rebate", "offer"],
+    "major": ["major", "branch", "department", "stream", "field", "course"],
+    "department": ["department", "dept", "team", "division", "unit"],
+    "city": ["city", "town", "location", "place"],
+    "country": ["country", "nation", "origin"],
+    "role": ["role", "designation", "position", "title", "job"]
+}
+
 def resolve_custom_table_query(q: str, target_table: str, meta: dict, limit_val: int = None) -> str:
     """
     Generates precision SQL queries for user-uploaded custom datasets / tables
@@ -229,15 +250,20 @@ def resolve_custom_table_query(q: str, target_table: str, meta: dict, limit_val:
     lim_str = f" LIMIT {limit_val}" if limit_val else ""
     lim_top = f" LIMIT {limit_val or 5}"
 
-    # 1. Count query
-    if any(w in q for w in ["how many", "count", "total count", "number of"]) and not any(w in q for w in ["sum", "average", "avg", "salary", "price", "fee", "cost", "amount", "revenue", "gpa"]):
-        return f"SELECT COUNT(*) AS total_{target_table} FROM {target_table};"
-
-    # Match which numeric column is mentioned
+    # Match which numeric column is mentioned (with synonym matching and word boundaries)
     matched_num = None
     for nc in num_cols:
-        if nc.lower() in q or nc.lower().replace("_", " ") in q:
+        nc_low = nc.lower()
+        if re.search(rf"\b{re.escape(nc_low)}\b", q) or nc_low.replace("_", " ") in q:
             matched_num = nc
+            break
+        # Check synonyms
+        for syn_k, syn_vals in CUSTOM_SYNONYMS.items():
+            if syn_k in nc_low:
+                if any(re.search(rf"\b{re.escape(s)}\b", q) for s in syn_vals):
+                    matched_num = nc
+                    break
+        if matched_num:
             break
     if not matched_num and num_cols:
         matched_num = num_cols[0]
@@ -245,45 +271,81 @@ def resolve_custom_table_query(q: str, target_table: str, meta: dict, limit_val:
     # Match which text column is mentioned
     matched_text = None
     for tc in text_cols:
-        if tc.lower() in q or tc.lower().replace("_", " ") in q:
+        tc_low = tc.lower()
+        if re.search(rf"\b{re.escape(tc_low)}\b", q) or tc_low.replace("_", " ") in q:
             matched_text = tc
             break
+        for syn_k, syn_vals in CUSTOM_SYNONYMS.items():
+            if syn_k in tc_low:
+                if any(re.search(rf"\b{re.escape(s)}\b", q) for s in syn_vals):
+                    matched_text = tc
+                    break
+        if matched_text:
+            break
 
-    # 2. Average calculation
-    if "average" in q or "avg" in q:
+    # 1. Show all / View all records
+    if any(w in q for w in ["all records", "show all", "view all", "list all", "all data", "everything", "display all"]) or q.strip() in [f"show {target_table}", f"all {target_table}", target_table]:
+        return f"SELECT * FROM {target_table} LIMIT {limit_val or 50};"
+
+    # 2. Count query (overall or grouped)
+    if any(w in q for w in ["how many", "count", "total count", "number of", "total records"]):
+        if any(w in q for w in ["by", "group", "each", "per"]) and text_cols:
+            grp_col = matched_text or text_cols[0]
+            return f"SELECT {grp_col}, COUNT(*) AS total_count FROM {target_table} GROUP BY {grp_col} ORDER BY total_count DESC;"
+        if not any(w in q for w in ["sum", "average", "avg", "salary", "price", "fee", "cost", "amount", "revenue", "gpa"]):
+            return f"SELECT COUNT(*) AS total_{target_table} FROM {target_table};"
+
+    # 3. Distinct / Unique values
+    if any(w in q for w in ["distinct", "unique", "different", "what are the", "list of all", "categories of"]) and (matched_text or text_cols):
+        target_col = matched_text or text_cols[0]
+        return f"SELECT DISTINCT {target_col} FROM {target_table} ORDER BY {target_col};"
+
+    # 4. Average calculation
+    if "average" in q or "avg" in q or "mean" in q:
         if matched_num:
             if any(w in q for w in ["by", "group", "each", "per"]) and text_cols:
                 grp_col = matched_text or text_cols[0]
                 return f"SELECT {grp_col}, ROUND(AVG({matched_num}), 2) AS avg_{matched_num} FROM {target_table} GROUP BY {grp_col} ORDER BY avg_{matched_num} DESC;"
             return f"SELECT ROUND(AVG({matched_num}), 2) AS avg_{matched_num} FROM {target_table};"
 
-    # 3. Sum / Cumulative Total
-    if any(w in q for w in ["sum", "total revenue", "total sales", "total amount", "total cost", "total spending"]):
+    # 5. Sum / Cumulative Total
+    if any(w in q for w in ["sum", "total revenue", "total sales", "total amount", "total cost", "total spending", "cumulative"]):
         if matched_num:
+            if any(w in q for w in ["by", "group", "each", "per"]) and text_cols:
+                grp_col = matched_text or text_cols[0]
+                return f"SELECT {grp_col}, ROUND(SUM({matched_num}), 2) AS total_{matched_num} FROM {target_table} GROUP BY {grp_col} ORDER BY total_{matched_num} DESC;"
             return f"SELECT ROUND(SUM({matched_num}), 2) AS total_{matched_num} FROM {target_table};"
 
-    # 4. Highest / Top / Maximum / Best / Oldest
+    # 6. Highest / Top / Maximum / Best / Oldest
     if any(w in q for w in ["highest", "max", "maximum", "top", "best", "most", "oldest", "expensive", "costliest"]):
         if matched_num:
-            return f"SELECT * FROM {target_table} ORDER BY {matched_num} DESC{lim_top};"
+            target_limit = limit_val if limit_val else (1 if any(w in q for w in ["who has the highest", "which has the highest", "who got the highest", "highest one"]) else 5)
+            return f"SELECT * FROM {target_table} ORDER BY {matched_num} DESC LIMIT {target_limit};"
 
-    # 5. Lowest / Minimum / Least / Cheapest / Youngest
+    # 7. Lowest / Minimum / Least / Cheapest / Youngest
     if any(w in q for w in ["lowest", "min", "minimum", "least", "cheapest", "youngest"]):
         if matched_num:
-            return f"SELECT * FROM {target_table} ORDER BY {matched_num} ASC{lim_top};"
+            target_limit = limit_val if limit_val else (1 if any(w in q for w in ["who has the lowest", "which has the lowest", "lowest one"]) else 5)
+            return f"SELECT * FROM {target_table} ORDER BY {matched_num} ASC LIMIT {target_limit};"
 
-    # 6. Numeric threshold filter (e.g., above 50, greater than 100, > 20)
-    thresh_match = re.search(r'(?:above|over|greater than|more than|>|>=)\s*(\d+(?:\.\d+)?)', q)
+    # 8. Numeric threshold filter (e.g., above 50, greater than 100, > 20)
+    thresh_match = re.search(r'(?:above|over|greater than|more than|higher than|>|>=)\s*(\d+(?:\.\d+)?)', q)
     if thresh_match and matched_num:
         val = thresh_match.group(1)
         return f"SELECT * FROM {target_table} WHERE {matched_num} >= {val}{lim_str};"
 
-    below_match = re.search(r'(?:below|under|less than|<|<=)\s*(\d+(?:\.\d+)?)', q)
+    below_match = re.search(r'(?:below|under|less than|fewer than|<|<=)\s*(\d+(?:\.\d+)?)', q)
     if below_match and matched_num:
         val = below_match.group(1)
         return f"SELECT * FROM {target_table} WHERE {matched_num} <= {val}{lim_str};"
 
-    # 7. Specific entity lookup & column projection (e.g. "Show the gpa of the student Alice Chen")
+    # Exact numeric match (e.g., graduation_year 2025, year 2024)
+    exact_num_match = re.search(r'\b(19\d{2}|20\d{2})\b', q)
+    year_col = next((c for c in num_cols if "year" in c.lower()), None)
+    if exact_num_match and year_col:
+        return f"SELECT * FROM {target_table} WHERE {year_col} = {exact_num_match.group(1)}{lim_str};"
+
+    # 9. Specific entity lookup & column projection (e.g. "Show the gpa of student Alice Chen")
     requested_cols = [c for c in cols if c.lower() in q or c.lower().replace("_", " ") in q]
     entity_clause = None
 
@@ -341,7 +403,7 @@ def resolve_custom_table_query(q: str, target_table: str, meta: dict, limit_val:
         proj = ", ".join(requested_cols)
         return f"SELECT {proj} FROM {target_table}{lim_str or ' LIMIT 15'};"
 
-    # 8. Default projection
+    # 10. Default projection
     lim_def = f" LIMIT {limit_val or 15}"
     return f"SELECT * FROM {target_table}{lim_def};"
 
@@ -410,7 +472,7 @@ def parse_oscar_condition(q: str):
     # 8. General Oscar mention ("won oscars", "has oscars", "oscar winning", "directors who have won oscars")
     return "CLAUSE", "oscars_won > 0"
 
-def generate_sql_semantic(question: str) -> str:
+def generate_sql_semantic(question: str, active_table: str = None) -> str:
     """
     Dynamic Schema-Grounded Semantic Engine for IMDb Dataset & User-Created Custom Datasets.
     Resolves natural language queries into SQL across all 5 movie tables (movies, directors, actors, movie_cast, reviews)
@@ -425,33 +487,55 @@ def generate_sql_semantic(question: str) -> str:
     limit_val = int(limit_match.group(1)) if limit_match else None
 
     # --- DYNAMIC CUSTOM DATASET RESOLVER ---
-    # Check if the active database contains custom tables (e.g., uploaded CSV/Excel or seeded datasets)
     db_tables = get_active_tables_info()
     movie_tables = {"movies", "directors", "actors", "movie_cast", "reviews"}
     custom_tables = {k: v for k, v in db_tables.items() if k not in movie_tables}
 
-    # Does the question specifically target a custom table?
     target_custom = None
-    if custom_tables:
+
+    # Priority 1: User has specifically designated an Active Workspace Dataset
+    if active_table and str(active_table).lower() not in ["all", "all tables / auto-detect", "none", ""]:
+        clean_act = str(active_table).strip().lower()
+        if clean_act in custom_tables:
+            target_custom = (clean_act, custom_tables[clean_act])
+        elif clean_act in db_tables and clean_act not in movie_tables:
+            target_custom = (clean_act, db_tables[clean_act])
+
+    # Priority 2: Custom table name or column matching in query
+    if not target_custom and custom_tables:
         for tbl_name, tbl_meta in custom_tables.items():
             singular = tbl_name.rstrip("s") if len(tbl_name) > 3 else tbl_name
             clean_tbl_name = tbl_name.replace("_", " ")
-            if tbl_name in q or singular in q or clean_tbl_name in q:
+            if re.search(rf"\b{re.escape(tbl_name)}\b", q) or re.search(rf"\b{re.escape(singular)}\b", q) or clean_tbl_name in q:
                 target_custom = (tbl_name, tbl_meta)
                 break
             for c in tbl_meta["columns"]:
-                if len(c) >= 4 and c.lower() in q and c.lower() not in ["name", "title", "id", "date", "type", "description"]:
-                    target_custom = (tbl_name, tbl_meta)
-                    break
+                c_low = c.lower()
+                if c_low not in ["name", "title", "id", "date", "type", "description"]:
+                    if len(c_low) >= 3 and re.search(rf"\b{re.escape(c_low)}\b", q):
+                        target_custom = (tbl_name, tbl_meta)
+                        break
+                    for syn_k, syn_list in CUSTOM_SYNONYMS.items():
+                        if syn_k in c_low and any(re.search(rf"\b{re.escape(s)}\b", q) for s in syn_list):
+                            target_custom = (tbl_name, tbl_meta)
+                            break
+                    if target_custom:
+                        break
             if target_custom:
                 break
 
-    # If query explicitly targets a custom table, generate SQL for it!
+    # If query targets a custom table, generate SQL for it!
     if target_custom:
         return resolve_custom_table_query(q, target_custom[0], target_custom[1], limit_val)
 
-    # If the database ONLY contains custom tables (movies not present):
+    # Priority 3: If the database ONLY contains custom tables (movies not present):
     if custom_tables and not any(t in db_tables for t in movie_tables):
+        first_tbl = list(custom_tables.keys())[0]
+        return resolve_custom_table_query(q, first_tbl, custom_tables[first_tbl], limit_val)
+
+    # Priority 4: If single custom table exists and question has no movie terms, route to it!
+    movie_keywords = {"movie", "movies", "film", "films", "cinema", "director", "directors", "actor", "actors", "cast", "hero", "oscar", "oscars", "box office"}
+    if len(custom_tables) == 1 and not any(re.search(rf"\b{kw}\b", q) for kw in movie_keywords):
         first_tbl = list(custom_tables.keys())[0]
         return resolve_custom_table_query(q, first_tbl, custom_tables[first_tbl], limit_val)
 
@@ -780,14 +864,18 @@ def get_gemini_models(api_key: str) -> list:
         pass
     return default_candidates
 
-def generate_sql_gemini(question: str, schema_context: str, api_key: str) -> str:
+def generate_sql_gemini(question: str, schema_context: str, api_key: str, active_table: str = None) -> str:
     """Generate SQL using Google Gemini API (Transformer LLM)."""
+    target_guidance = ""
+    if active_table and str(active_table).lower() not in ["all", "all tables / auto-detect", ""]:
+        target_guidance = f"\nPRIMARY WORKSPACE TARGET TABLE: '{active_table}'.\nFormulate the SQL query targeting table '{active_table}' using its schema columns unless the question explicitly asks for a different table.\n"
+
     prompt = f"""You are an expert database architect and Text-to-SQL neural model.
 Given the active database schema below, translate the natural language question into a syntactically correct and semantically accurate SQL query.
 
 DATABASE SCHEMA:
 {schema_context}
-
+{target_guidance}
 RULES:
 1. Return ONLY the raw SQL query. Do not wrap in markdown or backticks (no ```sql).
 2. Do not include conversational explanations, markdown formatting, greetings, or commentary.
@@ -856,16 +944,20 @@ SQL QUERY:"""
     except Exception:
         pass
 
-    return generate_sql_semantic(question)
+    return generate_sql_semantic(question, active_table=active_table)
 
-def generate_sql_openai(question: str, schema_context: str, api_key: str) -> str:
+def generate_sql_openai(question: str, schema_context: str, api_key: str, active_table: str = None) -> str:
     """Generate SQL using OpenAI GPT-4o-mini / GPT-3.5-turbo (Transformer LLM)."""
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {api_key}"
     }
-    prompt = f"Database Schema:\n{schema_context}\n\nConvert natural language to pure SQL:\nQuestion: {question}\nSQL Query:"
+    target_guidance = ""
+    if active_table and str(active_table).lower() not in ["all", "all tables / auto-detect", ""]:
+        target_guidance = f"\nPRIMARY WORKSPACE TARGET TABLE: '{active_table}'.\nFormulate the SQL query targeting '{active_table}' unless requested otherwise.\n"
+
+    prompt = f"Database Schema:\n{schema_context}\n{target_guidance}\nConvert natural language to pure SQL:\nQuestion: {question}\nSQL Query:"
     payload = {
         "model": "gpt-4o-mini",
         "messages": [
@@ -882,14 +974,14 @@ def generate_sql_openai(question: str, schema_context: str, api_key: str) -> str
             return clean_sql_string(sql)
     except Exception:
         pass
-    return generate_sql_semantic(question)
+    return generate_sql_semantic(question, active_table=active_table)
 
-def generate_sql_local(question: str, schema_context: str) -> str:
+def generate_sql_local(question: str, schema_context: str, active_table: str = None) -> str:
     """Generate SQL using local Hugging Face Transformers model (Flan-T5)."""
     try:
         generator = get_local_generator()
         prompt = (
-            f"Translate to SQL for IMDb database (tables: movies, directors, actors, movie_cast, reviews). "
+            f"Translate to SQL for database. "
             f"Question: {question}"
         )
         result = generator(prompt, max_new_tokens=100)
@@ -899,12 +991,22 @@ def generate_sql_local(question: str, schema_context: str) -> str:
         cleaned = clean_sql_string(raw_output)
         if cleaned and any(kw in cleaned.upper() for kw in ["SELECT", "SHOW", "DESCRIBE"]):
             return cleaned
-        return generate_sql_semantic(question)
+        return generate_sql_semantic(question, active_table=active_table)
     except Exception:
-        return generate_sql_semantic(question)
+        return generate_sql_semantic(question, active_table=active_table)
 
-def generate_sql(question: str) -> str:
+def generate_sql(question: str, active_table: str = None) -> str:
     """Main SQL generation router based on configuration settings."""
+    # Resolve active table target from session state if not passed directly
+    if active_table is None:
+        try:
+            import streamlit as st
+            active_table = st.session_state.get("active_dataset_table")
+            if active_table in ["all", "All Tables / Auto-Detect", ""]:
+                active_table = None
+        except Exception:
+            active_table = None
+
     config = load_config()
     schema_context = get_db_schema_context()
     provider = str(config.get("ai_provider", "Google Gemini")).strip()
@@ -915,19 +1017,18 @@ def generate_sql(question: str) -> str:
     # 1. Google Gemini (State-of-the-art neural Text-to-SQL for arbitrary queries)
     gemini_key = config.get("gemini_api_key", "").strip()
     if gemini_key and (provider in ["Google Gemini", "Gemini", "Mock"] or not provider):
-        return generate_sql_gemini(norm_question, schema_context, gemini_key)
+        return generate_sql_gemini(norm_question, schema_context, gemini_key, active_table=active_table)
     elif provider in ["Google Gemini", "Gemini"] and gemini_key:
-        return generate_sql_gemini(norm_question, schema_context, gemini_key)
+        return generate_sql_gemini(norm_question, schema_context, gemini_key, active_table=active_table)
 
     # 2. OpenAI GPT
     openai_key = config.get("openai_api_key", "").strip()
     if provider in ["OpenAI", "ChatGPT"] and openai_key:
-        return generate_sql_openai(norm_question, schema_context, openai_key)
+        return generate_sql_openai(norm_question, schema_context, openai_key, active_table=active_table)
 
-    # 3. Local Transformers Fine-Tuned Model
-    has_saved_model = os.path.isdir("saved_model") and os.path.exists(os.path.join("saved_model", "config.json"))
-    if provider in ["Local (Flan-T5)", "Local"] or (has_saved_model and provider in ["Offline Rules", "Local (Flan-T5)"]):
-        return generate_sql_local(norm_question, schema_context)
+    # 3. Local Transformers Fine-Tuned Model (only when explicitly selected as provider)
+    if provider in ["Local (Flan-T5)", "Local"]:
+        return generate_sql_local(norm_question, schema_context, active_table=active_table)
 
     # 4. Neural Schema-Grounded Semantic Parser (Zero-setup offline engine)
-    return generate_sql_semantic(norm_question)
+    return generate_sql_semantic(norm_question, active_table=active_table)

@@ -115,6 +115,35 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
             if "city" in df.columns:
                 details.append(f"from {row['city']}")
 
+        elif "student_name" in df.columns:
+            details.append(f"{row['student_name']}")
+            if "major" in df.columns:
+                details.append(f"majoring in {row['major']}")
+            if "gpa" in df.columns:
+                details.append(f"with GPA {row['gpa']}")
+
+        elif "employee_name" in df.columns or "first_name" in df.columns:
+            emp = row.get("employee_name", row.get("first_name", "Employee"))
+            details.append(f"{emp}")
+            if "department" in df.columns:
+                details.append(f"in {row['department']}")
+            if "salary" in df.columns:
+                details.append(f"earning ${float(row['salary']):,.0f}")
+
+        elif "patient_name" in df.columns:
+            details.append(f"{row['patient_name']}")
+            if "condition" in df.columns:
+                details.append(f"diagnosed with {row['condition']}")
+
+        # Generic name fallback
+        else:
+            name_c = next((c for c in df.columns if any(k in c.lower() for k in ["name", "title", "item"])), None)
+            num_c = next((c for c in df.columns if any(k in c.lower() for k in ["gpa", "price", "amount", "salary", "score", "total"])), None)
+            if name_c:
+                details.append(f"{row[name_c]}")
+                if num_c:
+                    details.append(f"{num_c.replace('_', ' ')}: {row[num_c]}")
+
         if details:
             return f"Found 1 result: {', '.join(details)}."
         else:
@@ -124,16 +153,17 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
     # 3. Small list (2 to 5 items)
     if 2 <= row_count <= 5:
         names = []
-        if "title" in df.columns:
-            names = [f"{r}" for r in df["title"].tolist()]
-        elif "director_name" in df.columns:
-            names = [str(r) for r in df["director_name"].tolist()]
-        elif "actor_name" in df.columns:
-            names = [str(r) for r in df["actor_name"].tolist()]
-        elif "product_name" in df.columns:
-            names = [str(r) for r in df["product_name"].tolist()]
-        elif "customer_name" in df.columns:
-            names = [str(r) for r in df["customer_name"].tolist()]
+        name_col = next((c for c in df.columns if any(k in c.lower() for k in ["title", "director_name", "actor_name", "product_name", "customer_name", "student_name", "employee_name", "patient_name", "name"])), None)
+        num_col = next((c for c in df.columns if any(k in c.lower() for k in ["gpa", "salary", "price", "amount", "revenue", "box_office", "score", "rating"])), None)
+
+        if name_col:
+            for _, r in df.iterrows():
+                n_val = str(r[name_col])
+                if num_col and pd.notna(r[num_col]):
+                    val_clean = f"${float(r[num_col]):,.0f}" if any(k in num_col.lower() for k in ["salary", "price", "revenue", "box_office", "amount"]) else str(r[num_col])
+                    names.append(f"{n_val} ({num_col.replace('_', ' ')} {val_clean})")
+                else:
+                    names.append(n_val)
 
         if names:
             if len(names) == 2:
@@ -157,6 +187,10 @@ def summarize_query_for_voice(natural_query, df_or_msg, success):
         item_type = "products"
     elif "customer_name" in df.columns:
         item_type = "customers"
+    elif "student_name" in df.columns or "gpa" in df.columns:
+        item_type = "student records"
+    elif "patient_name" in df.columns or "diagnosis" in df.columns:
+        item_type = "patient records"
     elif "order_id" in df.columns:
         item_type = "orders"
     elif "first_name" in df.columns or "employee_name" in df.columns:

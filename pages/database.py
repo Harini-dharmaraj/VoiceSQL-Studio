@@ -90,20 +90,50 @@ def show_database_page():
             st.info("No tables found. Click 'Re-seed Default Sample Data' above or upload a CSV in the next tab.")
             return
 
-        # Show user's active datasets
+        # Show user's active datasets in an interactive workspace card
         user = st.session_state.get("current_user", {})
         user_id = user.get("user_id", 0)
-        from database.auth import get_user_datasets
+        from database.auth import get_user_datasets, delete_user_dataset_by_name
         my_datasets = get_user_datasets(user_id) if user_id else []
-        if my_datasets:
-            ds_tags = ", ".join([f"`{d['table_name']}` ({d['row_count']} rows)" for d in my_datasets])
-            st.markdown(f"""
-            <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: #166534;">
-                📁 <b>Your Uploaded Datasets (@{user.get('username', 'user')}):</b> {ds_tags}
-            </div>
-            """, unsafe_allow_html=True)
 
-        selected_table = st.selectbox("Select Table to View:", sorted(tables))
+        if my_datasets:
+            st.markdown(f"#### 📁 My Workspace Datasets (@{user.get('username', 'user')})")
+            st.caption("These datasets are registered to your account. Click 'Query in Voice Studio' to immediately speak questions about any dataset.")
+            
+            for d in my_datasets:
+                tbl = d['table_name']
+                col_d_info, col_d_action1, col_d_action2 = st.columns([3, 1.4, 0.8])
+                with col_d_info:
+                    st.markdown(f"""
+                    <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-left: 4px solid #10B981; border-radius: 6px; padding: 10px 14px; margin-bottom: 8px;">
+                        <span style="font-weight: 700; font-size: 14px; color: #0F172A;">📊 {d.get('display_name', tbl)}</span>
+                        <code style="background: #E2E8F0; color: #334155; margin-left: 6px; padding: 2px 6px; border-radius: 4px; font-size: 12px;">{tbl}</code>
+                        <div style="font-size: 12px; color: #64748B; margin-top: 3px;">
+                            <b>{d.get('row_count', 0):,} rows</b> • Uploaded: {d.get('created_at', '')[:16]}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                with col_d_action1:
+                    st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+                    if st.button(f"🎙️ Query in Voice Studio", key=f"query_ds_{tbl}", use_container_width=True, type="primary"):
+                        st.session_state["active_dataset_table"] = tbl
+                        st.session_state["nav_override"] = "Voice Assistant"
+                        st.rerun()
+                with col_d_action2:
+                    st.markdown("<div style='height: 6px;'></div>", unsafe_allow_html=True)
+                    if st.button(f"🗑️ Delete", key=f"del_ds_{tbl}", use_container_width=True):
+                        ok_del, msg_del = delete_user_dataset_by_name(user_id, tbl)
+                        if ok_del:
+                            if st.session_state.get("active_dataset_table") == tbl:
+                                st.session_state["active_dataset_table"] = "all"
+                            st.success(f"✅ {msg_del}")
+                            st.rerun()
+                        else:
+                            st.error(f"❌ {msg_del}")
+
+            st.markdown("<hr style='border-color: #E2E8F0; margin: 18px 0 14px 0;'>", unsafe_allow_html=True)
+
+        selected_table = st.selectbox("Select Table to View Schema & Data:", sorted(tables))
 
         schema_df, total_rows = _get_table_info(selected_table, config)
 
@@ -204,7 +234,20 @@ def show_database_page():
                                 user_id = user.get("user_id", 0)
                                 if user_id:
                                     record_user_dataset(user_id, table_clean, display_name=uploaded_file.name, row_count=len(df_upload))
-                                st.success(f"🎉 Successfully created table `{table_clean}` with {len(df_upload)} records linked to @{user.get('username', 'user')}!")
+                                
+                                st.session_state["active_dataset_table"] = table_clean
+                                st.success(f"🎉 Successfully created table `{table_clean}` with {len(df_upload)} records in your workspace (@{user.get('username', 'user')})!")
+                                
+                                col_act1, col_act2 = st.columns([3, 2])
+                                with col_act1:
+                                    if st.button(f"🎙️ Query `{table_clean}` in Voice Studio Now ➔", type="primary", use_container_width=True, key="launch_voice_after_upload"):
+                                        st.session_state["active_dataset_table"] = table_clean
+                                        st.session_state["nav_override"] = "Voice Assistant"
+                                        st.rerun()
+                                with col_act2:
+                                    if st.button("📋 View in Table Explorer", use_container_width=True, key="browse_after_upload"):
+                                        st.rerun()
+
                                 st.markdown(f"""
                                 <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 8px; padding: 12px 16px; margin: 12px 0;">
                                     <b>🎙️ Ready for Voice Studio!</b> Try asking with your voice or typing:
@@ -215,7 +258,6 @@ def show_database_page():
                                     </ul>
                                 </div>
                                 """, unsafe_allow_html=True)
-                                st.rerun()
                             else:
                                 st.error(f"❌ Import failed: {err_imp}")
 
@@ -490,24 +532,49 @@ def _get_table_info(selected_table, config):
     return schema_df, total_rows
 
 
+def _clean_column_name(col):
+    import re
+    c = re.sub(r'[^a-zA-Z0-9_]', '_', str(col).strip())
+    c = re.sub(r'_+', '_', c).strip('_').lower()
+    return c or "col"
+
 def _drop_table(table_name):
-    """Drop a user-created table."""
+    """Drop a user-created table and remove from user_datasets registry."""
     conn = get_db_connection()
     cursor = conn.cursor()
     try:
         cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+        cursor.execute("DELETE FROM user_datasets WHERE LOWER(table_name) = ?;", (table_name.lower(),))
         conn.commit()
+    except Exception:
+        pass
     finally:
         cursor.close()
         conn.close()
 
 
 def _import_df_to_database(df: pd.DataFrame, table_name: str, config: dict):
-    """Safely import DataFrame into SQLite or MySQL without external ORM dependencies."""
+    """Safely import DataFrame into SQLite or MySQL without external ORM dependencies, sanitizing columns."""
     conn = get_db_connection()
     try:
+        # Sanitize column names: replace spaces/punctuation with underscores, lowercase
+        df_clean = df.copy()
+        raw_cols = [_clean_column_name(c) for c in df_clean.columns]
+        
+        # Deduplicate column names if needed
+        seen = {}
+        unique_cols = []
+        for c in raw_cols:
+            if c in seen:
+                seen[c] += 1
+                unique_cols.append(f"{c}_{seen[c]}")
+            else:
+                seen[c] = 0
+                unique_cols.append(c)
+        df_clean.columns = unique_cols
+
         if config["db_type"] == "SQLite":
-            df.to_sql(table_name, conn, if_exists="replace", index=False)
+            df_clean.to_sql(table_name, conn, if_exists="replace", index=False)
             return True, None
         else:
             cursor = conn.cursor()
@@ -515,26 +582,25 @@ def _import_df_to_database(df: pd.DataFrame, table_name: str, config: dict):
             
             # Map pandas dtypes to MySQL types
             col_defs = []
-            for col, dtype in zip(df.columns, df.dtypes):
-                clean_col = col.strip().replace(" ", "_")
+            for col, dtype in zip(df_clean.columns, df_clean.dtypes):
                 if pd.api.types.is_integer_dtype(dtype):
-                    col_defs.append(f"`{clean_col}` INT")
+                    col_defs.append(f"`{col}` INT")
                 elif pd.api.types.is_float_dtype(dtype):
-                    col_defs.append(f"`{clean_col}` DOUBLE")
+                    col_defs.append(f"`{col}` DOUBLE")
                 elif pd.api.types.is_bool_dtype(dtype):
-                    col_defs.append(f"`{clean_col}` BOOLEAN")
+                    col_defs.append(f"`{col}` BOOLEAN")
                 else:
-                    col_defs.append(f"`{clean_col}` TEXT")
+                    col_defs.append(f"`{col}` TEXT")
                     
             create_query = f"CREATE TABLE `{table_name}` ({', '.join(col_defs)});"
             cursor.execute(create_query)
 
             # Insert rows in batches
-            col_names = [f"`{col.strip().replace(' ', '_')}`" for col in df.columns]
+            col_names = [f"`{col}`" for col in df_clean.columns]
             placeholders = ", ".join(["%s"] * len(col_names))
             insert_query = f"INSERT INTO `{table_name}` ({', '.join(col_names)}) VALUES ({placeholders})"
 
-            rows = [tuple(None if pd.isna(v) else v for v in row) for row in df.values]
+            rows = [tuple(None if pd.isna(v) else v for v in row) for row in df_clean.values]
             cursor.executemany(insert_query, rows)
             conn.commit()
             cursor.close()

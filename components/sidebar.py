@@ -81,7 +81,7 @@ def show_sidebar():
         role_badge = '<span style="background: #2563EB; color: #FFF; padding: 2px 7px; border-radius: 4px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.05em; margin-left: 6px;">ADMIN</span>' if role == "admin" else ""
 
         user_card_html = f"""
-<div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px;">
+<div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
     <div style="background: linear-gradient(135deg, #6366F1 0%, #4F46E5 100%); width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #FFF; font-weight: 700;">
         {initial}
     </div>
@@ -95,6 +95,16 @@ def show_sidebar():
 </div>
 """
         st.markdown(user_card_html.strip(), unsafe_allow_html=True)
+
+        active_tbl = st.session_state.get("active_dataset_table", "all")
+        active_label = "Auto-Detect" if active_tbl in ["all", "All Tables / Auto-Detect", ""] else active_tbl
+        active_dataset_badge = f"""
+<div style="background: rgba(15, 23, 42, 0.6); border: 1px solid #1E293B; border-radius: 8px; padding: 6px 10px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; font-size: 11.5px;">
+    <span style="color: #94A3B8;">🎯 Query Target:</span>
+    <span style="background: #1E293B; color: #38BDF8; font-weight: 700; padding: 2px 7px; border-radius: 4px; font-family: monospace;">{active_label}</span>
+</div>
+"""
+        st.markdown(active_dataset_badge.strip(), unsafe_allow_html=True)
 
         st.caption("WORKSPACE NAVIGATION")
 
