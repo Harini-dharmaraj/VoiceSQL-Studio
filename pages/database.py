@@ -28,8 +28,8 @@ def show_database_page():
         db_online = False
         db_error = str(e)
 
-    # Status & Management Header
-    col1, col2, col3, col4 = st.columns([2.5, 1.8, 2.5, 2.2])
+    # Status & Management Header (Clean professional SaaS header)
+    col1, col2 = st.columns([1.5, 2.5])
     with col1:
         st.markdown(f"**Target Database:** `{db_name}`")
     with col2:
@@ -37,26 +37,6 @@ def show_database_page():
             st.markdown("🟢 **Status:** Connected & Ready")
         else:
             st.markdown("🔴 **Status:** Offline / Disconnected")
-    with col3:
-        if st.button("🎬 Seed IMDb Movies Data", use_container_width=True, type="primary"):
-            from database.seed_movies import generate_and_seed_movies
-            with st.spinner("Seeding IMDb Movies, Directors, and Actors..."):
-                ok, seed_msg = generate_and_seed_movies()
-            if ok:
-                st.success("✅ " + seed_msg)
-                st.rerun()
-            else:
-                st.error(f"❌ {seed_msg}")
-    with col4:
-        if st.button("📦 Seed Classic Tables", use_container_width=True):
-            from database.db_connection import init_database
-            with st.spinner("Restoring sample tables..."):
-                ok, seed_msg = init_database()
-            if ok:
-                st.success("✅ Sample database restored!")
-                st.rerun()
-            else:
-                st.error(f"❌ {seed_msg}")
 
     if not db_online:
         st.warning(f"⚠️ Unable to connect to database: {db_error}. Please check database settings in the Settings tab.")
@@ -391,7 +371,7 @@ def show_database_page():
             <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 14px; margin-top: 14px; margin-bottom: 4px;">
                 <div style="font-weight: 700; font-size: 16px; margin-bottom: 4px;">💼 Corporate Employees & HR (Recommended)</div>
                 <div style="font-size: 13px; color: #64748B; margin-bottom: 8px;">
-                    15 employee records, department salaries, experience years, performance ratings, and branch locations.
+                    500 enterprise employee records, department salaries, bonuses, experience years, performance ratings, and branch locations across 9 global tech hubs.
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -540,6 +520,31 @@ def show_database_page():
                             st.info("No other user accounts to delete.")
             else:
                 st.info("No users registered yet.")
+
+            st.markdown("<hr style='border-color: #E2E8F0; margin: 24px 0 16px 0;'>", unsafe_allow_html=True)
+            with st.expander("🛠️ Database Maintenance & Re-seeding Tools (Admin Only)", expanded=False):
+                st.caption("These administrative tools restore system tables and global reference datasets.")
+                col_sd1, col_sd2 = st.columns(2)
+                with col_sd1:
+                    if st.button("🎬 Re-seed IMDb Movies & Directors", use_container_width=True, key="admin_seed_movies"):
+                        from database.seed_movies import generate_and_seed_movies
+                        with st.spinner("Seeding IMDb Movies, Directors, and Actors..."):
+                            ok_m, seed_msg = generate_and_seed_movies()
+                        if ok_m:
+                            st.success("✅ " + seed_msg)
+                            st.rerun()
+                        else:
+                            st.error(f"❌ {seed_msg}")
+                with col_sd2:
+                    if st.button("📦 Re-seed Classic Tables", use_container_width=True, key="admin_seed_classic"):
+                        from database.db_connection import init_database
+                        with st.spinner("Restoring sample tables..."):
+                            ok_c, seed_msg = init_database()
+                        if ok_c:
+                            st.success("✅ Sample database restored!")
+                            st.rerun()
+                        else:
+                            st.error(f"❌ {seed_msg}")
 
 
 SYSTEM_AUTH_TABLES = {"users", "user_datasets", "query_history", "sqlite_sequence"}
